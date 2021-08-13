@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_dataentrate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_oretot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_entrate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_mancia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_kmpercorsi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp" />
+
+    <ImageButton
+        android:id="@+id/b_infoentrate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.25"
+        android:contentDescription="@string/infobutentrate_description"
+        android:src="@android:drawable/ic_dialog_info"
+        android:backgroundTint="@android:color/transparent"
+        app:tint="@color/holo_orange_dark" />
+
+
+</LinearLayout>

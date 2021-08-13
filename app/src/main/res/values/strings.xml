@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">PonyHelper</string>
+    <string name="login">Login</string>
+    <string name="registrati">REGISTRATI</string>
+    <string name="invito_reg">Non sei ancora registrato? Cosa aspetti!!!</string>
+    <string name="contentdescriptionfattorinoimage">contiene l\'immagine del titolo</string>
+    <string name="confermapassword">Conferma password</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="email">E-mail</string>
+    <string name="nome">Nome</string>
+    <string name="cognome">Cognome</string>
+    <string name="passcod">Password/Codice</string>
+    <string name="registrazione">Registrazione</string>
+    <string name="datanascita">Data di nascita</string>
+    <string name="messpaglogin">Non ricordi la password? \n Clicca qui per avere un nuovo codice di accesso!!</string>
+    <string name="ore">Ore</string>
+    <string name="lunedi">Lun</string>
+    <string name="martedi">Mar</string>
+    <string name="mercoledi">Mer</string>
+    <string name="giovedi">Gio</string>
+    <string name="venerdi">Ven</string>
+    <string name="sabato">Sab</string>
+    <string name="domenica">Dom</string>
+    <string name="entratemensili">ENTRATE MENSILI</string>
+    <string name="ore8">08:00</string>
+    <string name="ore9">09:00</string>
+    <string name="ore10">10:00</string>
+    <string name="ore11">11:00</string>
+    <string name="ore12">12:00</string>
+    <string name="ore13">13:00</string>
+    <string name="ore14">14:00</string>
+    <string name="ore15">15:00</string>
+    <string name="ore16">16:00</string>
+    <string name="ore17">17:00</string>
+    <string name="ore18">18:00</string>
+    <string name="ore19">19:00</string>
+    <string name="ore20">20:00</string>
+    <string name="ore21">21:00</string>
+    <string name="ore22">22:00</string>
+    <string name="ore23">23:00</string>
+    <string name="turni_settimanali">TURNI SETTIMANALI</string>
+    <string name="dal">Dal</string>
+    <string name="al">al</string>
+    <string name="mv_contentdescription">Map view della cosnegna</string>
+    <string name="infobutentrate_description">Bottone che attiva il pop up dell'entrata correlata</string>
+    <string name="connessioneriuscita">Connessione riuscita</string>
+
+
+</resources>
