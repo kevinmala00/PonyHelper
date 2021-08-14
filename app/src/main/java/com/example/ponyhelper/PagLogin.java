@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.example.ponyhelper.R;
 
 
 public class PagLogin extends AppCompatActivity {
