@@ -25,7 +25,7 @@ public class HomePage extends Activity {
         TextView tvGiornoInizio=findViewById(R.id.tv_giornoinizio);
         TextView tvGiornoFine = findViewById(R.id.tv_giornofine);
 
-        
+
 
 
     }
