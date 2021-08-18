@@ -21,7 +21,7 @@ import java.util.Random;
 public class UtilClass {
     public static final String EMAIL_SUBJECT_FIRSTREG= "BENVENUTO IN PONYHELPER!!";
     public static final String EMAIL_SUBJECT_NEWCODE= "NUOVO CODICE DI ACCESSO";
-    public static final String EMAIL_BODY_FIRSTREG= "Ciao ti diamo il benvenuto nella comunità di PonyHelper, " +
+    public static final String EMAIL_BODY_FIRSTREG= "Ciao, ti diamo il benvenuto nella comunità di PonyHelper, " +
             "con noi gestirai al meglio il tuo lavoro di fattorino.\n" +
             "Di seguito troverai il tuo nuovo codice di accesso:\n";
     public static final String EMAIL_BODY_NEWCODE= "Come da lei richiesto in seguito troverà il nuvo codice di accesso:\n";
@@ -31,7 +31,7 @@ public class UtilClass {
      * @param email email destinataria
      * @param body corpo della mail
      * @param subject soggetto della mail
-     * @param activity activit dalla quale viene chiamato il metodo
+     * @param activity activity dalla quale viene chiamato il metodo
      * @param accessCode codice di accesso
      */
     @SuppressLint("IntentReset")
