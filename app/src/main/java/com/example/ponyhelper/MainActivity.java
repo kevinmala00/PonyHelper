@@ -26,7 +26,6 @@ public class MainActivity extends Activity {
         try{
             dbhelper = new DbHelper(MainActivity.this);
             List<PonyAccount> resultList = dbhelper.selectAllAccount();
-            Toast.makeText(MainActivity.this, resultList.toString(), Toast.LENGTH_SHORT).show();
         }catch (Exception e){
             Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }

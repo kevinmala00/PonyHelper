@@ -1,10 +1,14 @@
 package com.example.ponyhelper.util;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
+
 
 import com.example.ponyhelper.body.PonyAccount;
 import com.google.android.material.textfield.TextInputLayout;
@@ -30,17 +34,27 @@ public class UtilClass {
      * @param activity activit dalla quale viene chiamato il metodo
      * @param accessCode codice di accesso
      */
+    @SuppressLint("IntentReset")
     public static void sendMail(String email, String subject, String body, Activity activity, int accessCode){
-        Intent i = new Intent(Intent.ACTION_SEND);
-        i.setType("message/rfc822");
-        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{email});
-        i.putExtra(Intent.EXTRA_SUBJECT, subject);
-        i.putExtra(Intent.EXTRA_TEXT   , body + accessCode);
-        try {
-            activity.startActivity(Intent.createChooser(i, "Send mail..."));
-        } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(activity.getApplicationContext(), "There are no email clients installed.", Toast.LENGTH_SHORT).show();
-        }
+            Log.i("Send email", "");
+            String[] TO = {"email"};
+            String[] CC = {""};
+            Intent emailIntent = new Intent(Intent.ACTION_SEND);
+
+            emailIntent.setData(Uri.parse("mailto:"));
+            emailIntent.setType("text/plain");
+            emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+            emailIntent.putExtra(Intent.EXTRA_CC, CC);
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, EMAIL_SUBJECT_FIRSTREG);
+            emailIntent.putExtra(Intent.EXTRA_TEXT, EMAIL_BODY_FIRSTREG + accessCode);
+
+            try {
+                activity.startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                activity.finish();
+                Log.i("Finished sending email.", "");
+            } catch (android.content.ActivityNotFoundException ex) {
+                Toast.makeText(activity, "There is no email client installed.", Toast.LENGTH_SHORT).show();
+            }
     }
 
 

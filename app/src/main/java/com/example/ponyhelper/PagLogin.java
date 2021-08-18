@@ -1,12 +1,11 @@
 package com.example.ponyhelper;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.Activity;
 import android.os.Bundle;
 
 
 
-public class PagLogin extends AppCompatActivity {
+public class PagLogin extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
