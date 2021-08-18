@@ -57,6 +57,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="250dp"
                 android:layout_height="70dp"
+                android:background="@color/white"
                 android:hint="@string/username"
                 android:inputType="text"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -80,6 +81,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="250dp"
                 android:layout_height="70dp"
+                android:background="@color/white"
                 android:hint="@string/passcod"
                 android:inputType="textPassword"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -106,24 +108,14 @@
         android:id="@+id/tv_messlogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:clickable="true"
+        android:focusable="true"
         android:minHeight="48dp"
         android:text="@string/messpaglogin"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_messcredenzialilogin"
-        android:focusable="true" />
-
-    <TextView
-        android:id="@+id/tv_messcredenzialilogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:textColor="@color/holo_red_dark"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

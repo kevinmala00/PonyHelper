@@ -7,9 +7,17 @@ public class PonyAccount {
     String Email;
     String Nome;
     String Cognome;
-    String DataNascita;
-    String Password;
-    int AccessCode;
+
+    public PonyAccount() {
+    }
+
+    public PonyAccount(String username, String email, String nome, String cognome) {
+        Username = username;
+        Email = email;
+        Nome = nome;
+        Cognome = cognome;
+    }
+
 
     public String getUsername() {
         return Username;
@@ -43,30 +51,6 @@ public class PonyAccount {
         Cognome = cognome;
     }
 
-    public String getDataNascita() {
-        return DataNascita;
-    }
-
-    public void setDataNascita(String dataNascita) {
-        DataNascita = dataNascita;
-    }
-
-    public String getPassword() {
-        return Password;
-    }
-
-    public void setPassword(String password) {
-        Password = password;
-    }
-
-    public int getAccessCode() {
-        return AccessCode;
-    }
-
-    public void setAccessCode(int accessCode) {
-        AccessCode = accessCode;
-    }
-
     @NonNull
     @Override
     public String toString() {
@@ -74,9 +58,6 @@ public class PonyAccount {
                 "Username='" + Username + '\'' +
                 ", Nome='" + Nome + '\'' +
                 ", Cognome='" + Cognome + '\'' +
-                ", DataNascita='" + DataNascita + '\'' +
-                ", Password='" + Password + '\'' +
-                ", AccessCode=" + AccessCode +
                 '}';
     }
 }

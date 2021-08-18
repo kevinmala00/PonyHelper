@@ -45,6 +45,14 @@
     <string name="mv_contentdescription">Map view della cosnegna</string>
     <string name="infobutentrate_description">Bottone che attiva il pop up dell\'entrata correlata</string>
     <string name="connessioneriuscita">Connessione riuscita</string>
+    <string name="selezionaturno">Seleziona i dati del turno</string>
+    <string name="modifica">Modifica</string>
+    <string name="giorno">Giorno</string>
+    <string name="ora_inizio">Ora inizio</string>
+    <string name="ora_fine">Ora fine</string>
+    <string name="spinner_ora_fine">spinner ora fine</string>
+    <string name="spinner_ora_inizio">spinner ora inizio</string>
+    <string name="spinner_giorno">spinner giorno</string>
 
 
 </resources>

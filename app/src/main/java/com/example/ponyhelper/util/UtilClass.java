@@ -9,6 +9,8 @@ import android.widget.Toast;
 import com.example.ponyhelper.body.PonyAccount;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Random;
 
@@ -63,9 +65,6 @@ public class UtilClass {
         AccountBundle.putString("nome", account.getNome());
         AccountBundle.putString("cognome", account.getCognome());
         AccountBundle.putString("email", account.getUsername());
-        AccountBundle.putString("password", account.getPassword());
-        AccountBundle.putString("datanascita", account.getDataNascita());
-        AccountBundle.putInt("accesscode", account.getAccessCode());
 
         return AccountBundle;
     }
@@ -81,9 +80,7 @@ public class UtilClass {
         account.setNome(bundle.getString("nome"));
         account.setCognome(bundle.getString("cognome"));
         account.setEmail(bundle.getString("email"));
-        account.setPassword(bundle.getString("password"));
-        account.setDataNascita(bundle.getString("datanascita"));
-        account.setAccessCode(bundle.getInt("accesscode"));
+
         return account;
     }
 
@@ -101,6 +98,43 @@ public class UtilClass {
         }
         return check;
     }
+
+    /**
+     * permette di ottenere la data del lunedi della settimana corrispondente alla data passata
+     * (es:    Date oggi = new Date();
+     *         Date lunedi = utilClass.getCurrentMonday(oggi);
+     *         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+     *         System.out.println(sdf.format(oggi));
+     *         System.out.println(sdf.format(lunedi));
+     *
+     *         OUTPUT:  17/08/2021 (ndr: martedì)
+     *                  16/08/2021 (ndr: lunedi)
+     *         )
+     * @param data data della settimana che si vuole analizzare
+     * @return ritorna la data del lunedi della settimana di cui fa perte la data passata come paramentro
+     */
+    public static Date getCurrentMonday(Date data)
+    {
+        Date monday;
+        Calendar rightNow = Calendar.getInstance();
+        rightNow.setTime(data);
+        int day = rightNow.get(Calendar.DAY_OF_WEEK);
+        int distance;
+        if (day == Calendar.MONDAY)
+        {
+            monday = rightNow.getTime();
+        }
+        else
+        {
+            distance = day - Calendar.MONDAY;
+            if (distance == -1)
+                distance = 6;
+            monday = rightNow.getTime();
+            monday.setTime(monday.getTime() - 1000L * 60 * 60 * 24 * (distance));
+        }
+        return monday;
+    }
+
 
 
 

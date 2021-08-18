@@ -84,6 +84,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="220dp"
                     android:layout_height="70dp"
+                    android:background="@color/white"
                     android:hint="@string/nome"
                     android:inputType="textPersonName"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -105,6 +106,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="220dp"
                     android:layout_height="70dp"
+                    android:background="@color/white"
                     android:hint="@string/cognome"
                     android:inputType="textPersonName"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -124,29 +126,11 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="220dp"
                     android:layout_height="70dp"
+                    android:background="@color/white"
                     android:hint="@string/email"
                     android:inputType="textEmailAddress"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     tools:ignore="TextContrastCheck,TextContrastCheck,TextContrastCheck" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/it_datanscitareg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                app:errorEnabled="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/it_emailpagreg">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="220dp"
-                    android:layout_height="70dp"
-                    android:hint="@string/datanascita"
-                    android:inputType="date"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -156,13 +140,13 @@
                 android:layout_marginTop="30dp"
                 app:errorEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/it_datanscitareg">
+                app:layout_constraintTop_toBottomOf="@+id/it_emailpagreg">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="220dp"
                     android:layout_height="70dp"
+                    android:background="@color/white"
                     android:hint="@string/username"
                     android:inputType="text"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -184,6 +168,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="220dp"
                     android:layout_height="70dp"
+                    android:background="@color/white"
                     android:hint="@string/password"
                     android:inputType="textPassword"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -194,7 +179,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:layout_marginBottom="100dp"
+                android:layout_marginBottom="300dp"
                 app:errorEnabled="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -206,6 +191,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="220dp"
                     android:layout_height="70dp"
+                    android:background="@color/white"
                     android:hint="@string/confermapassword"
                     android:inputType="textPassword"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -217,16 +203,6 @@
 
 
     </ScrollView>
-
-    <TextView
-        android:id="@+id/tv_messreg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        android:textColor="@color/holo_red_dark"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

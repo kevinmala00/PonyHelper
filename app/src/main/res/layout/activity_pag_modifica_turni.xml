@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PagModificaTurni">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/l_modificaturno"
+        android:layout_width="371dp"
+        android:layout_height="270dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/my_corner_rectangle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_selezionadati">
+
+        <TextView
+            android:id="@+id/tv_selezionagiorno"
+            android:layout_width="70dp"
+            android:layout_height="29dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/giorno"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.431"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_dalmodifcicaturno" />
+
+        <Spinner
+            android:id="@+id/s_gironomodificaturno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="-10dp"
+            android:contentDescription="@string/spinner_giorno"
+            android:minHeight="48dp"
+            app:layout_constraintStart_toEndOf="@+id/tv_selezionagiorno"
+            app:layout_constraintTop_toTopOf="@+id/tv_selezionagiorno" />
+
+        <TextView
+            android:id="@+id/tv_orainizio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="48dp"
+            android:text="@string/ora_inizio"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_selezionagiorno" />
+
+        <Spinner
+            android:id="@+id/s_orainiziomodificaturno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="-10dp"
+            android:contentDescription="@string/spinner_ora_inizio"
+            android:minHeight="48dp"
+            app:layout_constraintStart_toEndOf="@+id/tv_orainizio"
+            app:layout_constraintTop_toTopOf="@+id/tv_orainizio" />
+
+        <TextView
+            android:id="@+id/tv_orafinemodificaturno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ora_fine"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.443"
+            app:layout_constraintStart_toEndOf="@+id/s_orainiziomodificaturno"
+            app:layout_constraintTop_toTopOf="@+id/tv_orainizio" />
+
+        <Spinner
+            android:id="@+id/s_orafinemodificaturno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="-10dp"
+            android:contentDescription="@string/spinner_ora_fine"
+            android:minHeight="48dp"
+            app:layout_constraintStart_toEndOf="@+id/tv_orafinemodificaturno"
+            app:layout_constraintTop_toTopOf="@+id/tv_orafinemodificaturno" />
+
+        <TextView
+            android:id="@+id/tv_mesemodificaturno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_dalmodifcicaturno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/dal"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.437"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_mesemodificaturno" />
+
+        <TextView
+            android:id="@+id/tv_giornoiniziomodificaturon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/tv_dalmodifcicaturno"
+            app:layout_constraintTop_toTopOf="@+id/tv_dalmodifcicaturno" />
+
+        <TextView
+            android:id="@+id/tv_almodificaturno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/al"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/tv_giornoiniziomodificaturon"
+            app:layout_constraintTop_toTopOf="@+id/tv_giornoiniziomodificaturon" />
+
+        <TextView
+            android:id="@+id/tv_giornofinemodificaturno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/tv_almodificaturno"
+            app:layout_constraintTop_toTopOf="@+id/tv_almodificaturno" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/b_modificaturni"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/round_red_corner"
+        android:fontFamily="@font/droid_sans"
+        android:text="@string/modifica"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/l_modificaturno" />
+
+    <TextView
+        android:id="@+id/tv_selezionadati"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:text="@string/selezionaturno"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

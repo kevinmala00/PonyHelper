@@ -5,15 +5,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.ponyhelper.datamanagment.DbManager;
+import com.example.ponyhelper.body.PonyAccount;
+import com.example.ponyhelper.datamanagment.DbHelper;
+
+import java.util.List;
 
 
 public class MainActivity extends Activity {
-
-    private DbManager dbmanager = null;
-
 
 
     @Override
@@ -21,15 +21,15 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView tvmessconn=findViewById(R.id.tv_messconn);
+        DbHelper dbhelper;
 
-        dbmanager=new DbManager(this);
-        dbmanager.open();
-
-
-        tvmessconn.setText(R.string.connessioneriuscita);
-
-
+        try{
+            dbhelper = new DbHelper(MainActivity.this);
+            List<PonyAccount> resultList = dbhelper.selectAllAccount();
+            Toast.makeText(MainActivity.this, resultList.toString(), Toast.LENGTH_SHORT).show();
+        }catch (Exception e){
+            Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
 
 
 
@@ -37,15 +37,19 @@ public class MainActivity extends Activity {
         */
         Button bReg=findViewById(R.id.b_registrati);
         bReg.setOnClickListener(v -> {
-            Intent openPagReg=new Intent(getApplicationContext(), PagReg.class);
-            startActivity(openPagReg);
+            try {
+                Intent openPagReg = new Intent(MainActivity.this, PagReg.class);
+                startActivity(openPagReg);
+            }catch (Exception e){
+                Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
         });
 
         /*bottone checkLogin che apre paglogin
          */
         Button bLogin=findViewById(R.id.b_login);
         bLogin.setOnClickListener(v -> {
-            Intent openPagLogin = new Intent(getApplicationContext(), PagLogin.class);
+            Intent openPagLogin = new Intent(MainActivity.this, PagLogin.class);
             startActivity(openPagLogin);
         });
     }
