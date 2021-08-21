@@ -53,6 +53,8 @@
     <string name="spinner_ora_fine">spinner ora fine</string>
     <string name="spinner_ora_inizio">spinner ora inizio</string>
     <string name="spinner_giorno">spinner giorno</string>
+    <string name="entrate">entrate</string>
+    <string name="search_gg_mm_aa">Search (gg/mm/aa)</string>
 
 
 </resources>

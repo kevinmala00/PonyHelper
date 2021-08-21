@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 import com.example.ponyhelper.PagLogin;
+import com.example.ponyhelper.body.Entrate;
 import com.example.ponyhelper.body.PonyAccount;
 import com.example.ponyhelper.util.UtilClass;
 
@@ -226,5 +227,14 @@ public class DbHelper extends SQLiteOpenHelper {
         rs.close();
         db.close();
         return returnList;
+    }
+
+    //ENTRATE
+    public List<Entrate> selectEntrateMese(String mese, String username) throws Exception{
+        List<Entrate> returnList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        return returnList;
+
     }
 }

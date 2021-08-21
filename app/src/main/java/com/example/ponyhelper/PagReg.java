@@ -3,11 +3,8 @@ package com.example.ponyhelper;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.ponyhelper.body.PonyAccount;
@@ -84,7 +81,7 @@ public class PagReg extends Activity {
 
                 //se il controllo è OK passo alla prossima activity, portando i dati dell'account
                 if(check) {
-                    Intent openHomePage = new Intent(PagReg.this, HomePage.class);
+                    Intent openHomePage = new Intent(PagReg.this, HomePag.class);
                     Bundle accountBundle = UtilClass.salvataggioAccount(account);
 
                     dbhelper.registrazioneAccount(account, Password, PagReg.this);

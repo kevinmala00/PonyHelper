@@ -14,14 +14,14 @@ import java.time.LocalDate;
 import java.util.Date;
 
 
-public class HomePage extends Activity {
+public class HomePag extends Activity {
 PonyAccount account;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
+        setContentView(R.layout.activity_home_pag);
 
         //rispristino i dati dell'account dal bundle passato dall'activity precedente
         Bundle DatiPassati = getIntent().getExtras();
@@ -29,7 +29,7 @@ PonyAccount account;
 
         //istanzio un nuovo pony account con i dati ricevuti dall'activity precedente
         account = UtilClass.ripristinoAccount(AccountBundle);
-        Toast.makeText(HomePage.this, "Benvenuto " + account.getUsername(), Toast.LENGTH_LONG).show();
+        Toast.makeText(HomePag.this, "Benvenuto " + account.getUsername(), Toast.LENGTH_LONG).show();
 
 
 

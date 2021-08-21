@@ -63,7 +63,7 @@ public class PagLogin extends Activity {
 
                     account = dbhelper.checkLogin(username, passcod);
                     Bundle accountBundle = UtilClass.salvataggioAccount(account);
-                    Intent openHomePag = new Intent(PagLogin.this, HomePage.class);
+                    Intent openHomePag = new Intent(PagLogin.this, HomePag.class);
                     openHomePag.putExtra("account", accountBundle);
                     startActivity(openHomePag);
                 } catch (Exception e) {

@@ -20,13 +20,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PonyHelper">
         <activity
+            android:name=".PagEntrate"
+            android:exported="true" />
+        <activity
             android:name=".PagModificaTurni"
             android:exported="true" />
         <activity
             android:name=".PagDestinazioni"
             android:exported="true" />
         <activity
-            android:name=".HomePage"
+            android:name=".HomePag"
             android:exported="true" />
         <activity
             android:name=".PagLogin"
