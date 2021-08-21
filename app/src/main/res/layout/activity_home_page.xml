@@ -8,7 +8,7 @@
 
     <TableLayout
         android:id="@+id/l_table"
-        android:layout_width="384dp"
+        android:layout_width="361dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:orientation="vertical"
@@ -1050,15 +1050,17 @@
 
     <TextView
         android:id="@+id/tv_turnisettmanali"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
-        android:fontFamily="@font/droid_sans"
+        android:fontFamily="@font/bangers"
         android:text="@string/turni_settimanali"
-        android:textSize="24sp"
+        android:textAlignment="center"
+        android:textColor="@color/arancio_titolo"
+        android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.068"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

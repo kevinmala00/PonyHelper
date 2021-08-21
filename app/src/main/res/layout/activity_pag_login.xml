@@ -8,12 +8,13 @@
 
     <TextView
         android:id="@+id/tv_title"
-        android:layout_width="336dp"
-        android:layout_height="142dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-20dp"
         android:fontFamily="@font/bangers"
         android:text="@string/app_name"
-        android:textColor="#EF6C00"
+        android:textAlignment="center"
+        android:textColor="@color/arancio_titolo"
         android:textSize="80sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -22,11 +23,13 @@
 
     <TextView
         android:id="@+id/tv_login"
-        android:layout_width="119dp"
-        android:layout_height="92dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-50dp"
         android:fontFamily="@font/bangers"
         android:text="@string/login"
-        android:textColor="#039BE5"
+        android:textAlignment="center"
+        android:textColor="@color/azzurro_sottotitolo"
         android:textSize="48sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,8 +39,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="402dp"
-        android:layout_height="349dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.47"
@@ -45,47 +48,43 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_login">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputUsername"
+            android:id="@+id/it_usernamepaglog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="20dp"
             app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="250dp"
-                android:layout_height="70dp"
-                android:background="@color/white"
+                android:layout_height="wrap_content"
                 android:hint="@string/username"
                 android:inputType="text"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
                 tools:ignore="TextContrastCheck" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputPasswCodice"
+            android:id="@+id/it_passcodpaglog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputUsername"
+            app:layout_constraintTop_toBottomOf="@+id/it_usernamepaglog"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="250dp"
-                android:layout_height="70dp"
-                android:background="@color/white"
+                android:layout_height="wrap_content"
                 android:hint="@string/passcod"
                 android:inputType="textPassword"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/black" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -105,8 +104,8 @@
         tools:ignore="DuplicateSpeakableTextCheck" />
 
     <TextView
-        android:id="@+id/tv_messlogin"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_messnewcodelogin"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"

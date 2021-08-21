@@ -1,31 +1,35 @@
 package com.example.ponyhelper;
 
 import android.app.Activity;
-import android.os.Build;
+
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
-import androidx.annotation.RequiresApi;
-
+import com.example.ponyhelper.body.PonyAccount;
 import com.example.ponyhelper.util.UtilClass;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
+
 
 public class HomePage extends Activity {
+PonyAccount account;
 
 
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        //rispristino i dati dell'account dal bundle passato dall'activity precedente
+        Bundle DatiPassati = getIntent().getExtras();
+        Bundle AccountBundle = DatiPassati.getBundle("account");
+
+        //istanzio un nuovo pony account con i dati ricevuti dall'activity precedente
+        account = UtilClass.ripristinoAccount(AccountBundle);
+        Toast.makeText(HomePage.this, "Benvenuto " + account.getUsername(), Toast.LENGTH_LONG).show();
 
 
 

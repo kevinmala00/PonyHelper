@@ -2,7 +2,7 @@
     <string name="app_name">PonyHelper</string>
     <string name="login">Login</string>
     <string name="registrati">REGISTRATI</string>
-    <string name="invito_reg">Non sei ancora registrato? Cosa aspetti!!!</string>
+    <string name="invito_reg">Non sei ancora registrato?\nCosa aspetti!!!</string>
     <string name="contentdescriptionfattorinoimage">contiene l\'immagine del titolo</string>
     <string name="confermapassword">Conferma password</string>
     <string name="password">Password</string>

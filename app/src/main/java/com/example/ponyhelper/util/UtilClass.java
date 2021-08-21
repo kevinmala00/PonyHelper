@@ -6,7 +6,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.Toast;
 
 
@@ -19,44 +22,11 @@ import java.util.Objects;
 import java.util.Random;
 
 public class UtilClass {
-    public static final String EMAIL_SUBJECT_FIRSTREG= "BENVENUTO IN PONYHELPER!!";
-    public static final String EMAIL_SUBJECT_NEWCODE= "NUOVO CODICE DI ACCESSO";
-    public static final String EMAIL_BODY_FIRSTREG= "Ciao, ti diamo il benvenuto nella comunità di PonyHelper, " +
+    public static final String EMAIL_SUBJECT= "ponyhelper@gmail.com";
+    public static final String EMAIL_BODY_FIRSTREG= "BENVENUTO IN PONYHELPER!!\nCiao, ti diamo il benvenuto nella comunità di PonyHelper, " +
             "con noi gestirai al meglio il tuo lavoro di fattorino.\n" +
             "Di seguito troverai il tuo nuovo codice di accesso:\n";
-    public static final String EMAIL_BODY_NEWCODE= "Come da lei richiesto in seguito troverà il nuvo codice di accesso:\n";
-
-    /**
-     *invia una mail all'indirizzo prescelto
-     * @param email email destinataria
-     * @param body corpo della mail
-     * @param subject soggetto della mail
-     * @param activity activity dalla quale viene chiamato il metodo
-     * @param accessCode codice di accesso
-     */
-    @SuppressLint("IntentReset")
-    public static void sendMail(String email, String subject, String body, Activity activity, int accessCode){
-            Log.i("Send email", "");
-            String[] TO = {"email"};
-            String[] CC = {""};
-            Intent emailIntent = new Intent(Intent.ACTION_SEND);
-
-            emailIntent.setData(Uri.parse("mailto:"));
-            emailIntent.setType("text/plain");
-            emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-            emailIntent.putExtra(Intent.EXTRA_CC, CC);
-            emailIntent.putExtra(Intent.EXTRA_SUBJECT, EMAIL_SUBJECT_FIRSTREG);
-            emailIntent.putExtra(Intent.EXTRA_TEXT, EMAIL_BODY_FIRSTREG + accessCode);
-
-            try {
-                activity.startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-                activity.finish();
-                Log.i("Finished sending email.", "");
-            } catch (android.content.ActivityNotFoundException ex) {
-                Toast.makeText(activity, "There is no email client installed.", Toast.LENGTH_SHORT).show();
-            }
-    }
-
+    public static final String EMAIL_BODY_NEWCODE= "NUOVO CODICE DI ACCESSO.\nCome da lei richiesto in seguito troverà il nuvo codice di accesso:\n";
 
     /**
      * genera il codice di accesso relativo all'account,
@@ -65,6 +35,31 @@ public class UtilClass {
     public static int generateAccessCode(){
         Random rnd= new Random();
         return rnd.nextInt(9999);
+    }
+
+    /**
+     * setta il textchanger del edittext passato in modo che appena vnega inserito il testo
+     * venga rimosso qualsiasi errore riscontrato in precedenze
+     * @param textInput textinput di cui settare il texchanger del proprio edittext
+     */
+    public static void eliminaErroreCampoObbligatorio(TextInputLayout textInput){
+        EditText editInput = textInput.getEditText();
+        Objects.requireNonNull(editInput).addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                textInput.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
 

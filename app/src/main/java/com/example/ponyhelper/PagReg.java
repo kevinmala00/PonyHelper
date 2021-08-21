@@ -41,12 +41,12 @@ public class PagReg extends Activity {
 
 
         //setto gli onTextChanger degli edit text presenti
-        eliminaErrore(itUsername);
-        eliminaErrore(itNome);
-        eliminaErrore(itCognome);
-        eliminaErrore(itPassword);
-        eliminaErrore(itEmail);
-        eliminaErrore(itConfermaPass);
+        UtilClass.eliminaErroreCampoObbligatorio(itUsername);
+        UtilClass.eliminaErroreCampoObbligatorio(itNome);
+        UtilClass.eliminaErroreCampoObbligatorio(itCognome);
+        UtilClass.eliminaErroreCampoObbligatorio(itPassword);
+        UtilClass.eliminaErroreCampoObbligatorio(itEmail);
+        UtilClass.eliminaErroreCampoObbligatorio(itConfermaPass);
 
         //inserimento terminato controllo i parametri
         Button breg=findViewById(R.id.b_registratipagreg);
@@ -61,7 +61,7 @@ public class PagReg extends Activity {
             String Password = Objects.requireNonNull(itPassword.getEditText()).getText().toString();
             String ConfermaPassword= Objects.requireNonNull(itConfermaPass.getEditText()).getText().toString();
 
-            DbHelper dbhelper = new DbHelper(getApplicationContext());
+            DbHelper dbhelper = new DbHelper(PagReg.this);
             try {
                 //controllo se i dati sono già in uso nel database
                 dbhelper.checkRegistrazione(account.getUsername(), account.getEmail());
@@ -100,33 +100,6 @@ public class PagReg extends Activity {
             }
 
 
-        });
-    }
-
-
-
-    /**
-     * setta il textchanger del edittext passato in modo che appena vnega inserito il testo
-     * venga rimosso qualsiasi errore riscontrato in precedenze
-     * @param textInput textinput di cui settare il texchanger del proprio edittext
-     */
-    public void eliminaErrore(TextInputLayout textInput){
-        EditText editInput = textInput.getEditText();
-        Objects.requireNonNull(editInput).addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                textInput.setError(null);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
         });
     }
 }

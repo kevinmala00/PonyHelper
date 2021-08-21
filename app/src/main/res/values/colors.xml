@@ -10,4 +10,6 @@
     <color name="raisin_black">#202124</color>
     <color name="red">#ff0000</color>
     <color name="lightskyblue">#87cefa</color>
+    <color name="arancio_titolo">#EF6C00</color>
+    <color name="azzurro_sottotitolo">#039BE5</color>
 </resources>

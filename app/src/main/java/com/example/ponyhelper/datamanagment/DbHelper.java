@@ -6,7 +6,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
+import com.example.ponyhelper.PagLogin;
 import com.example.ponyhelper.body.PonyAccount;
 import com.example.ponyhelper.util.UtilClass;
 
@@ -41,6 +43,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(DataBaseString.CREATION_PRODOTTO_TIPOLOGIA);
         db.execSQL(DataBaseString.CREATION_PRODOTTO_IMPASTO);
         db.execSQL(DataBaseString.CREATION_PRODOTTO_INGREDIENTE);
+        db.execSQL(DataBaseString.CREATION_COSTI_CONSUMI);
 
     }
 
@@ -113,50 +116,90 @@ public class DbHelper extends SQLiteOpenHelper {
         }
         else{
             //invia mail
-            UtilClass.sendMail(account.getEmail(), UtilClass.EMAIL_SUBJECT_FIRSTREG, UtilClass.EMAIL_BODY_FIRSTREG, activity, codiceaccesso);
             db.close();
             return true;
         }
     }
 
     /**
-     * controlla la presenza dell'account nel database e ne verifica le credenziali
-     * @param credenziali vettore di stringhe che contiene username e passcod inseriti dall'utente
-     * @return ritorna treu se il login eè valido, false: credenziali errate
+     *  seleziona i dati dell'account partendo dallo username inserito, se questo non è presenta nel database genera un'eccezzione
+     * @param username username inserito dall'utente
+     * @param passcod password inserito dall'utente
+     * @return ritorna PonyAccount contenente i dati dell'account di login
+     * @throws Exception generata in caso di credenziali errate (username non presente o password non corrispondente)
      */
-    public boolean checkLogin(String[] credenziali) {
-        //rappresenta l'esito dei controlli
-        boolean check;
+    public PonyAccount checkLogin(String username, String passcod) throws Exception {
+        Exception e = new Exception("Credenziali errate");
+        PonyAccount account;
         SQLiteDatabase db= this.getReadableDatabase();
-        String passcod = credenziali[1];
-        Cursor rs = db.rawQuery("SELECT password, codice_accesso FROM ACCOUNT WHERE username LIKE ? LIMIT 1;", credenziali);
+        Cursor rs = db.rawQuery("SELECT * FROM ACCOUNT WHERE username LIKE \"" + username + "\" LIMIT 1", null);
+        if(rs.getCount()>0){
+            rs.moveToFirst();
+            account=new PonyAccount(
+                    rs.getString(0),
+                    rs.getString(1),
+                    rs.getString(2),
+                    rs.getString(3) );
+            String dbpass = rs.getString(4);
+            String dbcodacc = String.valueOf(rs.getInt(5));
+            if ((dbpass.equals(passcod)) || (dbcodacc.equals(passcod))) {
+                //credenziali corrette
+                return account;
+            } else {
+                //credenziali errate
+                rs.close();
+                db.close();
+                throw e;
+            }
 
-        String dbpass = rs.getString(0);
-        String dbcodacc = String.valueOf(rs.getInt(1));
+        }else{
+            //account non presente
+            rs.close();
+            db.close();
+            throw new Exception("Username non presente");
+        }
+    }
 
-        if ((dbpass.equals(passcod)) || (dbcodacc.equals(passcod))) {
-            //credenziali corrette
-            check = true;
-        } else {
-            //credenziali errate
-            check=false;
+    /**
+     * metodo che permette il recupero di dati relativi all'account
+     * @param username useranme dell'account da ricercare
+     * @return ritorna un oggetto di tipo PonyAccount in caso di successo
+     * @throws Exception genere un'eccezzione in caso di insuccesso (problemi con il database)
+     */
+    public PonyAccount recuperoDatiAccount(String username) throws  Exception{
+        SQLiteDatabase db = this.getReadableDatabase();
+        PonyAccount account;
+        Cursor rs = db.rawQuery("SELECT * FROM ACCOUNT WHERE username LIKE ? LIMIT 1;", new String[]{username});
+        if(rs.getCount()>0){
+            rs.moveToFirst();
+            account=new PonyAccount(
+                    rs.getString(0),
+                    rs.getString(1),
+                    rs.getString(2),
+                    rs.getString(3) );
+        }else{
+            rs.close();
+            db.close();
+            throw new Exception("ERRORE: account non trovato");
         }
 
         rs.close();
         db.close();
-        return check;
+        return account;
     }
 
     /**
      * metodo che aggiorna il codice di accesso dell'account apassato nel database e
      * invia la mail all'email specifica dell'account con il nuovo codice
-     * @param account account da aggiornare
      */
-    public void updateAccessCode(PonyAccount account){
+    public void updateAccessCode(String username, Activity activity) throws Exception{
         SQLiteDatabase db= this.getWritableDatabase();
         int newcode=UtilClass.generateAccessCode();
-        Cursor rs = db.rawQuery("UPDATE ACCOUNT SET codice_accesso = ? WHERE username LIKE ?", new String[]{String.valueOf(newcode), account.getUsername()});
-        rs.close();
+
+        PonyAccount account = recuperoDatiAccount(username);
+
+        db.execSQL("UPDATE ACCOUNT SET codice_accesso = " + "\"" + newcode +"\"" + " WHERE username LIKE " + "\"" + account.getUsername() + "\";");
+
         db.close();
     }
 
