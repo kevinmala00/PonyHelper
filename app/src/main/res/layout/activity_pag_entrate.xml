@@ -71,8 +71,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/not_red_button_background"
                     android:contentDescription="@string/contente_description_buttonserchentrata"
-                    app:srcCompat="@android:drawable/ic_menu_search"
-                    app:tint="@color/black"
+                    app:srcCompat="@drawable/ic_search"
                     tools:ignore="TouchTargetSizeCheck" />
 
             </LinearLayout>
@@ -109,7 +108,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/not_red_button_background"
                     android:contentDescription="@string/content_description_bottonemeseprecedente"
-                    app:srcCompat="@drawable/freccia_sinistra"
+                    app:srcCompat="@drawable/ic_freccia_sx"
                     app:tint="@color/black"
                     tools:ignore="TouchTargetSizeCheck" />
 
@@ -128,8 +127,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/not_red_button_background"
                     android:contentDescription="@string/content_description_buttonprossimomese"
-                    app:srcCompat="@drawable/freccia_destra"
-                    app:tint="@color/black"
+                    app:srcCompat="@drawable/ic_freccia_dx"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
@@ -150,7 +148,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/not_red_button_background"
                     android:contentDescription="@string/content_description_bottoneaggiungientrata"
-                    app:srcCompat="@android:drawable/ic_input_add"
+                    app:srcCompat="@drawable/ic_add"
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <ImageButton
@@ -160,7 +158,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/not_red_button_background"
                     android:contentDescription="@string/content_description_bottonegestiscicosti"
-                    app:srcCompat="@android:drawable/ic_menu_edit"
+                    app:srcCompat="@drawable/ic_edit"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
         </LinearLayout>
