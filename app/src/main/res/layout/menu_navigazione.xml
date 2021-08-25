@@ -10,20 +10,22 @@
         android:id="@+id/lineaUtenteNavMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/sfondo_pizze">
+       <!-- modificare il colore di backgroung
         android:backgroundTint="@color/arancio_titolo"
         android:backgroundTintMode="screen"
-        android:background="@drawable/sfondo_pizze">
+        -->
+
 
         <ImageView
             android:id="@+id/user"
             android:layout_width="108dp"
             android:layout_height="112dp"
-            android:layout_marginTop="20dp"
+            android:contentDescription="@string/user_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/ic_utente_grande"
-            android:contentDescription="@string/user_image" />
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            tools:srcCompat="@drawable/ic_utente_grande" />
 
         <TextView
             android:id="@+id/tv_usernamenavigationmenu"
@@ -73,6 +75,19 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:contentDescription="@string/mod_dati_image" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bangers"
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:textColor="@color/arancio_titolo"
+            android:textSize="34sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View

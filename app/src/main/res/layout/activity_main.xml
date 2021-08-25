@@ -8,40 +8,50 @@
     android:background="@drawable/gradient_background"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/tv_titlemainactiviy"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/l_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/bangers"
-        android:text="@string/titolomainactivity"
-        android:textColor="@color/arancio_titolo"
-        android:textSize="96sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="176dp"
-        android:layout_height="130dp"
-        android:contentDescription="@string/content_description_immaginefattortinotitle"
-        android:src="@drawable/img"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.88"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.059" />
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
+
+        <TextView
+            android:id="@+id/tv_titlemainactiviy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bangers"
+            android:text="@string/titolomainactivity"
+            android:textColor="@color/arancio_titolo"
+            android:textSize="96sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_title"
+            android:layout_width="176dp"
+            android:layout_height="130dp"
+            android:layout_marginStart="195dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/content_description_immaginefattortinotitle"
+            android:src="@drawable/img"
+            app:layout_constraintEnd_toEndOf="@+id/tv_titlemainactiviy"
+            app:layout_constraintStart_toStartOf="@+id/tv_titlemainactiviy"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/l_bodypaginaprincipale"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_titlemainactiviy">
+        app:layout_constraintTop_toBottomOf="@+id/l_title">
 
         <Button
             android:id="@+id/b_login"
@@ -87,8 +97,6 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_domandaregistrati" />
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
