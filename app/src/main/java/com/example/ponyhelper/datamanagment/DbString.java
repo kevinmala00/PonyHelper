@@ -16,6 +16,7 @@ public class DbString {
             ", cognome TEXT NOT NULL\n" +
             ", password TEXT NOT NULL\n" +
             ", codice_accesso INTEGER NOT NULL\n" +
+            ", attivo INTEGER NOT NULL" +
             ", PRIMARY KEY(username)\n" +
             ", UNIQUE (email)\n" +
             ");";
@@ -202,6 +203,8 @@ public class DbString {
      * seleziona i costi e i consumi
      */
     public static String selectCostiMensili =  "SELECT * FROM COSTI_CONSUMI WHERE (username LIKE ? AND mese_anno LIKE ?) LIMIT 1;";
+
+
     static String UPGRADE_SCRIPT="";
 
 

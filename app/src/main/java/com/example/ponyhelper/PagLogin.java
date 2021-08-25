@@ -52,7 +52,7 @@ public class PagLogin extends Activity {
                 username = Objects.requireNonNull(itUsername.getEditText()).getText().toString();
                 passcod = Objects.requireNonNull(itPasscod.getEditText()).getText().toString();
 
-                account = dbhelper.checkLogin(username, passcod);
+                account = dbhelper.login(username, passcod);
                 Bundle accountBundle = UtilClass.salvataggioAccount(account);
                 Intent openHomePag = new Intent(PagLogin.this, HomePage.class);
                 openHomePag.putExtra("account", accountBundle);

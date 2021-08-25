@@ -21,7 +21,7 @@ import java.util.List;
 
 /**
  * @author kevin
- * classe che permetta la creazione e la gestione del database Sqlite
+ * classe che permette la creazione e la gestione del database Sqlite
  */
 public class DbHelper extends SQLiteOpenHelper {
 
@@ -71,6 +71,8 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(DbString.UPGRADE_SCRIPT);
     }
 
+
+    //REGISTRAZIONE
     /**
      * Consente di controllare se è gia presente all'interno del database l'account con email o username che stanno cercando di inserire
      * @param username username con il quale ci si vuole registrare
@@ -117,6 +119,7 @@ public class DbHelper extends SQLiteOpenHelper {
         cv.put("cognome", account.getCognome());
         cv.put("password", password);
         cv.put("codice_accesso", Integer.valueOf(codiceaccesso));
+        cv.put("attivo", Integer.valueOf(1));
 
         long  checkInsert= db.insert("ACCOUNT", null, cv);
         db.close();
@@ -129,6 +132,8 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
+
+    //LOGIN
     /**
      *  seleziona i dati dell'account partendo dallo username inserito, se questo non è presenta nel database genera un'eccezzione
      * @param username username inserito dall'utente
@@ -136,10 +141,10 @@ public class DbHelper extends SQLiteOpenHelper {
      * @return ritorna PonyAccount contenente i dati dell'account di login
      * @throws Exception generata in caso di credenziali errate (username non presente o password non corrispondente)
      */
-    public PonyAccount checkLogin(String username, String passcod) throws Exception {
+    public PonyAccount login(String username, String passcod) throws Exception {
         Exception e = new Exception("Credenziali errate");
         PonyAccount account;
-        SQLiteDatabase db= this.getReadableDatabase();
+        SQLiteDatabase db= this.getWritableDatabase();
         Cursor rs = db.rawQuery("SELECT * FROM ACCOUNT WHERE username LIKE \"" + username + "\" LIMIT 1", null);
         if(rs.getCount()>0){
             rs.moveToFirst();
@@ -151,6 +156,11 @@ public class DbHelper extends SQLiteOpenHelper {
             String dbpass = rs.getString(4);
             String dbcodacc = String.valueOf(rs.getInt(5));
             if ((dbpass.equals(passcod)) || (dbcodacc.equals(passcod))) {
+                //setto attivo=1 per questo account
+                ContentValues cv = new ContentValues();
+                cv.put("attivo", "1");
+                db.update("ACCOUNT", cv, "username LIKE ?", new String[]{username});
+
                 //credenziali corrette
                 return account;
             } else {
@@ -166,6 +176,25 @@ public class DbHelper extends SQLiteOpenHelper {
             db.close();
             throw new Exception("Username non presente");
         }
+    }
+
+
+    //LOGOUT
+    /**
+     * aggiorna l'account in modo che non sia piu attivo (setta attivo = 0)
+     * @param account account del logout
+     * @return ritorna l'esito dell'aggiornamento
+     */
+    public boolean logout(PonyAccount account){
+        SQLiteDatabase db = this.getWritableDatabase();
+        boolean result = true;
+        ContentValues cv = new ContentValues();
+        cv.put("attivo", "0");
+        int row = db.update("ACCOUNT", cv, "username LIKE ?", new String[]{account.getUsername()});
+        if(row!=1){
+            result = false;
+        }
+        return result;
     }
 
     /**
@@ -414,6 +443,7 @@ public class DbHelper extends SQLiteOpenHelper {
         }
 
     }
+
 
 
 }
