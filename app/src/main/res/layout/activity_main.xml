@@ -5,56 +5,43 @@
     android:id="@+id/l_paginaprincipale"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/gradient_background"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/iv_title"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/tv_titlemainactiviy"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/title"
+        android:fontFamily="@font/bangers"
+        android:text="@string/titolomainactivity"
+        android:textColor="@color/arancio_titolo"
+        android:textSize="96sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="176dp"
+        android:layout_height="130dp"
+        android:contentDescription="@string/content_description_immaginefattortinotitle"
+        android:src="@drawable/img"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.88"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/contentdescriptionfattorinoimage" />
+        app:layout_constraintVertical_bias="0.059" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/l_bodypaginaprincipale"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_title">
-
-        <TextView
-            android:id="@+id/tv_domandaregistrati"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:freezesText="false"
-            android:gravity="clip_vertical|center_horizontal"
-            android:lines="2"
-            android:text="@string/invito_reg"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/b_login" />
-
-        <Button
-            android:id="@+id/b_registrati"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/round_red_corner"
-            android:fontFamily="@font/droid_sans"
-            android:text="@string/registrati"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_domandaregistrati" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_titlemainactiviy">
 
         <Button
             android:id="@+id/b_login"
@@ -71,8 +58,42 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tv_domandaregistrati"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:freezesText="false"
+            android:gravity="clip_vertical|center_horizontal"
+            android:lines="2"
+            android:text="@string/invito_reg"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/b_login"
+            tools:ignore="TextContrastCheck" />
+
+        <Button
+            android:id="@+id/b_registrati"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_red_corner"
+            android:fontFamily="@font/droid_sans"
+            android:text="@string/registrati"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_domandaregistrati" />
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

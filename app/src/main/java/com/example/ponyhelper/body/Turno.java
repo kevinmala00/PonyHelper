@@ -3,6 +3,8 @@ package com.example.ponyhelper.body;
 import androidx.annotation.NonNull;
 
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 
@@ -16,58 +18,48 @@ public class Turno {
     /**
      * rappresenta la data del turno
      */
-    Date data;
+    LocalDate data;
 
     /**
      * rappresenta l'ora di inizio del turno
      */
-    Time oraInizio;
+    LocalTime oraInizio;
 
     /**
      * rappresenta l'ora di fine del turno
      */
-    Time oraFine;
+    LocalTime oraFine;
 
     public Turno() {
     }
 
-    public Turno(Date data, Time oraInizio, Time oraFine) {
+    public Turno(LocalDate data, LocalTime oraInizio, LocalTime oraFine) {
         this.data = data;
         this.oraInizio = oraInizio;
         this.oraFine = oraFine;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
-    public Time getOraInizio() {
+    public LocalTime getOraInizio() {
         return oraInizio;
     }
 
-    public void setOraInizio(Time oraInizio) {
+    public void setOraInizio(LocalTime oraInizio) {
         this.oraInizio = oraInizio;
     }
 
-    public Time getOraFine() {
+    public LocalTime getOraFine() {
         return oraFine;
     }
 
-    public void setOraFine(Time oraFine) {
+    public void setOraFine(LocalTime oraFine) {
         this.oraFine = oraFine;
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return "Turno{" +
-                "data=" + data +
-                ", oraInizio=" + oraInizio +
-                ", oraFine=" + oraFine +
-                '}';
     }
 }

@@ -1,23 +1,20 @@
 package com.example.ponyhelper.util;
 
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.widget.EditText;
-import android.widget.Toast;
-
 
 import com.example.ponyhelper.body.PonyAccount;
 import com.google.android.material.textfield.TextInputLayout;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.DayOfWeek;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Random;
 
@@ -108,43 +105,72 @@ public class UtilClass {
         return check;
     }
 
+
     /**
-     * permette di ottenere la data del lunedi della settimana corrispondente alla data passata
-     * (es:    Date oggi = new Date();
-     *         Date lunedi = utilClass.getCurrentMonday(oggi);
-     *         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-     *         System.out.println(sdf.format(oggi));
-     *         System.out.println(sdf.format(lunedi));
-     *
-     *         OUTPUT:  17/08/2021 (ndr: martedì)
-     *                  16/08/2021 (ndr: lunedi)
-     *         )
-     * @param data data della settimana che si vuole analizzare
-     * @return ritorna la data del lunedi della settimana di cui fa perte la data passata come paramentro
+     * permette di calcolare il giorno specificato in TargetDayNumberInWeek
+     * della settimana corrispondente a quella della data passata
+     * @param data data di cui si vuole analizzare la settimana
+     * @param targetDayNumberInWeek giorno di cui si vuole calcolare la data
+     * @return ritorna la data del giorno target
      */
-    public static Date getCurrentMonday(Date data)
-    {
-        Date monday;
-        Calendar rightNow = Calendar.getInstance();
-        rightNow.setTime(data);
-        int day = rightNow.get(Calendar.DAY_OF_WEEK);
-        int distance;
-        if (day == Calendar.MONDAY)
-        {
-            monday = rightNow.getTime();
-        }
-        else
-        {
-            distance = day - Calendar.MONDAY;
-            if (distance == -1)
-                distance = 6;
-            monday = rightNow.getTime();
-            monday.setTime(monday.getTime() - 1000L * 60 * 60 * 24 * (distance));
-        }
-        return monday;
+    public static LocalDate getDayOfDataWeek(LocalDate data, DayOfWeek targetDayNumberInWeek){
+        LocalDate target;
+
+        //calcolo il numero del giorno della settimana dalla data passata
+        int day = data.getDayOfWeek().getValue();
+
+        //calcolo lo spostamento da effettuare per raggiungere il giorno target
+        int differenza = targetDayNumberInWeek.getValue() - day;
+
+        //ritorno la nuova data sottraendo (targetDayNumber - day) giorni da quella passata
+        return data.plusDays(differenza);
     }
 
+    /**
+     * converte un UnixTime(Long) nella corrispondente data(LocalDate)
+     * @param unixTime unixtime da convertire
+     * @return la data (Date) corrispondente al unixTime passato
+     */
+    public static LocalDate unixTimeToLocalDate(long unixTime){
+        return Instant.ofEpochSecond(unixTime).atZone(ZoneId.systemDefault()).toLocalDate();
+    }
 
+    /**
+     * converte una data (Date) nel corrispondente UnixTime (Long)
+     * @param data data da convertire
+     * @return ritorna un long corrispondente alla data passata in unixTime
+     */
+    public static long localDateToUnixTime(LocalDate data){
+        ZoneId zoneId = ZoneId.systemDefault(); // or: ZoneId.of("Europe/Oslo");
+        return data.atStartOfDay(zoneId).toEpochSecond();
+    }
 
+    /**
+     * consente di convertire una stringa del formato 'gg/MM/yyyy' in localdate
+     * @param data stringa da convertire
+     * @return ritorna la LocalDate convertirìta a partire dalla stringa
+     */
+    public static LocalDate stringToLocalDate(String data){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return  LocalDate.parse(data, formatter);
+    }
+
+    /**
+     * calcola il primo giorno del mese passato
+     * @param meseAnno mese del quale si vuole calcolare il primo giorno giorno
+     * @return data del primo giorno del mese
+     */
+    public static LocalDate getFirstDayOfMonth(YearMonth meseAnno){
+        return meseAnno.atEndOfMonth().plusDays(-(meseAnno.lengthOfMonth()-1));
+    }
+
+    /**
+     * calcola l'ultimo giorno del mese passato
+     * @param meseAnno mese del quale si vuole calcolare l'ultimo giorno
+     * @return data dell'ultimo giorno del mese
+     */
+    public static LocalDate getLastDayOfMonth(YearMonth meseAnno){
+        return meseAnno.atEndOfMonth();
+    }
 
 }

@@ -1,21 +1,28 @@
 package com.example.ponyhelper.datamanagment;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
 
-import com.example.ponyhelper.PagLogin;
-import com.example.ponyhelper.body.Entrate;
+import com.example.ponyhelper.body.Costi;
+import com.example.ponyhelper.body.Entrata;
 import com.example.ponyhelper.body.PonyAccount;
+import com.example.ponyhelper.body.Turno;
 import com.example.ponyhelper.util.UtilClass;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author kevin
+ * classe che permetta la creazione e la gestione del database Sqlite
+ */
 public class DbHelper extends SQLiteOpenHelper {
 
     /**
@@ -23,28 +30,29 @@ public class DbHelper extends SQLiteOpenHelper {
      * @param context   context nel momento della creazione.
      */
     public DbHelper(Context context){
-      super(context,DataBaseString.DBNAME, null, 1);
+      super(context, DbString.DBNAME, null, 1);
     }
 
     /**
-     * Metodo chiamato quando il database viene creato la prima volta. Esecuzione dello script.
+     * Metodo chiamato quando il database viene creato la prima volta.
+     * Esecuzione dello script di creazione delle tabelle.
      *
      * @param db il database.
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(DataBaseString.CREATION_ACCOUNT);
-        db.execSQL(DataBaseString.CREATION_PRODOTTO);
-        db.execSQL(DataBaseString.CREATION_ENTRATE);
-        db.execSQL(DataBaseString.CREATION_DESTINAZIONE);
-        db.execSQL(DataBaseString.CREATION_TURNI);
-        db.execSQL(DataBaseString.CREATION_IMPASTO);
-        db.execSQL(DataBaseString.CREATION_TIPOLOGIA);
-        db.execSQL(DataBaseString.CREATION_INGREDIENTE);
-        db.execSQL(DataBaseString.CREATION_PRODOTTO_TIPOLOGIA);
-        db.execSQL(DataBaseString.CREATION_PRODOTTO_IMPASTO);
-        db.execSQL(DataBaseString.CREATION_PRODOTTO_INGREDIENTE);
-        db.execSQL(DataBaseString.CREATION_COSTI_CONSUMI);
+        db.execSQL(DbString.CREATION_ACCOUNT);
+        db.execSQL(DbString.CREATION_PRODOTTO);
+        db.execSQL(DbString.CREATION_ENTRATE);
+        db.execSQL(DbString.CREATION_DESTINAZIONE);
+        db.execSQL(DbString.CREATION_TURNI);
+        db.execSQL(DbString.CREATION_IMPASTO);
+        db.execSQL(DbString.CREATION_TIPOLOGIA);
+        db.execSQL(DbString.CREATION_INGREDIENTE);
+        db.execSQL(DbString.CREATION_PRODOTTO_TIPOLOGIA);
+        db.execSQL(DbString.CREATION_PRODOTTO_IMPASTO);
+        db.execSQL(DbString.CREATION_PRODOTTO_INGREDIENTE);
+        db.execSQL(DbString.CREATION_COSTI_CONSUMI);
 
     }
 
@@ -60,7 +68,7 @@ public class DbHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(DataBaseString.UPGRADE_SCRIPT);
+        db.execSQL(DbString.UPGRADE_SCRIPT);
     }
 
     /**
@@ -93,11 +101,11 @@ public class DbHelper extends SQLiteOpenHelper {
     /**
      * inserisce i dati relativi all'account nella tabella ACCOUNT
      * @param account Ponyaccount
-     *                @see PonyAccount
-     * @param password password dell'account
+     *                @param password password dell'account
+     * @see PonyAccount
      * @return ritorna true se la registrazione è avvenuta con successo oppure false se ci sono stati problemi
      */
-    public boolean registrazioneAccount(PonyAccount account, String password, Activity activity){
+    public boolean registrazioneAccount(PonyAccount account, String password){
         SQLiteDatabase db = this.getWritableDatabase();
         int codiceaccesso = UtilClass.generateAccessCode();
 
@@ -111,13 +119,12 @@ public class DbHelper extends SQLiteOpenHelper {
         cv.put("codice_accesso", Integer.valueOf(codiceaccesso));
 
         long  checkInsert= db.insert("ACCOUNT", null, cv);
+        db.close();
         if(checkInsert==-1){
-            db.close();
             return false;
         }
         else{
             //invia mail
-            db.close();
             return true;
         }
     }
@@ -193,13 +200,13 @@ public class DbHelper extends SQLiteOpenHelper {
      * metodo che aggiorna il codice di accesso dell'account apassato nel database e
      * invia la mail all'email specifica dell'account con il nuovo codice
      */
-    public void updateAccessCode(String username, Activity activity) throws Exception{
+    public void updateAccessCode(String username) throws Exception{
         SQLiteDatabase db= this.getWritableDatabase();
         int newcode=UtilClass.generateAccessCode();
 
         PonyAccount account = recuperoDatiAccount(username);
 
-        db.execSQL("UPDATE ACCOUNT SET codice_accesso = " + "\"" + newcode +"\"" + " WHERE username LIKE " + "\"" + account.getUsername() + "\";");
+        db.execSQL("UPDATE ACCOUNT SET codice_accesso = \"" + newcode +"\" WHERE username LIKE \"" + account.getUsername() + "\";");
 
         db.close();
     }
@@ -212,7 +219,7 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db= this.getWritableDatabase();
         List<PonyAccount> returnList= new ArrayList<>();
 
-        Cursor rs = db.rawQuery(DataBaseString.SELECT_ALL_ACCOUNT,null);
+        Cursor rs = db.rawQuery(DbString.SELECT_ALL_ACCOUNT,null);
 
         if(rs.moveToFirst()){
             do{
@@ -230,11 +237,183 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     //ENTRATE
-    public List<Entrate> selectEntrateMese(String mese, String username) throws Exception{
-        List<Entrate> returnList = new ArrayList<>();
+
+    public void addNewEntrata(Entrata entrata){
+
+    }
+
+    /**
+     * permette di estrapolare dal database tutte le entrate del mese selezionato,
+     * @param meseAnno mese di cui si vogliono selezionare le ntrate
+     * @param username username dell'account di cui si vogliono selezionare le entrate
+     * @return ritorna una lista di entrate ordinate per data
+     * @throws Exception "Entrata non presente" genera eccezzioni in caso non ci siano
+     */
+    public List<Entrata> getAllEntrateMese(String meseAnno, String username) throws Exception{
+        List<Entrata> returnList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM yyyy");
+        LocalDate meseAnnoData = LocalDate.parse(meseAnno, formatter);
+        YearMonth yearMonth = YearMonth.of(meseAnnoData.getYear(), meseAnnoData.getMonth());
+
+        long startMonth = UtilClass.localDateToUnixTime(UtilClass.getFirstDayOfMonth(yearMonth));
+
+        long endMonth = UtilClass.localDateToUnixTime(UtilClass.getLastDayOfMonth(yearMonth));
+
+        Cursor rs = db.rawQuery(DbString.selectAllEntrateMese, new String[]{username, String.valueOf(startMonth), String.valueOf(endMonth)});
+        if(rs.getCount()>0){
+            //cursor pieno inserisco Entrata fino a che sono state selezionate dal database
+            rs.moveToFirst();
+            do{
+                returnList.add(new Entrata(
+                        UtilClass.unixTimeToLocalDate(rs.getLong(0)),
+                        LocalTime.parse(rs.getString(1)),
+                        LocalTime.parse(rs.getString(2)),
+                        LocalTime.parse(rs.getString(3)),
+                        rs.getDouble(4),
+                        rs.getDouble(5),
+                        rs.getDouble(6),
+                        rs.getString(7))
+                );
+
+            }while (rs.moveToNext());
+
+        }else{
+            //cursor vuoto
+            rs.close();
+            db.close();
+            throw new Exception("Entrata non presente!");
+        }
 
         return returnList;
 
     }
+
+    /**
+     * ricerca l'entrata corriscpondente alla data passata, genera eccezzioni in caso di errore di
+     * formattazione della stringa passata oppure di entrata non presente
+     * @param data data di cui si vuole ricercare la'entrata nel seguente foramto (dd
+     * @param username username dell'account
+     * @return ritorna l'entrata ricercata
+     * @throws Exception generate in caso di formattazione della stringa non corretta oppure entrata non presente
+     */
+    public  Entrata getEntrata(String data, String username) throws Exception{
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        //data convertita in LocalDate
+        LocalDate localDate = UtilClass.stringToLocalDate(data);
+
+        //data convertita in unixTime
+        long unixTimeData = UtilClass.localDateToUnixTime(localDate);
+        Cursor rs= db.rawQuery(DbString.selectEntrata, new String[]{username, String.valueOf(unixTimeData)} );
+        if(rs.getCount()>0){
+            rs.moveToFirst();
+            return new Entrata(
+                    UtilClass.unixTimeToLocalDate(rs.getLong(0)),
+                    LocalTime.parse(rs.getString(1)),
+                    LocalTime.parse(rs.getString(2)),
+                    LocalTime.parse(rs.getString(3)),
+                    rs.getDouble(4),
+                    rs.getDouble(5),
+                    rs.getDouble(6),
+                    rs.getString(7)
+            );
+        }else{
+            //entrata non presente
+            rs.close();
+            db.close();
+            throw  new Exception("Entrata non presente!");
+        }
+    }
+
+    /**
+     * metodo che permette di ottenere una lista dei turni settimanali
+     * @param username username dell'account
+     * @param start giorno di inizio della settimana da selezionare
+     * @param end giorno di fine della settimana da selezionare
+     * @return ritorna la lista con tutti i turni settimanali
+     * * @throws Exception in caso di assenza di turni
+     */
+    public List<Turno> getTurniFromInterval(String username, LocalDate start, LocalDate end) throws Exception {
+        SQLiteDatabase db = this.getReadableDatabase();
+        List<Turno> returnList = new ArrayList<>();
+
+        long unixTimeStartWeek = UtilClass.localDateToUnixTime(start);
+        long unixTimeEndWeek = UtilClass.localDateToUnixTime(end);
+
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        Cursor rs = db.rawQuery(DbString.selectTurniSettimanali,
+                new String[]{username, String.valueOf(unixTimeStartWeek), String.valueOf(unixTimeEndWeek)});
+        if(rs.getCount()>0){
+            rs.moveToFirst();
+            do{
+                returnList.add(new Turno(
+                        UtilClass.unixTimeToLocalDate(rs.getLong(0)),
+                        LocalTime.parse(rs.getString(1), timeFormatter),
+                        LocalTime.parse(rs.getString(2), timeFormatter))
+                );
+            }while(rs.moveToNext());
+
+            rs.close();
+            db.close();
+            return returnList;
+        }else{
+            rs.close();
+            db.close();
+            throw new Exception("Nessun turno presente");
+        }
+    }
+
+    /**
+     * permette di estrapolare dal database i costi e i consumi di un determinato mese e username
+     * @param meseAnno mese da analizzarre
+     * @param username username dell'account
+     * @return ritorna un'instanza di costi con i dati del mese selezionato
+     * @throws Exception in caso non ci siano costi inseriti nel database
+     */
+    public Costi getCostiMensili(String meseAnno, String username) throws Exception {
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor rs= db.rawQuery(DbString.selectCostiMensili, new String[]{username, meseAnno});
+        if(rs.getCount()>0){
+            return  new Costi(rs.getString(1),
+                    rs.getDouble(2),
+                    rs.getDouble(3));
+        }else{
+            //non ci sono costi inseriti per il mese selezionato
+            rs.close();
+            db.close();
+            throw new Exception("Non ci sono costi inseriti!");
+        }
+    }
+
+    /**
+     * software di calcolo delle entrate nettte mesili ovvero quelle lorde (entrate + mancia) - i costi [(kmtot / consumomedio) * costocarburante]
+     * @param meseAnno mese da analizzare
+     * @param username username dell'account
+     * @return ritorna le entrate mensili nette
+     */
+    public double getTotMensile(String meseAnno, String username){
+        List<Entrata> list;
+        double totMensile=0;
+        double kmMensili=0;
+        Costi costiMensili;
+        try {
+            list = this.getAllEntrateMese(meseAnno, username);
+            if(!list.isEmpty()){
+               for(Entrata e : list){
+                   totMensile+=(e.getEntrate()+e.getMancia());
+                   kmMensili+=e.getKm();
+               }
+               costiMensili = getCostiMensili(meseAnno, username);
+               totMensile-=(kmMensili/costiMensili.getConsumoMedio())*costiMensili.getCostoCarburante();
+            }
+            return totMensile;
+        } catch (Exception e) {
+            return totMensile;
+        }
+
+    }
+
+
 }

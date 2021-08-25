@@ -3,7 +3,7 @@ package com.example.ponyhelper;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -19,6 +19,12 @@ public class PagReg extends Activity {
 
     //variabile che rappresenta l'esito dei controlli
     boolean check;
+    TextInputLayout itUsername;
+    TextInputLayout itNome;
+    TextInputLayout itCognome;
+    TextInputLayout itEmail;
+    TextInputLayout itPassword;
+    TextInputLayout itConfermaPass;
 
 
 
@@ -27,12 +33,12 @@ public class PagReg extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pag_reg);
 
-        TextInputLayout itUsername=findViewById(R.id.it_usernamepagreg);
-        TextInputLayout itNome=findViewById(R.id.it_nomepagreg);
-        TextInputLayout itCognome=findViewById(R.id.it_cognomepagreg);
-        TextInputLayout itEmail=findViewById(R.id.it_emailpagreg);
-        TextInputLayout itPassword = findViewById(R.id.it_passwordpagreg);
-        TextInputLayout itConfermaPass=findViewById(R.id.it_confermapassword);
+        itUsername=findViewById(R.id.it_usernamepagreg);
+        itNome=findViewById(R.id.it_nomepagreg);
+        itCognome=findViewById(R.id.it_cognomepagreg);
+        itEmail=findViewById(R.id.it_emailpagreg);
+        itPassword = findViewById(R.id.it_passwordpagreg);
+        itConfermaPass=findViewById(R.id.it_confermapassword);
 
 
 
@@ -47,7 +53,13 @@ public class PagReg extends Activity {
 
         //inserimento terminato controllo i parametri
         Button breg=findViewById(R.id.b_registratipagreg);
-        breg.setOnClickListener(v -> {
+        breg.setOnClickListener(registrazione);
+    }
+
+
+    View.OnClickListener registrazione = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
 
             //salvo i dati inseriti dall'utente nell'account
             account.setUsername(Objects.requireNonNull(itUsername.getEditText()).getText().toString());
@@ -56,7 +68,7 @@ public class PagReg extends Activity {
             account.setEmail(Objects.requireNonNull(itEmail.getEditText()).getText().toString());
 
             String Password = Objects.requireNonNull(itPassword.getEditText()).getText().toString();
-            String ConfermaPassword= Objects.requireNonNull(itConfermaPass.getEditText()).getText().toString();
+            String ConfermaPassword = Objects.requireNonNull(itConfermaPass.getEditText()).getText().toString();
 
             DbHelper dbhelper = new DbHelper(PagReg.this);
             try {
@@ -72,32 +84,32 @@ public class PagReg extends Activity {
                 check = UtilClass.checkCampoObbligatorio(itConfermaPass);
 
                 //controllo che le password siano uguali
-                if(!(ConfermaPassword.equals(Password))) {
-                    check=false;
+                if (!(ConfermaPassword.equals(Password))) {
+                    check = false;
                     itPassword.setError("Password differenti");
                     itConfermaPass.setError("Password differenti");
                 }
 
 
                 //se il controllo è OK passo alla prossima activity, portando i dati dell'account
-                if(check) {
-                    Intent openHomePage = new Intent(PagReg.this, HomePag.class);
+                if (check) {
+                    Intent openHomePage = new Intent(PagReg.this, HomePage.class);
                     Bundle accountBundle = UtilClass.salvataggioAccount(account);
 
-                    dbhelper.registrazioneAccount(account, Password, PagReg.this);
-
-                    openHomePage.putExtra("account", accountBundle);
-                    startActivity(openHomePage);
+                    if (dbhelper.registrazioneAccount(account, Password)) {
+                        openHomePage.putExtra("account", accountBundle);
+                        PagReg.this.startActivity(openHomePage);
+                    } else {
+                        Toast.makeText(PagReg.this, "Errori nella registrazione. \nRiprova", Toast.LENGTH_LONG).show();
+                    }
                 }
             } catch (Exception e) {
-                check=false;
-                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                check = false;
+                Toast.makeText(PagReg.this.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                 e.printStackTrace();
-                Log.e("errore", e.getMessage());
             }
+        }
+    };
 
-
-        });
-    }
 }
 

@@ -1,47 +1,61 @@
 package com.example.ponyhelper.body;
 
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
-public class Entrate {
-    Date data;
-    Time oraInizio;
-    Time oraFine;
-    Time oreTot;
+public class Entrata {
+    LocalDate data;
+    LocalTime oraInizio;
+    LocalTime oraFine;
+    LocalTime oreTot;
     double entrate;
     double mancia;
     double km;
     String note;
 
-    public Date getData() {
+
+    public Entrata(LocalDate data, LocalTime oraInizio, LocalTime oraFine, LocalTime oreTot, double entrate, double mancia, double km, String note) {
+        this.data = data;
+        this.oraInizio = oraInizio;
+        this.oraFine = oraFine;
+        this.oreTot = oreTot;
+        this.entrate = entrate;
+        this.mancia = mancia;
+        this.km = km;
+        this.note = note;
+    }
+
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
-    public Time getOraInizio() {
+    public LocalTime getOraInizio() {
         return oraInizio;
     }
 
-    public void setOraInizio(Time oraInizio) {
+    public void setOraInizio(LocalTime oraInizio) {
         this.oraInizio = oraInizio;
     }
 
-    public Time getOraFine() {
+    public LocalTime getOraFine() {
         return oraFine;
     }
 
-    public void setOraFine(Time oraFine) {
+    public void setOraFine(LocalTime oraFine) {
         this.oraFine = oraFine;
     }
 
-    public Time getOreTot() {
+    public LocalTime getOreTot() {
         return oreTot;
     }
 
-    public void setOreTot(Time oreTot) {
+    public void setOreTot(LocalTime oreTot) {
         this.oreTot = oreTot;
     }
 
@@ -75,19 +89,5 @@ public class Entrate {
 
     public void setNote(String note) {
         this.note = note;
-    }
-
-    @Override
-    public String toString() {
-        return "Entrate{" +
-                "data=" + data +
-                ", oraInizio=" + oraInizio +
-                ", oraFine=" + oraFine +
-                ", oreTot=" + oreTot +
-                ", entrate=" + entrate +
-                ", mancia=" + mancia +
-                ", km=" + km +
-                ", note='" + note + '\'' +
-                '}';
     }
 }

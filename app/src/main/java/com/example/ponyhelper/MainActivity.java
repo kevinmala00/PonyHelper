@@ -7,11 +7,6 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.ponyhelper.body.PonyAccount;
-import com.example.ponyhelper.datamanagment.DbHelper;
-
-import java.util.List;
-
 
 public class MainActivity extends Activity {
 
@@ -20,17 +15,6 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        DbHelper dbhelper;
-
-        try{
-            dbhelper = new DbHelper(MainActivity.this);
-            List<PonyAccount> resultList = dbhelper.selectAllAccount();
-        }catch (Exception e){
-            Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-
-
 
         /*bottone registrati che apre pagreg
         */

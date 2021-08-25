@@ -10,7 +10,7 @@
         android:id="@+id/tv_entratepagentrate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="40dp"
         android:fontFamily="@font/bangers"
         android:text="@string/entrate"
         android:textAlignment="center"
@@ -20,6 +20,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
@@ -36,6 +37,7 @@
             android:id="@+id/l_bodyentrate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -55,23 +57,31 @@
                     android:background="@drawable/my_search_round"
                     android:ems="10"
                     android:hint="@string/search_gg_mm_aa"
+                    android:autofillHints="data"
                     android:inputType="date"
                     android:selectAllOnFocus="true"
                     android:singleLine="true"
                     android:textAlignment="textStart"
-                    android:autofillHints="" />
+                    tools:ignore="TouchTargetSizeCheck" />
 
                 <ImageButton
                     android:id="@+id/b_searcheentrata"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/not_red_button_background"
+                    android:contentDescription="@string/contente_description_buttonserchentrata"
                     app:srcCompat="@android:drawable/ic_menu_search"
                     app:tint="@color/black"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                    tools:ignore="TouchTargetSizeCheck" />
 
             </LinearLayout>
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_weight="1" />
 
             <View
                 android:id="@+id/divider1"
@@ -98,9 +108,10 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/not_red_button_background"
+                    android:contentDescription="@string/content_description_bottonemeseprecedente"
                     app:srcCompat="@drawable/freccia_sinistra"
                     app:tint="@color/black"
-                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                    tools:ignore="TouchTargetSizeCheck" />
 
                 <TextView
                     android:id="@+id/tv_mesecorrente"
@@ -116,9 +127,10 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/not_red_button_background"
+                    android:contentDescription="@string/content_description_buttonprossimomese"
                     app:srcCompat="@drawable/freccia_destra"
                     app:tint="@color/black"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                    tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -137,8 +149,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/not_red_button_background"
+                    android:contentDescription="@string/content_description_bottoneaggiungientrata"
                     app:srcCompat="@android:drawable/ic_input_add"
-                    tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+                    tools:ignore="TouchTargetSizeCheck" />
 
                 <ImageButton
                     android:id="@+id/b_gestiscicosti"
@@ -146,10 +159,14 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/not_red_button_background"
+                    android:contentDescription="@string/content_description_bottonegestiscicosti"
                     app:srcCompat="@android:drawable/ic_menu_edit"
-                    tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+                    tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
         </LinearLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

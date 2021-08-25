@@ -1,5 +1,9 @@
 package com.example.ponyhelper.body;
 
+import androidx.annotation.NonNull;
+
+import java.util.Objects;
+
 public class Indirizzo {
     int cap;
     String via;
@@ -105,11 +109,26 @@ public class Indirizzo {
         this.citta = citta;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Indirizzo indirizzo = (Indirizzo) o;
+        return cap == indirizzo.cap && Objects.equals(via, indirizzo.via) && Objects.equals(civico, indirizzo.civico) && Objects.equals(provincia, indirizzo.provincia) && Objects.equals(citta, indirizzo.citta);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cap, via, civico, provincia, citta);
+    }
+
     /**
      * toString della classe indirizzo
      *
      * @return ritorna la conversione in stringa delle istanze degli attributi dell'oggetto
      */
+
+    @NonNull
     @Override
     public String toString() {
         return "com.example.ponyhelper.appclass.Indirizzo{" +

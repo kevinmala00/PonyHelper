@@ -21,6 +21,8 @@ public class PagLogin extends Activity {
     DbHelper dbhelper;
     String username;
     String passcod;
+    TextInputLayout itUsername;
+    TextInputLayout itPasscod;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,49 +31,51 @@ public class PagLogin extends Activity {
         dbhelper = new DbHelper(PagLogin.this);
 
         //inizializzo i text imput con il quale l'utenet interagisce
-        TextInputLayout itUsername = findViewById(R.id.it_usernamepaglog);
-        TextInputLayout itPasscod = findViewById(R.id.it_passcodpaglog);
+        itUsername = findViewById(R.id.it_usernamepaglog);
+        itPasscod = findViewById(R.id.it_passcodpaglog);
 
-
-
-
-
-        //text view contente messaggio cambio codice
+        //text view contente messaggio cambio codice con relaticvo OnClickListener
         TextView tvMessNewCode = findViewById(R.id.tv_messnewcodelogin);
-        tvMessNewCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    dbhelper.updateAccessCode(username, PagLogin.this);
-                    Toast.makeText(PagLogin.this, "Nuovo codice inviato alla mail", Toast.LENGTH_SHORT).show();
-                } catch (Exception e) {
-                    Toast.makeText(PagLogin.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        tvMessNewCode.setOnClickListener(updateAccessCode);
 
-
-
+        //setto l'onClickListenere in modo che cliccando blogin si sttivi login
         Button bLogin = findViewById(R.id.b_loginpaglogin);
-        bLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-
-                    username = Objects.requireNonNull(itUsername.getEditText()).getText().toString();
-                    passcod = Objects.requireNonNull(itPasscod.getEditText()).getText().toString();
-
-                    account = dbhelper.checkLogin(username, passcod);
-                    Bundle accountBundle = UtilClass.salvataggioAccount(account);
-                    Intent openHomePag = new Intent(PagLogin.this, HomePag.class);
-                    openHomePag.putExtra("account", accountBundle);
-                    startActivity(openHomePag);
-                } catch (Exception e) {
-                    Toast.makeText(PagLogin.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+        bLogin.setOnClickListener(login);
     }
+
+    //OnClickListener che permette il login
+    View.OnClickListener login= new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            try {
+
+                username = Objects.requireNonNull(itUsername.getEditText()).getText().toString();
+                passcod = Objects.requireNonNull(itPasscod.getEditText()).getText().toString();
+
+                account = dbhelper.checkLogin(username, passcod);
+                Bundle accountBundle = UtilClass.salvataggioAccount(account);
+                Intent openHomePag = new Intent(PagLogin.this, HomePage.class);
+                openHomePag.putExtra("account", accountBundle);
+                startActivity(openHomePag);
+            } catch (Exception e) {
+                Toast.makeText(PagLogin.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }
+    };
+
+    //OnClickListener per settare un nuovo codice di accesso
+    View.OnClickListener updateAccessCode = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            try {
+                dbhelper.updateAccessCode(username);
+                Toast.makeText(PagLogin.this, "Nuovo codice inviato alla mail", Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                Toast.makeText(PagLogin.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
 }
 
 
