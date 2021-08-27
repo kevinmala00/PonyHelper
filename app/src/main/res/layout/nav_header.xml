@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/sfondo_pizze"
     android:backgroundTintMode="multiply"
-    android:backgroundTint="#80FFFFFF"
+    android:backgroundTint="#99FFFFFF"
     android:gravity="bottom"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
@@ -18,7 +18,7 @@
         android:text="@string/app_name"
         android:textAlignment="center"
         android:textColor="@color/arancio_titolo"
-        android:textSize="24sp"
+        android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/iv_navUser"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -33,7 +33,20 @@
         android:src="@drawable/ic_user"
         app:layout_constraintBottom_toTopOf="@+id/tv_usernameNavMenu"
         app:layout_constraintStart_toStartOf="parent"
-        app:tint="@color/background_dark" />
+        app:tint="@color/raisin_black" />
+
+    <TextView
+        android:id="@+id/tv_usernameNavMenu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tv_navEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tv_navEmail"
@@ -42,6 +55,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
         android:textColor="@color/black"
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -54,16 +68,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_usernameNavMenu"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="5dp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tv_navEmail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
