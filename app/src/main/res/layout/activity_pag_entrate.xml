@@ -22,8 +22,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
-            android:padding="10dp">
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp">
 
             <TextView
                 android:id="@+id/tv_entratepagentrate"
@@ -42,14 +42,15 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginBottom="100dp"
+                android:layout_marginBottom="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_entratepagentrate">
+                app:layout_constraintTop_toBottomOf="@+id/tv_entratepagentrate"
+                app:layout_constraintVertical_bias="0.0">
 
                 <LinearLayout
                     android:id="@+id/l_bodyentrate"
@@ -122,7 +123,7 @@
                         <ImageButton
                             android:id="@+id/b_meseprecedente"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="@drawable/not_red_button_background"
                             android:contentDescription="@string/content_description_bottonemeseprecedente"
@@ -140,7 +141,7 @@
                         <ImageButton
                             android:id="@+id/b_prossimomese"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="@drawable/not_red_button_background"
                             android:contentDescription="@string/content_description_buttonprossimomese"
@@ -150,7 +151,7 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="411dp" />
 
                     <LinearLayout
                         android:id="@+id/l_lineabutton"
@@ -161,7 +162,7 @@
                         <ImageButton
                             android:id="@+id/b_aggiunginentrata"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="@drawable/not_red_button_background"
                             android:contentDescription="@string/content_description_bottoneaggiungientrata"
@@ -171,7 +172,7 @@
                         <ImageButton
                             android:id="@+id/b_gestiscicosti"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="@drawable/not_red_button_background"
                             android:contentDescription="@string/content_description_bottonegestiscicosti"
