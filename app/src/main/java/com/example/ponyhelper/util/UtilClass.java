@@ -1,12 +1,17 @@
 package com.example.ponyhelper.util;
 
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.example.ponyhelper.body.PonyAccount;
+import com.example.ponyhelper.datamanagment.DbHelper;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.time.DayOfWeek;

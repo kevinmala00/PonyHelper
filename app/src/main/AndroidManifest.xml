@@ -19,7 +19,19 @@
         android:label="Pony Helper"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PonyHelper">
+        android:theme="@style/Theme.PonyHelper.NoActionBar">
+        <activity
+            android:name=".PagCalcoloTot"
+            android:exported="true" />
+        <activity
+            android:name=".PagProfilo"
+            android:exported="true" />
+        <activity
+            android:name=".PagInfo"
+            android:exported="true" />
+        <activity
+            android:name=".PagMenu"
+            android:exported="true" />
         <activity
             android:name=".PagEntrate"
             android:exported="true" />
@@ -31,7 +43,13 @@
             android:exported="true" />
         <activity
             android:name=".HomePage"
-            android:exported="true" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".PagLogin"
             android:exported="true" />
@@ -40,13 +58,7 @@
             android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true" />
     </application>
 
 </manifest>

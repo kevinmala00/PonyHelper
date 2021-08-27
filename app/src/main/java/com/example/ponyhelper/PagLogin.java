@@ -1,24 +1,39 @@
 package com.example.ponyhelper;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import com.example.ponyhelper.body.PonyAccount;
 import com.example.ponyhelper.datamanagment.DbHelper;
 import com.example.ponyhelper.util.UtilClass;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Objects;
 
 
-public class PagLogin extends Activity {
-    PonyAccount  account;
+public class PagLogin extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    PonyAccount account;
     DbHelper dbhelper;
+    DrawerLayout drawerLayout;
+    Toolbar toolbar;
+    ActionBarDrawerToggle toggle;
+    NavigationView navigationView;
     String username;
     String passcod;
     TextInputLayout itUsername;
@@ -29,6 +44,24 @@ public class PagLogin extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pag_login);
         dbhelper = new DbHelper(PagLogin.this);
+
+        //setto la toolbar
+        toolbar=findViewById(R.id.Toolbar);
+        setSupportActionBar(toolbar);
+        //elimino il titolo dalla toolbar
+        if (getSupportActionBar() != null) getSupportActionBar().setDisplayShowTitleEnabled (false);
+
+        //setto il navigation drawer
+        drawerLayout = findViewById(R.id.drawer_layout);
+
+        //setto la navigation view
+        navigationView=findViewById(R.id.navigation_view_pag_login);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
 
         //inizializzo i text imput con il quale l'utenet interagisce
         itUsername = findViewById(R.id.it_usernamepaglog);
@@ -75,6 +108,83 @@ public class PagLogin extends Activity {
             }
         }
     };
+
+    /**
+     * Called when an item in the navigation menu is selected.
+     *
+     * @param item The selected item
+     * @return true to display the item as the selected item
+     */
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.nav_item_home: {
+                startActivity(new Intent(PagLogin.this, HomePage.class));
+                break;
+
+            }
+            case R.id.nav_item_destinazioni: {
+                startActivity(new Intent(PagLogin.this, PagDestinazioni.class));
+                break;
+            }
+            case R.id.nav_item_turni: {
+
+                startActivity(new Intent(PagLogin.this, PagModificaTurni.class));
+                break;
+            }
+            case R.id.nav_item_entrate: {
+                startActivity(new Intent(PagLogin.this,  PagEntrate.class));
+                break;
+            }
+            case R.id.nav_item_menu: {
+                startActivity(new Intent(PagLogin.this, PagMenu.class));
+                break;
+            }
+            case R.id.nav_item_calcola_tot: {
+                startActivity(new Intent(PagLogin.this, PagCalcoloTot.class));
+                break;
+            }
+            case R.id.nav_item_profilo: {
+                startActivity(new Intent(PagLogin.this, PagProfilo.class));
+                break;
+            }
+            case R.id.nav_item_info: {
+                startActivity(new Intent(PagLogin.this, PagInfo.class));
+                break;
+            }
+            case R.id.nav_item_logout:{
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(PagLogin.this);
+                builder.setTitle("LOGOUT");
+                builder.setMessage("Sei sicuro di voler effettuare il logout?");
+                builder.setPositiveButton("CONFERMA", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        try {
+                            dbhelper.logout(account);
+                        } catch (Exception e) {
+                            Toast.makeText(PagLogin.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                        finishAffinity();
+
+                        System.exit(0);
+                    }
+                });
+                builder.setNegativeButton("ANNULLA", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.show();
+            }
+
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
 
 }
 

@@ -18,17 +18,20 @@ import com.example.ponyhelper.body.PonyAccount;
 import com.example.ponyhelper.datamanagment.DbHelper;
 import com.google.android.material.navigation.NavigationView;
 
-public class PagEntrate extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class PagCalcoloTot extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     PonyAccount account;
     DbHelper dbhelper;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     ActionBarDrawerToggle toggle;
     NavigationView navigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pag_entrate);
+        setContentView(R.layout.activity_pag_calcolo_tot);
+
+
         //setto la toolbar
         toolbar=findViewById(R.id.Toolbar);
         setSupportActionBar(toolbar);
@@ -39,8 +42,8 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
         drawerLayout = findViewById(R.id.drawer_layout);
 
         //setto la navigation view
-        navigationView=findViewById(R.id.navigation_view_pag_entrate);
-        navigationView.setCheckedItem(R.id.nav_item_entrate);
+        navigationView=findViewById(R.id.navigation_view_pag_calcolo_tot);
+        navigationView.setCheckedItem(R.id.nav_item_calcola_tot);
         navigationView.setNavigationItemSelectedListener(this);
 
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
@@ -62,43 +65,42 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
         switch (item.getItemId()) {
 
             case R.id.nav_item_home: {
-                startActivity(new Intent(PagEntrate.this, HomePage.class));
+                startActivity(new Intent(PagCalcoloTot.this, HomePage.class));
                 break;
 
             }
             case R.id.nav_item_destinazioni: {
-                startActivity(new Intent(PagEntrate.this, PagDestinazioni.class));
+                startActivity(new Intent(PagCalcoloTot.this, PagDestinazioni.class));
                 break;
             }
             case R.id.nav_item_turni: {
 
-                startActivity(new Intent(PagEntrate.this, PagModificaTurni.class));
+                startActivity(new Intent(PagCalcoloTot.this, PagModificaTurni.class));
                 break;
             }
             case R.id.nav_item_entrate: {
-                recreate();
+                startActivity(new Intent(PagCalcoloTot.this, PagEntrate.class));
                 break;
-
             }
             case R.id.nav_item_menu: {
-                startActivity(new Intent(PagEntrate.this, PagMenu.class));
+                startActivity(new Intent(PagCalcoloTot.this, PagMenu.class));
                 break;
             }
             case R.id.nav_item_calcola_tot: {
-                startActivity(new Intent(PagEntrate.this, PagCalcoloTot.class));
+                recreate();
                 break;
             }
             case R.id.nav_item_profilo: {
-                startActivity(new Intent(PagEntrate.this, PagProfilo.class));
+                startActivity(new Intent(PagCalcoloTot.this, PagProfilo.class));
                 break;
             }
             case R.id.nav_item_info: {
-                startActivity(new Intent(PagEntrate.this,  PagInfo.class));
+                startActivity(new Intent(PagCalcoloTot.this,  PagInfo.class));
                 break;
             }
             case R.id.nav_item_logout:{
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(PagEntrate.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(PagCalcoloTot.this);
                 builder.setTitle("LOGOUT");
                 builder.setMessage("Sei sicuro di voler effettuare il logout?");
                 builder.setPositiveButton("CONFERMA", new DialogInterface.OnClickListener() {
@@ -107,7 +109,7 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
                         try {
                             dbhelper.logout(account);
                         } catch (Exception e) {
-                            Toast.makeText(PagEntrate.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PagCalcoloTot.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                         finishAffinity();
 
@@ -127,4 +129,5 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

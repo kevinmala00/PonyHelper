@@ -204,6 +204,12 @@ public class DbString {
      */
     public static String selectCostiMensili =  "SELECT * FROM COSTI_CONSUMI WHERE (username LIKE ? AND mese_anno LIKE ?) LIMIT 1;";
 
+    /**
+     * Seleziona l'account attivo
+     */
+    public static String selectActiveAccount = "SELECT * FROM ACCOUNT WHERE attivo = 1 LIMIT 1;";
+
+    public static String selectAccount = "SELECT * FROM ACCOUNT WHERE username LIKE ? LIMIT 1;";
 
     static String UPGRADE_SCRIPT="";
 

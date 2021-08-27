@@ -18,7 +18,7 @@ import com.example.ponyhelper.body.PonyAccount;
 import com.example.ponyhelper.datamanagment.DbHelper;
 import com.google.android.material.navigation.NavigationView;
 
-public class PagEntrate extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class PagMenu extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
     PonyAccount account;
     DbHelper dbhelper;
     DrawerLayout drawerLayout;
@@ -28,7 +28,8 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pag_entrate);
+        setContentView(R.layout.activity_pag_menu);
+
         //setto la toolbar
         toolbar=findViewById(R.id.Toolbar);
         setSupportActionBar(toolbar);
@@ -39,8 +40,8 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
         drawerLayout = findViewById(R.id.drawer_layout);
 
         //setto la navigation view
-        navigationView=findViewById(R.id.navigation_view_pag_entrate);
-        navigationView.setCheckedItem(R.id.nav_item_entrate);
+        navigationView=findViewById(R.id.navigation_view_pag_menu);
+        navigationView.setCheckedItem(R.id.nav_item_menu);
         navigationView.setNavigationItemSelectedListener(this);
 
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
@@ -48,8 +49,6 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
     }
-
-
     /**
      * Called when an item in the navigation menu is selected.
      *
@@ -62,43 +61,42 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
         switch (item.getItemId()) {
 
             case R.id.nav_item_home: {
-                startActivity(new Intent(PagEntrate.this, HomePage.class));
+                startActivity(new Intent(PagMenu.this, HomePage.class));
                 break;
 
             }
             case R.id.nav_item_destinazioni: {
-                startActivity(new Intent(PagEntrate.this, PagDestinazioni.class));
+                startActivity(new Intent(PagMenu.this, PagDestinazioni.class));
                 break;
             }
             case R.id.nav_item_turni: {
 
-                startActivity(new Intent(PagEntrate.this, PagModificaTurni.class));
+                startActivity(new Intent(PagMenu.this, PagModificaTurni.class));
                 break;
             }
             case R.id.nav_item_entrate: {
-                recreate();
+                startActivity(new Intent(PagMenu.this,  PagEntrate.class));
                 break;
-
             }
             case R.id.nav_item_menu: {
-                startActivity(new Intent(PagEntrate.this, PagMenu.class));
+                recreate();
                 break;
             }
             case R.id.nav_item_calcola_tot: {
-                startActivity(new Intent(PagEntrate.this, PagCalcoloTot.class));
+                startActivity(new Intent(PagMenu.this, PagCalcoloTot.class));
                 break;
             }
             case R.id.nav_item_profilo: {
-                startActivity(new Intent(PagEntrate.this, PagProfilo.class));
+                startActivity(new Intent(PagMenu.this, PagProfilo.class));
                 break;
             }
             case R.id.nav_item_info: {
-                startActivity(new Intent(PagEntrate.this,  PagInfo.class));
+                startActivity(new Intent(PagMenu.this, PagInfo.class));
                 break;
             }
             case R.id.nav_item_logout:{
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(PagEntrate.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(PagMenu.this);
                 builder.setTitle("LOGOUT");
                 builder.setMessage("Sei sicuro di voler effettuare il logout?");
                 builder.setPositiveButton("CONFERMA", new DialogInterface.OnClickListener() {
@@ -107,7 +105,7 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
                         try {
                             dbhelper.logout(account);
                         } catch (Exception e) {
-                            Toast.makeText(PagEntrate.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PagMenu.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                         finishAffinity();
 

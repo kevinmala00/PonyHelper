@@ -206,7 +206,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public PonyAccount recuperoDatiAccount(String username) throws  Exception{
         SQLiteDatabase db = this.getReadableDatabase();
         PonyAccount account;
-        Cursor rs = db.rawQuery("SELECT * FROM ACCOUNT WHERE username LIKE ? LIMIT 1;", new String[]{username});
+        Cursor rs = db.rawQuery(DbString.selectAccount, new String[]{username});
         if(rs.getCount()>0){
             rs.moveToFirst();
             account=new PonyAccount(
@@ -443,6 +443,34 @@ public class DbHelper extends SQLiteOpenHelper {
         }
 
     }
+
+    /**
+     * permette di ottenere l'ultimo account attivo sull'app
+     * @return ritorna il ponyaccount con i dati istanziati
+     * @throws Exception in caso di nessuno o piu account attivi
+     */
+    public PonyAccount getActiveAccount() throws Exception{
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor rs=db.rawQuery(DbString.selectActiveAccount, null);
+        if(rs.getCount()>0){
+            rs.moveToFirst();
+            if (rs.getCount()>1){
+                rs.close();
+                db.close();
+                throw new Exception("Piu account attivi!\nEsegui il logout");
+            }
+            return new PonyAccount(
+                    rs.getString(0),
+                    rs.getString(1),
+                    rs.getString(2),
+                    rs.getString(3) );
+        }else{
+            rs.close();
+            db.close();
+            throw new Exception("Nessun account attivo!\nEsegui il login o registrati");
+        }
+    }
+
 
 
 
