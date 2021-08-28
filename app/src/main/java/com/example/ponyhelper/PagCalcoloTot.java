@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.ponyhelper.body.PonyAccount;
 import com.example.ponyhelper.datamanagment.DbHelper;
+import com.example.ponyhelper.util.UtilClass;
 import com.google.android.material.navigation.NavigationView;
 
 public class PagCalcoloTot extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -100,29 +101,8 @@ public class PagCalcoloTot extends AppCompatActivity implements NavigationView.O
             }
             case R.id.nav_item_logout:{
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(PagCalcoloTot.this);
-                builder.setTitle("LOGOUT");
-                builder.setMessage("Sei sicuro di voler effettuare il logout?");
-                builder.setPositiveButton("CONFERMA", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        try {
-                            dbhelper.logout(account);
-                        } catch (Exception e) {
-                            Toast.makeText(PagCalcoloTot.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                        finishAffinity();
-
-                        System.exit(0);
-                    }
-                });
-                builder.setNegativeButton("ANNULLA", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                builder.show();
+                UtilClass.logout(PagCalcoloTot.this, account);
+                break;
             }
 
         }

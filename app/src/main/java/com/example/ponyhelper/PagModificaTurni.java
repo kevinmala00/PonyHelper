@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.ponyhelper.body.PonyAccount;
 import com.example.ponyhelper.datamanagment.DbHelper;
+import com.example.ponyhelper.util.UtilClass;
 import com.google.android.material.navigation.NavigationView;
 
 public class PagModificaTurni extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -51,7 +52,7 @@ public class PagModificaTurni extends AppCompatActivity implements NavigationVie
         toggle.syncState();
 
         View lModificaTurno=findViewById(R.id.l_modificaturno);
-        lModificaTurno.setClipToOutline(true);
+
     }
 
     /**
@@ -101,29 +102,8 @@ public class PagModificaTurni extends AppCompatActivity implements NavigationVie
             }
             case R.id.nav_item_logout:{
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(PagModificaTurni.this);
-                builder.setTitle("LOGOUT");
-                builder.setMessage("Sei sicuro di voler effettuare il logout?");
-                builder.setPositiveButton("CONFERMA", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        try {
-                            dbhelper.logout(account);
-                        } catch (Exception e) {
-                            Toast.makeText(PagModificaTurni.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                        finishAffinity();
-
-                        System.exit(0);
-                    }
-                });
-                builder.setNegativeButton("ANNULLA", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                builder.show();
+                UtilClass.logout(PagModificaTurni.this, account);
+                break;
             }
 
         }

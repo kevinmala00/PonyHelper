@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.example.ponyhelper.PagProfilo;
 import com.example.ponyhelper.body.PonyAccount;
 import com.example.ponyhelper.datamanagment.DbHelper;
 import com.google.android.material.textfield.TextInputLayout;
@@ -177,5 +179,43 @@ public class UtilClass {
     public static LocalDate getLastDayOfMonth(YearMonth meseAnno){
         return meseAnno.atEndOfMonth();
     }
+
+
+    /**
+     * esegue il logout scollegando anche l'account
+     * @param activity activity nella quale il metodo è stato chiamato
+     * @param dbhelper dbhelper
+     * @param account accont di cui effettuare il logout
+     */
+    public static void logout(Activity activity, PonyAccount account){
+        DbHelper dbhelper = new DbHelper(activity);
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle("LOGOUT");
+        builder.setMessage("Sei sicuro di voler effettuare il logout?");
+        builder.setPositiveButton("CONFERMA", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                try {
+                    dbhelper.logout(account);
+                } catch (Exception e) {
+                    Toast.makeText(activity, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                activity.finishAffinity();
+
+                System.exit(0);
+            }
+        });
+        builder.setNegativeButton("ANNULLA", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
+
+
+
+
 
 }

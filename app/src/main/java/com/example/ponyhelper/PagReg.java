@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -90,7 +91,7 @@ public class PagReg extends AppCompatActivity implements  NavigationView.OnNavig
         breg.setOnClickListener(registrazione);
     }
 
-
+    //onclick listener che permette la registrazione
     View.OnClickListener registrazione = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -127,6 +128,12 @@ public class PagReg extends AppCompatActivity implements  NavigationView.OnNavig
 
                 //se il controllo è OK passo alla prossima activity, portando i dati dell'account
                 if (check) {
+
+                    //SETTO USERNAME E EMAIL NEL NAV HEADER
+                    View headerView=navigationView.getHeaderView(0);
+                    TextView tvNavUsername= headerView.findViewById(R.id.tv_usernameNavMenu);
+                    TextView tvNavEmail=headerView.findViewById(R.id.tv_navEmail);
+
                     Intent openHomePage = new Intent(PagReg.this, HomePage.class);
                     Bundle accountBundle = UtilClass.salvataggioAccount(account);
 
@@ -193,29 +200,8 @@ public class PagReg extends AppCompatActivity implements  NavigationView.OnNavig
             }
             case R.id.nav_item_logout:{
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(PagReg.this);
-                builder.setTitle("LOGOUT");
-                builder.setMessage("Sei sicuro di voler effettuare il logout?");
-                builder.setPositiveButton("CONFERMA", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        try {
-                            dbhelper.logout(account);
-                        } catch (Exception e) {
-                            Toast.makeText(PagReg.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                        finishAffinity();
-
-                        System.exit(0);
-                    }
-                });
-                builder.setNegativeButton("ANNULLA", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                builder.show();
+                UtilClass.logout(PagReg.this, account);
+                break;
             }
 
         }
