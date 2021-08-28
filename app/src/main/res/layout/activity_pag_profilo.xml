@@ -41,7 +41,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/iv_profiloPagProfilo"
                 android:layout_width="116dp"
                 android:layout_height="121dp"
                 android:layout_marginTop="15dp"
@@ -60,7 +60,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                app:layout_constraintTop_toBottomOf="@+id/iv_profiloPagProfilo" />
 
             <TextView
                 android:id="@+id/tv_emailPagProfilo"

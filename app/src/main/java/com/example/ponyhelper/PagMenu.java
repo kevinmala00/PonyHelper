@@ -80,7 +80,7 @@ public class PagMenu extends AppCompatActivity implements  NavigationView.OnNavi
                 break;
             }
             case R.id.nav_item_menu: {
-                recreate();
+
                 break;
             }
             case R.id.nav_item_calcola_tot: {

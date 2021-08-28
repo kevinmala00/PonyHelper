@@ -184,7 +184,6 @@ public class UtilClass {
     /**
      * esegue il logout scollegando anche l'account
      * @param activity activity nella quale il metodo è stato chiamato
-     * @param dbhelper dbhelper
      * @param account accont di cui effettuare il logout
      */
     public static void logout(Activity activity, PonyAccount account){

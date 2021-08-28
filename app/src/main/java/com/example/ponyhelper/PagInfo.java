@@ -94,7 +94,6 @@ public class PagInfo extends AppCompatActivity implements NavigationView.OnNavig
                 break;
             }
             case R.id.nav_item_info: {
-                recreate();
                 break;
             }
             case R.id.nav_item_logout:{

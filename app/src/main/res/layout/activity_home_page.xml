@@ -117,38 +117,17 @@
 
             <TextView
                 android:id="@+id/tv_entratemensili"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:fontFamily="@font/bangers"
                 android:text="@string/entratemensili"
-                android:textAlignment="viewStart"
+                android:textAlignment="center"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.288"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rv_turnisettimanali" />
-
-            <TextView
-                android:id="@+id/tv_totmensile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:fontFamily="@font/bangers"
-                android:textSize="24sp"
-                app:layout_constraintStart_toEndOf="@+id/tv_entratemensili"
-                app:layout_constraintTop_toTopOf="@+id/tv_entratemensili" />
-
-            <TextView
-                android:id="@+id/tv_simboloeurohomepage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:fontFamily="@font/bangers"
-                android:text="@string/simboloeuro"
-                android:textSize="24sp"
-                app:layout_constraintStart_toEndOf="@+id/tv_totmensile"
-                app:layout_constraintTop_toTopOf="@+id/tv_entratemensili" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

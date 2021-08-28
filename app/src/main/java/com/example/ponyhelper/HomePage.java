@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class HomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class HomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     PonyAccount account;
     DbHelper dbhelper;
     List<Turno> turniSettimanali;
@@ -48,16 +48,16 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         setContentView(R.layout.activity_home_page);
 
         //setto la toolbar
-        toolbar=findViewById(R.id.Toolbar);
+        toolbar = findViewById(R.id.Toolbar);
         setSupportActionBar(toolbar);
         //elimino il titolo dalla toolbar
-        if (getSupportActionBar() != null) getSupportActionBar().setDisplayShowTitleEnabled (false);
+        if (getSupportActionBar() != null) getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         //setto il navigation drawer
         drawerLayout = findViewById(R.id.drawer_layout);
 
         //setto la navigation view
-        navigationView=findViewById(R.id.navigation_view_home_page);
+        navigationView = findViewById(R.id.navigation_view_home_page);
         navigationView.setCheckedItem(R.id.nav_item_home);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -67,24 +67,24 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         toggle.syncState();
 
 
-        dbhelper=new DbHelper(HomePage.this);
+        dbhelper = new DbHelper(HomePage.this);
 
         //INIZIALIZZO LE VARIE VIEW
         //recycler view
         RecyclerView rvTurniSettimanali = findViewById(R.id.rv_turnisettimanali);
         //view del navigationHeader, tv username e email presenti in esso
-        View headerView=navigationView.getHeaderView(0);
-        TextView tvNavUsername= headerView.findViewById(R.id.tv_usernameNavMenu);
-        TextView tvNavEmail=headerView.findViewById(R.id.tv_navEmail);
-        TextView tvTotMensile = findViewById(R.id.tv_totmensile);
+        View headerView = navigationView.getHeaderView(0);
+        TextView tvNavUsername = headerView.findViewById(R.id.tv_usernameNavMenu);
+        TextView tvNavEmail = headerView.findViewById(R.id.tv_navEmail);
         TextView tvDurataSettimana = findViewById(R.id.tv_durataSettimana);
-        TextView tvMeseAnno=findViewById(R.id.tv_meseanno);
+        TextView tvMeseAnno = findViewById(R.id.tv_meseanno);
+        TextView tvEntrateMensili = findViewById(R.id.tv_entratemensili);
 
         //SETTO IL TESTO DELLE VARIE TEXTVIEW
         //meseanno con il mese e anno  corrente
-        String mese=LocalDate.now().getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault());
-        int anno=LocalDate.now().getYear();
-        String stringMeseAnno= mese + "\t\t" + anno;
+        String mese = LocalDate.now().getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault());
+        int anno = LocalDate.now().getYear();
+        String stringMeseAnno = mese + "\t\t" + anno;
         tvMeseAnno.setText(stringMeseAnno);
 
         //la durata della settimana partendo dal primo giorno di questa settimana fino all'ultimo
@@ -94,21 +94,31 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         tvDurataSettimana.setText(durataSettimana);
 
 
+        if (savedInstanceState != null) {
+            //ripristino i dati dal bundle passato dall'activity precedente
+            Bundle accountBundle = getIntent().getExtras().getBundle("account");
+            if(accountBundle!=null){
+                account = UtilClass.ripristinoAccount(accountBundle);
+            }
+        }else{
+            try {
+                //otennego i dati dell'account attivo
+                account = dbhelper.getActiveAccount();
+                Toast.makeText(HomePage.this, "Benvenuto " + account.getUsername(), Toast.LENGTH_LONG).show();
 
 
+            } catch (Exception e) {
+                Toast.makeText(HomePage.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }
+
+        //setto le text view account e email ne navigation manu con quelle correnti
+        tvNavUsername.setText(account.getUsername());
+        tvNavEmail.setText(account.getEmail());
 
         try {
-            //otennego i dati dell'account attivo
-            account=dbhelper.getActiveAccount();
-
-            //setto le text view account e email ne navigation manu con quelle correnti
-            tvNavUsername.setText(account.getUsername());
-            tvNavEmail.setText(account.getEmail());
-
-            Toast.makeText(HomePage.this, "Benvenuto " + account.getUsername(), Toast.LENGTH_LONG).show();
-
             //ottengo la lista dei turni settimanali
-            turniSettimanali=dbhelper.getTurniFromInterval(account.getUsername(),
+            turniSettimanali = dbhelper.getTurniFromInterval(account.getUsername(),
                     UtilClass.getDayOfDataWeek(LocalDate.now(), DayOfWeek.MONDAY),
                     UtilClass.getDayOfDataWeek(LocalDate.now(), DayOfWeek.SUNDAY));
 
@@ -116,14 +126,18 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             TurniAdapter turniAdapter = new TurniAdapter(turniSettimanali);
             rvTurniSettimanali.setAdapter(turniAdapter);
             rvTurniSettimanali.setLayoutManager(new LinearLayoutManager(this));
-
-            //totmensile con i ricavi netti mensili
-            tvTotMensile.setText(String.valueOf(dbhelper.getTotMensile(stringMeseAnno, account.getUsername())));
-
-        } catch (Exception e) {
+        }catch (Exception e){
             Toast.makeText(HomePage.this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
+
+        //totmensile con i ricavi netti mensili
+        String entrateMensili = "ENTRATE MENSILI:\t\t" + dbhelper.getTotMensile(stringMeseAnno, account.getUsername()) + "\t\t€";
+        tvEntrateMensili.setText(entrateMensili);
+
     }
+
+
+
 
 
 
@@ -139,7 +153,6 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         switch (item.getItemId()) {
 
             case R.id.nav_item_home: {
-                recreate();
                 break;
             }
             case R.id.nav_item_destinazioni: {

@@ -66,6 +66,11 @@ public class PagProfilo extends AppCompatActivity implements  NavigationView.OnN
         Button bLogin = findViewById(R.id.b_loginPagProfilo);
         Button bRegistrati = findViewById(R.id.b_registratiPagProfilo);
 
+        View headerView=navigationView.getHeaderView(0);
+        TextView tvNavUsername= headerView.findViewById(R.id.tv_usernameNavMenu);
+        TextView tvNavEmail=headerView.findViewById(R.id.tv_navEmail);
+
+
         //RECUPERO I DATI DELL'ACCOUNT ATTIVO
         try{
             account = dbhelper.getActiveAccount();
@@ -76,9 +81,8 @@ public class PagProfilo extends AppCompatActivity implements  NavigationView.OnN
             tvCognome.setText(account.getCognome());
 
             //SETTO USERNAME E EMAIL NEL NAV HEADER
-            View headerView=navigationView.getHeaderView(0);
-            TextView tvNavUsername= headerView.findViewById(R.id.tv_usernameNavMenu);
-            TextView tvNavEmail=headerView.findViewById(R.id.tv_navEmail);
+            tvNavUsername.setText(account.getUsername());
+            tvNavEmail.setText(account.getEmail());
 
             //SETTO L'ONCLICKLISTENER DI B_LOGOUT
             bLogout.setOnClickListener(logout);

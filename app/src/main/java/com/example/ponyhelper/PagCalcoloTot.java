@@ -88,7 +88,7 @@ public class PagCalcoloTot extends AppCompatActivity implements NavigationView.O
                 break;
             }
             case R.id.nav_item_calcola_tot: {
-                recreate();
+
                 break;
             }
             case R.id.nav_item_profilo: {

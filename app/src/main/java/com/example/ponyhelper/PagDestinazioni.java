@@ -74,7 +74,7 @@ public class PagDestinazioni extends AppCompatActivity implements NavigationView
 
             }
             case R.id.nav_item_destinazioni: {
-                recreate();
+
                 break;
             }
             case R.id.nav_item_turni: {

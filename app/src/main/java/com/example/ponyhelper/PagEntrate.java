@@ -77,7 +77,6 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
                 break;
             }
             case R.id.nav_item_entrate: {
-                recreate();
                 break;
 
             }
