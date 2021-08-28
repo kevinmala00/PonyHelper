@@ -12,10 +12,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ponyhelper.body.PonyAccount;
 import com.example.ponyhelper.datamanagment.DbHelper;
+import com.example.ponyhelper.util.UtilClass;
 import com.google.android.material.navigation.NavigationView;
 
 public class PagProfilo extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
@@ -48,7 +53,74 @@ public class PagProfilo extends AppCompatActivity implements  NavigationView.OnN
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+        //ISTANZIO DBHELPER
+        dbhelper= new DbHelper(PagProfilo.this);
+
+        //INIZIALIZZO LE VARIE VIEW
+        TextView tvUsername = findViewById(R.id.tv_usernamePagProfilo);
+        TextView tvEmail = findViewById(R.id.tv_emailPagProfilo);
+        TextView tvNome = findViewById(R.id.tv_nomePagProfilo);
+        TextView tvCognome = findViewById(R.id.tv_cognomePagProfilo);
+        ImageButton bLogout = findViewById(R.id.b_logoutPagProfilo);
+        Button bLogin = findViewById(R.id.b_loginPagProfilo);
+        Button bRegistrati = findViewById(R.id.b_registratiPagProfilo);
+
+        //RECUPERO I DATI DELL'ACCOUNT ATTIVO
+        try{
+            account = dbhelper.getActiveAccount();
+            //SETTO IL TESTO DELLE TEXTVIEW
+            tvUsername.setText(account.getUsername());
+            tvEmail.setText(account.getEmail());
+            tvNome.setText(account.getNome());
+            tvCognome.setText(account.getCognome());
+
+            //SETTO USERNAME E EMAIL NEL NAV HEADER
+            View headerView=navigationView.getHeaderView(0);
+            TextView tvNavUsername= headerView.findViewById(R.id.tv_usernameNavMenu);
+            TextView tvNavEmail=headerView.findViewById(R.id.tv_navEmail);
+
+            //SETTO L'ONCLICKLISTENER DI B_LOGOUT
+            bLogout.setOnClickListener(logout);
+            bLogin.setOnClickListener(login);
+            bRegistrati.setOnClickListener(registrati);
+
+        } catch (Exception e) {
+            Toast.makeText(PagProfilo.this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
+
     }
+
+    //ONCLICKLISTENER LOGOUT
+    View.OnClickListener logout = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            UtilClass.logout(PagProfilo.this, account);
+        }
+    };
+
+
+    //ONCLICKLISTENER LOGIN
+    View.OnClickListener login = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent =  new Intent(PagProfilo.this, PagLogin.class);
+            startActivity(intent);
+        }
+    };
+
+    //ONCLICKLISTENER REGISTRATI
+    View.OnClickListener registrati = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent =  new Intent(PagProfilo.this, PagReg.class);
+            startActivity(intent);
+        }
+    };
+
+
+
     /**
      * Called when an item in the navigation menu is selected.
      *
@@ -87,40 +159,17 @@ public class PagProfilo extends AppCompatActivity implements  NavigationView.OnN
                 break;
             }
             case R.id.nav_item_profilo: {
-                recreate();
+
                 break;
             }
             case R.id.nav_item_info: {
                 startActivity(new Intent(PagProfilo.this, PagInfo.class));
                 break;
             }
-            case R.id.nav_item_logout:{
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(PagProfilo.this);
-                builder.setTitle("LOGOUT");
-                builder.setMessage("Sei sicuro di voler effettuare il logout?");
-                builder.setPositiveButton("CONFERMA", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        try {
-                            dbhelper.logout(account);
-                        } catch (Exception e) {
-                            Toast.makeText(PagProfilo.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                        finishAffinity();
-
-                        System.exit(0);
-                    }
-                });
-                builder.setNegativeButton("ANNULLA", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                builder.show();
+            case R.id.nav_item_logout: {
+                UtilClass.logout(PagProfilo.this, account);
+                break;
             }
-
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

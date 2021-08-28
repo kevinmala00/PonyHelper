@@ -22,10 +22,153 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="10dp">
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="10dp">
 
 
+            <TextView
+                android:id="@+id/tv_profiloPagProfilo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/profilo"
+                android:fontFamily="@font/bangers"
+                android:textSize="34sp"
+                android:textAlignment="center"
+                android:textColor="@color/arancio_titolo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="116dp"
+                android:layout_height="121dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_profiloPagProfilo"
+                app:srcCompat="@drawable/ic_user" />
+
+            <TextView
+                android:id="@+id/tv_usernamePagProfilo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+            <TextView
+                android:id="@+id/tv_emailPagProfilo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_usernamePagProfilo" />
+
+            <ImageButton
+                android:id="@+id/b_logoutPagProfilo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_logout"
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+            <TextView
+                android:id="@+id/tv_nomeLabelPagProfilo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:text="@string/nome"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_emailPagProfilo" />
+
+            <TextView
+                android:id="@+id/tv_nomePagProfilo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="30dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:padding="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_nomeLabelPagProfilo"
+                android:background="@drawable/rounded_orange"/>
+
+            <TextView
+                android:id="@+id/tv_cognomeLabelPagProfilo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/cognome"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_nomePagProfilo" />
+
+            <TextView
+                android:id="@+id/tv_cognomePagProfilo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="30dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:padding="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_cognomeLabelPagProfilo"
+                android:background="@drawable/rounded_orange"/>
+
+            <Button
+                android:id="@+id/b_loginPagProfilo"
+                style="@android:style/Widget.Holo.Button"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/my_search_round"
+                android:backgroundTint="@color/arancio_titolo"
+                android:backgroundTintMode="src_over"
+                android:fontFamily="@font/droid_sans"
+                android:text="@string/login"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                app:layout_constraintEnd_toStartOf="@+id/b_registratiPagProfilo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_cognomePagProfilo"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <Button
+                android:id="@+id/b_registratiPagProfilo"
+                style="@android:style/Widget.Holo.Button"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_orange"
+                android:backgroundTint="@color/arancio_titolo"
+                android:backgroundTintMode="src_over"
+                android:fontFamily="@font/droid_sans"
+                android:text="@string/registrati"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/b_loginPagProfilo"
+                app:layout_constraintTop_toTopOf="@+id/b_loginPagProfilo" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
