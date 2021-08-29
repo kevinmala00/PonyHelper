@@ -211,6 +211,8 @@ public class DbString {
 
     public static String selectAccount = "SELECT * FROM ACCOUNT WHERE username LIKE ? LIMIT 1;";
 
+    public static String checkPresenzaTurno = "SELECT EXISTS(SELECT * FROM TURNI WHERE data LIKE ? AND username LIKE ?)";
+
     static String UPGRADE_SCRIPT="";
 
 

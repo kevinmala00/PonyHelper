@@ -25,8 +25,180 @@
             android:paddingStart="10dp"
             android:paddingEnd="10dp">
 
+            <TextView
+                android:id="@+id/tv_titlePagInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/bangers"
+                android:text="@string/info"
+                android:textAlignment="center"
+                android:textColor="@color/arancio_titolo"
+                android:textSize="34sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.473"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="550dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_orange"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.533"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_titlePagInfo"
+                app:layout_constraintVertical_bias="0.0">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bangers"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:text="@string/generale"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tv_messGeneralePagInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bangers"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:text="@string/home_page"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tv_messHomePagePagInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bangers"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:text="@string/pagina_destinazioni"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tv_messDestinazioniPagInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bangers"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:text="@string/pagina_turni"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tv_messTurniPagInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bangers"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:text="@string/pagine_entrate"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tv_messEntratePagInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bangers"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:text="@string/pagina_menu"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tv_messMenuPagInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bangers"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:text="@string/calcola_totale"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tv_messCalcolaTotPagInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bangers"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:text="@string/pagina_profilo"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tv_messProfiloPagInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+            </ScrollView>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -73,7 +73,7 @@ public class TurniAdapter extends RecyclerView.Adapter<TurniAdapter.ViewHolder> 
             super(itemView);
             tvGiorno=itemView.findViewById(R.id.tv_GiornoSettimana);
             tvOraInizio=itemView.findViewById(R.id.tv_OraInizioTurno);
-            tvOraInizio=itemView.findViewById(R.id.tv_OraFineTurno);
+            tvOraFine=itemView.findViewById(R.id.tv_OraFineTurno);
         }
     }
 }

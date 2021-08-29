@@ -67,9 +67,6 @@ public class PagLogin extends AppCompatActivity implements NavigationView.OnNavi
         itUsername = findViewById(R.id.it_usernamepaglog);
         itPasscod = findViewById(R.id.it_passcodpaglog);
 
-        //text view contente messaggio cambio codice con relaticvo OnClickListener
-        TextView tvMessNewCode = findViewById(R.id.tv_messnewcodelogin);
-        tvMessNewCode.setOnClickListener(updateAccessCode);
 
         //setto l'onClickListenere in modo che cliccando blogin si sttivi login
         Button bLogin = findViewById(R.id.b_loginpaglogin);

@@ -74,9 +74,10 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1.5"
                             android:autofillHints="data"
-                            android:background="@drawable/my_search_round"
-                            android:ems="10"
+                            android:background="@drawable/rounded_orange"
                             android:hint="@string/search_gg_mm_aa"
+                            android:paddingLeft="4dp"
+                            android:paddingRight="4dp"
                             android:inputType="date"
                             android:selectAllOnFocus="true"
                             android:singleLine="true"
@@ -88,7 +89,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@drawable/not_red_button_background"
+                            android:background="@android:color/transparent"
                             android:contentDescription="@string/contente_description_buttonserchentrata"
                             app:srcCompat="@drawable/ic_search"
                             tools:ignore="TouchTargetSizeCheck" />
@@ -102,14 +103,12 @@
                         android:layout_weight="1" />
 
                     <View
-                        android:id="@+id/divider1"
                         android:layout_width="match_parent"
-                        android:layout_height="2dp"
+                        android:layout_height="1dp"
                         android:layout_weight="1"
                         android:background="@color/arancio_titolo" />
 
                     <View
-                        android:id="@+id/divider2"
                         android:layout_width="match_parent"
                         android:layout_height="5dp"
                         android:layout_weight="1" />
@@ -125,7 +124,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@drawable/not_red_button_background"
+                            android:background="@android:color/transparent"
                             android:contentDescription="@string/content_description_bottonemeseprecedente"
                             app:srcCompat="@drawable/ic_freccia_sx"
                             tools:ignore="TouchTargetSizeCheck" />
@@ -143,7 +142,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@drawable/not_red_button_background"
+                            android:background="@android:color/transparent"
                             android:contentDescription="@string/content_description_buttonprossimomese"
                             app:srcCompat="@drawable/ic_freccia_dx"
                             tools:ignore="TouchTargetSizeCheck" />
@@ -164,9 +163,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@drawable/not_red_button_background"
                             android:contentDescription="@string/content_description_bottoneaggiungientrata"
                             app:srcCompat="@drawable/ic_add"
+                            android:background="@android:color/transparent"
                             tools:ignore="TouchTargetSizeCheck" />
 
                         <ImageButton
@@ -174,9 +173,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@drawable/not_red_button_background"
                             android:contentDescription="@string/content_description_bottonegestiscicosti"
                             app:srcCompat="@drawable/ic_edit"
+                            android:background="@android:color/transparent"
                             tools:ignore="TouchTargetSizeCheck" />
                     </LinearLayout>
                 </LinearLayout>

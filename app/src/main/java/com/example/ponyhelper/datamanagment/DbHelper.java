@@ -378,9 +378,9 @@ public class DbHelper extends SQLiteOpenHelper {
             rs.moveToFirst();
             do{
                 returnList.add(new Turno(
-                        UtilClass.unixTimeToLocalDate(rs.getLong(0)),
-                        LocalTime.parse(rs.getString(1), timeFormatter),
-                        LocalTime.parse(rs.getString(2), timeFormatter))
+                        UtilClass.unixTimeToLocalDate(rs.getLong(1)),
+                        LocalTime.parse(rs.getString(2), timeFormatter),
+                        LocalTime.parse(rs.getString(3), timeFormatter))
                 );
             }while(rs.moveToNext());
 
@@ -471,7 +471,50 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * permette prima di cercare all'interno del database se è presente il turno in quella data
+     * in caso sia presente allora viene eseguito l'update in caso non lo sia viene inserita una nuova riga alla tabella del database
+     * @param account account attivo in quel momento
+     * @param turno turno interessato alle modifiche
+     * @throws Exception in caso vi siano problemi viene lanciata questa eccezione: "Errori interni ci scusiamo per il disagio.\nRIPROVARE!"
+     */
+    public void modificaTurno(PonyAccount account, Turno turno) throws Exception {
+        SQLiteDatabase db = this.getWritableDatabase();
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
-
+        Exception e = new Exception("Errori interni ci scusiamo per il disagio.\nRIPROVARE!");
+        long unixTime = UtilClass.localDateToUnixTime(turno.getData());
+        ContentValues cv = new ContentValues();
+        cv.put("username", account.getUsername());
+        cv.put("data", unixTime);
+        cv.put("ora_inizio", turno.getOraInizio().format(timeFormatter));
+        cv.put("ora_fine", turno.getOraFine().format(timeFormatter));
+        //controllo se il turno è presente
+        Cursor rs = db.rawQuery(DbString.checkPresenzaTurno, new String[]{String.valueOf(unixTime),account.getUsername()});
+        if(rs.getCount()>0){
+            rs.moveToFirst();
+            if(rs.getInt(0) == 0){
+                //ilturno non è presente lo dobbiamo inserire
+                long result = db.insert("TURNI", null, cv );
+                rs.close();
+                db.close();
+                if(result != 1){
+                    throw e;
+                }
+            }else{
+                //il turno è gia presente update
+                int result = db.update("TURNI", cv, "username LIKE ? AND data LIKE ?", new String[]{account.getUsername(), String.valueOf(unixTime)});
+                rs.close();
+                db.close();
+                if(result != 1){
+                    throw e;
+                }
+            }
+        }else{
+            rs.close();
+            db.close();
+            throw e;
+        }
+    }
 
 }

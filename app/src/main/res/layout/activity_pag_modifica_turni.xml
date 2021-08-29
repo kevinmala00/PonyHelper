@@ -29,9 +29,10 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/l_modificaturno"
                 android:layout_width="match_parent"
-                android:layout_height="270dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/my_search_round"
+                android:paddingBottom="10dp"
+                android:background="@drawable/rounded_orange"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -41,24 +42,27 @@
                     android:id="@+id/tv_selezionagiorno"
                     android:layout_width="70dp"
                     android:layout_height="29dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="52dp"
                     android:text="@string/giorno"
                     android:textAlignment="center"
                     android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.431"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toStartOf="@+id/s_giornomodificaturno"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_durataSettimana" />
 
                 <Spinner
-                    android:id="@+id/s_gironomodificaturno"
+                    android:id="@+id/s_giornomodificaturno"
+                    android:popupTheme="@style/Theme.PonyHelper.NoActionBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
                     android:layout_marginTop="-10dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/rounded_orange"
                     android:contentDescription="@string/spinner_giorno"
                     android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tv_selezionagiorno"
                     app:layout_constraintTop_toTopOf="@+id/tv_selezionagiorno" />
 
@@ -66,12 +70,10 @@
                     android:id="@+id/tv_orainizio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginTop="48dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="50dp"
                     android:text="@string/ora_inizio"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintEnd_toStartOf="@+id/s_orainiziomodificaturno"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_selezionagiorno" />
 
@@ -79,10 +81,13 @@
                     android:id="@+id/s_orainiziomodificaturno"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="-10dp"
+                    android:layout_marginTop="-15dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/rounded_orange"
                     android:contentDescription="@string/spinner_ora_inizio"
+                    android:entries="@array/orari"
                     android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tv_orainizio"
                     app:layout_constraintTop_toTopOf="@+id/tv_orainizio" />
 
@@ -90,22 +95,24 @@
                     android:id="@+id/tv_orafinemodificaturno"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="45dp"
+                    app:layout_constraintEnd_toStartOf="@+id/s_orafinemodificaturno"
                     android:text="@string/ora_fine"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.443"
-                    app:layout_constraintStart_toEndOf="@+id/s_orainiziomodificaturno"
-                    app:layout_constraintTop_toTopOf="@+id/tv_orainizio" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_orainizio" />
 
                 <Spinner
                     android:id="@+id/s_orafinemodificaturno"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="-10dp"
+                    android:layout_marginTop="-15dp"
+                    android:layout_marginEnd="20dp"
                     android:contentDescription="@string/spinner_ora_fine"
+                    android:entries="@array/orari"
                     android:minHeight="48dp"
                     app:layout_constraintStart_toEndOf="@+id/tv_orafinemodificaturno"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/tv_orafinemodificaturno" />
 
                 <TextView
@@ -114,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/bangers"
                     android:textAlignment="center"
-                    android:textSize="20sp"
+                    android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -125,14 +132,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:textAlignment="center"
                     android:fontFamily="@font/bangers"
-                    android:textSize="16sp"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_meseanno" />
-
-
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

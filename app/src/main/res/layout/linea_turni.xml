@@ -4,9 +4,8 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/my_search_round"
-    android:paddingBottom="10dp"
-    android:paddingTop="10dp">
+    android:background="@drawable/rounded_orange"
+    android:padding="10dp">
 
 
     <TextView
@@ -14,9 +13,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textStyle="bold"
+        android:textAlignment="center"
         android:textSize="14sp"
-        />
+        android:textStyle="bold" />
 
 
     <TextView
@@ -24,9 +23,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textSize="14sp"
-        />
-
+        android:textAlignment="center"
+        android:textSize="14sp" />
 
 
     <TextView
@@ -34,7 +32,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textSize="14sp"
-        />
+        android:textAlignment="center"
+        android:textSize="14sp" />
 
 </LinearLayout>

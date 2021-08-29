@@ -2,35 +2,43 @@ package com.example.ponyhelper;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ponyhelper.body.PonyAccount;
+import com.example.ponyhelper.body.Turno;
 import com.example.ponyhelper.datamanagment.DbHelper;
 import com.example.ponyhelper.util.UtilClass;
 import com.google.android.material.navigation.NavigationView;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class PagModificaTurni extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    PonyAccount account;
+    private PonyAccount account;
+    private Turno turno;
     DbHelper dbhelper;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
@@ -67,6 +75,9 @@ public class PagModificaTurni extends AppCompatActivity implements NavigationVie
         TextView tvNavEmail=headerView.findViewById(R.id.tv_navEmail);
         TextView tvDurataSettimana = findViewById(R.id.tv_durataSettimana);
         TextView tvMeseAnno=findViewById(R.id.tv_meseanno);
+        Spinner sGiorno = findViewById(R.id.s_giornomodificaturno);
+        Spinner sOraInizio = findViewById(R.id.s_orainiziomodificaturno);
+        Spinner sOraFine =  findViewById(R.id.s_orafinemodificaturno);
         Button bModifica = findViewById(R.id.b_modificaturni);
 
 
@@ -79,10 +90,21 @@ public class PagModificaTurni extends AppCompatActivity implements NavigationVie
         String stringMeseAnno= mese + "\t\t" + anno;
         tvMeseAnno.setText(stringMeseAnno);
         //la durata della settimana partendo dal primo giorno di questa settimana fino all'ultimo
-        String giornoInizio = UtilClass.getDayOfDataWeek(LocalDate.now(), DayOfWeek.MONDAY).format(DateTimeFormatter.ofPattern("dd"));
-        String giornoFine = UtilClass.getDayOfDataWeek(LocalDate.now(), DayOfWeek.SUNDAY).format(DateTimeFormatter.ofPattern("dd"));
+        LocalDate monday = UtilClass.getDayOfDataWeek(LocalDate.now(), DayOfWeek.MONDAY);
+        LocalDate sunday = UtilClass.getDayOfDataWeek(LocalDate.now(), DayOfWeek.SUNDAY);
+        String giornoInizio = monday.format(DateTimeFormatter.ofPattern("dd"));
+        String giornoFine = sunday.format(DateTimeFormatter.ofPattern("dd"));
         String durataSettimana = "Dal\t\t" + giornoInizio + "\t\tal\t\t" + giornoFine;
         tvDurataSettimana.setText(durataSettimana);
+
+        //creao la lista dei giorni selezionabili e li collego allo spinner tramite l'arrayadapter
+        LocalDate giorno=LocalDate.from(monday);
+        List<String> giorniSettimana = new ArrayList<>();
+        for(int i = 0; i<=6; i++){
+            giorniSettimana.add(giorno.plusDays(i).format(DateTimeFormatter.ofPattern("dd")));
+        }
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, giorniSettimana);
+        sGiorno.setAdapter(spinnerAdapter);
 
         dbhelper = new DbHelper(PagModificaTurni.this);
 
@@ -96,7 +118,6 @@ public class PagModificaTurni extends AppCompatActivity implements NavigationVie
             try {
                 //otennego i dati dell'account attivo
                 account = dbhelper.getActiveAccount();
-                Toast.makeText(PagModificaTurni.this, "Benvenuto " + account.getUsername(), Toast.LENGTH_LONG).show();
 
 
             } catch (Exception e) {
@@ -104,22 +125,52 @@ public class PagModificaTurni extends AppCompatActivity implements NavigationVie
             }
         }
 
-        //setto le text view account e email ne navigation manu con quelle correnti
+        //setto le text view account e email ne navigation menu con quelle correnti
         tvNavUsername.setText(account.getUsername());
         tvNavEmail.setText(account.getEmail());
 
-        bModifica.setOnClickListener(modificaTurno);
+
+
+        bModifica.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //ripristino i dati selezionat dall'utente
+                LocalDate dataTurno = LocalDate.of(LocalDate.now().getYear(),
+                        LocalDate.now().getMonth(), Integer.parseInt(sGiorno.getSelectedItem().toString()));
+                LocalTime oraInizio= LocalTime.parse(sOraInizio.getSelectedItem().toString());
+                LocalTime oraFine= LocalTime.parse(sOraFine.getSelectedItem().toString());
+                turno = new Turno(dataTurno, oraInizio, oraFine);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(PagModificaTurni.this);
+                builder.setTitle("MODIFICA/INSERIMENTO TURNO");
+                builder.setMessage("Sei sicuro di voler modificare il turno da te selezionato?\n" +
+                        "\nData: "+ dataTurno.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) +
+                        "\nora inizio: " + oraInizio.format(DateTimeFormatter.ofPattern("HH:mm")) +
+                        "\nora fine: " + oraFine.format(DateTimeFormatter.ofPattern("HH:mm")));
+                builder.setNegativeButton("ANNULLA",  new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.setPositiveButton("CONFERMA", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        try {
+                            dbhelper.modificaTurno(account, turno);
+                        } catch (Exception e) {
+                            Toast.makeText(PagModificaTurni.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                builder.show();
+
+            }
+        });
 
 
     }
-
-    //ONCLICKLISTENER MODIFICA TURNO
-    View.OnClickListener modificaTurno = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-        }
-    };
 
     /**
      * Called when an item in the navigation menu is selected.
@@ -142,8 +193,7 @@ public class PagModificaTurni extends AppCompatActivity implements NavigationVie
                 break;
             }
             case R.id.nav_item_turni: {
-                recreate();
-                break;
+                 break;
 
             }
             case R.id.nav_item_entrate: {

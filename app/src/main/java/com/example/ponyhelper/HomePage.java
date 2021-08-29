@@ -94,23 +94,17 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         tvDurataSettimana.setText(durataSettimana);
 
 
-        if (savedInstanceState != null) {
-            //ripristino i dati dal bundle passato dall'activity precedente
-            Bundle accountBundle = getIntent().getExtras().getBundle("account");
-            if(accountBundle!=null){
-                account = UtilClass.ripristinoAccount(accountBundle);
-            }
-        }else{
-            try {
-                //otennego i dati dell'account attivo
-                account = dbhelper.getActiveAccount();
-                Toast.makeText(HomePage.this, "Benvenuto " + account.getUsername(), Toast.LENGTH_LONG).show();
+
+        try {
+            //otennego i dati dell'account attivo
+            account = dbhelper.getActiveAccount();
+            Toast.makeText(HomePage.this, "Benvenuto " + account.getUsername(), Toast.LENGTH_LONG).show();
 
 
-            } catch (Exception e) {
-                Toast.makeText(HomePage.this, e.getMessage(), Toast.LENGTH_LONG).show();
-            }
+        } catch (Exception e) {
+            Toast.makeText(HomePage.this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
+
 
         //setto le text view account e email ne navigation manu con quelle correnti
         tvNavUsername.setText(account.getUsername());
