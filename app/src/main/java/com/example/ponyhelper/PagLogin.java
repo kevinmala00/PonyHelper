@@ -38,6 +38,7 @@ public class PagLogin extends AppCompatActivity implements NavigationView.OnNavi
     String passcod;
     TextInputLayout itUsername;
     TextInputLayout itPasscod;
+    boolean utenteAttivo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,14 +59,32 @@ public class PagLogin extends AppCompatActivity implements NavigationView.OnNavi
         navigationView=findViewById(R.id.navigation_view_pag_login);
         navigationView.setNavigationItemSelectedListener(this);
 
-        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+        //istanzio le view del navmenu
+        View headerView=navigationView.getHeaderView(0);
+        TextView tvNavUsername= headerView.findViewById(R.id.tv_usernameNavMenu);
+        TextView tvNavEmail=headerView.findViewById(R.id.tv_navEmail);
 
         //inizializzo i text imput con il quale l'utenet interagisce
         itUsername = findViewById(R.id.it_usernamepaglog);
         itPasscod = findViewById(R.id.it_passcodpaglog);
+        UtilClass.eliminaErroreCampoObbligatorio(itUsername);
+        UtilClass.eliminaErroreCampoObbligatorio(itPasscod);
+
+        //RECUPERO I DATI DELL'ACCOUNT ATTIVO
+        try{
+            account = dbhelper.getActiveAccount();
+            utenteAttivo = true;
+            //SETTO USERNAME E EMAIL NEL NAV HEADER
+            tvNavUsername.setText(account.getUsername());
+            tvNavEmail.setText(account.getEmail());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         //setto l'onClickListenere in modo che cliccando blogin si sttivi login
@@ -77,19 +96,27 @@ public class PagLogin extends AppCompatActivity implements NavigationView.OnNavi
     View.OnClickListener login= new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            try {
-
-                username = Objects.requireNonNull(itUsername.getEditText()).getText().toString();
-                passcod = Objects.requireNonNull(itPasscod.getEditText()).getText().toString();
-
-                account = dbhelper.login(username, passcod);
-                Bundle accountBundle = UtilClass.salvataggioAccount(account);
-                Intent openHomePag = new Intent(PagLogin.this, HomePage.class);
-                openHomePag.putExtra("account", accountBundle);
-                startActivity(openHomePag);
-            } catch (Exception e) {
-                Toast.makeText(PagLogin.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            if(utenteAttivo){
+                Toast.makeText(PagLogin.this, "Esiste gia un utente attivo!\nEffettuare il logout.", Toast.LENGTH_SHORT).show();
             }
+            else{
+                try {
+                    if(UtilClass.checkCampoObbligatorio(itUsername) && UtilClass.checkCampoObbligatorio(itPasscod)){
+                        username = Objects.requireNonNull(itUsername.getEditText()).getText().toString();
+                        passcod = Objects.requireNonNull(itPasscod.getEditText()).getText().toString();
+
+                        account = dbhelper.login(username, passcod);
+                        Bundle accountBundle = UtilClass.salvataggioAccount(account);
+                        Intent openHomePag = new Intent(PagLogin.this, HomePage.class);
+                        openHomePag.putExtra("account", accountBundle);
+                        startActivity(openHomePag);
+                    }
+
+                } catch (Exception e) {
+                    Toast.makeText(PagLogin.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+
         }
     };
 
