@@ -170,6 +170,7 @@ public class PagModificaTurni extends AppCompatActivity implements NavigationVie
                         public void onClick(DialogInterface dialog, int which) {
                             try {
                                 dbhelper.modificaTurno(account, turno);
+                                Toast.makeText(PagModificaTurni.this, "Modifica avvenuta con successo", Toast.LENGTH_SHORT).show();
                             } catch (Exception e) {
                                 Toast.makeText(PagModificaTurni.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                 e.printStackTrace();
