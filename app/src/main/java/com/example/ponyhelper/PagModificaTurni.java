@@ -103,8 +103,13 @@ public class PagModificaTurni extends AppCompatActivity implements NavigationVie
         for(int i = 0; i<=6; i++){
             giorniSettimana.add(giorno.plusDays(i).format(DateTimeFormatter.ofPattern("dd")));
         }
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, giorniSettimana);
-        sGiorno.setAdapter(spinnerAdapter);
+
+        //CREO E SETTO GLI SPINNER ADAPTER
+        ArrayAdapter<String> spinnerAdapterGiorni = new ArrayAdapter<>(getApplicationContext(), R.layout.spinner_item, giorniSettimana);
+        sGiorno.setAdapter(spinnerAdapterGiorni);
+        ArrayAdapter<String> spinnerAdapterOre = new ArrayAdapter<>(getApplicationContext(), R.layout.spinner_item, getResources().getStringArray(R.array.orari));
+        sOraInizio.setAdapter(spinnerAdapterOre);
+        sOraFine.setAdapter(spinnerAdapterOre);
 
         dbhelper = new DbHelper(PagModificaTurni.this);
 
@@ -139,32 +144,41 @@ public class PagModificaTurni extends AppCompatActivity implements NavigationVie
                         LocalDate.now().getMonth(), Integer.parseInt(sGiorno.getSelectedItem().toString()));
                 LocalTime oraInizio= LocalTime.parse(sOraInizio.getSelectedItem().toString());
                 LocalTime oraFine= LocalTime.parse(sOraFine.getSelectedItem().toString());
-                turno = new Turno(dataTurno, oraInizio, oraFine);
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(PagModificaTurni.this);
-                builder.setTitle("MODIFICA/INSERIMENTO TURNO");
-                builder.setMessage("Sei sicuro di voler modificare il turno da te selezionato?\n" +
-                        "\nData: "+ dataTurno.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) +
-                        "\nora inizio: " + oraInizio.format(DateTimeFormatter.ofPattern("HH:mm")) +
-                        "\nora fine: " + oraFine.format(DateTimeFormatter.ofPattern("HH:mm")));
-                builder.setNegativeButton("ANNULLA",  new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                builder.setPositiveButton("CONFERMA", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        try {
-                            dbhelper.modificaTurno(account, turno);
-                        } catch (Exception e) {
-                            Toast.makeText(PagModificaTurni.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
+                if(oraFine.isBefore(oraInizio)){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(PagModificaTurni.this);
+                    builder.setTitle("ERRORE INSERIMENTO DATI");
+                    builder.setMessage("L'orario di fine turno non deve precedere quello di inizio!!");
+                    builder.show();
+                }else{
+                    turno = new Turno(dataTurno, oraInizio, oraFine);
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(PagModificaTurni.this);
+                    builder.setTitle("MODIFICA/INSERIMENTO TURNO");
+                    builder.setMessage("Sei sicuro di voler modificare il turno da te selezionato?\n" +
+                            "\nData: "+ dataTurno.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) +
+                            "\nora inizio: " + oraInizio.format(DateTimeFormatter.ofPattern("HH:mm")) +
+                            "\nora fine: " + oraFine.format(DateTimeFormatter.ofPattern("HH:mm")));
+                    builder.setNegativeButton("ANNULLA",  new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
                         }
-                    }
-                });
-                builder.show();
+                    });
+                    builder.setPositiveButton("CONFERMA", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            try {
+                                dbhelper.modificaTurno(account, turno);
+                            } catch (Exception e) {
+                                Toast.makeText(PagModificaTurni.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                    builder.show();
+                }
+
 
             }
         });
