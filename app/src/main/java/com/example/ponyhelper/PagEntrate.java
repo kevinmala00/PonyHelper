@@ -48,6 +48,12 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+        //INSTANZIO LE VIEW
+
+
+
+
     }
 
 
