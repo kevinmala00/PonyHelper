@@ -100,39 +100,36 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             account = dbhelper.getActiveAccount();
             Toast.makeText(HomePage.this, "Benvenuto " + account.getUsername(), Toast.LENGTH_LONG).show();
 
+            //setto le text view account e email ne navigation manu con quelle correnti
+            tvNavUsername.setText(account.getUsername());
+            tvNavEmail.setText(account.getEmail());
+
+            try {
+                //ottengo la lista dei turni settimanali
+                turniSettimanali = dbhelper.getTurniFromInterval(account.getUsername(),
+                        UtilClass.getDayOfDataWeek(LocalDate.now(), DayOfWeek.MONDAY),
+                        UtilClass.getDayOfDataWeek(LocalDate.now(), DayOfWeek.SUNDAY));
+
+                //popolo la recycler view con la lista dei turni settimanali
+                TurniAdapter turniAdapter = new TurniAdapter(turniSettimanali);
+                rvTurniSettimanali.setAdapter(turniAdapter);
+                rvTurniSettimanali.setLayoutManager(new LinearLayoutManager(this));
+            }catch (Exception e){
+                Toast.makeText(HomePage.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+
+            //totmensile con i ricavi netti mensili
+            String entrateMensili = "ENTRATE MENSILI:\t\t" + dbhelper.getTotMensile(stringMeseAnno, account.getUsername()) + "\t\t€";
+            tvEntrateMensili.setText(entrateMensili);
+
 
         } catch (Exception e) {
             Toast.makeText(HomePage.this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
 
-        //setto le text view account e email ne navigation manu con quelle correnti
-        tvNavUsername.setText(account.getUsername());
-        tvNavEmail.setText(account.getEmail());
-
-        try {
-            //ottengo la lista dei turni settimanali
-            turniSettimanali = dbhelper.getTurniFromInterval(account.getUsername(),
-                    UtilClass.getDayOfDataWeek(LocalDate.now(), DayOfWeek.MONDAY),
-                    UtilClass.getDayOfDataWeek(LocalDate.now(), DayOfWeek.SUNDAY));
-
-            //popolo la recycler view con la lista dei turni settimanali
-            TurniAdapter turniAdapter = new TurniAdapter(turniSettimanali);
-            rvTurniSettimanali.setAdapter(turniAdapter);
-            rvTurniSettimanali.setLayoutManager(new LinearLayoutManager(this));
-        }catch (Exception e){
-            Toast.makeText(HomePage.this, e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-
-        //totmensile con i ricavi netti mensili
-        String entrateMensili = "ENTRATE MENSILI:\t\t" + dbhelper.getTotMensile(stringMeseAnno, account.getUsername()) + "\t\t€";
-        tvEntrateMensili.setText(entrateMensili);
 
     }
-
-
-
-
 
 
     /**
