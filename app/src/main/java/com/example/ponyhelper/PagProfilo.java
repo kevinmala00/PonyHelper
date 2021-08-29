@@ -84,14 +84,14 @@ public class PagProfilo extends AppCompatActivity implements  NavigationView.OnN
             tvNavUsername.setText(account.getUsername());
             tvNavEmail.setText(account.getEmail());
 
-            //SETTO L'ONCLICKLISTENER DI B_LOGOUT
-            bLogout.setOnClickListener(logout);
-            bLogin.setOnClickListener(login);
-            bRegistrati.setOnClickListener(registrati);
 
         } catch (Exception e) {
             Toast.makeText(PagProfilo.this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
+        //SETTO L'ONCLICKLISTENER DI B_LOGOUT
+        bLogout.setOnClickListener(logout);
+        bLogin.setOnClickListener(login);
+        bRegistrati.setOnClickListener(registrati);
 
 
     }
