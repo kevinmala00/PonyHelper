@@ -75,6 +75,7 @@
     <string name="pagine_entrate">Pagine entrate</string>
     <string name="pagina_menu">Pagina menù</string>
     <string name="pagina_profilo">Pagina profilo</string>
+    <string name="indirizzo">Indirizzo</string>
     <string-array name="orari">
         <item>08:00</item>
         <item>08:30</item>

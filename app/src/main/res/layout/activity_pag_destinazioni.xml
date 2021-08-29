@@ -25,7 +25,110 @@
       android:padding="10dp">
 
 
+   <TextView
+       android:id="@+id/tv_titelDestinazioni"
+       android:layout_width="0dp"
+       android:layout_height="wrap_content"
+       android:fontFamily="@font/bangers"
+       android:text="@string/destinazioni"
+       android:textAlignment="center"
+       android:textColor="@color/arancio_titolo"
+       android:textSize="34sp"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent" />
 
+   <LinearLayout
+       android:layout_width="0dp"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="10dp"
+       android:orientation="vertical"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/tv_titelDestinazioni"
+       app:layout_constraintVertical_bias="0.0">
+
+    <LinearLayout
+        android:id="@+id/l_lineasearch"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+     <EditText
+         android:id="@+id/et_searchDestinazioni"
+         android:layout_width="wrap_content"
+         android:layout_height="match_parent"
+         android:layout_weight="1.5"
+         android:autofillHints="data"
+         android:background="@drawable/rounded_orange"
+         android:hint="@string/indirizzo"
+         android:inputType="date"
+         android:paddingLeft="4dp"
+         android:paddingRight="4dp"
+         android:selectAllOnFocus="true"
+         android:singleLine="true"
+         android:textAlignment="textStart"
+         tools:ignore="TouchTargetSizeCheck" />
+
+     <ImageButton
+         android:id="@+id/b_searcheDestinazione"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_weight="1"
+         android:background="@android:color/transparent"
+         android:contentDescription="@string/contente_description_buttonserchentrata"
+         app:srcCompat="@drawable/ic_search"
+         tools:ignore="TouchTargetSizeCheck" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_weight="1" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_weight="1"
+        android:background="@color/arancio_titolo" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_weight="1" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_destinazioni"
+        android:layout_width="376dp"
+        android:layout_height="482dp"
+        android:layout_weight="1">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:id="@+id/l_lineabutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+     <ImageButton
+         android:id="@+id/b_aggiunginDestinazione"
+         android:layout_width="0dp"
+         android:layout_height="wrap_content"
+         android:layout_weight="1"
+         android:background="@android:color/transparent"
+         android:contentDescription="@string/content_description_bottoneaggiungientrata"
+         app:srcCompat="@drawable/ic_add"
+         tools:ignore="TouchTargetSizeCheck" />
+
+    </LinearLayout>
+
+   </LinearLayout>
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
