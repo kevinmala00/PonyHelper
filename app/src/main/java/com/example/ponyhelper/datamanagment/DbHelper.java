@@ -498,7 +498,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 long result = db.insert("TURNI", null, cv );
                 rs.close();
                 db.close();
-                if(result != 1){
+                if(result == -1){
                     throw e;
                 }
             }else{

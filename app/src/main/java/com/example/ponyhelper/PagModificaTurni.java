@@ -97,11 +97,16 @@ public class PagModificaTurni extends AppCompatActivity implements NavigationVie
         String durataSettimana = "Dal\t\t" + giornoInizio + "\t\tal\t\t" + giornoFine;
         tvDurataSettimana.setText(durataSettimana);
 
+        //guardo se si cambia mese durente la settimana
+        if (Integer.parseInt(giornoFine) < Integer.parseInt(giornoInizio)) {
+
+        }
+
         //creao la lista dei giorni selezionabili e li collego allo spinner tramite l'arrayadapter
         LocalDate giorno=LocalDate.from(monday);
         List<String> giorniSettimana = new ArrayList<>();
         for(int i = 0; i<=6; i++){
-            giorniSettimana.add(giorno.plusDays(i).format(DateTimeFormatter.ofPattern("dd")));
+            giorniSettimana.add(giorno.plusDays(i).format(DateTimeFormatter.ofPattern("dd-MM-yy")));
         }
 
         //CREO E SETTO GLI SPINNER ADAPTER
@@ -140,8 +145,7 @@ public class PagModificaTurni extends AppCompatActivity implements NavigationVie
             @Override
             public void onClick(View v) {
                 //ripristino i dati selezionat dall'utente
-                LocalDate dataTurno = LocalDate.of(LocalDate.now().getYear(),
-                        LocalDate.now().getMonth(), Integer.parseInt(sGiorno.getSelectedItem().toString()));
+                LocalDate dataTurno = LocalDate.parse(sGiorno.getSelectedItem().toString(), DateTimeFormatter.ofPattern("dd-MM-yy"));
                 LocalTime oraInizio= LocalTime.parse(sOraInizio.getSelectedItem().toString());
                 LocalTime oraFine= LocalTime.parse(sOraFine.getSelectedItem().toString());
 

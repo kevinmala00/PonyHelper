@@ -173,7 +173,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="@string/selezionaturno"
+                android:text="@string/inserisci_i_dati_del_turno"
                 android:textAlignment="center"
                 android:textSize="20sp"
                 android:textStyle="bold"

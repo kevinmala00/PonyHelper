@@ -76,7 +76,8 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="15dp"
                         android:paddingEnd="15dp"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:text="@string/info_generali"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -93,7 +94,8 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="15dp"
                         android:paddingEnd="15dp"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:text="@string/info_homepag"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -102,7 +104,8 @@
                         android:paddingStart="15dp"
                         android:paddingEnd="15dp"
                         android:text="@string/pagina_destinazioni"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        />
 
                     <TextView
                         android:id="@+id/tv_messDestinazioniPagInfo"
@@ -110,7 +113,8 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="15dp"
                         android:paddingEnd="15dp"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:text="@string/info_destinazioni"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -127,7 +131,8 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="15dp"
                         android:paddingEnd="15dp"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:text="@string/info_turni"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -144,7 +149,8 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="15dp"
                         android:paddingEnd="15dp"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:text="@string/info_entrate"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -161,7 +167,8 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="15dp"
                         android:paddingEnd="15dp"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:text="@string/info_menu"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -169,7 +176,7 @@
                         android:fontFamily="@font/bangers"
                         android:paddingStart="15dp"
                         android:paddingEnd="15dp"
-                        android:text="@string/calcola_totale"
+                        android:text="@string/calcolo_totale"
                         android:textSize="20sp" />
 
                     <TextView
@@ -178,7 +185,8 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="15dp"
                         android:paddingEnd="15dp"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:text="@string/info_calcolotot"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -195,7 +203,8 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="15dp"
                         android:paddingEnd="15dp"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:text="@string/info_profilo"/>
 
                 </LinearLayout>
             </ScrollView>
