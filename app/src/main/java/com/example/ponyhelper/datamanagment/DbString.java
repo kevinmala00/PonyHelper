@@ -138,18 +138,17 @@ public class DbString {
      */
     public static final String CREATION_DESTINAZIONE = "CREATE TABLE IF NOT EXISTS DESTINAZIONE(\n" +
             "username TEXT NOT NULL\n" +
-            ", codice_dest INTEGER NOT NULL\n" +
             ", data_modifica INTEGER DEFAULT CURRENT_DATE\n" +
             ", ora_modifica TEXT DEFAULT CURRENT_TIME\n" +
             ", indirizzo TEXT NOT NULL\n" +
             ", citta TEXT NOT NULL\n" +
-            ", cap TEXT NULL\n" +
+            ", cap INTEGER NULL\n" +
             ", provincia TEXT NOT NULL\n" +
             ", latitudine REAL NOT NULL\n" +
             ", longitudine REAL NOT NULL\n" +
+            ", mancia INTEGER NULL\n" +
             ", note  TEXT NULL\n" +
-            ", foto BLOB NULL\n" +
-            ", PRIMARY KEY(username, codice_dest)" +
+            ", PRIMARY KEY(username, indirizzo, citta)" +
             ", FOREIGN KEY (username) REFERENCES ACCOUNT(username) ON DELETE CASCADE ON UPDATE CASCADE\n" +
             ", UNIQUE (indirizzo, citta, provincia)\n" +
             ");";
@@ -197,7 +196,7 @@ public class DbString {
     /**
      * seleziona i turni di una data settimana
      */
-    public static String selectTurniSettimanali = "SELECT * FROM TURNI WHERE (username LIKE ? AND data BETWEEN ? AND ?);";
+    public static String selectTurniSettimanali = "SELECT * FROM TURNI WHERE (username LIKE ? AND data BETWEEN ? AND ?) ORDER BY data;";
 
     /**
      * seleziona i costi e i consumi
@@ -213,7 +212,11 @@ public class DbString {
 
     public static String checkPresenzaTurno = "SELECT EXISTS(SELECT * FROM TURNI WHERE data LIKE ? AND username LIKE ?)";
 
-    static String UPGRADE_SCRIPT="";
+    public static String selectDestinazione = "SELECT * FROM DESTINAZIONE WHERE username LIKE ? AND indirizzo LIKE ?;";
+
+    public static String selectAllDestinazioni = "SELECT * FROM DESTINAZIONE WHERE username LIKE ?;";
+
+
 
 
 }
