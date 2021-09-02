@@ -247,4 +247,16 @@
     <string name="info_profilo">Nella pagina profilo vedrai i dati del tuo account in caso tu sia già loggato oppure potrai registrarti o effettuare il login rapidamente.</string>
     <string name="destinazione">Destinazione</string>
     <string name="content_description_button_destinazioen">bottone che porterà all\'apertura in google maps</string>
+    <string name="civico">Civico</string>
+    <string name="provincia">Provincia</string>
+    <string name="citt">Città</string>
+    <string name="cap">Cap</string>
+    <string name="mancia">Mancia</string>
+    <string name="note">Note</string>
+    <string name="aggiungi_immagine">Aggiungi immagine</string>
+    <string name="mess_popup_mod_dest">I seguenti campi verranno automaticamnete compilati tramite la lettura della tua posizione attuale. \nRICORDATI DI ATTIVARLA!</string>
+    <string name="latitudine">Latitudine</string>
+    <string name="longitudine">Longitudine</string>
+    <string name="salva">Salva</string>
+    <string name="content_description_buttn_refresch_mod_dest">bottone che refresha la localizzazione gps</string>
 </resources>
