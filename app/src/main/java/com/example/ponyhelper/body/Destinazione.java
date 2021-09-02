@@ -1,18 +1,19 @@
 package com.example.ponyhelper.body;
 
-import android.media.Image;
-
 import androidx.annotation.NonNull;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Destinazione {
     Indirizzo indirizzo;
-    Date dataUltimaModifica;
+    LocalDate dataUltimaModifica;
+    LocalTime oraUltimaModifica;
+    double mancia;
     double longitudine;
     double latitudine;
     String note;
-    Image foto;
 
     /**
      * costruttore di destinazione, genera un'istanza vuota di destinazione
@@ -21,17 +22,22 @@ public class Destinazione {
         super();
     }
 
-    /**
-     * costruttore di destinazione, acccetta tre parametri indirizzo, latitudine  e longitudine
-     * @param indirizzo rappresenta l'indirizzo della destinazione
-     * @param longitudine rappresenta la longitudine della destinazione
-     * @param latitudine rappresenta la latitudine della destinazione
-     */
-    public Destinazione(Indirizzo indirizzo, double longitudine, double latitudine) {
-        super();
+    public Destinazione(Indirizzo indirizzo, LocalDate dataUltimaModifica, LocalTime oraUltimaModifica, double mancia, double longitudine, double latitudine, String note) {
         this.indirizzo = indirizzo;
+        this.dataUltimaModifica = dataUltimaModifica;
+        this.oraUltimaModifica = oraUltimaModifica;
+        this.mancia = mancia;
         this.longitudine = longitudine;
         this.latitudine = latitudine;
+        this.note = note;
+    }
+
+    public LocalTime getOraUltimaModifica() {
+        return oraUltimaModifica;
+    }
+
+    public void setOraUltimaModifica(LocalTime oraUltimaModifica) {
+        this.oraUltimaModifica = oraUltimaModifica;
     }
 
     /**
@@ -42,11 +48,11 @@ public class Destinazione {
         return indirizzo;
     }
 
-    public Date getDataUltimaModifica() {
+    public LocalDate getDataUltimaModifica() {
         return dataUltimaModifica;
     }
 
-    public void setDataUltimaModifica(Date dataUltimaModifica) {
+    public void setDataUltimaModifica(LocalDate dataUltimaModifica) {
         this.dataUltimaModifica = dataUltimaModifica;
     }
 
@@ -106,20 +112,15 @@ public class Destinazione {
         this.note = note;
     }
 
-    /**
-     * getter della foto
-     * @return ritorna la foto relativa a una destinazione
-     */
-    public Image getFoto() {
-        return foto;
+
+
+
+    public double getMancia() {
+        return mancia;
     }
 
-    /**
-     * setter di foto, permette di settare la foto di una desrinazione
-     * @param foto foto relativa alla destinazione
-     */
-    public void setFoto(Image foto) {
-        this.foto = foto;
+    public void setMancia(double mancia) {
+        this.mancia = mancia;
     }
 
     @NonNull
@@ -127,11 +128,10 @@ public class Destinazione {
     public String toString() {
         return "Destinazione{" +
                 "indirizzo=" + indirizzo +
-                ", dataUltimaModifica=" + dataUltimaModifica +
+                ", dataUltimaModifica=" + dataUltimaModifica.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) +
                 ", longitudine=" + longitudine +
                 ", latitudine=" + latitudine +
                 ", note='" + note + '\'' +
-                ", foto=" + foto +
                 '}';
     }
 }
