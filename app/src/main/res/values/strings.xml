@@ -122,6 +122,121 @@
         <item>Domenica</item>
     </string-array>
 
+
+    <string-array name="province">
+        <item>AG</item>
+        <item>AL</item>
+        <item>AN</item>
+        <item>AO</item>
+        <item>AR</item>
+        <item>AP</item>
+        <item>AT</item>
+        <item>AV</item>
+        <item>BA</item>
+        <item>BT</item>
+        <item>BL</item>
+        <item>BN</item>
+        <item>BG</item>
+        <item>BI</item>
+        <item>BO</item>
+        <item>BZ</item>
+        <item>BS</item>
+        <item>BR</item>
+        <item>CA</item>
+        <item>CL</item>
+        <item>CB</item>
+        <item>CI</item>
+        <item>CE</item>
+        <item>CT</item>
+        <item>CZ</item>
+        <item>CH</item>
+        <item>CO</item>
+        <item>CS</item>
+        <item>CR</item>
+        <item>KR</item>
+        <item>CN</item>
+        <item>EN</item>
+        <item>FM</item>
+        <item>FE</item>
+        <item>FI</item>
+        <item>FG</item>
+        <item>FC</item>
+        <item>FR</item>
+        <item>GE</item>
+        <item>GO</item>
+        <item>GR</item>
+        <item>IM</item>
+        <item>IS</item>
+        <item>SP</item>
+        <item>AQ</item>
+        <item>LT</item>
+        <item>LE</item>
+        <item>LC</item>
+        <item>LI</item>
+        <item>LO</item>
+        <item>LU</item>
+        <item>MC</item>
+        <item>MN</item>
+        <item>MS</item>
+        <item>MT</item>
+        <item>ME</item>
+        <item>MI</item>
+        <item>MO</item>
+        <item>MB</item>
+        <item>NA</item>
+        <item>NO</item>
+        <item>NU</item>
+        <item>OT</item>
+        <item>OR</item>
+        <item>PD</item>
+        <item>PA</item>
+        <item>PR</item>
+        <item>PV</item>
+        <item>PG</item>
+        <item>PU</item>
+        <item>PE</item>
+        <item>PC</item>
+        <item>PI</item>
+        <item>PT</item>
+        <item>PN</item>
+        <item>PZ</item>
+        <item>PO</item>
+        <item>RG</item>
+        <item>RA</item>
+        <item>RC</item>
+        <item>RE</item>
+        <item>RI</item>
+        <item>RN</item>
+        <item>RM</item>
+        <item>RO</item>
+        <item>SA</item>
+        <item>VS</item>
+        <item>SS</item>
+        <item>SV</item>
+        <item>SI</item>
+        <item>SR</item>
+        <item>SO</item>
+        <item>TA</item>
+        <item>TE</item>
+        <item>TR</item>
+        <item>TO</item>
+        <item>OG</item>
+        <item>TP</item>
+        <item>TN</item>
+        <item>TV</item>
+        <item>TS</item>
+        <item>UD</item>
+        <item>VA</item>
+        <item>VE</item>
+        <item>VB</item>
+        <item>VC</item>
+        <item>VR</item>
+        <item>VV</item>
+        <item>VI</item>
+        <item>VT</item>
+    </string-array>
+
+
     <string name="info_generali">PonyHelper è un\'app nata nell\'estate 2021 realizzata per facilitare il lavoro del fattorino, con essa potrai gestire agevolmente i turni settimanali, tenere conto delle tue entrate e velocizzare le consegne.</string>
     <string name="info_homepag">Nella Hompage troverai i turni della settimana corrente e potrai vedere le entrate inserite del mese corrente.</string>
     <string name="info_turni">Nella pagina Turni potrai modificare o inserire un nuovo turno della settimana in corso. Potrai inserire un turno al giorno, quindi in caso inserissi la data di un turno già presente verranno apportate ad esso le modifiche selezionate.</string>
@@ -130,4 +245,6 @@
     <string name="info_calcolotot">Nella pagina calcolo totale potrai usufruire del software di calcolo basato sui prezzi da te inseriti nel menù. Rapido ed efficiente ti saà utilissimo per gestire i totali dei tuoi ordini.</string>
     <string name="info_menu">Nella pagina menù potrai gestire i prodotti e gli ingredenti utilizzati nel tuo luogo di lavoro inserendo i prezzi riuscirai ad usufruire del software di calcolo integrato nell\'app per avere rapidamente a disposizione il totale dell\'ordine.</string>
     <string name="info_profilo">Nella pagina profilo vedrai i dati del tuo account in caso tu sia già loggato oppure potrai registrarti o effettuare il login rapidamente.</string>
+    <string name="destinazione">Destinazione</string>
+    <string name="content_description_button_destinazioen">bottone che porterà all\'apertura in google maps</string>
 </resources>
