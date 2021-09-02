@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.ponyhelper"
     android:versionCode="1"
     android:versionName="1.0">
@@ -22,27 +23,35 @@
         android:theme="@style/Theme.PonyHelper.NoActionBar">
         <activity
             android:name=".PagCalcoloTot"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".PagProfilo"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".PagInfo"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".PagMenu"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".PagEntrate"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".PagModificaTurni"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".PagDestinazioni"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".HomePage"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -52,12 +61,15 @@
         </activity>
         <activity
             android:name=".PagLogin"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".PagReg"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
     </application>
 
