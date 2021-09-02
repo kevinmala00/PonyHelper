@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/rounded_orange">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tv_titlepopupModDestinazione"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/bangers"
+            android:text="@string/destinazione"
+            android:textAlignment="center"
+            android:textColor="@color/arancio_titolo"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_indirizzo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/indirizzo"
+            android:labelFor="@id/et_indirizzoModDest"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_titlepopupModDestinazione" />
+
+        <EditText
+            android:id="@+id/et_indirizzoModDest"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:foreground="@drawable/rounded_orange"
+            android:inputType="textMultiLine|textPostalAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_indirizzo"
+            app:layout_constraintTop_toBottomOf="@+id/tv_indirizzo"
+            android:importantForAutofill="no" />
+
+        <TextView
+            android:id="@+id/tv_civico"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="20dp"
+            android:text="@string/civico"
+            android:labelFor="@id/tv_civico"
+            app:layout_constraintTop_toBottomOf="@id/et_indirizzoModDest"
+            />
+
+        <EditText
+            android:id="@+id/et_civicoModDest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:foreground="@drawable/rounded_orange"
+            android:inputType="textMultiLine|textPostalAddress"
+            android:isScrollContainer="false"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tv_civico"
+            app:layout_constraintTop_toBottomOf="@+id/tv_civico"
+            android:importantForAutofill="no" />
+
+        <TextView
+            android:id="@+id/tv_provincia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="@string/provincia"
+            android:labelFor="@id/et_provinciaModDest"
+            app:layout_constraintStart_toEndOf="@+id/et_civicoModDest"
+            app:layout_constraintTop_toTopOf="@id/tv_civico"/>
+
+        <EditText
+            android:id="@+id/et_provinciaModDest"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:foreground="@drawable/rounded_orange"
+            android:inputType="textPostalAddress"
+            app:layout_constraintStart_toStartOf="@+id/tv_provincia"
+            app:layout_constraintTop_toBottomOf="@+id/tv_provincia"
+            android:importantForAutofill="no" />
+
+        <TextView
+            android:id="@+id/tv_citta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/citt"
+            android:labelFor="@id/et_cittaModDest"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_civicoModDest" />
+
+        <EditText
+            android:id="@+id/et_cittaModDest"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:foreground="@drawable/rounded_orange"
+            android:inputType="textMultiLine|textPostalAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_citta"
+            app:layout_constraintTop_toBottomOf="@+id/tv_citta"
+            android:importantForAutofill="no" />
+
+        <TextView
+            android:id="@+id/tv_cap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/cap"
+            android:labelFor="@id/et_capModDest"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_cittaModDest" />
+
+        <EditText
+            android:id="@+id/et_capModDest"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:foreground="@drawable/rounded_orange"
+            android:inputType="textMultiLine|number"
+            app:layout_constraintStart_toStartOf="@+id/tv_cap"
+            app:layout_constraintTop_toBottomOf="@+id/tv_cap"
+            android:importantForAutofill="no" />
+
+        <TextView
+            android:id="@+id/tv_manciaModDest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:labelFor="@id/et_manciaModDest"
+            android:text="@string/mancia"
+            app:layout_constraintStart_toEndOf="@+id/et_capModDest"
+            app:layout_constraintTop_toTopOf="@+id/tv_cap" />
+
+        <EditText
+            android:id="@+id/et_manciaModDest"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:foreground="@drawable/rounded_orange"
+            android:inputType="numberDecimal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_manciaModDest"
+            app:layout_constraintTop_toBottomOf="@+id/tv_manciaModDest"
+            android:importantForAutofill="no" />
+
+        <TextView
+            android:id="@+id/tv_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/note"
+            android:labelFor="@id/et_noteModDest"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_capModDest" />
+
+        <EditText
+            android:id="@+id/et_noteModDest"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:foreground="@drawable/rounded_orange"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_note"
+            app:layout_constraintTop_toBottomOf="@+id/tv_note"
+            android:importantForAutofill="no" />
+
+        <TextView
+            android:id="@+id/tv_messGeolocalizzazione"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/mess_popup_mod_dest"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_noteModDest" />
+
+        <TextView
+            android:id="@+id/tv_latitudine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/latitudine"
+            android:labelFor="@id/tv_latitudineModDest"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_messGeolocalizzazione" />
+
+        <TextView
+            android:id="@+id/tv_latitudineModDest"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_orange"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="4dp"
+            app:layout_constraintStart_toStartOf="@+id/tv_latitudine"
+            app:layout_constraintTop_toBottomOf="@+id/tv_latitudine" />
+
+        <TextView
+            android:id="@+id/tv_longitudine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/longitudine"
+            android:labelFor="@id/tv_longitudineModDest"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_latitudineModDest" />
+
+        <TextView
+            android:id="@+id/tv_longitudineModDest"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_orange"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="4dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tv_latitudine"
+            app:layout_constraintTop_toBottomOf="@+id/tv_longitudine" />
+
+
+        <Button
+            android:id="@+id/b_salvaModDest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/round_red_corner"
+            android:text="@string/salva"
+            android:textSize="16sp"
+            android:fontFamily="@font/droid_sans"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ib_refreshGpsModDest" />
+
+        <ImageButton
+            android:id="@+id/ib_refreshGpsModDest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded_orange"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_longitudineModDest"
+            app:srcCompat="@drawable/ic_refresh"
+            android:contentDescription="@string/content_description_buttn_refresch_mod_dest" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>
