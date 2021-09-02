@@ -9,6 +9,15 @@ public class Indirizzo {
     String via;
     String civico;
     String provincia;
+
+    public String getCivico() {
+        return civico;
+    }
+
+    public void setCivico(String civico) {
+        this.civico = civico;
+    }
+
     String citta;
 
     /**
@@ -145,6 +154,20 @@ public class Indirizzo {
      * @return ritorna una stringa contenente l'dirizzo completo ovvero via e numero civico
      */
     public String toStringFullAddress(){
+        return via + ", " + civico + "("+citta+")";
+    }
+
+    public String toStringViaCivico(){
         return via + ", " + civico;
+    }
+
+    public void setViaFromViaCivico(String ViaCivico){
+        int position = ViaCivico.indexOf(',');
+        via =  ViaCivico.substring(0,position);
+    }
+
+    public void setCivicoFromViaCivico(String viaCivico){
+        int position =  viaCivico.indexOf(',');
+        civico =  viaCivico.substring(position);
     }
 }
