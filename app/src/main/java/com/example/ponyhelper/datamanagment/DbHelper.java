@@ -3,11 +3,15 @@ package com.example.ponyhelper.datamanagment;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.media.Image;
 
 import com.example.ponyhelper.body.Costi;
+import com.example.ponyhelper.body.Destinazione;
 import com.example.ponyhelper.body.Entrata;
+import com.example.ponyhelper.body.Indirizzo;
 import com.example.ponyhelper.body.PonyAccount;
 import com.example.ponyhelper.body.Turno;
 import com.example.ponyhelper.util.UtilClass;
@@ -68,7 +72,7 @@ public class DbHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(DbString.UPGRADE_SCRIPT);
+
     }
 
 
@@ -514,6 +518,101 @@ public class DbHelper extends SQLiteOpenHelper {
             rs.close();
             db.close();
             throw e;
+        }
+    }
+
+    public  void salvaDestinazione(PonyAccount account, Destinazione destinazione) throws Exception{
+        SQLiteDatabase db = this.getWritableDatabase();
+        Exception e = new Exception("Errori interni ci scusiamo per il disagio.\nRIPROVARE!");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        long unixTime = UtilClass.localDateToUnixTime(destinazione.getDataUltimaModifica());
+        String oraModifica = destinazione.getOraUltimaModifica().format(DateTimeFormatter.ofPattern("HH:mm"));
+        ContentValues cv = new ContentValues();
+        cv.put("username", account.getUsername());
+        cv.put("data_modifica", unixTime);
+        cv.put("ora_modifica", oraModifica);
+        cv.put("indirizzo", destinazione.getIndirizzo().toStringViaCivico());
+        cv.put("citta", destinazione.getIndirizzo().getCitta());
+        cv.put("cap", destinazione.getIndirizzo().getCap());
+        cv.put("provincia", destinazione.getIndirizzo().getProvincia());
+        cv.put("latitudine", destinazione.getLatitudine());
+        cv.put("longitudine", destinazione.getLongitudine());
+        cv.put("note", destinazione.getLongitudine());
+        long result;
+        try{
+             result = db.insert("DESTINAZIONE", "ora_modifica, note, cap, mancia", cv );
+        }catch (SQLiteConstraintException constraintException){
+            db.close();
+            throw new Exception("Destinazione già presente nel database; RIPROVA!");
+        }
+        if(result == -1){
+            db.close();
+            throw e;
+        }
+        db.close();
+
+
+    }
+
+    public List<Destinazione> searchDestinazione(PonyAccount account, String indirizzo) throws Exception {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor rs = db.rawQuery(DbString.selectDestinazione, new String[]{account.getUsername(), indirizzo});
+        List<Destinazione> returnList = new ArrayList<>();
+        if(rs.getCount()>0){
+            rs.moveToFirst();
+            do{
+                Indirizzo ind = new Indirizzo();
+                ind.setViaFromViaCivico(rs.getString(3));
+                ind.setCivicoFromViaCivico(rs.getString(3));
+                ind.setCitta(rs.getString(4));
+                ind.setCap(rs.getInt(5));
+                ind.setProvincia(rs.getString(6));
+                returnList.add(new Destinazione(ind,
+                        UtilClass.unixTimeToLocalDate(rs.getLong(1)),
+                        LocalTime.parse(rs.getString(2), DateTimeFormatter.ofPattern("HH:mm")),
+                        rs.getDouble(9),
+                        rs.getDouble(8),
+                        rs.getDouble(7),
+                        rs.getString(10)));
+            }while(rs.moveToNext());
+            rs.close();
+            db.close();
+            return  returnList;
+        }else{
+            rs.close();
+            db.close();
+            throw new Exception("Nessuna destinazione corrisponde alla ricerca");
+        }
+    }
+
+    public List<Destinazione> getAllDestinazioni(PonyAccount account) throws Exception {
+        SQLiteDatabase db = this.getReadableDatabase();
+        List<Destinazione> returnList = new ArrayList<>();
+        Cursor rs = db.rawQuery(DbString.selectAllDestinazioni, new String[]{account.getUsername()});
+        if(rs.getCount()>0){
+            rs.moveToFirst();
+            do{
+                Indirizzo ind = new Indirizzo();
+                ind.setViaFromViaCivico(rs.getString(3));
+                ind.setCivicoFromViaCivico(rs.getString(3));
+                ind.setCitta(rs.getString(4));
+                ind.setCap(rs.getInt(5));
+                ind.setProvincia(rs.getString(6));
+
+                returnList.add(new Destinazione(ind,
+                        UtilClass.unixTimeToLocalDate(rs.getLong(1)),
+                                LocalTime.parse(rs.getString(2), DateTimeFormatter.ofPattern("HH:mm")),
+                                rs.getDouble(9),
+                                rs.getDouble(8),
+                                rs.getDouble(7),
+                                rs.getString(10))
+                        );
+            }while(rs.moveToNext());
+            return returnList;
+        }else{
+            rs.close();
+            db.close();
+            throw new Exception("Nessuna destinazione presente");
         }
     }
 
