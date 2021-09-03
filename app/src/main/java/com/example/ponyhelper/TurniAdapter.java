@@ -17,7 +17,6 @@ import java.util.Locale;
 
 public class TurniAdapter extends RecyclerView.Adapter<TurniAdapter.ViewHolder> {
 
-
     private List<Turno> mlistTurni;
 
     public TurniAdapter(List<Turno> listTurni){
