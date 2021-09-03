@@ -18,12 +18,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class DestinazioniAdapter extends RecyclerView.Adapter<DestinazioniAdapter.ViewHolder> {
-    private Context mContext;
+    private  Context mContext;
     private List<Destinazione> mlistDest;
 
     public DestinazioniAdapter(List<Destinazione> listDest, Context context){
-        mContext=context;
-        mlistDest = listDest;
+        mContext= context;
+       mlistDest = listDest;
     }
 
 
@@ -51,7 +51,8 @@ public class DestinazioniAdapter extends RecyclerView.Adapter<DestinazioniAdapte
         tvIndirizzoCompleto.setText(indirirzzo);
 
         TextView tvDataOraUltimaMod= holder.tvDataOraUltimaMod;
-        tvDataOraUltimaMod.setText(destinazione.getDataUltimaModifica().format(DateTimeFormatter.ofPattern(("dd-MM-yyyy HH:mm"))));
+        String dataOraMod = destinazione.getDataUltimaModifica().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + destinazione.getOraUltimaModifica().format(DateTimeFormatter.ofPattern("HH : mm"));
+        tvDataOraUltimaMod.setText(dataOraMod);
 
         TextView tvMancia= holder.tvMancia;
         String mancia= destinazione.getMancia() + "€";
@@ -80,7 +81,7 @@ public class DestinazioniAdapter extends RecyclerView.Adapter<DestinazioniAdapte
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mlistDest.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -97,7 +98,7 @@ public class DestinazioniAdapter extends RecyclerView.Adapter<DestinazioniAdapte
             tvDataOraUltimaMod=itemView.findViewById(R.id.tv_dataultimamoddestinazione);
             tvMancia=itemView.findViewById(R.id.tv_manciadestinazione);
             tvNote=itemView.findViewById(R.id.tv_notedestinazione);
-            bPosition=itemView.findViewById(R.id.b_aggiunginDestinazione);
+            bPosition=itemView.findViewById(R.id.b_openMaps);
 
 
         }

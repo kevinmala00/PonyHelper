@@ -55,6 +55,7 @@ public class TurniAdapter extends RecyclerView.Adapter<TurniAdapter.ViewHolder> 
         tvOraFineTurno.setText(oraFineTurno);
     }
 
+
     // ritorna il numero totali di item
     @Override
     public int getItemCount() {
