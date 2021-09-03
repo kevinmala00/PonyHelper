@@ -196,7 +196,7 @@ public class DbString {
     /**
      * seleziona i turni di una data settimana
      */
-    public static String selectTurniSettimanali = "SELECT * FROM TURNI WHERE (username LIKE ? AND data BETWEEN ? AND ?) ORDER BY data;";
+    public static String selectTurniSettimanali = "SELECT * FROM TURNI WHERE (username LIKE ? AND data BETWEEN ? AND ?) ORDER BY data ASC;";
 
     /**
      * seleziona i costi e i consumi
@@ -212,9 +212,9 @@ public class DbString {
 
     public static String checkPresenzaTurno = "SELECT EXISTS(SELECT * FROM TURNI WHERE data LIKE ? AND username LIKE ?)";
 
-    public static String selectDestinazione = "SELECT * FROM DESTINAZIONE WHERE username LIKE ? AND indirizzo LIKE ?;";
+    public static String selectDestinazione = "SELECT * FROM DESTINAZIONE WHERE username LIKE ? AND indirizzo LIKE ? ORDER BY data_modifica DESC;";
 
-    public static String selectAllDestinazioni = "SELECT * FROM DESTINAZIONE WHERE username LIKE ?;";
+    public static String selectAllDestinazioni = "SELECT * FROM DESTINAZIONE WHERE username LIKE ? ORDER BY data_modifica DESC;";
 
 
 
