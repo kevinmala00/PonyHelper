@@ -537,7 +537,7 @@ public class DbHelper extends SQLiteOpenHelper {
         cv.put("provincia", destinazione.getIndirizzo().getProvincia());
         cv.put("latitudine", destinazione.getLatitudine());
         cv.put("longitudine", destinazione.getLongitudine());
-        cv.put("note", destinazione.getLongitudine());
+        cv.put("note", destinazione.getNote());
         long result;
         try{
              result = db.insert("DESTINAZIONE", "ora_modifica, note, cap, mancia", cv );
@@ -616,4 +616,31 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
+    public void updateDestinazione(PonyAccount account, Destinazione oldDestinazione, Destinazione newDestinazione) throws Exception{
+        SQLiteDatabase db = this.getWritableDatabase();
+        Exception e = new Exception("Errori interni ci scusiamo per il disagio.\nRIPROVARE!");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        long unixTime = UtilClass.localDateToUnixTime(newDestinazione.getDataUltimaModifica());
+        String oraModifica = newDestinazione.getOraUltimaModifica().format(DateTimeFormatter.ofPattern("HH:mm"));
+        ContentValues cvNew = new ContentValues();
+        cvNew.put("account", account.getUsername());
+        cvNew.put("username", account.getUsername());
+        cvNew.put("data_modifica", unixTime);
+        cvNew.put("ora_modifica", oraModifica);
+        cvNew.put("indirizzo", newDestinazione.getIndirizzo().toStringViaCivico());
+        cvNew.put("citta", newDestinazione.getIndirizzo().getCitta());
+        cvNew.put("cap", newDestinazione.getIndirizzo().getCap());
+        cvNew.put("provincia", newDestinazione.getIndirizzo().getProvincia());
+        cvNew.put("latitudine", newDestinazione.getLatitudine());
+        cvNew.put("longitudine", newDestinazione.getLongitudine());
+        cvNew.put("note", newDestinazione.getLongitudine());
+        
+        int result = db.update("DESTINAZIONE", cvNew, "username LIKE ? AND indirizzo LIKE ? AND citta LIKE ?",
+                new String[]{account.getUsername(), oldDestinazione.getIndirizzo().toStringViaCivico(), oldDestinazione.getIndirizzo().getCitta()} );
+
+        db.close();
+        if(result != 1){
+            throw e;
+        }
+    }
 }
