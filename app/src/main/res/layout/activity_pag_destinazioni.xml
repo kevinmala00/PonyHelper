@@ -104,7 +104,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_destinazioni"
-        android:layout_width="376dp"
+        android:layout_width="match_parent"
         android:layout_height="482dp"
         android:layout_weight="1">
 

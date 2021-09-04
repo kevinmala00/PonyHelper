@@ -154,7 +154,7 @@ public class Indirizzo {
      * @return ritorna una stringa contenente l'dirizzo completo ovvero via e numero civico
      */
     public String toStringFullAddress(){
-        return via + ", " + civico + "("+citta+")";
+        return via + ", " + civico + " ("+citta+")";
     }
 
     public String toStringViaCivico(){
@@ -168,6 +168,6 @@ public class Indirizzo {
 
     public void setCivicoFromViaCivico(String viaCivico){
         int position =  viaCivico.indexOf(',');
-        civico =  viaCivico.substring(position);
+        civico =  viaCivico.substring(position+1);
     }
 }
