@@ -106,9 +106,7 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/nome"
                             android:inputType="textPersonName"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="@color/black"
-                            tools:ignore="TextContrastCheck" />
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
