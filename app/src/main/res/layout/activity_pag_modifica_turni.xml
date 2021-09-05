@@ -90,10 +90,10 @@
                     android:layout_marginEnd="20dp"
                     android:contentDescription="@string/spinner_ora_inizio"
                     android:entries="@array/orari"
-                    android:minHeight="48dp"
-                    android:spinnerMode="dialog"
                     android:foreground="@drawable/rounded_orange"
+                    android:minHeight="48dp"
                     android:paddingHorizontal="4dp"
+                    android:spinnerMode="dialog"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tv_orainizio"
                     app:layout_constraintTop_toTopOf="@+id/tv_orainizio" />
