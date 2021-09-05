@@ -33,14 +33,8 @@ public class PagReg extends AppCompatActivity implements  NavigationView.OnNavig
 
     //variabile che rappresenta l'esito dei controlli
     boolean check = true;
-    TextInputLayout itUsername;
-    TextInputLayout itNome;
-    TextInputLayout itCognome;
-    TextInputLayout itEmail;
-    TextInputLayout itPassword;
-    TextInputLayout itConfermaPass;
-    TextView tvNavUsername;
-    TextView tvNavEmail;
+    TextInputLayout itUsername, itNome, itCognome, itEmail, itPassword, itConfermaPass;
+    TextView tvNavUsername, tvNavEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,6 +133,7 @@ public class PagReg extends AppCompatActivity implements  NavigationView.OnNavig
                     if (check) {
 
                         //salvo i dati inseriti dall'utente nell'account
+                        account = new PonyAccount();
                         account.setUsername(Objects.requireNonNull(itUsername.getEditText()).getText().toString());
                         account.setNome(Objects.requireNonNull(itNome.getEditText()).getText().toString());
                         account.setCognome(Objects.requireNonNull(itCognome.getEditText()).getText().toString());

@@ -118,13 +118,6 @@ public class PagModificaTurni extends AppCompatActivity implements NavigationVie
 
         dbhelper = new DbHelper(PagModificaTurni.this);
 
-        if (savedInstanceState != null) {
-            //ripristino i dati dal bundle passato dall'activity precedente
-            Bundle accountBundle = getIntent().getExtras().getBundle("account");
-            if(accountBundle!=null){
-                account = UtilClass.ripristinoAccount(accountBundle);
-            }
-        }else{
             try {
                 //otennego i dati dell'account attivo
                 account = dbhelper.getActiveAccount();
@@ -132,8 +125,9 @@ public class PagModificaTurni extends AppCompatActivity implements NavigationVie
 
             } catch (Exception e) {
                 Toast.makeText(PagModificaTurni.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                e.printStackTrace();
             }
-        }
+
 
         //setto le text view account e email ne navigation menu con quelle correnti
         tvNavUsername.setText(account.getUsername());

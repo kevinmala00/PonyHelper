@@ -136,6 +136,9 @@ public class PagDestinazioni extends AppCompatActivity implements NavigationView
             tvNavUsername.setText(account.getUsername());
             tvNavEmail.setText(account.getEmail());
 
+            bAddDestinazione.setOnClickListener(addDestinazione);
+            bSearchDestinazione.setOnClickListener(searchDestinazione);
+
             try{
                 //otenngo la lista di destinazione dal database
                 listDestinazione=dbhelper.getAllDestinazioni(account);
@@ -145,8 +148,7 @@ public class PagDestinazioni extends AppCompatActivity implements NavigationView
                 rvDestinazioni.setAdapter(destinazioniAdapter);
                 rvDestinazioni.setLayoutManager(new LinearLayoutManager(this));
 
-                bAddDestinazione.setOnClickListener(addDestinazione);
-                bSearchDestinazione.setOnClickListener(searchDestinazione);
+
 
             }catch (Exception e){
                 Toast.makeText(PagDestinazioni.this, e.getMessage(), Toast.LENGTH_SHORT).show();

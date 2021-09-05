@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.media.Image;
 
 import com.example.ponyhelper.body.Costi;
 import com.example.ponyhelper.body.Destinazione;
@@ -85,22 +84,27 @@ public class DbHelper extends SQLiteOpenHelper {
      */
     public void checkRegistrazione(String username, String email) throws Exception{
         SQLiteDatabase db= this.getReadableDatabase();
-        Cursor rs=db.rawQuery("SELECT username " +
-                "FROM ACCOUNT WHERE username LIKE " + "\"" + username + "\"" + " LIMIT 1;", null);
+        db.execSQL(DbString.enableCaseSensitive);
+        Cursor rs=db.rawQuery( DbString.checkPresenzaUsername, new String[]{ username });
 
         if(rs.getCount()>0){
-            rs.close();
-            throw new Exception("Username già presente");
+            rs.moveToFirst();
+            if(rs.getInt(0) == 1){
+                rs.close();
+                db.close();
+                throw new Exception("Username già presente");
+            }
         }
-
-
-        rs=db.rawQuery("SELECT email " +
-                "FROM ACCOUNT WHERE email LIKE " + "\"" + email + "\"" + " LIMIT 1;", null);
-
+        rs=db.rawQuery( DbString.checkPresenzaEmail, new String[]{ email });
         if(rs.getCount()>0){
-            rs.close();
-            throw new Exception("E-mail già presente");
+            rs.moveToFirst();
+            if(rs.getInt(0) == 1){
+                rs.close();
+                db.close();
+                throw new Exception("E-mail già presente");
+            }
         }
+        rs.close();
         db.close();
     }
 
@@ -149,6 +153,7 @@ public class DbHelper extends SQLiteOpenHelper {
         Exception e = new Exception("Credenziali errate");
         PonyAccount account;
         SQLiteDatabase db= this.getWritableDatabase();
+        db.execSQL(DbString.enableCaseSensitive);
         Cursor rs = db.rawQuery("SELECT * FROM ACCOUNT WHERE username LIKE \"" + username + "\" LIMIT 1", null);
         if(rs.getCount()>0){
             rs.moveToFirst();
@@ -210,6 +215,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public PonyAccount recuperoDatiAccount(String username) throws  Exception{
         SQLiteDatabase db = this.getReadableDatabase();
         PonyAccount account;
+        db.execSQL(DbString.enableCaseSensitive);
         Cursor rs = db.rawQuery(DbString.selectAccount, new String[]{username});
         if(rs.getCount()>0){
             rs.moveToFirst();
@@ -455,6 +461,7 @@ public class DbHelper extends SQLiteOpenHelper {
      */
     public PonyAccount getActiveAccount() throws Exception{
         SQLiteDatabase db=this.getReadableDatabase();
+        db.execSQL(DbString.enableCaseSensitive);
         Cursor rs=db.rawQuery(DbString.selectActiveAccount, null);
         if(rs.getCount()>0){
             rs.moveToFirst();

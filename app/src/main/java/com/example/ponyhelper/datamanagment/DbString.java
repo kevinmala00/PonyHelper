@@ -42,8 +42,8 @@ public class DbString {
      * strigna di creazione della tabella prodotto
      */
     public static final String CREATION_PRODOTTO = "CREATE TABLE IF NOT EXISTS PRODOTTO(\n" +
-            "username TEXT NOT NULL\n" +
-            ", nome TEXT NOT NULL\n" +
+            "username TEXT NOT NULL \n" +
+            ", nome TEXT NOT NULL COLLATE NOCASE\n" +
             ", costo REAL NOT NULL\n" +
             ", PRIMARY KEY(nome, username)\n" +
             ", FOREIGN KEY (username) REFERENCES ACCOUNT(username) ON DELETE CASCADE ON UPDATE CASCADE\n" +
@@ -54,7 +54,7 @@ public class DbString {
      */
     public static final String CREATION_INGREDIENTE = "CREATE TABLE IF NOT EXISTS INGREDIENTE(\n" +
             "username TEXT NOT NULL\n" +
-            ", nome TEXT NOT NULL\n" +
+            ", nome TEXT NOT NULL COLLATE NOCASE\n" +
             ", costo_aggiunta REAL NOT NULL DEFAULT 0\n" +
             ", costo_eliminazione REAL NOT NULL DEFAULT 0\n" +
             ", PRIMARY KEY(nome, username)\n" +
@@ -68,7 +68,7 @@ public class DbString {
      */
     public static final String CREATION_TIPOLOGIA = "CREATE TABLE IF NOT EXISTS TIPOLOGIA(\n" +
             "username TEXT NOT NULL\n" +
-            ", nome TEXT NOT NULL\n" +
+            ", nome TEXT NOT NULL COLLATE NOCASE\n" +
             ", costo_aggiunta REAL NOT NULL DEFAULT 0\n" +
             ", costo_eliminazione REAL NOT NULL DEFAULT 0\n" +
             ", PRIMARY KEY(nome, username)\n" +
@@ -82,7 +82,7 @@ public class DbString {
      */
     public static final String CREATION_IMPASTO = "CREATE TABLE IF NOT EXISTS IMPASTO(\n" +
             "username TEXT NOT NULL\n" +
-            ", nome TEXT NOT NULL\n" +
+            ", nome TEXT NOT NULL COLLATE NOCASE\n" +
             ", costo_aggiunta REAL NOT NULL DEFAULT 0\n" +
             ", costo_eliminazione REAL NOT NULL DEFAULT 0\n" +
             ", PRIMARY KEY(nome, username)\n" +
@@ -97,8 +97,8 @@ public class DbString {
      */
     public static final String CREATION_PRODOTTO_INGREDIENTE ="CREATE TABLE IF NOT EXISTS PRODOTTO_INGREDIENTE(\n" +
             "username TEXT NOT NULL\n" +
-            ", nome_prodotto TEXT NOT NULL\n" +
-            ", nome_ingrediente TEXT NOT NULL\n" +
+            ", nome_prodotto TEXT NOT NULL COLLATE NOCASE\n" +
+            ", nome_ingrediente TEXT NOT NULL COLLATE NOCASE\n" +
             ", PRIMARY KEY (nome_prodotto, nome_ingrediente, username)\n" +
             ", FOREIGN KEY (nome_prodotto) REFERENCES PRODOTTO(nome) ON DELETE CASCADE ON UPDATE CASCADE\n" +
             ", FOREIGN KEY (nome_ingrediente) REFERENCES INGREDIENTE(nome) ON DELETE CASCADE ON UPDATE CASCADE\n" +
@@ -111,8 +111,8 @@ public class DbString {
      */
     public static final String CREATION_PRODOTTO_TIPOLOGIA = "CREATE TABLE IF NOT EXISTS PRODOTTO_TIPOLOGIA(\n" +
             "username TEXT NOT NULL\n" +
-            ", nome_prodotto TEXT NOT NULL\n" +
-            ", nome_tipologia TEXT NOT NULL\n" +
+            ", nome_prodotto TEXT NOT NULL COLLATE NOCASE\n" +
+            ", nome_tipologia TEXT NOT NULL COLLATE NOCASE\n" +
             ", PRIMARY KEY (nome_prodotto, nome_tipologia, username)\n" +
             ", FOREIGN KEY (nome_prodotto) REFERENCES PRODOTTO(nome) ON DELETE CASCADE ON UPDATE CASCADE\n" +
             ", FOREIGN KEY (nome_tipologia) REFERENCES TIPOLOGIA(nome) ON DELETE CASCADE ON UPDATE CASCADE\n" +
@@ -125,8 +125,8 @@ public class DbString {
      */
     public static final String CREATION_PRODOTTO_IMPASTO = "CREATE TABLE IF NOT EXISTS PRODOTTO_IMPASTO(\n" +
             "username TEXT NOT NULL\n" +
-            ", nome_prodotto TEXT NOT NULL\n" +
-            ", nome_impasto TEXT NOT NULL\n" +
+            ", nome_prodotto TEXT NOT NULL COLLATE NOCASE\n" +
+            ", nome_impasto TEXT NOT NULL COLLATE NOCASE\n" +
             ", PRIMARY KEY (nome_prodotto, nome_impasto, username)\n" +
             ", FOREIGN KEY (nome_prodotto) REFERENCES PRODOTTO(nome) ON DELETE CASCADE ON UPDATE CASCADE\n" +
             ", FOREIGN KEY (nome_impasto) REFERENCES IMPASTO(nome) ON DELETE CASCADE ON UPDATE CASCADE\n" +
@@ -140,17 +140,16 @@ public class DbString {
             "username TEXT NOT NULL\n" +
             ", data_modifica INTEGER DEFAULT CURRENT_DATE\n" +
             ", ora_modifica TEXT DEFAULT CURRENT_TIME\n" +
-            ", indirizzo TEXT NOT NULL\n" +
-            ", citta TEXT NOT NULL\n" +
+            ", indirizzo TEXT NOT NULL COLLATE NOCASE\n" +
+            ", citta TEXT NOT NULL COLLATE NOCASE\n" +
             ", cap INTEGER NULL\n" +
-            ", provincia TEXT NOT NULL\n" +
+            ", provincia TEXT NOT NULL COLLATE NOCASE\n" +
             ", latitudine REAL NOT NULL\n" +
             ", longitudine REAL NOT NULL\n" +
             ", mancia INTEGER NULL\n" +
             ", note  TEXT NULL\n" +
             ", PRIMARY KEY(username, indirizzo, citta)" +
             ", FOREIGN KEY (username) REFERENCES ACCOUNT(username) ON DELETE CASCADE ON UPDATE CASCADE\n" +
-            ", UNIQUE (indirizzo, citta, provincia)\n" +
             ");";
 
     /**
@@ -177,6 +176,11 @@ public class DbString {
             ", FOREIGN KEY (username) REFERENCES ACCOUNT(username) ON DELETE CASCADE ON UPDATE CASCADE\n" +
             ");";
 
+    public static final String enableCaseSensitive = "PRAGMA case_sensitive_like = 1;";
+
+    public static final String checkPresenzaUsername = "SELECT EXISTS(SELECT * FROM ACCOUNT WHERE username LIKE ?)";
+
+    public static final String checkPresenzaEmail = "SELECT EXISTS(SELECT * FROM ACCOUNT WHERE email LIKE ?)";
     /**
      * stringa che oermettte di selezionare tutti i record relativi agli account
      */
