@@ -181,69 +181,75 @@ public class PagDestinazioni extends AppCompatActivity implements NavigationView
     View.OnClickListener addDestinazione = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+            if (account == null) {
+                Toast.makeText(PagDestinazioni.this, "Effettua il login o registrati per aggiungere un'entrata", Toast.LENGTH_SHORT).show();
+            } else {
+                locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
-            //apro il popUp mod dest
-            dialogModDest = new Dialog(PagDestinazioni.this);
-            dialogModDest.getWindow();
-            dialogModDest.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialogModDest.setContentView(R.layout.popup_add_dest);
-            dialogModDest.setCancelable(true);
-
-            etIndirizzo = dialogModDest.findViewById(R.id.et_indirizzoModDest);
-            etCivico = dialogModDest.findViewById(R.id.et_civicoModDest);
-            etCitta = dialogModDest.findViewById(R.id.et_cittaModDest);
-            etProvincia = dialogModDest.findViewById(R.id.et_provinciaModDest);
-            etCap = dialogModDest.findViewById(R.id.et_capModDest);
-            etNote = dialogModDest.findViewById(R.id.et_noteModDest);
-            etMancia = dialogModDest.findViewById(R.id.et_manciaModDest);
-            bSalva = dialogModDest.findViewById(R.id.b_salvaModDest);
-            tvLatitudine= dialogModDest.findViewById(R.id.tv_latitudineModDest);
-            tvLongitudine= dialogModDest.findViewById(R.id.tv_longitudineModDest);
-            ibRefreshGps= dialogModDest.findViewById(R.id.ib_refreshGpsModDest);
-
-            //Controllo se si mDestinazione non null allora è aggiornamento
-            if(mDestinazione !=null){
-                //inserisco i campi negli edit text
-                etIndirizzo.setText(mDestinazione.getIndirizzo().getVia());
-                etCivico.setText(mDestinazione.getIndirizzo().getCivico());
-                etCitta.setText(mDestinazione.getIndirizzo().getCitta());
-                etProvincia.setText(mDestinazione.getIndirizzo().getProvincia());
-                etCap.setText(mDestinazione.getIndirizzo().getCap());
-                etMancia.setText(String.valueOf(mDestinazione.getMancia()));
-                etNote.setText(mDestinazione.getNote());
-                tvLatitudine.setText(String.valueOf(mDestinazione.getLatitudine()));
-                tvLongitudine.setText(String.valueOf(mDestinazione.getLongitudine()));
-                aggiornamento = true;
-            }
+                //apro il popUp mod dest
+                dialogModDest = new Dialog(PagDestinazioni.this);
+                dialogModDest.getWindow();
+                dialogModDest.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialogModDest.setContentView(R.layout.popup_add_dest);
+                dialogModDest.setCancelable(true);
 
 
-            ibRefreshGps.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //se è aggiornamento chiedo conferma per poter aggiornare la posizione
-                    if(aggiornamento){
-                        AlertDialog.Builder builder= new AlertDialog.Builder(getApplicationContext());
-                        builder.setTitle("AGGIORNAMENTO DESTINAZIONE");
-                        builder.setMessage("Confermi di volere aggiornare la posizione corrente? Ricordati che stai aggiornando una destinazione perderai i dati precedenti");
-                        builder.setPositiveButton("Conferma", new DialogInterface.OnClickListener(){
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                updateGPS();
-                                Toast.makeText(getApplicationContext(), "Posizione aggiornata", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }else {
-                        updateGPS();
-                        Toast.makeText(getApplicationContext(), "Posizione aggiornata", Toast.LENGTH_SHORT).show();
-                    }
+                etIndirizzo = dialogModDest.findViewById(R.id.et_indirizzoModDest);
+                etCivico = dialogModDest.findViewById(R.id.et_civicoModDest);
+                etCitta = dialogModDest.findViewById(R.id.et_cittaModDest);
+                etProvincia = dialogModDest.findViewById(R.id.et_provinciaModDest);
+                etCap = dialogModDest.findViewById(R.id.et_capModDest);
+                etNote = dialogModDest.findViewById(R.id.et_noteModDest);
+                etMancia = dialogModDest.findViewById(R.id.et_manciaModDest);
+                bSalva = dialogModDest.findViewById(R.id.b_salvaModDest);
+                tvLatitudine = dialogModDest.findViewById(R.id.tv_latitudineModDest);
+                tvLongitudine = dialogModDest.findViewById(R.id.tv_longitudineModDest);
+                ibRefreshGps = dialogModDest.findViewById(R.id.ib_refreshGpsModDest);
+
+                bSalva.setOnClickListener(salvaDestinazione);
+
+                //Controllo se si mDestinazione non null allora è aggiornamento
+                if (mDestinazione != null) {
+                    //inserisco i campi negli edit text
+                    etIndirizzo.setText(mDestinazione.getIndirizzo().getVia());
+                    etCivico.setText(mDestinazione.getIndirizzo().getCivico());
+                    etCitta.setText(mDestinazione.getIndirizzo().getCitta());
+                    etProvincia.setText(mDestinazione.getIndirizzo().getProvincia());
+                    etCap.setText(mDestinazione.getIndirizzo().getCap());
+                    etMancia.setText(String.valueOf(mDestinazione.getMancia()));
+                    etNote.setText(mDestinazione.getNote());
+                    tvLatitudine.setText(String.valueOf(mDestinazione.getLatitudine()));
+                    tvLongitudine.setText(String.valueOf(mDestinazione.getLongitudine()));
+                    aggiornamento = true;
                 }
-            });
 
-            bSalva.setOnClickListener(salvaDestinazione);
 
-            dialogModDest.show();
+                ibRefreshGps.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //se è aggiornamento chiedo conferma per poter aggiornare la posizione
+                        if (aggiornamento) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                            builder.setTitle("AGGIORNAMENTO DESTINAZIONE");
+                            builder.setMessage("Confermi di volere aggiornare la posizione corrente? Ricordati che stai aggiornando una destinazione perderai i dati precedenti");
+                            builder.setPositiveButton("Conferma", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    updateGPS();
+                                    Toast.makeText(getApplicationContext(), "Posizione aggiornata", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        } else {
+                            updateGPS();
+                            Toast.makeText(getApplicationContext(), "Posizione aggiornata", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
+
+                dialogModDest.show();
+
+            }
         }
     };
 
@@ -320,7 +326,6 @@ public class PagDestinazioni extends AppCompatActivity implements NavigationView
 
                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
-                    Log.e("ERRORE:", e.getMessage());
                 }
             }else{
                 AlertDialog.Builder builder = new AlertDialog.Builder(PagDestinazioni.this);
@@ -419,6 +424,7 @@ public class PagDestinazioni extends AppCompatActivity implements NavigationView
         switch (item.getItemId()) {
 
             case R.id.nav_item_home: {
+                finish();
                 startActivity(new Intent(PagDestinazioni.this, HomePage.class));
                 break;
 
@@ -428,32 +434,36 @@ public class PagDestinazioni extends AppCompatActivity implements NavigationView
                 break;
             }
             case R.id.nav_item_turni: {
-
+                finish();
                 startActivity(new Intent(PagDestinazioni.this, PagModificaTurni.class));
                 break;
             }
             case R.id.nav_item_entrate: {
+                finish();
                 startActivity(new Intent(PagDestinazioni.this, PagEntrate.class));
                 break;
             }
             case R.id.nav_item_menu: {
+                finish();
                 startActivity(new Intent(PagDestinazioni.this, PagMenu.class));
                 break;
             }
             case R.id.nav_item_calcola_tot: {
+                finish();
                 startActivity(new Intent(PagDestinazioni.this, PagCalcoloTot.class));
                 break;
             }
             case R.id.nav_item_profilo: {
+                finish();
                 startActivity(new Intent(PagDestinazioni.this, PagProfilo.class));
                 break;
             }
             case R.id.nav_item_info: {
+                finish();
                 startActivity(new Intent(PagDestinazioni.this,  PagInfo.class));
                 break;
             }
             case R.id.nav_item_logout:{
-
                 UtilClass.logout(PagDestinazioni.this, account);
                 break;
             }

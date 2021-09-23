@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -75,10 +75,10 @@
                             android:layout_weight="1.5"
                             android:autofillHints="data"
                             android:background="@drawable/rounded_orange"
-                            android:hint="@string/search_gg_mm_aa"
+                            android:hint="@string/search_gg_mm_aaaa"
+                            android:inputType="date"
                             android:paddingLeft="4dp"
                             android:paddingRight="4dp"
-                            android:inputType="date"
                             android:selectAllOnFocus="true"
                             android:singleLine="true"
                             android:textAlignment="textStart"
@@ -133,8 +133,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_weight="4"
+                            android:fontFamily="@font/bangers"
                             android:textAlignment="center"
-                            android:textSize="16sp" />
+                            android:textSize="20sp" />
 
                         <ImageButton
                             android:id="@+id/b_prossimomese"
@@ -148,6 +149,7 @@
                     </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_entrate"
                         android:layout_width="match_parent"
                         android:layout_height="411dp" />
 
@@ -169,7 +171,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Modifica costi"
+                            android:text="Modifica costo"
                             android:textAlignment="center" />
                     </LinearLayout>
 
@@ -184,9 +186,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:background="@android:color/transparent"
                             android:contentDescription="@string/content_description_bottoneaggiungientrata"
                             app:srcCompat="@drawable/ic_add"
-                            android:background="@android:color/transparent"
                             tools:ignore="TouchTargetSizeCheck" />
 
                         <ImageButton
@@ -194,9 +196,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:background="@android:color/transparent"
                             android:contentDescription="@string/content_description_bottonegestiscicosti"
                             app:srcCompat="@drawable/ic_edit"
-                            android:background="@android:color/transparent"
                             tools:ignore="TouchTargetSizeCheck" />
                     </LinearLayout>
                 </LinearLayout>

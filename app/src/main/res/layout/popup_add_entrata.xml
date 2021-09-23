@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rounded_orange"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/tv_titleModEntrata"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/bangers"
+        android:text="Entrata"
+        android:textAlignment="center"
+        android:textColor="@color/arancio_titolo"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_mese"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_titleModEntrata"
+        android:layout_marginTop="10dp"
+        android:text="Data"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_titleModEntrata" />
+
+    <EditText
+        android:id="@+id/tv_meseModCosti"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_mese"
+        android:layout_marginTop="0dp"
+        android:ems="10"
+        android:foreground="@drawable/rounded_orange"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_mese" />
+
+    <TextView
+        android:id="@+id/tv_ora_inizio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_meseModCosti"
+        android:layout_marginTop="8dp"
+        android:text="@string/ora_inizio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_meseModCosti" />
+
+    <EditText
+        android:id="@+id/et_costoCarburanteModCosti"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_ora_inizio"
+        android:layout_marginTop="0dp"
+        android:ems="10"
+        android:foreground="@drawable/rounded_orange"
+        android:inputType="time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ora_inizio" />
+
+    <TextView
+        android:id="@+id/tv_oraFine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_costoCarburanteModCosti"
+        android:layout_marginTop="8dp"
+        android:text="@string/ora_fine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_costoCarburanteModCosti" />
+
+    <EditText
+        android:id="@+id/et_oraFineModEntrata"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_oraFine"
+        android:layout_marginTop="0dp"
+        android:ems="10"
+        android:foreground="@drawable/rounded_orange"
+        android:inputType="time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_oraFine" />
+
+    <TextView
+        android:id="@+id/tv_oreTot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_oraFineModEntrata"
+        android:layout_marginTop="8dp"
+        android:text="Ore totali"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_oraFineModEntrata" />
+
+    <TextView
+        android:id="@+id/tv_oreTotModEntrata"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_oreTot"
+        android:layout_marginTop="0dp"
+        android:foreground="@drawable/rounded_orange"
+        android:padding="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_oreTot" />
+
+    <TextView
+        android:id="@+id/tv_entrateModEntrata"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_oreTotModEntrata"
+        android:layout_marginTop="8dp"
+        android:text="@string/entrate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_oreTotModEntrata" />
+
+    <EditText
+        android:id="@+id/et_entrateModEntrata"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_entrateModEntrata"
+        android:layout_marginTop="0dp"
+        android:ems="10"
+        android:foreground="@drawable/rounded_orange"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_entrateModEntrata" />
+
+    <TextView
+        android:id="@+id/tv_manciaModEntrata"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_entrateModEntrata"
+        android:layout_marginTop="8dp"
+        android:text="@string/mancia"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_entrateModEntrata" />
+
+    <EditText
+        android:id="@+id/et_manciaModEntrata"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_manciaModEntrata"
+        android:layout_marginTop="0dp"
+        android:ems="10"
+        android:foreground="@drawable/rounded_orange"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_manciaModEntrata" />
+
+    <TextView
+        android:id="@+id/tv_kmPercorsi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_manciaModEntrata"
+        android:layout_marginTop="8dp"
+        android:text="Km percorsi"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_manciaModEntrata" />
+
+    <EditText
+        android:id="@+id/et_kmPercorsiModEntrata"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_kmPercorsi"
+        android:layout_marginTop="0dp"
+        android:ems="10"
+        android:foreground="@drawable/rounded_orange"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_kmPercorsi" />
+
+    <TextView
+        android:id="@+id/tv_altro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_kmPercorsiModEntrata"
+        android:layout_marginTop="8dp"
+        android:text="Altro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_kmPercorsiModEntrata" />
+
+    <EditText
+        android:id="@+id/et_altroModEntrata"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_altro"
+        android:layout_marginTop="0dp"
+        android:ems="10"
+        android:foreground="@drawable/rounded_orange"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_altro" />
+
+    <Button
+        android:id="@+id/b_salvaModEntrata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_altroModEntrata"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round_red_corner"
+        android:fontFamily="@font/droid_sans"
+        android:text="@string/salva"
+        android:textSize="16sp"
+        android:layout_centerHorizontal="true"
+         />
+
+</RelativeLayout>

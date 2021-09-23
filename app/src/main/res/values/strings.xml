@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PonyHelper</string>
+    <string name="app_name">Pony Helper</string>
     <string name="login">Login</string>
     <string name="registrati">REGISTRATI</string>
     <string name="invito_reg">Non sei ancora registrato?\nCosa aspetti!!!</string>
@@ -38,13 +38,12 @@
     <string name="spinner_ora_inizio">spinner ora inizio</string>
     <string name="spinner_giorno">spinner giorno</string>
     <string name="entrate">Entrate</string>
-    <string name="search_gg_mm_aa">Search (gg/mm/aa)</string>
+    <string name="search_gg_mm_aaaa">Search (gg/mm/aaaa)</string>
     <string name="content_description_buttonprossimomese">bottone che permette di passare al mese susccessivo</string>
     <string name="content_description_bottonemeseprecedente">bottone chepermette di passare al mese precedente</string>
     <string name="content_description_bottoneaggiungientrata">bottone che permette di aggiungere un\'entrata</string>
-    <string name="content_description_bottonegestiscicosti">bottone che permette di gestire i costi</string>
+    <string name="content_description_bottonegestiscicosti">bottone che permette di gestire i costo</string>
     <string name="contente_description_buttonserchentrata">bottne che permette la ricerca dell\'entrata</string>
-    <string name="titolomainactivity">\t\t\tPony\n\t\t\t\t\t\t\t\t\t\t\tHelper</string>
     <string name="content_description_immaginefattortinotitle">immagine foattorino stilizzato</string>
     <string name="simboloeuro">€\t</string>
     <string name="home">Home</string>

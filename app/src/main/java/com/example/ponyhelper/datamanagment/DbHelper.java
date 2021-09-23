@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.ponyhelper.body.Costi;
+import com.example.ponyhelper.body.Costo;
 import com.example.ponyhelper.body.Destinazione;
 import com.example.ponyhelper.body.Entrata;
 import com.example.ponyhelper.body.Indirizzo;
@@ -411,11 +411,11 @@ public class DbHelper extends SQLiteOpenHelper {
      * @return ritorna un'instanza di costi con i dati del mese selezionato
      * @throws Exception in caso non ci siano costi inseriti nel database
      */
-    public Costi getCostiMensili(String meseAnno, String username) throws Exception {
+    public Costo getCostiMensili(String meseAnno, String username) throws Exception {
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor rs= db.rawQuery(DbString.selectCostiMensili, new String[]{username, meseAnno});
         if(rs.getCount()>0){
-            return  new Costi(rs.getString(1),
+            return  new Costo(rs.getString(1),
                     rs.getDouble(2),
                     rs.getDouble(3));
         }else{
@@ -436,7 +436,7 @@ public class DbHelper extends SQLiteOpenHelper {
         List<Entrata> list;
         double totMensile=0;
         double kmMensili=0;
-        Costi costiMensili;
+        Costo costiMensili;
         try {
             list = this.getAllEntrateMese(meseAnno, username);
             if(!list.isEmpty()){
@@ -528,6 +528,12 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * permette di salvare una destinazione all'interno del databse
+     * @param account account attivo
+     * @param destinazione destinazione da salvare
+     * @throws Exception in caso di errori
+     */
     public  void salvaDestinazione(PonyAccount account, Destinazione destinazione) throws Exception{
         SQLiteDatabase db = this.getWritableDatabase();
         Exception e = new Exception("Errori interni ci scusiamo per il disagio.\nRIPROVARE!");
@@ -561,6 +567,14 @@ public class DbHelper extends SQLiteOpenHelper {
 
     }
 
+    /**
+     * permete di cercare all'interno del database una o piu destinazioni
+     * @param account account attivo
+     * @param indirizzo indirizzo ricercato dall'utente
+     * @return ritorna la lista delle destinazioni corrispondenti all'interno del database
+     * @throws Exception in caso di errore o di mancanza di corrispondenza
+     */
+
     public List<Destinazione> searchDestinazione(PonyAccount account, String indirizzo) throws Exception {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor rs = db.rawQuery(DbString.selectDestinazione, new String[]{account.getUsername(), indirizzo});
@@ -592,6 +606,12 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * permette di recuperare la lista di tutte le destinazioni presenti nel database
+     * @param account account attivo
+     * @return ritrona la lista delle destinazioni presenti nel database
+     * @throws Exception in caso di errore o destinazioni non presenti
+     */
     public List<Destinazione> getAllDestinazioni(PonyAccount account) throws Exception {
         SQLiteDatabase db = this.getReadableDatabase();
         List<Destinazione> returnList = new ArrayList<>();
@@ -623,6 +643,13 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * permette di modificare una destinazione precedentemente inserita
+     * @param account account attivo
+     * @param oldDestinazione campi della vecchia destinazione
+     * @param newDestinazione campi della nuova destinazione
+     * @throws Exception in caso di errore
+     */
     public void updateDestinazione(PonyAccount account, Destinazione oldDestinazione, Destinazione newDestinazione) throws Exception{
         SQLiteDatabase db = this.getWritableDatabase();
         Exception e = new Exception("Errori interni ci scusiamo per il disagio.\nRIPROVARE!");
@@ -649,5 +676,48 @@ public class DbHelper extends SQLiteOpenHelper {
         if(result != 1){
             throw e;
         }
+    }
+
+
+    /**
+     * permette di modificare i costi se già presenti in quel meseAnno oppure inserirli in caso non siano presenti
+     * @param account account attivo
+     * @param meseAnno meseAnno di cui si vuole modificare i costi
+     * @param costo nuovi costi
+     * @throws Exception in caso di errori
+     */
+    public void modCostiConsumi(PonyAccount account, String meseAnno, Costo costo) throws Exception {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Exception e = new Exception("Errori interni ci scusiamo per il disagio.\nRIPROVARE!");
+        ContentValues cvNew = new ContentValues();
+        cvNew.put("username", account.getUsername());
+        cvNew.put("mese_anno", meseAnno);
+        cvNew.put("costo_carburante", costo.getCostoCarburante());
+        cvNew.put("consumo_medio", costo.getConsumoMedio());
+
+        Cursor rs = db.rawQuery(DbString.checkPresenzaCosti, new String[]{meseAnno, account.getUsername()});
+        if(rs.getCount()>0){
+            rs.moveToFirst();
+            if(rs.getInt(0)==1){
+                //costi presenti update
+                int result = db.update("COSTI_CONSUMI", cvNew, "username LIKE ? AND mese_anno LIKE ?",
+                        new String[]{account.getUsername(), meseAnno});
+                db.close();
+                if(result != 1){
+                    throw e;
+                }
+
+            }else{
+                //costi non presenti insert
+                long result = db.insert("COSTI_CONSUMI", null, cvNew);
+                if(result == -1){
+                    throw e;
+                }
+            }
+
+        }else{
+            throw e;
+        }
+
     }
 }

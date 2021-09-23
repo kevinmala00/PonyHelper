@@ -65,7 +65,7 @@ public class DestinazioniAdapter extends RecyclerView.Adapter<DestinazioniAdapte
         bPosition.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String geoLocation = "geo:" + destinazione.getLatitudine() +"," + destinazione.getLongitudine() +"?q("+destinazione.getIndirizzo().toStringFullAddress()+")";
+                String geoLocation = "google.navigation:q="+destinazione.getLatitudine() +"," + destinazione.getLongitudine();
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(geoLocation));
                 if (intent.resolveActivity(mContext.getPackageManager()) != null) {

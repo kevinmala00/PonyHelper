@@ -25,35 +25,6 @@
             android:paddingStart="10dp"
             android:paddingEnd="10dp">
 
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/bangers"
-                android:text="@string/app_name"
-                android:textAlignment="center"
-                android:textColor="@color/arancio_titolo"
-                android:textSize="80sp"
-                android:translationY="-20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_registrazione"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-60dp"
-                android:fontFamily="@font/bangers"
-                android:text="@string/registrazione"
-                android:textAlignment="center"
-                android:textColor="@color/azzurro_sottotitolo"
-                android:textSize="48sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
             <Button
                 android:id="@+id/b_registratipagreg"
@@ -71,14 +42,13 @@
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <ScrollView
-                android:layout_width="390dp"
-                android:layout_height="477dp"
-                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_registrazione">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -88,25 +58,38 @@
                     app:layout_constraintStart_toStartOf="parent"
                     tools:layout_editor_absoluteX="86dp">
 
+                    <TextView
+                        android:id="@+id/tv_registrazione"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bangers"
+                        android:text="@string/registrazione"
+                        android:textAlignment="center"
+                        android:textColor="@color/arancio_titolo"
+                        android:textSize="48sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/it_nomepagreg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:textColor="@color/black"
+                        android:layout_marginTop="20dp"
                         app:errorEnabled="true"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintTop_toBottomOf="@+id/tv_registrazione">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="220dp"
                             android:layout_height="wrap_content"
                             android:hint="@string/nome"
                             android:inputType="textPersonName"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout

@@ -4,15 +4,15 @@ import androidx.annotation.NonNull;
 
 import java.util.Objects;
 
-public class Costi {
+public class Costo {
     String meseAnno;
     double costoCarburante;
     double consumoMedio;
 
-    public Costi() {
+    public Costo() {
     }
 
-    public Costi(String meseAnno, double costoCarburante, double consumoMedio) {
+    public Costo(String meseAnno, double costoCarburante, double consumoMedio) {
         this.meseAnno = meseAnno;
         this.costoCarburante = costoCarburante;
         this.consumoMedio = consumoMedio;
@@ -46,8 +46,8 @@ public class Costi {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Costi costi = (Costi) o;
-        return Double.compare(costi.costoCarburante, costoCarburante) == 0 && Double.compare(costi.consumoMedio, consumoMedio) == 0 && Objects.equals(meseAnno, costi.meseAnno);
+        Costo costo = (Costo) o;
+        return Double.compare(costo.costoCarburante, costoCarburante) == 0 && Double.compare(costo.consumoMedio, consumoMedio) == 0 && Objects.equals(meseAnno, costo.meseAnno);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class Costi {
     @NonNull
     @Override
     public String toString() {
-        return "Costi{" +
+        return "Costo{" +
                 "meseAnno='" + meseAnno + '\'' +
                 ", costoCarburante=" + costoCarburante +
                 ", consumoMedio=" + consumoMedio +

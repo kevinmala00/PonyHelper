@@ -220,6 +220,8 @@ public class DbString {
 
     public static String selectAllDestinazioni = "SELECT * FROM DESTINAZIONE WHERE username LIKE ? ORDER BY data_modifica DESC;";
 
+    public static String checkPresenzaCosti = "SELECT EXISTS(SELECT * FROM COSTI_CONSUMI WHERE mese_anno LIKE ? AND username LIKE ?)";
+
 
 
 
