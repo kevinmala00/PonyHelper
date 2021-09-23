@@ -20,12 +20,13 @@
         <entry key="..\:/Users/kevin/Desktop/PonyHelper/Code/app/src/main/res/drawable/my_search_round.xml" value="0.18611111111111112" />
         <entry key="..\:/Users/kevin/Desktop/PonyHelper/Code/app/src/main/res/drawable/not_red_butto_background.xml" value="0.18611111111111112" />
         <entry key="..\:/Users/kevin/Desktop/PonyHelper/Code/app/src/main/res/drawable/not_red_button_background.xml" value="0.13229166666666667" />
+        <entry key="..\:/Users/kevin/Desktop/PonyHelper/Code/app/src/main/res/drawable/road.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/kevin/Desktop/PonyHelper/Code/app/src/main/res/drawable/round_red_corner.xml" value="0.13125" />
         <entry key="..\:/Users/kevin/Desktop/PonyHelper/Code/app/src/main/res/drawable/rounded_orange.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/kevin/Desktop/PonyHelper/Code/app/src/main/res/drawable/rounded_transparent_dark.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/kevin/Desktop/PonyHelper/Code/app/src/main/res/layout/action_bar.xml" value="0.23645833333333333" />
         <entry key="..\:/Users/kevin/Desktop/PonyHelper/Code/app/src/main/res/layout/activity_home_page.xml" value="0.1916376306620209" />
-        <entry key="..\:/Users/kevin/Desktop/PonyHelper/Code/app/src/main/res/layout/activity_main.xml" value="0.152" />
+        <entry key="..\:/Users/kevin/Desktop/PonyHelper/Code/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/kevin/Desktop/PonyHelper/Code/app/src/main/res/layout/activity_main2.xml" value="0.23645833333333333" />
         <entry key="..\:/Users/kevin/Desktop/PonyHelper/Code/app/src/main/res/layout/activity_pag_aggiungi_dest.xml" value="0.2583826429980276" />
         <entry key="..\:/Users/kevin/Desktop/PonyHelper/Code/app/src/main/res/layout/activity_pag_calcolo_tot.xml" value="0.2318840579710145" />
@@ -45,7 +46,9 @@
         <entry key="..\:/Users/kevin/Desktop/PonyHelper/Code/app/src/main/res/layout/nav_header.xml" value="0.4" />
         <entry key="..\:/Users/kevin/Desktop/PonyHelper/Code/app/src/main/res/layout/popup.xml" value="0.264" />
         <entry key="..\:/Users/kevin/Desktop/PonyHelper/Code/app/src/main/res/layout/popup_add_dest.xml" value="0.264" />
+        <entry key="..\:/Users/kevin/Desktop/PonyHelper/Code/app/src/main/res/layout/popup_add_entrata.xml" value="0.2210144927536232" />
         <entry key="..\:/Users/kevin/Desktop/PonyHelper/Code/app/src/main/res/layout/popup_add_modifica_destinazione.xml" value="0.264" />
+        <entry key="..\:/Users/kevin/Desktop/PonyHelper/Code/app/src/main/res/layout/popup_mod_costi.xml" value="0.36977491961414793" />
         <entry key="..\:/Users/kevin/Desktop/PonyHelper/Code/app/src/main/res/layout/spinner_item.xml" value="0.1" />
         <entry key="..\:/Users/kevin/Desktop/PonyHelper/Code/app/src/main/res/layout/toolbar.xml" value="0.1" />
         <entry key="..\:/Users/kevin/Desktop/PonyHelper/Code/app/src/main/res/layout/toolbar1.xml" value="0.1" />

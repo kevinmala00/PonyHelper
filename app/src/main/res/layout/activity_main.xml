@@ -2,106 +2,67 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/l_paginaprincipale"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-    tools:context=".MainActivity">
+    tools:context=".IntroPage">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/l_title"
+
+    <TextView
+        android:id="@+id/tv_titlemainactiviy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/bangers"
+
+        android:padding="10dp"
+        android:rotation="-8"
+        android:text="@string/app_name"
+        android:textAlignment="center"
+        android:textColor="@color/arancio_titolo"
+        android:textSize="80sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp">
-
-        <TextView
-            android:id="@+id/tv_titlemainactiviy"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/bangers"
-            android:text="@string/titolomainactivity"
-            android:textColor="@color/arancio_titolo"
-            android:textSize="96sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/iv_title"
-            android:layout_width="176dp"
-            android:layout_height="130dp"
-            android:layout_marginStart="195dp"
-            android:layout_marginTop="16dp"
-            android:contentDescription="@string/content_description_immaginefattortinotitle"
-            android:src="@drawable/img"
-            app:layout_constraintEnd_toEndOf="@+id/tv_titlemainactiviy"
-            app:layout_constraintStart_toStartOf="@+id/tv_titlemainactiviy"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintVertical_bias="0.250" />
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/l_bodypaginaprincipale"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/raisin_black"
+        android:rotationX="50"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/l_title">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.725" />
 
-        <Button
-            android:id="@+id/b_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/round_red_corner"
-            android:fontFamily="@font/droid_sans"
-            android:text="@string/login"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@drawable/road"
+        android:rotationX="50"
 
-        <TextView
-            android:id="@+id/tv_domandaregistrati"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:freezesText="false"
-            android:gravity="clip_vertical|center_horizontal"
-            android:lines="2"
-            android:text="@string/invito_reg"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/b_login"
-            tools:ignore="TextContrastCheck" />
+        app:layout_constraintBottom_toBottomOf="@+id/view1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view1" />
 
-        <Button
-            android:id="@+id/b_registrati"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/round_red_corner"
-            android:fontFamily="@font/droid_sans"
-            android:text="@string/registrati"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_domandaregistrati" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
+    <ImageView
+        android:id="@+id/iv_title"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:contentDescription="@string/content_description_immaginefattortinotitle"
+        android:src="@drawable/img"
+        app:layout_constraintBottom_toBottomOf="@+id/view1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
