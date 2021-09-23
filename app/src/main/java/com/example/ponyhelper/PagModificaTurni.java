@@ -121,6 +121,9 @@ public class PagModificaTurni extends AppCompatActivity implements NavigationVie
             try {
                 //otennego i dati dell'account attivo
                 account = dbhelper.getActiveAccount();
+                //setto le text view account e email ne navigation menu con quelle correnti
+                tvNavUsername.setText(account.getUsername());
+                tvNavEmail.setText(account.getEmail());
 
 
             } catch (Exception e) {
@@ -129,54 +132,58 @@ public class PagModificaTurni extends AppCompatActivity implements NavigationVie
             }
 
 
-        //setto le text view account e email ne navigation menu con quelle correnti
-        tvNavUsername.setText(account.getUsername());
-        tvNavEmail.setText(account.getEmail());
+
 
 
 
         bModifica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //ripristino i dati selezionat dall'utente
-                LocalDate dataTurno = LocalDate.parse(sGiorno.getSelectedItem().toString(), DateTimeFormatter.ofPattern("dd-MM-yy"));
-                LocalTime oraInizio= LocalTime.parse(sOraInizio.getSelectedItem().toString());
-                LocalTime oraFine= LocalTime.parse(sOraFine.getSelectedItem().toString());
-
-                if(oraFine.isBefore(oraInizio)){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(PagModificaTurni.this);
-                    builder.setTitle("ERRORE INSERIMENTO DATI");
-                    builder.setMessage("L'orario di fine turno non deve precedere quello di inizio!!");
-                    builder.show();
-                }else{
-                    turno = new Turno(dataTurno, oraInizio, oraFine);
-
-                    AlertDialog.Builder builder = new AlertDialog.Builder(PagModificaTurni.this);
-                    builder.setTitle("MODIFICA/INSERIMENTO TURNO");
-                    builder.setMessage("Sei sicuro di voler modificare il turno da te selezionato?\n" +
-                            "\nData: "+ dataTurno.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) +
-                            "\nora inizio: " + oraInizio.format(DateTimeFormatter.ofPattern("HH:mm")) +
-                            "\nora fine: " + oraFine.format(DateTimeFormatter.ofPattern("HH:mm")));
-                    builder.setNegativeButton("ANNULLA",  new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-                    builder.setPositiveButton("CONFERMA", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            try {
-                                dbhelper.modificaTurno(account, turno);
-                                Toast.makeText(PagModificaTurni.this, "Modifica avvenuta con successo", Toast.LENGTH_SHORT).show();
-                            } catch (Exception e) {
-                                Toast.makeText(PagModificaTurni.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                e.printStackTrace();
-                            }
-                        }
-                    });
-                    builder.show();
+                if(account==null){
+                    Toast.makeText(PagModificaTurni.this, "Effettua il login o registrati!!", Toast.LENGTH_SHORT).show();
                 }
+                else {
+                    //ripristino i dati selezionat dall'utente
+                    LocalDate dataTurno = LocalDate.parse(sGiorno.getSelectedItem().toString(), DateTimeFormatter.ofPattern("dd-MM-yy"));
+                    LocalTime oraInizio= LocalTime.parse(sOraInizio.getSelectedItem().toString());
+                    LocalTime oraFine= LocalTime.parse(sOraFine.getSelectedItem().toString());
+
+                    if(oraFine.isBefore(oraInizio)){
+                        AlertDialog.Builder builder = new AlertDialog.Builder(PagModificaTurni.this);
+                        builder.setTitle("ERRORE INSERIMENTO DATI");
+                        builder.setMessage("L'orario di fine turno non deve precedere quello di inizio!!");
+                        builder.show();
+                    }else{
+                        turno = new Turno(dataTurno, oraInizio, oraFine);
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(PagModificaTurni.this);
+                        builder.setTitle("MODIFICA/INSERIMENTO TURNO");
+                        builder.setMessage("Sei sicuro di voler modificare il turno da te selezionato?\n" +
+                                "\nData: "+ dataTurno.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) +
+                                "\nora inizio: " + oraInizio.format(DateTimeFormatter.ofPattern("HH:mm")) +
+                                "\nora fine: " + oraFine.format(DateTimeFormatter.ofPattern("HH:mm")));
+                        builder.setNegativeButton("ANNULLA",  new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        builder.setPositiveButton("CONFERMA", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                try {
+                                    dbhelper.modificaTurno(account, turno);
+                                    Toast.makeText(PagModificaTurni.this, "Modifica avvenuta con successo", Toast.LENGTH_SHORT).show();
+                                } catch (Exception e) {
+                                    Toast.makeText(PagModificaTurni.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        builder.show();
+                    }
+                }
+
 
 
             }
