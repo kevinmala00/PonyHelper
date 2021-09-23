@@ -5,12 +5,14 @@
             <gradient
                 android:type="radial"
                 android:centerX="0.5"
-                android:centerY="0"
+                android:centerY="0.5"
                 android:startColor="#6a6a6a"
                 android:centerColor="#3f3f3f"
                 android:gradientRadius="700dp"
                 android:endColor="@color/black"
                 />
+
         </shape>
+
     </item>
 </selector>
