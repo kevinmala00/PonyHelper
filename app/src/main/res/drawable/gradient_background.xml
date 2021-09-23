@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+        <item>
+
         <shape>
             <gradient
-                android:type="radial"
-                android:centerX="0.5"
-                android:centerY="0.5"
+                android:type="linear"
+                android:angle="270"
                 android:startColor="#6a6a6a"
                 android:centerColor="#3f3f3f"
-                android:gradientRadius="700dp"
                 android:endColor="@color/black"
                 />
 
         </shape>
-
     </item>
-</selector>
+
+</layer-list>
