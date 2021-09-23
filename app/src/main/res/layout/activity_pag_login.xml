@@ -26,45 +26,32 @@
             android:paddingEnd="10dp">
 
             <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-20dp"
-                android:fontFamily="@font/bangers"
-                android:text="@string/app_name"
-                android:textAlignment="center"
-                android:textColor="@color/arancio_titolo"
-                android:textSize="80sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
                 android:id="@+id/tv_login"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="-50dp"
                 android:fontFamily="@font/bangers"
                 android:text="@string/login"
                 android:textAlignment="center"
-                android:textColor="@color/azzurro_sottotitolo"
+                android:textColor="@color/arancio_titolo"
                 android:textSize="48sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="56dp"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.526"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_login">
+                app:layout_constraintTop_toBottomOf="@+id/tv_login"
+                app:layout_constraintVertical_bias="0.25">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/it_usernamepaglog"
