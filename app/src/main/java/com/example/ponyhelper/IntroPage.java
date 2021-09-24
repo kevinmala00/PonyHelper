@@ -17,6 +17,7 @@ public class IntroPage extends Activity {
         handler.postDelayed(new Runnable() {
             public void run() {
                 Intent intent = new Intent(IntroPage.this, HomePage.class);
+                finish();
                 startActivity(intent);
             }
         }, 2000);   //5 seconds
