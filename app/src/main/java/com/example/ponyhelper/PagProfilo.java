@@ -137,28 +137,34 @@ public class PagProfilo extends AppCompatActivity implements  NavigationView.OnN
         switch (item.getItemId()) {
 
             case R.id.nav_item_home: {
+                finish();
                 startActivity(new Intent(PagProfilo.this, HomePage.class));
                 break;
 
             }
             case R.id.nav_item_destinazioni: {
+                finish();
                 startActivity(new Intent(PagProfilo.this, PagDestinazioni.class));
                 break;
             }
             case R.id.nav_item_turni: {
+                finish();
                 startActivity(new Intent(PagProfilo.this, PagModificaTurni.class));
                 break;
 
             }
             case R.id.nav_item_entrate: {
+                finish();
                 startActivity(new Intent(PagProfilo.this,  PagEntrate.class));
                 break;
             }
             case R.id.nav_item_menu: {
+                finish();
                 startActivity(new Intent(PagProfilo.this, PagMenu.class));
                 break;
             }
             case R.id.nav_item_calcola_tot: {
+                finish();
                 startActivity(new Intent(PagProfilo.this, PagCalcoloTot.class));
                 break;
             }
@@ -167,6 +173,7 @@ public class PagProfilo extends AppCompatActivity implements  NavigationView.OnN
                 break;
             }
             case R.id.nav_item_info: {
+                finish();
                 startActivity(new Intent(PagProfilo.this, PagInfo.class));
                 break;
             }

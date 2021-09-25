@@ -204,11 +204,13 @@ public class PagModificaTurni extends AppCompatActivity implements NavigationVie
         switch (item.getItemId()) {
 
             case R.id.nav_item_home: {
+                finish();
                 startActivity(new Intent(PagModificaTurni.this, HomePage.class));
                 break;
 
             }
             case R.id.nav_item_destinazioni: {
+                finish();
                 startActivity(new Intent(PagModificaTurni.this, PagDestinazioni.class));
                 break;
             }
@@ -217,22 +219,27 @@ public class PagModificaTurni extends AppCompatActivity implements NavigationVie
 
             }
             case R.id.nav_item_entrate: {
+                finish();
                 startActivity(new Intent(PagModificaTurni.this,  PagEntrate.class));
                 break;
             }
             case R.id.nav_item_menu: {
+                finish();
                 startActivity(new Intent(PagModificaTurni.this, PagMenu.class));
                 break;
             }
             case R.id.nav_item_calcola_tot: {
+                finish();
                 startActivity(new Intent(PagModificaTurni.this, PagCalcoloTot.class));
                 break;
             }
             case R.id.nav_item_profilo: {
+                finish();
                 startActivity(new Intent(PagModificaTurni.this, PagProfilo.class));
                 break;
             }
             case R.id.nav_item_info: {
+                finish();
                 startActivity(new Intent(PagModificaTurni.this, PagInfo.class));
                 break;
             }

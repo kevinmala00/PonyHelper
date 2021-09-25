@@ -62,36 +62,41 @@ public class PagMenu extends AppCompatActivity implements  NavigationView.OnNavi
         switch (item.getItemId()) {
 
             case R.id.nav_item_home: {
+                finish();
                 startActivity(new Intent(PagMenu.this, HomePage.class));
                 break;
 
             }
             case R.id.nav_item_destinazioni: {
+                finish();
                 startActivity(new Intent(PagMenu.this, PagDestinazioni.class));
                 break;
             }
             case R.id.nav_item_turni: {
-
+                finish();
                 startActivity(new Intent(PagMenu.this, PagModificaTurni.class));
                 break;
             }
             case R.id.nav_item_entrate: {
+                finish();
                 startActivity(new Intent(PagMenu.this,  PagEntrate.class));
                 break;
             }
             case R.id.nav_item_menu: {
-
                 break;
             }
             case R.id.nav_item_calcola_tot: {
+                finish();
                 startActivity(new Intent(PagMenu.this, PagCalcoloTot.class));
                 break;
             }
             case R.id.nav_item_profilo: {
+                finish();
                 startActivity(new Intent(PagMenu.this, PagProfilo.class));
                 break;
             }
             case R.id.nav_item_info: {
+                finish();
                 startActivity(new Intent(PagMenu.this, PagInfo.class));
                 break;
             }

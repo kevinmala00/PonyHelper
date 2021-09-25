@@ -65,32 +65,39 @@ public class PagInfo extends AppCompatActivity implements NavigationView.OnNavig
 
             case R.id.nav_item_home: {
                 startActivity(new Intent(PagInfo.this, HomePage.class));
+                finish();
                 break;
 
             }
             case R.id.nav_item_destinazioni: {
                 startActivity(new Intent(PagInfo.this, PagDestinazioni.class));
+                finish();
                 break;
             }
             case R.id.nav_item_turni: {
 
                 startActivity(new Intent(PagInfo.this, PagModificaTurni.class));
+                finish();
                 break;
             }
             case R.id.nav_item_entrate: {
                 startActivity(new Intent(PagInfo.this,  PagEntrate.class));
+                finish();
                 break;
             }
             case R.id.nav_item_menu: {
                 startActivity(new Intent(PagInfo.this, PagMenu.class));
+                finish();
                 break;
             }
             case R.id.nav_item_calcola_tot: {
                 startActivity(new Intent(PagInfo.this, PagCalcoloTot.class));
+                finish();
                 break;
             }
             case R.id.nav_item_profilo: {
                 startActivity(new Intent(PagInfo.this, PagProfilo.class));
+                finish();
                 break;
             }
             case R.id.nav_item_info: {

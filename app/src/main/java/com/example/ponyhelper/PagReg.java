@@ -177,41 +177,47 @@ public class PagReg extends AppCompatActivity implements  NavigationView.OnNavig
         switch (item.getItemId()) {
 
             case R.id.nav_item_home: {
+                finish();
                 startActivity(new Intent(PagReg.this, HomePage.class));
                 break;
 
             }
             case R.id.nav_item_destinazioni: {
+                finish();
                 startActivity(new Intent(PagReg.this, PagDestinazioni.class));
                 break;
             }
             case R.id.nav_item_turni: {
-
+                finish();
                 startActivity(new Intent(PagReg.this, PagModificaTurni.class));
                 break;
             }
             case R.id.nav_item_entrate: {
+                finish();
                 startActivity(new Intent(PagReg.this,  PagEntrate.class));
                 break;
             }
             case R.id.nav_item_menu: {
+                finish();
                 startActivity(new Intent(PagReg.this, PagMenu.class));
                 break;
             }
             case R.id.nav_item_calcola_tot: {
+                finish();
                 startActivity(new Intent(PagReg.this, PagCalcoloTot.class));
                 break;
             }
             case R.id.nav_item_profilo: {
+                finish();
                 startActivity(new Intent(PagReg.this, PagProfilo.class));
                 break;
             }
             case R.id.nav_item_info: {
+                finish();
                 startActivity(new Intent(PagReg.this, PagInfo.class));
                 break;
             }
             case R.id.nav_item_logout:{
-
                 UtilClass.logout(PagReg.this, account);
                 break;
             }

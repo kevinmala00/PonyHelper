@@ -145,36 +145,43 @@ public class PagLogin extends AppCompatActivity implements NavigationView.OnNavi
         switch (item.getItemId()) {
 
             case R.id.nav_item_home: {
+                finish();
                 startActivity(new Intent(PagLogin.this, HomePage.class));
                 break;
 
             }
             case R.id.nav_item_destinazioni: {
+                finish();
                 startActivity(new Intent(PagLogin.this, PagDestinazioni.class));
                 break;
             }
             case R.id.nav_item_turni: {
-
+                finish();
                 startActivity(new Intent(PagLogin.this, PagModificaTurni.class));
                 break;
             }
             case R.id.nav_item_entrate: {
+                finish();
                 startActivity(new Intent(PagLogin.this,  PagEntrate.class));
                 break;
             }
             case R.id.nav_item_menu: {
+                finish();
                 startActivity(new Intent(PagLogin.this, PagMenu.class));
                 break;
             }
             case R.id.nav_item_calcola_tot: {
+                finish();
                 startActivity(new Intent(PagLogin.this, PagCalcoloTot.class));
                 break;
             }
             case R.id.nav_item_profilo: {
+                finish();
                 startActivity(new Intent(PagLogin.this, PagProfilo.class));
                 break;
             }
             case R.id.nav_item_info: {
+                finish();
                 startActivity(new Intent(PagLogin.this, PagInfo.class));
                 break;
             }
