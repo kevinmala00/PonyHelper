@@ -7,6 +7,9 @@ import android.os.Handler;
 
 import androidx.annotation.Nullable;
 
+/**
+ * activity introdutticva per la durata di 2 secondi prima dell'apertura della home page
+ */
 public class IntroPage extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -20,7 +23,7 @@ public class IntroPage extends Activity {
                 finish();
                 startActivity(intent);
             }
-        }, 2000);   //5 seconds
+        }, 2000);   //2 seconds
 
 
     }
