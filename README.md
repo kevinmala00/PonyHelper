@@ -14,7 +14,7 @@ Repository contenente il progetto relativo all'esame del corso di OOP a.a. 2020/
 * [SQLite]
 
 ## COSE DA FARE
-* eliminare bug logout in assenza di account attivo
+* ~~eliminare bug logout in assenza di account attivo
 * pagina menu
 * pagina calcolo totale
 * aggiungere finish activity quando si cambia pagina dal nav drawer
