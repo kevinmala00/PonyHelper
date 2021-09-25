@@ -22,7 +22,7 @@ Repository contenente il progetto relativo all'esame del corso di OOP a.a. 2020/
 * migliorare parte grafica popup aggiungi entrate
 * aggiugnere on click listener nella recyclerview destinazioni
 * aggiugnere on click listener nella recyclerview entrate
-* modificare ricerca destinazioni all'onTextChanger dell'edittext ricerca
+* ~~modificare ricerca destinazioni all'onTextChanger dell'edittext ricerca~~
 * modificare ricerca entrate all'onTextChanger dell'edittext ricerca
 * migliorare parte grafica inserimento turni
 * creare presentazione powerpoint con funzionamento app da inserire nella pagina info, inserire contattaci con link alla mail
