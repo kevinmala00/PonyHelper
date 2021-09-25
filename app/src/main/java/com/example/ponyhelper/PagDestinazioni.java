@@ -9,6 +9,8 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,8 +49,8 @@ import java.util.List;
 
 public class PagDestinazioni extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, LocationListener {
     private static final int PERMISSION_FINE_LOCATION = 99;
-    PonyAccount account;
-    DbHelper dbhelper;
+    private PonyAccount account;
+    private DbHelper dbhelper;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     ActionBarDrawerToggle toggle;
@@ -61,21 +63,20 @@ public class PagDestinazioni extends AppCompatActivity implements NavigationView
 
     boolean check = true;
 
+
     static final int DEFAULT_UPDATE_INTERVAL = 10;
     static final int FAST_UPDATE_INTERVAL = 3;
 
     //riferimentio agli elemnti grafici presenti nel poPuP
-    EditText etIndirizzo, etCivico, etCitta, etCap, etProvincia, etNote, etMancia;
-    TextView tvLatitudine, tvLongitudine;
-    ImageButton ibRefreshGps;
-    Button bSalva;
+    private EditText etIndirizzo, etCivico, etCitta, etCap, etProvincia, etNote, etMancia;
+    private TextView tvLatitudine, tvLongitudine;
+    private ImageButton ibRefreshGps;
+    private Button bSalva;
 
     //riferimenti agli elementi grafici dell'activity
-    TextView tvNavUsername, tvNavEmail;
-    ImageButton bAddDestinazione, bSearchDestinazione;
-    EditText etSearchDestinazione;
-    View navHeader;
-    RecyclerView rvDestinazioni;
+    private TextView tvNavUsername, tvNavEmail;
+    private ImageButton bAddDestinazione, bSearchDestinazione;
+    private EditText etSearchDestinazione;
 
     //google API per i servizi di geolocalizzazione
     FusedLocationProviderClient fusedLocationProviderClient;
@@ -84,7 +85,7 @@ public class PagDestinazioni extends AppCompatActivity implements NavigationView
     LocationRequest locationRequest;
 
     //gestore del popUp modifica destinazione
-    Dialog dialogModDest;
+    private Dialog dialogModDest;
 
 
     @Override
@@ -118,13 +119,13 @@ public class PagDestinazioni extends AppCompatActivity implements NavigationView
         locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
         //ISTANZIO LE VARIE VIEW
-        navHeader = navigationView.getHeaderView(0);
+        View navHeader = navigationView.getHeaderView(0);
         tvNavUsername = navHeader.findViewById(R.id.tv_usernameNavMenu);
         tvNavEmail = navHeader.findViewById(R.id.tv_navEmail);
         bAddDestinazione = findViewById(R.id.b_aggiunginDestinazione);
         etSearchDestinazione = findViewById(R.id.et_searchDestinazioni);
         bSearchDestinazione=findViewById(R.id.b_searcheDestinazione);
-        rvDestinazioni=findViewById(R.id.rv_destinazioni);
+        RecyclerView rvDestinazioni = findViewById(R.id.rv_destinazioni);
 
 
         dbhelper = new DbHelper(PagDestinazioni.this);
@@ -155,6 +156,27 @@ public class PagDestinazioni extends AppCompatActivity implements NavigationView
                 e.printStackTrace();
             }
 
+            etSearchDestinazione.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    try {
+                        findDestination();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
+
         } catch (Exception e) {
             Toast.makeText(PagDestinazioni.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
@@ -165,16 +187,14 @@ public class PagDestinazioni extends AppCompatActivity implements NavigationView
         @Override
         public void onClick(View v) {
 
-            String indirizzo = String.valueOf(etSearchDestinazione.getText());
-            if(indirizzo.trim().length()!=0){
-                try{
-                    List<Destinazione> searchListDestinazione = dbhelper.searchDestinazione(account, indirizzo);
-                    updateDestList(searchListDestinazione);
-                }catch (Exception e){
-                    e.printStackTrace();
-                    Toast.makeText(PagDestinazioni.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
+            try {
+                findDestination();
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(PagDestinazioni.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
+
+
         }
     };
 
@@ -337,7 +357,23 @@ public class PagDestinazioni extends AppCompatActivity implements NavigationView
         }
     };
 
-    private void removeDestToList(int removeIndex){
+
+    private void findDestination() throws Exception{
+        String indirizzo = String.valueOf(etSearchDestinazione.getText());
+        if(indirizzo.length()!=0){
+
+            List<Destinazione> searchListDestinazione = dbhelper.searchDestinazione(account, indirizzo);
+            updateDestList(searchListDestinazione);
+
+        }else{
+            List<Destinazione> searchListDestinazione = dbhelper.getAllDestinazioni(account);
+            updateDestList(searchListDestinazione);
+        }
+    }
+
+
+
+    private void removeSingleDestToList(int removeIndex){
         listDestinazione.remove(removeIndex);
         destinazioniAdapter.notifyItemRemoved(removeIndex);
     }
@@ -350,6 +386,15 @@ public class PagDestinazioni extends AppCompatActivity implements NavigationView
     private void updateSingleDestToList(int updateIndex, Destinazione newDest) {
         listDestinazione.set(updateIndex, newDest);
         destinazioniAdapter.notifyItemChanged(updateIndex);
+    }
+    /**
+     * metodo per aggiornare la lista contenente i dati della recyclerview, e informare l'adapter
+     * @param newListDestinazione nuova lista contenente i nuovi dati
+     */
+    public void updateDestList(List<Destinazione> newListDestinazione){
+        listDestinazione.clear();
+        listDestinazione.addAll(newListDestinazione);
+        destinazioniAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -368,15 +413,7 @@ public class PagDestinazioni extends AppCompatActivity implements NavigationView
         }
     }
 
-    /**
-     * metodo per aggiornare la lista contenente i dati della recyclerview, e informare l'adapter
-     * @param newListDestinazione nuova lista contenente i nuovi dati
-     */
-    public void updateDestList(List<Destinazione> newListDestinazione){
-        listDestinazione.clear();
-        listDestinazione.addAll(newListDestinazione);
-        destinazioniAdapter.notifyDataSetChanged();
-    }
+
     
     
     private void updateGPS(){
@@ -386,7 +423,7 @@ public class PagDestinazioni extends AppCompatActivity implements NavigationView
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
 
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED){
-            //l'utente ha fornito il permesso alla
+            //l'utente ha fornito il permesso
             fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
                 @Override
                 public void onSuccess(Location location) {

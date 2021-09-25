@@ -216,7 +216,7 @@ public class DbString {
 
     public static String checkPresenzaTurno = "SELECT EXISTS(SELECT * FROM TURNI WHERE data LIKE ? AND username LIKE ?)";
 
-    public static String selectDestinazione = "SELECT * FROM DESTINAZIONE WHERE username LIKE ? AND indirizzo LIKE ? ORDER BY data_modifica DESC;";
+    public static String selectDestinazione = "SELECT * FROM DESTINAZIONE WHERE username LIKE ? AND indirizzo LIKE \"%?%\" ORDER BY data_modifica DESC;";
 
     public static String selectAllDestinazioni = "SELECT * FROM DESTINAZIONE WHERE username LIKE ? ORDER BY data_modifica DESC;";
 

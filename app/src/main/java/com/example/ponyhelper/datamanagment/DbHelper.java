@@ -577,7 +577,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public List<Destinazione> searchDestinazione(PonyAccount account, String indirizzo) throws Exception {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor rs = db.rawQuery(DbString.selectDestinazione, new String[]{account.getUsername(), indirizzo});
+        Cursor rs = db.rawQuery("SELECT * FROM DESTINAZIONE WHERE username LIKE ? AND indirizzo LIKE \'%"+indirizzo+"%\' ORDER BY data_modifica DESC;", new String[]{account.getUsername()});
         List<Destinazione> returnList = new ArrayList<>();
         if(rs.getCount()>0){
             rs.moveToFirst();

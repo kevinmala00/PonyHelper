@@ -33,14 +33,23 @@ import java.util.Locale;
 
 
 public class HomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    PonyAccount account;
-    DbHelper dbhelper;
-    List<Turno> turniSettimanali;
-
+    private PonyAccount account;
+    private DbHelper dbhelper;
+    private List<Turno> turniSettimanali;
+    private List<Turno> newTurniSettimanali;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     ActionBarDrawerToggle toggle;
     NavigationView navigationView;
+
+    RecyclerView rvTurniSettimanali;
+    View headerView;
+    TextView tvNavUsername, tvNavEmail, tvDurataSettimana, tvMeseAnno, tvEntrateMensili;
+    TurniAdapter turniAdapter;
+
+    String mese = LocalDate.now().getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault());
+    int anno = LocalDate.now().getYear();
+    String stringMeseAnno = mese + "\t\t" + anno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,20 +80,18 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
         //INIZIALIZZO LE VARIE VIEW
         //recycler view
-        RecyclerView rvTurniSettimanali = findViewById(R.id.rv_turnisettimanali);
+        rvTurniSettimanali = findViewById(R.id.rv_turnisettimanali);
         //view del navigationHeader, tv username e email presenti in esso
-        View headerView = navigationView.getHeaderView(0);
-        TextView tvNavUsername = headerView.findViewById(R.id.tv_usernameNavMenu);
-        TextView tvNavEmail = headerView.findViewById(R.id.tv_navEmail);
-        TextView tvDurataSettimana = findViewById(R.id.tv_durataSettimana);
-        TextView tvMeseAnno = findViewById(R.id.tv_meseanno);
-        TextView tvEntrateMensili = findViewById(R.id.tv_entratemensili);
+         headerView = navigationView.getHeaderView(0);
+        tvNavUsername = headerView.findViewById(R.id.tv_usernameNavMenu);
+        tvNavEmail = headerView.findViewById(R.id.tv_navEmail);
+        tvDurataSettimana = findViewById(R.id.tv_durataSettimana);
+        tvMeseAnno = findViewById(R.id.tv_meseanno);
+        tvEntrateMensili = findViewById(R.id.tv_entratemensili);
 
         //SETTO IL TESTO DELLE VARIE TEXTVIEW
         //meseanno con il mese e anno  corrente
-        String mese = LocalDate.now().getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault());
-        int anno = LocalDate.now().getYear();
-        String stringMeseAnno = mese + "\t\t" + anno;
+
         tvMeseAnno.setText(stringMeseAnno);
 
         //la durata della settimana partendo dal primo giorno di questa settimana fino all'ultimo
@@ -111,7 +118,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                         UtilClass.getDayOfDataWeek(LocalDate.now(), DayOfWeek.SUNDAY));
 
                 //popolo la recycler view con la lista dei turni settimanali
-                TurniAdapter turniAdapter = new TurniAdapter(turniSettimanali);
+                turniAdapter = new TurniAdapter(turniSettimanali);
                 rvTurniSettimanali.setAdapter(turniAdapter);
                 rvTurniSettimanali.setLayoutManager(new LinearLayoutManager(this));
             }catch (Exception e){
@@ -131,6 +138,43 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        try {
+            //otennego i dati dell'account attivo
+            account = dbhelper.getActiveAccount();
+
+            //setto le text view account e email ne navigation manu con quelle correnti
+            tvNavUsername.setText(account.getUsername());
+            tvNavEmail.setText(account.getEmail());
+
+            try {
+            //ottengo la lista dei turni settimanali
+            newTurniSettimanali = dbhelper.getTurniFromInterval(account.getUsername(),
+                    UtilClass.getDayOfDataWeek(LocalDate.now(), DayOfWeek.MONDAY),
+                    UtilClass.getDayOfDataWeek(LocalDate.now(), DayOfWeek.SUNDAY));
+
+            //popolo la recycler view con la lista dei turni settimanali
+            updateDestinazioniList(newTurniSettimanali);
+            }catch (Exception e){
+                Toast.makeText(HomePage.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+            //totmensile con i ricavi netti mensili
+            String entrateMensili = "ENTRATE MENSILI:\t\t" + dbhelper.getTotMensile(stringMeseAnno, account.getUsername()) + "\t\t€";
+            tvEntrateMensili.setText(entrateMensili);
+
+        } catch (Exception e) {
+            Toast.makeText(HomePage.this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    private void updateDestinazioniList(List<Turno> newTurniList){
+        turniSettimanali.clear();
+        turniSettimanali.addAll(newTurniList);
+        turniAdapter.notifyDataSetChanged();
+    }
 
     /**
      * Called when an item in the navigation menu is selected.
