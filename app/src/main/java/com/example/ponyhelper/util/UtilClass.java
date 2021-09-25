@@ -188,6 +188,10 @@ public class UtilClass {
      */
     public static void logout(Activity activity, PonyAccount account){
         DbHelper dbhelper = new DbHelper(activity);
+        if(account==null){
+            Toast.makeText(activity, "Non esiste alcun account attivo. impossibile effettuare il logout", Toast.LENGTH_SHORT).show();
+            return;
+        }
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle("LOGOUT");
         builder.setMessage("Sei sicuro di voler effettuare il logout?");
