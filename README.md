@@ -13,19 +13,16 @@ Repository contenente il progetto relativo all'esame del corso di OOP a.a. 2020/
 * [INTELLIJ](https://www.jetbrains.com/idea/download/#section=windows)
 * [SQLite]
 
-## INFO GENERALI
-
-
-## FUNZIONALITA'
-	
-### Accesso
-#### Sign in
-
-#### Log in 
-
-
-
-	
-### Funzionalità aggiuntive
-* software di calcolo del prezzo, utilizzato nell'inserimento degli ordini e come funzionalità da pizzeria e fattorini	
-* *[opzionale] gestione del fatturato con rappresentazione grafica dei dati*
+## COSE DA FARE
+* eliminare bug logout in assenza di account attivo
+* pagina menu
+* pagina calcolo totale
+* aggiungere finish activity quando si cambia pagina dal nav drawer
+* migliorare parte grafica intropage
+* migliorare parte grafica popup aggiungi entrate
+* aggiugnere on click listener nella recyclerview destinazioni
+* aggiugnere on click listener nella recyclerview entrate
+* modificare ricerca destinazioni all'onTextChanger dell'edittext ricerca
+* modificare ricerca entrate all'onTextChanger dell'edittext ricerca
+* migliorare parte grafica inserimento turni
+* creare presentazione powerpoint con funzionamento app da inserire nella pagina info, inserire contattaci con link alla mail
