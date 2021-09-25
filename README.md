@@ -17,7 +17,7 @@ Repository contenente il progetto relativo all'esame del corso di OOP a.a. 2020/
 * ~~eliminare bug logout in assenza di account attivo~~
 * pagina menu
 * pagina calcolo totale
-* aggiungere finish activity quando si cambia pagina dal nav drawer
+* ~~aggiungere finish activity quando si cambia pagina dal nav drawer~~
 * migliorare parte grafica intropage
 * migliorare parte grafica popup aggiungi entrate
 * aggiugnere on click listener nella recyclerview destinazioni
