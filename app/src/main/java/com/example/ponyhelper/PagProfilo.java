@@ -138,8 +138,11 @@ public class PagProfilo extends AppCompatActivity implements  NavigationView.OnN
 
             case R.id.nav_item_home: {
                 finish();
-                startActivity(new Intent(PagProfilo.this, HomePage.class));
+                Intent openMainActivity = new Intent(PagProfilo.this, HomePage.class);
+                openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityIfNeeded(openMainActivity, 0);
                 break;
+
 
             }
             case R.id.nav_item_destinazioni: {

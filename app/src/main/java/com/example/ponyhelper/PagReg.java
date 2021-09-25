@@ -178,8 +178,11 @@ public class PagReg extends AppCompatActivity implements  NavigationView.OnNavig
 
             case R.id.nav_item_home: {
                 finish();
-                startActivity(new Intent(PagReg.this, HomePage.class));
+                Intent openMainActivity = new Intent(PagReg.this, HomePage.class);
+                openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityIfNeeded(openMainActivity, 0);
                 break;
+
 
             }
             case R.id.nav_item_destinazioni: {

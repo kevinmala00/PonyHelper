@@ -425,7 +425,9 @@ public class PagDestinazioni extends AppCompatActivity implements NavigationView
 
             case R.id.nav_item_home: {
                 finish();
-                startActivity(new Intent(PagDestinazioni.this, HomePage.class));
+                Intent openMainActivity = new Intent(PagDestinazioni.this, HomePage.class);
+                openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityIfNeeded(openMainActivity, 0);
                 break;
 
             }

@@ -64,40 +64,41 @@ public class PagInfo extends AppCompatActivity implements NavigationView.OnNavig
         switch (item.getItemId()) {
 
             case R.id.nav_item_home: {
-                startActivity(new Intent(PagInfo.this, HomePage.class));
                 finish();
+                Intent openMainActivity = new Intent(PagInfo.this, HomePage.class);
+                openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityIfNeeded(openMainActivity, 0);
                 break;
 
             }
             case R.id.nav_item_destinazioni: {
-                startActivity(new Intent(PagInfo.this, PagDestinazioni.class));
                 finish();
+                startActivity(new Intent(PagInfo.this, PagDestinazioni.class));
                 break;
             }
             case R.id.nav_item_turni: {
-
-                startActivity(new Intent(PagInfo.this, PagModificaTurni.class));
                 finish();
+                startActivity(new Intent(PagInfo.this, PagModificaTurni.class));
                 break;
             }
             case R.id.nav_item_entrate: {
-                startActivity(new Intent(PagInfo.this,  PagEntrate.class));
                 finish();
+                startActivity(new Intent(PagInfo.this,  PagEntrate.class));
                 break;
             }
             case R.id.nav_item_menu: {
-                startActivity(new Intent(PagInfo.this, PagMenu.class));
                 finish();
+                startActivity(new Intent(PagInfo.this, PagMenu.class));
                 break;
             }
             case R.id.nav_item_calcola_tot: {
-                startActivity(new Intent(PagInfo.this, PagCalcoloTot.class));
                 finish();
+                startActivity(new Intent(PagInfo.this, PagCalcoloTot.class));
                 break;
             }
             case R.id.nav_item_profilo: {
-                startActivity(new Intent(PagInfo.this, PagProfilo.class));
                 finish();
+                startActivity(new Intent(PagInfo.this, PagProfilo.class));
                 break;
             }
             case R.id.nav_item_info: {
