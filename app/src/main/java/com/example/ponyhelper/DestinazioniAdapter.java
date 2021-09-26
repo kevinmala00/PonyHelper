@@ -18,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class DestinazioniAdapter extends RecyclerView.Adapter<DestinazioniAdapter.ViewHolder> {
+    private static ClickListener clickListener;
     private  Context mContext;
     private List<Destinazione> mlistDest;
 
@@ -71,11 +72,8 @@ public class DestinazioniAdapter extends RecyclerView.Adapter<DestinazioniAdapte
                 if (intent.resolveActivity(mContext.getPackageManager()) != null) {
                     mContext.startActivity(intent);
                 }
-
-
             }
         });
-
 
     }
 
@@ -84,7 +82,10 @@ public class DestinazioniAdapter extends RecyclerView.Adapter<DestinazioniAdapte
         return mlistDest.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+
+
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         public TextView tvIndirizzoCompleto;
         public TextView tvDataOraUltimaMod;
         public TextView tvMancia;
@@ -99,8 +100,28 @@ public class DestinazioniAdapter extends RecyclerView.Adapter<DestinazioniAdapte
             tvMancia=itemView.findViewById(R.id.tv_manciadestinazione);
             tvNote=itemView.findViewById(R.id.tv_notedestinazione);
             bPosition=itemView.findViewById(R.id.b_openMaps);
-
-
         }
+
+        @Override
+        public void onClick(View v) {
+            clickListener.onItemClick(getAdapterPosition(), v);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            clickListener.onItemLongClick(getAdapterPosition(), v);
+            return false;
+        }
+
+
+    }
+
+    public void setOnItemClickListener(ClickListener clickListener) {
+        DestinazioniAdapter.clickListener = clickListener;
+    }
+
+    public interface ClickListener {
+        void onItemClick(int position, View v);
+        void onItemLongClick(int position, View v);
     }
 }
