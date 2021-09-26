@@ -568,13 +568,12 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * permete di cercare all'interno del database una o piu destinazioni
+     * permette di cercare all'interno del database una o piu destinazioni
      * @param account account attivo
      * @param indirizzo indirizzo ricercato dall'utente
      * @return ritorna la lista delle destinazioni corrispondenti all'interno del database
      * @throws Exception in caso di errore o di mancanza di corrispondenza
      */
-
     public List<Destinazione> searchDestinazione(PonyAccount account, String indirizzo) throws Exception {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor rs = db.rawQuery("SELECT * FROM DESTINAZIONE WHERE username LIKE ? AND indirizzo LIKE \'%"+indirizzo+"%\' ORDER BY data_modifica DESC;", new String[]{account.getUsername()});
