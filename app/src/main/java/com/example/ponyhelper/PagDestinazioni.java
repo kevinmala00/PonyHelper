@@ -11,7 +11,6 @@ import android.location.LocationListener;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -31,9 +30,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ponyhelper.body.Destinazione;
-import com.example.ponyhelper.body.Indirizzo;
-import com.example.ponyhelper.body.PonyAccount;
+import com.example.ponyhelper.body.*;
 import com.example.ponyhelper.datamanagment.DbHelper;
 import com.example.ponyhelper.util.UtilClass;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -338,7 +335,7 @@ public class PagDestinazioni extends AppCompatActivity implements NavigationView
                         //altrimenti salvo la nuova destinazione e comunico il cambiamento all'adapter
                         dbhelper.salvaDestinazione(account, mDestinazione);
                         Toast.makeText(PagDestinazioni.this, "Destinazione aggiunta con successo", Toast.LENGTH_SHORT).show();
-                        addDestToList(mDestinazione);
+                        addSingleDestToList(mDestinazione);
                     }
 
                     dialogModDest.dismiss();
@@ -358,6 +355,10 @@ public class PagDestinazioni extends AppCompatActivity implements NavigationView
     };
 
 
+    /**
+     * metodo per ricercare una destinazione all'interno del database
+     * @throws Exception derivanti dal metodo searchDestinazione
+     */
     private void findDestination() throws Exception{
         String indirizzo = String.valueOf(etSearchDestinazione.getText());
         if(indirizzo.length()!=0){
@@ -372,23 +373,35 @@ public class PagDestinazioni extends AppCompatActivity implements NavigationView
     }
 
 
-
+    /**
+     * metodo per rimuovere un singolo elelmento dalla lista e informare l'adapter della recycler view in modod che ricarichi la recyclerview
+     * @param removeIndex
+     */
     private void removeSingleDestToList(int removeIndex){
         listDestinazione.remove(removeIndex);
         destinazioniAdapter.notifyItemRemoved(removeIndex);
     }
-    
-    private void addDestToList(Destinazione newDest) {
+
+    /**
+     * metodo per aggiungere un unico elemento alla lista e informare l'adapter della recycler view in modod che ricarichi la recyclerview, aggiunge tale elemento in cima alla lista in posizione '0'
+     * @param newDest nuova destinazione
+     */
+    private void addSingleDestToList(Destinazione newDest) {
         listDestinazione.add(0, newDest);
         destinazioniAdapter.notifyItemInserted(0);
     }
 
+    /**
+     * metodo per aggiornare un singolo elemento della lista e informare l'adapter della recycler view in modod che ricarichi la recyclerview
+     * @param updateIndex indice dell'elemento
+     * @param newDest nuovo elemento
+     */
     private void updateSingleDestToList(int updateIndex, Destinazione newDest) {
         listDestinazione.set(updateIndex, newDest);
         destinazioniAdapter.notifyItemChanged(updateIndex);
     }
     /**
-     * metodo per aggiornare la lista contenente i dati della recyclerview, e informare l'adapter
+     * metodo per aggiornare la lista contenente i dati della recyclerview, e e informare l'adapter della recycler view in modod che ricarichi la recyclerview
      * @param newListDestinazione nuova lista contenente i nuovi dati
      */
     public void updateDestList(List<Destinazione> newListDestinazione){
@@ -397,6 +410,7 @@ public class PagDestinazioni extends AppCompatActivity implements NavigationView
         destinazioniAdapter.notifyDataSetChanged();
     }
 
+    //metodo per verificare il permesso all'accesso della posizione
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
