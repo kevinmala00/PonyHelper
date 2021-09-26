@@ -142,12 +142,14 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     protected void onResume() {
         super.onResume();
         try {
+
             //otennego i dati dell'account attivo
             account = dbhelper.getActiveAccount();
 
             //setto le text view account e email ne navigation manu con quelle correnti
             tvNavUsername.setText(account.getUsername());
             tvNavEmail.setText(account.getEmail());
+            navigationView.setCheckedItem(R.id.nav_item_home);
 
             try {
             //ottengo la lista dei turni settimanali
