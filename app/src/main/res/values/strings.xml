@@ -111,6 +111,21 @@
         <item>23:30</item>
     </string-array>
 
+    <string-array name="numeroMesi">
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+
     <string-array name="giorni">
         <item>Lunedì</item>
         <item>Martedì</item>
@@ -258,4 +273,8 @@
     <string name="longitudine">Longitudine</string>
     <string name="salva">Salva</string>
     <string name="content_description_buttn_refresch_mod_dest">bottone che refresha la localizzazione gps</string>
+    <string name="content_description_binfodestinazione">bottone che apre il popupinfo destinazioen</string>
+    <string name="content_description_b_openmaps_destinazione">bottone che apre google maps con l\'indirizzo della destinazione</string>
+    <string name="ultima_modifica">Ultima modifica</string>
+    <string name="info_destinazione">Info destinazione</string>
 </resources>
