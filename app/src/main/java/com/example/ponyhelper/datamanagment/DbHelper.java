@@ -19,8 +19,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * @author kevin
@@ -277,7 +279,26 @@ public class DbHelper extends SQLiteOpenHelper {
 
     //ENTRATE
 
-    public void addNewEntrata(Entrata entrata){
+    public void addNewEntrata(Entrata entrata, String username) throws Exception {
+        Exception e = new Exception("Errori intetni ci scusiamo per il disagio.\nRIPROVARE!");
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("username", username);
+        cv.put("data", UtilClass.localDateToUnixTime(entrata.getData()));
+        cv.put("ora_inizio", entrata.getOraInizio().format(DateTimeFormatter.ofPattern(("HH:mm"))));
+        cv.put("ora_fine", entrata.getOraFine().format(DateTimeFormatter.ofPattern(("HH:mm"))));
+        cv.put("ore_tot", entrata.getOreTot().format(DateTimeFormatter.ofPattern("HH:mm")));
+        cv.put("entrate", entrata.getEntrate());
+        cv.put("mancia", entrata.getMancia());
+        cv.put("km_percorsi", entrata.getKm());
+        cv.put("altro", entrata.getNote());
+        long result = db.insert("ENTRATE", null, cv);
+        db.close();
+        if(result == -1){
+            throw e;
+        }
+
+
 
     }
 
@@ -288,16 +309,14 @@ public class DbHelper extends SQLiteOpenHelper {
      * @return ritorna una lista di entrate ordinate per data
      * @throws Exception "Entrata non presente" genera eccezzioni in caso non ci siano
      */
-    public List<Entrata> getAllEntrateMese(String meseAnno, String username) throws Exception{
+    public List<Entrata> getAllEntrateMese(YearMonth meseAnno, String username) throws Exception{
         List<Entrata> returnList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM yyyy");
-        LocalDate meseAnnoData = LocalDate.parse(meseAnno, formatter);
-        YearMonth yearMonth = YearMonth.of(meseAnnoData.getYear(), meseAnnoData.getMonth());
 
-        long startMonth = UtilClass.localDateToUnixTime(UtilClass.getFirstDayOfMonth(yearMonth));
 
-        long endMonth = UtilClass.localDateToUnixTime(UtilClass.getLastDayOfMonth(yearMonth));
+        long startMonth = UtilClass.localDateToUnixTime(UtilClass.getFirstDayOfMonth(meseAnno));
+
+        long endMonth = UtilClass.localDateToUnixTime(UtilClass.getLastDayOfMonth(meseAnno));
 
         Cursor rs = db.rawQuery(DbString.selectAllEntrateMese, new String[]{username, String.valueOf(startMonth), String.valueOf(endMonth)});
         if(rs.getCount()>0){
@@ -305,14 +324,14 @@ public class DbHelper extends SQLiteOpenHelper {
             rs.moveToFirst();
             do{
                 returnList.add(new Entrata(
-                        UtilClass.unixTimeToLocalDate(rs.getLong(0)),
-                        LocalTime.parse(rs.getString(1)),
+                        UtilClass.unixTimeToLocalDate(rs.getLong(1)),
                         LocalTime.parse(rs.getString(2)),
                         LocalTime.parse(rs.getString(3)),
-                        rs.getDouble(4),
+                        LocalTime.parse(rs.getString(4)),
                         rs.getDouble(5),
                         rs.getDouble(6),
-                        rs.getString(7))
+                        rs.getDouble(7),
+                        rs.getString(8))
                 );
 
             }while (rs.moveToNext());
@@ -411,9 +430,10 @@ public class DbHelper extends SQLiteOpenHelper {
      * @return ritorna un'instanza di costi con i dati del mese selezionato
      * @throws Exception in caso non ci siano costi inseriti nel database
      */
-    public Costo getCostiMensili(String meseAnno, String username) throws Exception {
+    public Costo getCostiMensili(YearMonth meseAnno, String username) throws Exception {
         SQLiteDatabase db=this.getReadableDatabase();
-        Cursor rs= db.rawQuery(DbString.selectCostiMensili, new String[]{username, meseAnno});
+        String stringMeseAnno = meseAnno.format(DateTimeFormatter.ofPattern("MMM yyyy"));
+        Cursor rs= db.rawQuery(DbString.selectCostiMensili, new String[]{username, stringMeseAnno});
         if(rs.getCount()>0){
             return  new Costo(rs.getString(1),
                     rs.getDouble(2),
@@ -432,7 +452,7 @@ public class DbHelper extends SQLiteOpenHelper {
      * @param username username dell'account
      * @return ritorna le entrate mensili nette
      */
-    public double getTotMensile(String meseAnno, String username){
+    public double getTotMensile(YearMonth meseAnno, String username){
         List<Entrata> list;
         double totMensile=0;
         double kmMensili=0;
@@ -568,6 +588,37 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * metodo che ritonra gli anni di cui si possono inserire o modificare entrate
+     * @param username username dell'account atttivo
+     * @return ritorna la lsita dfi integere contente i possibili anni
+     */
+    public List<Integer> getAnniPossibiliFromEntrate(String username){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Integer annoCorr = LocalDate.now().getYear();
+
+        Cursor rs = db.rawQuery("SELECT data FROM ENTRATE WHERE username LIKE ?;", new String[]{username});
+        List<Integer> returnList = new ArrayList<>();
+        if(rs.getCount()>0){
+            rs.moveToFirst();
+            do{
+                Integer anno = UtilClass.unixTimeToLocalDate(rs.getLong(0)).getYear();
+                if(!returnList.contains(anno)){
+                    returnList.add(anno);
+                }
+            }while(rs.moveToNext());
+        }else{
+            rs.close();
+            db.close();
+        }
+
+        if(!returnList.contains(annoCorr)){
+            returnList.add(annoCorr);
+        }
+
+        return returnList;
+    }
+
+    /**
      * permette di cercare all'interno del database una o piu destinazioni
      * @param account account attivo
      * @param indirizzo indirizzo ricercato dall'utente
@@ -576,7 +627,7 @@ public class DbHelper extends SQLiteOpenHelper {
      */
     public List<Destinazione> searchDestinazione(PonyAccount account, String indirizzo) throws Exception {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor rs = db.rawQuery("SELECT * FROM DESTINAZIONE WHERE username LIKE ? AND indirizzo LIKE \'%"+indirizzo+"%\' ORDER BY data_modifica DESC;", new String[]{account.getUsername()});
+        Cursor rs = db.rawQuery("SELECT * FROM DESTINAZIONE WHERE username LIKE ? AND indirizzo LIKE '%"+indirizzo+"%' ORDER BY data_modifica DESC;", new String[]{account.getUsername()});
         List<Destinazione> returnList = new ArrayList<>();
         if(rs.getCount()>0){
             rs.moveToFirst();
