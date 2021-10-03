@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
     android:id="@+id/drawer_layout"
-    tools:context=".PagDestinazioni">
+    tools:context=".destinationManagment.PagDestinazioni">
 
  <LinearLayout
      android:layout_width="match_parent"
@@ -22,7 +22,7 @@
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:padding="10dp">
+      android:paddingHorizontal="15dp">
 
 
    <TextView
@@ -53,14 +53,16 @@
         android:id="@+id/l_lineasearch"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="4dp"
+        android:background="@drawable/rounded_orange"
+        android:backgroundTint="#40ff8800">
 
      <EditText
          android:id="@+id/et_searchDestinazioni"
-         android:layout_width="wrap_content"
+         android:layout_width="0dp"
          android:layout_height="match_parent"
-         android:layout_weight="1.5"
-         android:background="@drawable/rounded_orange"
+         android:layout_weight="3"
          android:hint="@string/indirizzo"
          android:inputType="textPostalAddress"
          android:paddingLeft="4dp"
@@ -75,7 +77,8 @@
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_weight="1"
-         android:background="@android:color/transparent"
+
+         android:background="@drawable/rounded_transparent_light"
          android:contentDescription="@string/contente_description_buttonserchentrata"
          app:srcCompat="@drawable/ic_search"
          tools:ignore="TouchTargetSizeCheck" />
@@ -105,6 +108,7 @@
         android:id="@+id/rv_destinazioni"
         android:layout_width="match_parent"
         android:layout_height="482dp"
+        android:paddingHorizontal="4dp"
         android:layout_weight="1">
 
     </androidx.recyclerview.widget.RecyclerView>
@@ -120,7 +124,9 @@
          android:layout_width="0dp"
          android:layout_height="wrap_content"
          android:layout_weight="1"
-         android:background="@android:color/transparent"
+         android:paddingVertical="4dp"
+         android:layout_marginTop="3dp"
+         android:background="@drawable/rounded_transparent_light"
          android:contentDescription="@string/content_description_bottoneaggiungientrata"
          app:srcCompat="@drawable/ic_add"
          tools:ignore="TouchTargetSizeCheck" />
