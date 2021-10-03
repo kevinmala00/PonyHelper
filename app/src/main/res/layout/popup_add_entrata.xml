@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/rounded_orange"
     android:padding="8dp">
 
@@ -22,183 +22,270 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_mese"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/l_bodyPopUpModEntrata"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_titleModEntrata"
-        android:layout_marginTop="10dp"
-        android:text="Data"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_titleModEntrata" />
+        android:layout_below="@id/tv_titleModEntrata"
+        android:layout_centerHorizontal="true">
 
-    <EditText
-        android:id="@+id/tv_meseModCosti"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_mese"
-        android:layout_marginTop="0dp"
-        android:ems="10"
-        android:foreground="@drawable/rounded_orange"
-        android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_mese" />
+        <TextView
+            android:id="@+id/tv_dataAddEntrata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="Data"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_ora_inizio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_meseModCosti"
-        android:layout_marginTop="8dp"
-        android:text="@string/ora_inizio"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_meseModCosti" />
+        <Spinner
+            android:id="@+id/s_meseDataModEntrata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:entries="@array/numeroMesi"
+            android:foreground="@drawable/rounded_orange"
+            android:padding="4dp"
+            android:spinnerMode="dialog"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_dataAddEntrata" />
 
-    <EditText
-        android:id="@+id/et_costoCarburanteModCosti"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_ora_inizio"
-        android:layout_marginTop="0dp"
-        android:ems="10"
-        android:foreground="@drawable/rounded_orange"
-        android:inputType="time"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_ora_inizio" />
+        <Spinner
+            android:id="@+id/s_giornoDataModEntrata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_dataAddEntrata"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="112dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="5dp"
+            android:layout_toStartOf="@id/s_meseDataModEntrata"
+            android:foreground="@drawable/rounded_orange"
+            android:padding="4dp"
+            android:spinnerMode="dialog"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@id/s_meseDataModEntrata"
+            app:layout_constraintEnd_toStartOf="@id/s_meseDataModEntrata"
+            app:layout_constraintTop_toTopOf="@id/s_meseDataModEntrata" />
 
-    <TextView
-        android:id="@+id/tv_oraFine"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/et_costoCarburanteModCosti"
-        android:layout_marginTop="8dp"
-        android:text="@string/ora_fine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_costoCarburanteModCosti" />
 
-    <EditText
-        android:id="@+id/et_oraFineModEntrata"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_oraFine"
-        android:layout_marginTop="0dp"
-        android:ems="10"
-        android:foreground="@drawable/rounded_orange"
-        android:inputType="time"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_oraFine" />
+        <Spinner
+            android:id="@+id/s_annoDataModEntrata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_dataAddEntrata"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="5dp"
+            android:foreground="@drawable/rounded_orange"
+            android:padding="4dp"
+            android:spinnerMode="dialog"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@id/s_meseDataModEntrata"
+            app:layout_constraintStart_toEndOf="@id/s_meseDataModEntrata"
+            app:layout_constraintTop_toTopOf="@id/s_meseDataModEntrata" />
 
-    <TextView
-        android:id="@+id/tv_oreTot"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/et_oraFineModEntrata"
-        android:layout_marginTop="8dp"
-        android:text="Ore totali"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_oraFineModEntrata" />
 
-    <TextView
-        android:id="@+id/tv_oreTotModEntrata"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_oreTot"
-        android:layout_marginTop="0dp"
-        android:foreground="@drawable/rounded_orange"
-        android:padding="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_oreTot" />
+        <TextView
+            android:id="@+id/tv_ora_inizio"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="@string/ora_inizio"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toStartOf="@+id/separator1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/s_meseDataModEntrata" />
 
-    <TextView
-        android:id="@+id/tv_entrateModEntrata"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_oreTotModEntrata"
-        android:layout_marginTop="8dp"
-        android:text="@string/entrate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_oreTotModEntrata" />
+        <Spinner
+            android:id="@+id/s_oraInizioModEntrata"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_ora_inizio"
+            android:layout_alignStart="@id/tv_ora_inizio"
+            android:layout_marginTop="0dp"
+            android:entries="@array/orari"
+            android:foreground="@drawable/rounded_orange"
+            android:padding="4dp"
+            android:spinnerMode="dialog"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toStartOf="@id/separator1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_ora_inizio" />
 
-    <EditText
-        android:id="@+id/et_entrateModEntrata"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_entrateModEntrata"
-        android:layout_marginTop="0dp"
-        android:ems="10"
-        android:foreground="@drawable/rounded_orange"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_entrateModEntrata" />
 
-    <TextView
-        android:id="@+id/tv_manciaModEntrata"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/et_entrateModEntrata"
-        android:layout_marginTop="8dp"
-        android:text="@string/mancia"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_entrateModEntrata" />
+        <View
+            android:id="@+id/separator1"
+            android:layout_width="10dp"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"
+            app:layout_constraintBottom_toBottomOf="@id/s_oraInizioModEntrata"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/s_oraInizioModEntrata" />
 
-    <EditText
-        android:id="@+id/et_manciaModEntrata"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_manciaModEntrata"
-        android:layout_marginTop="0dp"
-        android:ems="10"
-        android:foreground="@drawable/rounded_orange"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_manciaModEntrata" />
 
-    <TextView
-        android:id="@+id/tv_kmPercorsi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/et_manciaModEntrata"
-        android:layout_marginTop="8dp"
-        android:text="Km percorsi"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_manciaModEntrata" />
+        <TextView
+            android:id="@+id/tv_oraFine"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/s_oraFineModEntrata"
+            android:layout_alignTop="@id/tv_ora_inizio"
+            android:text="@string/ora_fine"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/separator1"
+            app:layout_constraintTop_toTopOf="@id/tv_ora_inizio" />
 
-    <EditText
-        android:id="@+id/et_kmPercorsiModEntrata"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_kmPercorsi"
-        android:layout_marginTop="0dp"
-        android:ems="10"
-        android:foreground="@drawable/rounded_orange"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_kmPercorsi" />
+        <Spinner
+            android:id="@+id/s_oraFineModEntrata"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_oraFine"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="0dp"
+            android:entries="@array/orari"
+            android:foreground="@drawable/rounded_orange"
+            android:padding="4dp"
+            android:spinnerMode="dialog"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_oraFine"
+            app:layout_constraintTop_toBottomOf="@id/tv_oraFine" />
+
+        <TextView
+            android:id="@+id/tv_oreTot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/s_oraFineModEntrata"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="Ore totali"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/s_oraFineModEntrata" />
+
+        <TextView
+            android:id="@+id/tv_oreTotModEntrata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_oreTot"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:foreground="@drawable/rounded_orange"
+            android:padding="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_oreTot" />
+
+        <TextView
+            android:id="@+id/tv_manciaModEntrata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/et_manciaModEntrata"
+            android:layout_marginTop="10dp"
+            android:text="@string/mancia"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_oreTotModEntrata" />
+
+        <EditText
+            android:id="@+id/et_manciaModEntrata"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:ems="10"
+            android:foreground="@drawable/rounded_orange"
+            android:inputType="numberDecimal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_manciaModEntrata" />
+
+        <View
+            android:id="@+id/separator2"
+            android:layout_width="10dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/et_manciaModEntrata"
+            app:layout_constraintEnd_toStartOf="@id/et_manciaModEntrata"
+            app:layout_constraintTop_toTopOf="@id/et_manciaModEntrata" />
+
+        <View
+            android:id="@+id/separator3"
+            android:layout_width="10dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/et_manciaModEntrata"
+            app:layout_constraintStart_toEndOf="@id/et_manciaModEntrata"
+            app:layout_constraintTop_toTopOf="@id/et_manciaModEntrata" />
+
+        <TextView
+            android:id="@+id/tv_entrateModEntrata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_oreTotModEntrata"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="8dp"
+            android:text="@string/entrate"
+            app:layout_constraintEnd_toEndOf="@+id/et_entrateModEntrata"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_oreTotModEntrata" />
+
+        <EditText
+            android:id="@+id/et_entrateModEntrata"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_entrateModEntrata"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="0dp"
+            android:layout_toStartOf="@id/et_manciaModEntrata"
+            android:ems="10"
+            android:foreground="@drawable/rounded_orange"
+            android:inputType="number"
+            app:layout_constraintEnd_toStartOf="@id/separator2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_entrateModEntrata" />
+
+        <TextView
+            android:id="@+id/tv_kmPercorsi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/et_kmPercorsiModEntrata"
+            android:layout_alignTop="@id/tv_entrateModEntrata"
+            android:text="Km percorsi"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/separator3"
+            app:layout_constraintTop_toTopOf="@id/tv_manciaModEntrata" />
+
+        <EditText
+            android:id="@+id/et_kmPercorsiModEntrata"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/et_manciaModEntrata"
+            android:layout_alignBottom="@id/et_manciaModEntrata"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="0dp"
+            android:layout_toEndOf="@id/et_manciaModEntrata"
+            android:ems="10"
+            android:foreground="@drawable/rounded_orange"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/separator3"
+            app:layout_constraintTop_toBottomOf="@+id/tv_kmPercorsi" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <TextView
         android:id="@+id/tv_altro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/et_kmPercorsiModEntrata"
-        android:layout_marginTop="8dp"
-        android:text="Altro"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_kmPercorsiModEntrata" />
+        android:layout_below="@+id/l_bodyPopUpModEntrata"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+        android:text="Altro" />
 
     <EditText
         android:id="@+id/et_altroModEntrata"
@@ -226,5 +313,7 @@
         android:textSize="16sp"
         android:layout_centerHorizontal="true"
          />
+
+
 
 </RelativeLayout>
