@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -14,7 +13,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -24,6 +22,8 @@ import android.widget.Toast;
 import com.example.ponyhelper.body.PonyAccount;
 import com.example.ponyhelper.body.Turno;
 import com.example.ponyhelper.datamanagment.DbHelper;
+import com.example.ponyhelper.destinationManagment.PagDestinazioni;
+import com.example.ponyhelper.entrate.PagEntrate;
 import com.example.ponyhelper.util.UtilClass;
 import com.google.android.material.navigation.NavigationView;
 
@@ -106,7 +106,7 @@ public class PagModificaTurni extends AppCompatActivity implements NavigationVie
         LocalDate giorno=LocalDate.from(monday);
         List<String> giorniSettimana = new ArrayList<>();
         for(int i = 0; i<=6; i++){
-            giorniSettimana.add(giorno.plusDays(i).format(DateTimeFormatter.ofPattern("dd-MM-yy")));
+            giorniSettimana.add(giorno.plusDays(i).format(DateTimeFormatter.ofPattern("dd/MM/yy")));
         }
 
         //CREO E SETTO GLI SPINNER ADAPTER

@@ -1,6 +1,5 @@
 package com.example.ponyhelper;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -10,7 +9,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -21,11 +19,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ponyhelper.body.PonyAccount;
 import com.example.ponyhelper.body.Turno;
 import com.example.ponyhelper.datamanagment.DbHelper;
+import com.example.ponyhelper.destinationManagment.PagDestinazioni;
+import com.example.ponyhelper.entrate.PagEntrate;
 import com.example.ponyhelper.util.UtilClass;
 import com.google.android.material.navigation.NavigationView;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.List;
@@ -47,8 +48,9 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     TextView tvNavUsername, tvNavEmail, tvDurataSettimana, tvMeseAnno, tvEntrateMensili;
     TurniAdapter turniAdapter;
 
-    String mese = LocalDate.now().getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault());
-    int anno = LocalDate.now().getYear();
+    YearMonth meseAnnoCurr = YearMonth.from(LocalDate.now());
+    String mese = meseAnnoCurr.getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault());
+    int anno = meseAnnoCurr.getYear();
     String stringMeseAnno = mese + "\t\t" + anno;
 
     @Override
@@ -105,13 +107,17 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         try {
             //otennego i dati dell'account attivo
             account = dbhelper.getActiveAccount();
-            Toast.makeText(HomePage.this, "Benvenuto " + account.getUsername(), Toast.LENGTH_LONG).show();
+            Toast.makeText(HomePage.this, "Benvenuto " + account.getUsername(), Toast.LENGTH_SHORT).show();
 
             //setto le text view account e email ne navigation manu con quelle correnti
             tvNavUsername.setText(account.getUsername());
             tvNavEmail.setText(account.getEmail());
 
-            try {
+            //totmensile con i ricavi netti mensili
+            String entrateMensili = "ENTRATE MENSILI:\t\t" + dbhelper.getTotMensile(meseAnnoCurr, account.getUsername()) + "\t\t€";
+            tvEntrateMensili.setText(entrateMensili);
+
+
                 //ottengo la lista dei turni settimanali
                 turniSettimanali = dbhelper.getTurniFromInterval(account.getUsername(),
                         UtilClass.getDayOfDataWeek(LocalDate.now(), DayOfWeek.MONDAY),
@@ -121,17 +127,13 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                 turniAdapter = new TurniAdapter(turniSettimanali);
                 rvTurniSettimanali.setAdapter(turniAdapter);
                 rvTurniSettimanali.setLayoutManager(new LinearLayoutManager(this));
-            }catch (Exception e){
-                Toast.makeText(HomePage.this, e.getMessage(), Toast.LENGTH_LONG).show();
-            }
 
-            //totmensile con i ricavi netti mensili
-            String entrateMensili = "ENTRATE MENSILI:\t\t" + dbhelper.getTotMensile(stringMeseAnno, account.getUsername()) + "\t\t€";
-            tvEntrateMensili.setText(entrateMensili);
+
+
 
 
         } catch (Exception e) {
-            Toast.makeText(HomePage.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(HomePage.this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
 
@@ -151,7 +153,11 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             tvNavEmail.setText(account.getEmail());
             navigationView.setCheckedItem(R.id.nav_item_home);
 
-            try {
+            //totmensile con i ricavi netti mensili
+            String entrateMensili = "ENTRATE MENSILI:\t\t" + dbhelper.getTotMensile(meseAnnoCurr, account.getUsername()) + "\t\t€";
+            tvEntrateMensili.setText(entrateMensili);
+
+
             //ottengo la lista dei turni settimanali
             newTurniSettimanali = dbhelper.getTurniFromInterval(account.getUsername(),
                     UtilClass.getDayOfDataWeek(LocalDate.now(), DayOfWeek.MONDAY),
@@ -159,15 +165,11 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
             //popolo la recycler view con la lista dei turni settimanali
             updateDestinazioniList(newTurniSettimanali);
-            }catch (Exception e){
-                Toast.makeText(HomePage.this, e.getMessage(), Toast.LENGTH_LONG).show();
-            }
-            //totmensile con i ricavi netti mensili
-            String entrateMensili = "ENTRATE MENSILI:\t\t" + dbhelper.getTotMensile(stringMeseAnno, account.getUsername()) + "\t\t€";
-            tvEntrateMensili.setText(entrateMensili);
+
+
 
         } catch (Exception e) {
-            Toast.makeText(HomePage.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(HomePage.this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
     }

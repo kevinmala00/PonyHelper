@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
     android:id="@+id/drawer_layout"
-    tools:context=".PagEntrate">
+    tools:context=".entrate.PagEntrate">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -66,7 +66,10 @@
                         android:id="@+id/l_lineasearch"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:padding="4dp"
+                        android:background="@drawable/rounded_orange"
+                        android:backgroundTint="#40ff8800">
 
                         <EditText
                             android:id="@+id/et_searchentrate"
@@ -74,7 +77,6 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1.5"
                             android:autofillHints="data"
-                            android:background="@drawable/rounded_orange"
                             android:hint="@string/search_gg_mm_aaaa"
                             android:inputType="date"
                             android:paddingLeft="4dp"
@@ -89,7 +91,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@android:color/transparent"
+                            android:background="@drawable/rounded_transparent_light"
+                            android:layout_marginStart="2dp"
                             android:contentDescription="@string/contente_description_buttonserchentrata"
                             app:srcCompat="@drawable/ic_search"
                             tools:ignore="TouchTargetSizeCheck" />
@@ -186,8 +189,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@android:color/transparent"
-                            android:contentDescription="@string/content_description_bottoneaggiungientrata"
+                            android:padding="4dp"
+                            android:layout_marginEnd="1.5dp"
+                            android:background="@drawable/rounded_transparent_light"                            android:contentDescription="@string/content_description_bottoneaggiungientrata"
                             app:srcCompat="@drawable/ic_add"
                             tools:ignore="TouchTargetSizeCheck" />
 
@@ -196,8 +200,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@android:color/transparent"
-                            android:contentDescription="@string/content_description_bottonegestiscicosti"
+                            android:padding="4dp"
+                            android:layout_marginStart="1.5dp"
+                            android:background="@drawable/rounded_transparent_light"                            android:contentDescription="@string/content_description_bottonegestiscicosti"
                             app:srcCompat="@drawable/ic_edit"
                             tools:ignore="TouchTargetSizeCheck" />
                     </LinearLayout>
