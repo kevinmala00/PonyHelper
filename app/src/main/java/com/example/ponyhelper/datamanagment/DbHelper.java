@@ -19,10 +19,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
-import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * @author kevin
@@ -75,6 +73,8 @@ public class DbHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
+
+    Exception erroriInterni = new Exception("Errori intetni ci scusiamo per il disagio.\nRIPROVARE!");
 
 
     //REGISTRAZIONE
@@ -237,50 +237,37 @@ public class DbHelper extends SQLiteOpenHelper {
         return account;
     }
 
-    /**
-     * metodo che aggiorna il codice di accesso dell'account apassato nel database e
-     * invia la mail all'email specifica dell'account con il nuovo codice
+     /**
+     * permette di ottenere l'ultimo account attivo sull'app
+     * @return ritorna il ponyaccount con i dati istanziati
+     * @throws Exception in caso di nessuno o piu account attivi
      */
-    public void updateAccessCode(String username) throws Exception{
-        SQLiteDatabase db= this.getWritableDatabase();
-        int newcode=UtilClass.generateAccessCode();
-
-        PonyAccount account = recuperoDatiAccount(username);
-
-        db.execSQL("UPDATE ACCOUNT SET codice_accesso = \"" + newcode +"\" WHERE username LIKE \"" + account.getUsername() + "\";");
-
-        db.close();
-    }
-
-    /**
-     * seleziona tutti gli account presenti nel database
-     * @return ritorna una lista di PonyAccount
-     */
-    public List<PonyAccount> selectAllAccount(){
-        SQLiteDatabase db= this.getWritableDatabase();
-        List<PonyAccount> returnList= new ArrayList<>();
-
-        Cursor rs = db.rawQuery(DbString.SELECT_ALL_ACCOUNT,null);
-
-        if(rs.moveToFirst()){
-            do{
-                String Username=rs.getString(0);
-                String Email=rs.getString(1);
-                String Nome=rs.getString(2);
-                String Cognome=rs.getString(3);
-                PonyAccount pa=new PonyAccount(Username, Email, Nome, Cognome);
-                returnList.add(pa);
-            }while(rs.moveToNext());
+    public PonyAccount getActiveAccount() throws Exception{
+        SQLiteDatabase db=this.getReadableDatabase();
+        db.execSQL(DbString.enableCaseSensitive);
+        Cursor rs=db.rawQuery(DbString.selectActiveAccount, null);
+        if(rs.getCount()>0){
+            rs.moveToFirst();
+            if (rs.getCount()>1){
+                rs.close();
+                db.close();
+                throw new Exception("Piu account attivi!\nEsegui il logout");
+            }
+            return new PonyAccount(
+                    rs.getString(0),
+                    rs.getString(1),
+                    rs.getString(2),
+                    rs.getString(3) );
+        }else{
+            rs.close();
+            db.close();
+            throw new Exception("Nessun account attivo!\nEsegui il login o registrati");
         }
-        rs.close();
-        db.close();
-        return returnList;
     }
 
     //ENTRATE
 
     public void addNewEntrata(Entrata entrata, String username) throws Exception {
-        Exception e = new Exception("Errori intetni ci scusiamo per il disagio.\nRIPROVARE!");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("username", username);
@@ -295,12 +282,82 @@ public class DbHelper extends SQLiteOpenHelper {
         long result = db.insert("ENTRATE", null, cv);
         db.close();
         if(result == -1){
-            throw e;
+            throw erroriInterni;
+        }
+    }
+
+    public int checkPresenzaEntrata(Entrata entrata, String username) throws Exception {
+        int check;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor rs = db.rawQuery("SELECT EXISTS(SELECT * FROM ENTRATE WHERE username LIKE ? AND data = ?);",
+                new String[]{username, String.valueOf(UtilClass.localDateToUnixTime(entrata.getData()))});
+        if(rs.getCount()>0){
+            rs.moveToFirst();
+            check = rs.getInt(0);
+            rs.close();
+            db.close();
+        }else{
+            rs.close();
+            db.close();
+            throw  erroriInterni;
+        }
+        return check;
+    }
+
+    public void updateEntrata(Entrata oldEntrata, Entrata newEntrata, String username) throws Exception{
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues newCv = new ContentValues();
+        newCv.put("username", username);
+        newCv.put("data", UtilClass.localDateToUnixTime(newEntrata.getData()));
+        newCv.put("ora_inizio", newEntrata.getOraInizio().format(DateTimeFormatter.ofPattern(("HH:mm"))));
+        newCv.put("ora_fine", newEntrata.getOraFine().format(DateTimeFormatter.ofPattern(("HH:mm"))));
+        newCv.put("ore_tot", newEntrata.getOreTot().format(DateTimeFormatter.ofPattern("HH:mm")));
+        newCv.put("entrate", newEntrata.getEntrate());
+        newCv.put("mancia", newEntrata.getMancia());
+        newCv.put("km_percorsi", newEntrata.getKm());
+        newCv.put("altro", newEntrata.getNote());
+
+        long result = db.update("ENTRATE", newCv,
+                "username LIKE ? AND data LIKE ?",
+                new String[]{username, String.valueOf(UtilClass.localDateToUnixTime(oldEntrata.getData()))});
+        db.close();
+        if(result!=1){
+            throw erroriInterni;
         }
 
-
-
     }
+
+    /**
+     * metodo che ritonra gli anni di cui si possono inserire o modificare entrate
+     * @param username username dell'account atttivo
+     * @return ritorna la lsita dfi integere contente i possibili anni
+     */
+    public List<Integer> getAnniPossibiliFromEntrate(String username){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Integer annoCorr = LocalDate.now().getYear();
+
+        Cursor rs = db.rawQuery("SELECT data FROM ENTRATE WHERE username LIKE ?;", new String[]{username});
+        List<Integer> returnList = new ArrayList<>();
+        if(rs.getCount()>0){
+            rs.moveToFirst();
+            do{
+                Integer anno = UtilClass.unixTimeToLocalDate(rs.getLong(0)).getYear();
+                if(!returnList.contains(anno)){
+                    returnList.add(anno);
+                }
+            }while(rs.moveToNext());
+        }else{
+            rs.close();
+            db.close();
+        }
+
+        if(!returnList.contains(annoCorr)){
+            returnList.add(annoCorr);
+        }
+
+        return returnList;
+    }
+
 
     /**
      * permette di estrapolare dal database tutte le entrate del mese selezionato,
@@ -340,7 +397,7 @@ public class DbHelper extends SQLiteOpenHelper {
             //cursor vuoto
             rs.close();
             db.close();
-            throw new Exception("Entrata non presente!");
+            throw new Exception("Entrate non presenti!");
         }
 
         return returnList;
@@ -355,7 +412,7 @@ public class DbHelper extends SQLiteOpenHelper {
      * @return ritorna l'entrata ricercata
      * @throws Exception generate in caso di formattazione della stringa non corretta oppure entrata non presente
      */
-    public  Entrata getEntrata(String data, String username) throws Exception{
+    public  Entrata searchEntrata(String data, String username) throws Exception{
         SQLiteDatabase db = this.getReadableDatabase();
 
         //data convertita in LocalDate
@@ -367,14 +424,14 @@ public class DbHelper extends SQLiteOpenHelper {
         if(rs.getCount()>0){
             rs.moveToFirst();
             return new Entrata(
-                    UtilClass.unixTimeToLocalDate(rs.getLong(0)),
-                    LocalTime.parse(rs.getString(1)),
+                    UtilClass.unixTimeToLocalDate(rs.getLong(1)),
                     LocalTime.parse(rs.getString(2)),
                     LocalTime.parse(rs.getString(3)),
-                    rs.getDouble(4),
+                    LocalTime.parse(rs.getString(4)),
                     rs.getDouble(5),
                     rs.getDouble(6),
-                    rs.getString(7)
+                    rs.getDouble(7),
+                    rs.getString(8)
             );
         }else{
             //entrata non presente
@@ -384,42 +441,27 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
-    /**
-     * metodo che permette di ottenere una lista dei turni settimanali
-     * @param username username dell'account
-     * @param start giorno di inizio della settimana da selezionare
-     * @param end giorno di fine della settimana da selezionare
-     * @return ritorna la lista con tutti i turni settimanali
-     * * @throws Exception in caso di assenza di turni
-     */
-    public List<Turno> getTurniFromInterval(String username, LocalDate start, LocalDate end) throws Exception {
+    public  Entrata searchEntrata(long data, String username) throws Exception{
         SQLiteDatabase db = this.getReadableDatabase();
-        List<Turno> returnList = new ArrayList<>();
 
-        long unixTimeStartWeek = UtilClass.localDateToUnixTime(start);
-        long unixTimeEndWeek = UtilClass.localDateToUnixTime(end);
-
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-
-        Cursor rs = db.rawQuery(DbString.selectTurniSettimanali,
-                new String[]{username, String.valueOf(unixTimeStartWeek), String.valueOf(unixTimeEndWeek)});
+        Cursor rs= db.rawQuery(DbString.selectEntrata, new String[]{username, String.valueOf(data)} );
         if(rs.getCount()>0){
             rs.moveToFirst();
-            do{
-                returnList.add(new Turno(
-                        UtilClass.unixTimeToLocalDate(rs.getLong(1)),
-                        LocalTime.parse(rs.getString(2), timeFormatter),
-                        LocalTime.parse(rs.getString(3), timeFormatter))
-                );
-            }while(rs.moveToNext());
-
-            rs.close();
-            db.close();
-            return returnList;
+            return new Entrata(
+                    UtilClass.unixTimeToLocalDate(rs.getLong(1)),
+                    LocalTime.parse(rs.getString(2)),
+                    LocalTime.parse(rs.getString(3)),
+                    LocalTime.parse(rs.getString(4)),
+                    rs.getDouble(5),
+                    rs.getDouble(6),
+                    rs.getDouble(7),
+                    rs.getString(8)
+            );
         }else{
+            //entrata non presente
             rs.close();
             db.close();
-            throw new Exception("Nessun turno presente");
+            throw  new Exception("Entrata non presente!");
         }
     }
 
@@ -460,12 +502,12 @@ public class DbHelper extends SQLiteOpenHelper {
         try {
             list = this.getAllEntrateMese(meseAnno, username);
             if(!list.isEmpty()){
-               for(Entrata e : list){
-                   totMensile+=(e.getEntrate()+e.getMancia());
-                   kmMensili+=e.getKm();
-               }
-               costiMensili = getCostiMensili(meseAnno, username);
-               totMensile-=(kmMensili/costiMensili.getConsumoMedio())*costiMensili.getCostoCarburante();
+                for(Entrata e : list){
+                    totMensile+=(e.getEntrate()+e.getMancia());
+                    kmMensili+=e.getKm();
+                }
+                costiMensili = getCostiMensili(meseAnno, username);
+                totMensile-=(kmMensili/costiMensili.getConsumoMedio())*costiMensili.getCostoCarburante();
             }
             return totMensile;
         } catch (Exception e) {
@@ -474,33 +516,48 @@ public class DbHelper extends SQLiteOpenHelper {
 
     }
 
+
+    //TURNI
+
     /**
-     * permette di ottenere l'ultimo account attivo sull'app
-     * @return ritorna il ponyaccount con i dati istanziati
-     * @throws Exception in caso di nessuno o piu account attivi
+     * metodo che permette di ottenere una lista dei turni settimanali
+     * @param username username dell'account
+     * @param start giorno di inizio della settimana da selezionare
+     * @param end giorno di fine della settimana da selezionare
+     * @return ritorna la lista con tutti i turni settimanali
+     * * @throws Exception in caso di assenza di turni
      */
-    public PonyAccount getActiveAccount() throws Exception{
-        SQLiteDatabase db=this.getReadableDatabase();
-        db.execSQL(DbString.enableCaseSensitive);
-        Cursor rs=db.rawQuery(DbString.selectActiveAccount, null);
+    public List<Turno> getTurniFromInterval(String username, LocalDate start, LocalDate end) throws Exception {
+        SQLiteDatabase db = this.getReadableDatabase();
+        List<Turno> returnList = new ArrayList<>();
+
+        long unixTimeStartWeek = UtilClass.localDateToUnixTime(start);
+        long unixTimeEndWeek = UtilClass.localDateToUnixTime(end);
+
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        Cursor rs = db.rawQuery(DbString.selectTurniSettimanali,
+                new String[]{username, String.valueOf(unixTimeStartWeek), String.valueOf(unixTimeEndWeek)});
         if(rs.getCount()>0){
             rs.moveToFirst();
-            if (rs.getCount()>1){
-                rs.close();
-                db.close();
-                throw new Exception("Piu account attivi!\nEsegui il logout");
-            }
-            return new PonyAccount(
-                    rs.getString(0),
-                    rs.getString(1),
-                    rs.getString(2),
-                    rs.getString(3) );
+            do{
+                returnList.add(new Turno(
+                        UtilClass.unixTimeToLocalDate(rs.getLong(1)),
+                        LocalTime.parse(rs.getString(2), timeFormatter),
+                        LocalTime.parse(rs.getString(3), timeFormatter))
+                );
+            }while(rs.moveToNext());
+
+            rs.close();
+            db.close();
+            return returnList;
         }else{
             rs.close();
             db.close();
-            throw new Exception("Nessun account attivo!\nEsegui il login o registrati");
+            throw new Exception("Nessun turno presente");
         }
     }
+
 
     /**
      * permette prima di cercare all'interno del database se è presente il turno in quella data
@@ -512,8 +569,6 @@ public class DbHelper extends SQLiteOpenHelper {
     public void modificaTurno(PonyAccount account, Turno turno) throws Exception {
         SQLiteDatabase db = this.getWritableDatabase();
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-
-        Exception e = new Exception("Errori interni ci scusiamo per il disagio.\nRIPROVARE!");
         long unixTime = UtilClass.localDateToUnixTime(turno.getData());
         ContentValues cv = new ContentValues();
         cv.put("username", account.getUsername());
@@ -530,7 +585,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 rs.close();
                 db.close();
                 if(result == -1){
-                    throw e;
+                    throw erroriInterni;
                 }
             }else{
                 //il turno è gia presente update
@@ -538,16 +593,18 @@ public class DbHelper extends SQLiteOpenHelper {
                 rs.close();
                 db.close();
                 if(result != 1){
-                    throw e;
+                    throw erroriInterni;
                 }
             }
         }else{
             rs.close();
             db.close();
-            throw e;
+            throw erroriInterni;
         }
     }
 
+
+    //DESTINAZIONI
     /**
      * permette di salvare una destinazione all'interno del databse
      * @param account account attivo
@@ -556,7 +613,6 @@ public class DbHelper extends SQLiteOpenHelper {
      */
     public  void salvaDestinazione(PonyAccount account, Destinazione destinazione) throws Exception{
         SQLiteDatabase db = this.getWritableDatabase();
-        Exception e = new Exception("Errori interni ci scusiamo per il disagio.\nRIPROVARE!");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         long unixTime = UtilClass.localDateToUnixTime(destinazione.getDataUltimaModifica());
         String oraModifica = destinazione.getOraUltimaModifica().format(DateTimeFormatter.ofPattern("HH:mm"));
@@ -580,43 +636,13 @@ public class DbHelper extends SQLiteOpenHelper {
         }
         if(result == -1){
             db.close();
-            throw e;
+            throw erroriInterni;
         }
         db.close();
 
 
     }
 
-    /**
-     * metodo che ritonra gli anni di cui si possono inserire o modificare entrate
-     * @param username username dell'account atttivo
-     * @return ritorna la lsita dfi integere contente i possibili anni
-     */
-    public List<Integer> getAnniPossibiliFromEntrate(String username){
-        SQLiteDatabase db = this.getReadableDatabase();
-        Integer annoCorr = LocalDate.now().getYear();
-
-        Cursor rs = db.rawQuery("SELECT data FROM ENTRATE WHERE username LIKE ?;", new String[]{username});
-        List<Integer> returnList = new ArrayList<>();
-        if(rs.getCount()>0){
-            rs.moveToFirst();
-            do{
-                Integer anno = UtilClass.unixTimeToLocalDate(rs.getLong(0)).getYear();
-                if(!returnList.contains(anno)){
-                    returnList.add(anno);
-                }
-            }while(rs.moveToNext());
-        }else{
-            rs.close();
-            db.close();
-        }
-
-        if(!returnList.contains(annoCorr)){
-            returnList.add(annoCorr);
-        }
-
-        return returnList;
-    }
 
     /**
      * permette di cercare all'interno del database una o piu destinazioni
@@ -702,7 +728,6 @@ public class DbHelper extends SQLiteOpenHelper {
      */
     public void updateDestinazione(PonyAccount account, Destinazione oldDestinazione, Destinazione newDestinazione) throws Exception{
         SQLiteDatabase db = this.getWritableDatabase();
-        Exception e = new Exception("Errori interni ci scusiamo per il disagio.\nRIPROVARE!");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         long unixTime = UtilClass.localDateToUnixTime(newDestinazione.getDataUltimaModifica());
         String oraModifica = newDestinazione.getOraUltimaModifica().format(DateTimeFormatter.ofPattern("HH:mm"));
@@ -724,7 +749,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.close();
         if(result != 1){
-            throw e;
+            throw erroriInterni;
         }
     }
 
@@ -738,7 +763,6 @@ public class DbHelper extends SQLiteOpenHelper {
      */
     public void modCostiConsumi(PonyAccount account, String meseAnno, Costo costo) throws Exception {
         SQLiteDatabase db = this.getWritableDatabase();
-        Exception e = new Exception("Errori interni ci scusiamo per il disagio.\nRIPROVARE!");
         ContentValues cvNew = new ContentValues();
         cvNew.put("username", account.getUsername());
         cvNew.put("mese_anno", meseAnno);
@@ -754,19 +778,19 @@ public class DbHelper extends SQLiteOpenHelper {
                         new String[]{account.getUsername(), meseAnno});
                 db.close();
                 if(result != 1){
-                    throw e;
+                    throw erroriInterni;
                 }
 
             }else{
                 //costi non presenti insert
                 long result = db.insert("COSTI_CONSUMI", null, cvNew);
                 if(result == -1){
-                    throw e;
+                    throw erroriInterni;
                 }
             }
 
         }else{
-            throw e;
+            throw erroriInterni;
         }
 
     }
