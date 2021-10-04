@@ -133,6 +133,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
 
         } catch (Exception e) {
+            e.printStackTrace();
             Toast.makeText(HomePage.this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
@@ -169,13 +170,16 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
 
         } catch (Exception e) {
+            e.printStackTrace();
             Toast.makeText(HomePage.this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
     }
 
     private void updateDestinazioniList(List<Turno> newTurniList){
-        turniSettimanali.clear();
+        if(turniSettimanali!=null){
+            turniSettimanali.clear();
+        }
         turniSettimanali.addAll(newTurniList);
         turniAdapter.notifyDataSetChanged();
     }

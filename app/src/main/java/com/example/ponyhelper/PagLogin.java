@@ -119,18 +119,7 @@ public class PagLogin extends AppCompatActivity implements NavigationView.OnNavi
         }
     };
 
-    //OnClickListener per settare un nuovo codice di accesso
-    View.OnClickListener updateAccessCode = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            try {
-                dbhelper.updateAccessCode(username);
-                Toast.makeText(PagLogin.this, "Nuovo codice inviato alla mail", Toast.LENGTH_SHORT).show();
-            } catch (Exception e) {
-                Toast.makeText(PagLogin.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }
-    };
+
 
     /**
      * Called when an item in the navigation menu is selected.

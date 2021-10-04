@@ -144,7 +144,7 @@ public class PagModificaTurni extends AppCompatActivity implements NavigationVie
                 }
                 else {
                     //ripristino i dati selezionat dall'utente
-                    LocalDate dataTurno = LocalDate.parse(sGiorno.getSelectedItem().toString(), DateTimeFormatter.ofPattern("dd-MM-yy"));
+                    LocalDate dataTurno = LocalDate.parse(sGiorno.getSelectedItem().toString(), DateTimeFormatter.ofPattern("dd/MM/yy"));
                     LocalTime oraInizio= LocalTime.parse(sOraInizio.getSelectedItem().toString());
                     LocalTime oraFine= LocalTime.parse(sOraFine.getSelectedItem().toString());
 
