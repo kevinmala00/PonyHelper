@@ -6,10 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -53,6 +56,7 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
     private PonyAccount account;
     private DbHelper dbhelper;
     private List<Entrata> listEntrate;
+    private EntrateAdapter entrateAdapter;
     private YearMonth meseAnnoSel;
     private  DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
@@ -113,8 +117,6 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
 
 
         dbhelper=new DbHelper(PagEntrate.this);
-        account=new PonyAccount();
-
         try{
             account = dbhelper.getActiveAccount();
             navUsername.setText(account.getUsername());
@@ -147,10 +149,9 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
             try{
 
                 listEntrate = dbhelper.getAllEntrateMese(meseAnnoSel, account.getUsername());
-                EntrateAdapter adapter = new EntrateAdapter(PagEntrate.this, listEntrate);
-                rvEntrate.setAdapter(adapter);
+                entrateAdapter = new EntrateAdapter(PagEntrate.this, listEntrate);
+                rvEntrate.setAdapter(entrateAdapter);
                 rvEntrate.setLayoutManager(new LinearLayoutManager(this));
-
             }catch (Exception e) {
                 e.printStackTrace();
                 Toast.makeText(PagEntrate.this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -286,48 +287,80 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
                         if (check) {
                             //icontrolli sono andati a buon fine istanzio l'entrata e l'aggiongo al db
 
+                            //leggo i dati
+                            LocalDate data = LocalDate.of(Integer.parseInt(String.valueOf(sAnnoData.getSelectedItem())),
+                                    Integer.parseInt(String.valueOf(sMeseData.getSelectedItem())),
+                                    Integer.parseInt(String.valueOf(sGiornoData.getSelectedItem())));
+                            LocalTime oraInizio = LocalTime.parse(String.valueOf(sOraInizio.getSelectedItem()), timeFormatter);
+                            LocalTime oraFine = LocalTime.parse(String.valueOf(sOraFine.getSelectedItem()), timeFormatter);
+                            LocalTime oreTot = oraFine.minusHours(oraInizio.getHour()).minusMinutes(oraInizio.getMinute());
+                            double paga =Double.parseDouble(String.valueOf(etEntrate.getText()));
+                            double mancia = Double.parseDouble(String.valueOf(etMancia.getText()));
+                            double kmPercorsi = Double.parseDouble(String.valueOf(etKmPercorsi.getText()));
+                            String note = String.valueOf(etAltro.getText());
+
+                            //inizializzo entrata
+                            Entrata entrata = new Entrata(data, oraInizio, oraFine, oreTot, paga, mancia, kmPercorsi, note);
+
+
+
                             try{
-                                //leggo i dati
-                                LocalDate data = LocalDate.of(Integer.parseInt(String.valueOf(sAnnoData.getSelectedItem())),
-                                        Integer.parseInt(String.valueOf(sMeseData.getSelectedItem())),
-                                        Integer.parseInt(String.valueOf(sGiornoData.getSelectedItem())));
-                                LocalTime oraInizio = LocalTime.parse(String.valueOf(sOraInizio.getSelectedItem()), timeFormatter);
-                                LocalTime oraFine = LocalTime.parse(String.valueOf(sOraFine.getSelectedItem()), timeFormatter);
-                                LocalTime oreTot = oraFine.minusHours(oraInizio.getHour()).minusMinutes(oraInizio.getMinute());
-                                double paga =Double.parseDouble(String.valueOf(etEntrate.getText()));
-                                double mancia = Double.parseDouble(String.valueOf(etMancia.getText()));
-                                double kmPercorsi = Double.parseDouble(String.valueOf(etKmPercorsi.getText()));
-                                String note = String.valueOf(etAltro.getText());
+                                //controllo se è gia presente all'interno del db
+                                if(dbhelper.checkPresenzaEntrata(entrata, account.getUsername()) == 1){
+                                    //update
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(PagEntrate.this);
+                                    builder.setTitle("MODIFICA ENTRATA");
+                                    builder.setMessage("Esiste già un'entrata inserita in quella data, sei sicuro di volerla modificare?");
+                                    builder.setPositiveButton("CONFERMA", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            try {
+                                                Entrata oldEntrata = dbhelper.searchEntrata(UtilClass.localDateToUnixTime(entrata.getData()), account.getUsername());
+                                                int index = searchIndexOfEntrataInList(oldEntrata);
+                                                dialogModEntrata.dismiss();
+                                                dbhelper.updateEntrata(oldEntrata, entrata, account.getUsername());
+                                                updateSingleEntrateInList(index, entrata);
+                                                Toast.makeText(PagEntrate.this, "Modifica avvenuta correttamente", Toast.LENGTH_SHORT).show();
+                                            }catch (Exception e){
+                                                e.printStackTrace();
+                                                Toast.makeText(PagEntrate.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+                                    builder.setNegativeButton("ANNULLA", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                                    builder.show();
+                                }else{
+                                    //insert
+                                    try {
+                                        dialogModEntrata.dismiss();
+                                        dbhelper.addNewEntrata(entrata, account.getUsername());
+                                        addSingleEntrataToList(entrata);
+                                        Toast.makeText(PagEntrate.this, "Inserimento avvenuto correttamente", Toast.LENGTH_SHORT).show();
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                        Toast.makeText(PagEntrate.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
 
-                                //inizializzo entrata
-                                Entrata entrata = new Entrata(data, oraInizio, oraFine, oreTot, paga, mancia, kmPercorsi, note);
-
-                                //aggiungo entrata al database
-                                dbhelper.addNewEntrata(entrata, account.getUsername());
-
+                                }
                             }catch (Exception e){
                                 e.printStackTrace();
-                                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(PagEntrate.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
-                            dialogModEntrata.dismiss();
-
                         }
                     }
                 });
-
                 dialogModEntrata.show();
             }
 
         }
     };
 
-    private void setOreTotTextView(String oreInizio, String oreFine) {
-        LocalTime oraInizio = LocalTime.parse(oreInizio, timeFormatter);
-        LocalTime oraFine = LocalTime.parse(oreFine, timeFormatter);
-        LocalTime oreTot = oraFine.minusHours(oraInizio.getHour()).minusMinutes(oraInizio.getMinute());
-        String oreTotali = oreTot.getHour() + ":" + oreTot.getMinute();
-        tvOreTotali.setText(oreTotali);
-    }
+
 
     View.OnClickListener modCosti = new View.OnClickListener() {
         //componenti popUp mod costi
@@ -374,9 +407,51 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
     View.OnClickListener searchEntrata = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            String searchedEntrata = String.valueOf(etSearchEntrata.getText());
+            try {
+                updateAllEntrateToList(dbhelper.searchEntrata(searchedEntrata, account.getUsername()));
+            }catch(Exception e){
+                e.printStackTrace();
+                AlertDialog.Builder builder = new AlertDialog.Builder(PagEntrate.this);
+                builder.setTitle("ERRORE");
+                builder.setMessage(e.getMessage());
+                builder.show();
+            }
         }
     };
+
+    private void updateAllEntrateToList(Entrata searchEntrata) {
+        if(!listEntrate.isEmpty()){
+            listEntrate.clear();
+        }
+        listEntrate.add(0,searchEntrata);
+        entrateAdapter.notifyDataSetChanged();
+    }
+
+
+    private void addSingleEntrataToList(Entrata entrata) {
+        int i =0 ;
+        Entrata e = listEntrate.get(i);
+        while(UtilClass.localDateToUnixTime(e.getData())<UtilClass.localDateToUnixTime(entrata.getData())){
+            i=i+1;
+            e = listEntrate.get(i);
+        }
+        listEntrate.add(i, entrata);
+        entrateAdapter.notifyItemInserted(i);
+    }
+
+    private void updateSingleEntrateInList(int index, Entrata newEntrata){
+        listEntrate.set(index, newEntrata);
+        entrateAdapter.notifyItemChanged(index);
+    }
+
+    private void setOreTotTextView(String oreInizio, String oreFine) {
+        LocalTime oraInizio = LocalTime.parse(oreInizio, timeFormatter);
+        LocalTime oraFine = LocalTime.parse(oreFine, timeFormatter);
+        LocalTime oreTot = oraFine.minusHours(oraInizio.getHour()).minusMinutes(oraInizio.getMinute());
+        String oreTotali = oreTot.getHour() + ":" + oreTot.getMinute();
+        tvOreTotali.setText(oreTotali);
+    }
 
     void setListaGiorniPossibili(int mese, int anno){
         boolean isLeap = Year.isLeap(anno);
@@ -388,6 +463,17 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
 
     }
 
+    public int searchIndexOfEntrataInList(Entrata entrata){
+        for (Entrata e : listEntrate){
+            if(UtilClass.localDateToUnixTime(e.getData()) > UtilClass.localDateToUnixTime(entrata.getData())){
+                break;
+            }else if(UtilClass.localDateToUnixTime(e.getData()) == UtilClass.localDateToUnixTime(entrata.getData())){
+                return listEntrate.indexOf(e);
+            }
+        }
+        return -1;
+    }
+
     public boolean checkCampoObbligatorio(EditText editText){
         if( editText.getText().toString().length() != 0 ) {
             return true;
@@ -396,6 +482,8 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
             return false;
         }
     }
+
+
 
     /**
      * Called when an item in the navigation menu is selected.
