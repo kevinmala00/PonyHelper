@@ -22,6 +22,8 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Random;
 
@@ -160,6 +162,18 @@ public class UtilClass {
     public static LocalDate stringToLocalDate(String data){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return  LocalDate.parse(data, formatter);
+    }
+
+    /**
+     * da YaerMonth a stringa con lingua locale
+     * @param meseAnno mese anno rapresentato con YearMonth
+     * @return ritorna la stringa mese anno nella lingua del sistema, mese e anno separati da spazio
+     */
+
+    public static String yearMonthToLocalLanguageString(YearMonth meseAnno){
+        String mese = meseAnno.getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault());
+        int anno = meseAnno.getYear();
+        return  mese + " " + anno;
     }
 
     /**
