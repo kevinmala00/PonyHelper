@@ -34,6 +34,7 @@ import com.example.ponyhelper.PagMenu;
 import com.example.ponyhelper.PagModificaTurni;
 import com.example.ponyhelper.PagProfilo;
 import com.example.ponyhelper.R;
+import com.example.ponyhelper.body.Costo;
 import com.example.ponyhelper.body.Entrata;
 import com.example.ponyhelper.body.PonyAccount;
 import com.example.ponyhelper.datamanagment.DbHelper;
@@ -128,9 +129,6 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
             e.printStackTrace();
         }finally{
             meseAnnoSel = YearMonth.from(LocalDate.now());
-            String mese = meseAnnoSel.getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault());
-            int anno = meseAnnoSel.getYear();
-            String stringMeseAnno = mese + "\t\t" + anno;
 
             ibAddEntrata=findViewById(R.id.b_aggiunginentrata);
             ibModCosti=findViewById(R.id.b_gestiscicosti);
@@ -141,15 +139,22 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
             tvMeseAnno=findViewById(R.id.tv_mesecorrente);
             rvEntrate=findViewById(R.id.rv_entrate);
 
+            updateMeseAnnoTextView(meseAnnoSel);
             ibAddEntrata.setOnClickListener(addEntrata);
             ibSearchEntrata.setOnClickListener(searchEntrata);
             ibModCosti.setOnClickListener(modCosti);
-            tvMeseAnno.setText(stringMeseAnno);
+            ibNextMonth.setOnClickListener(nextMonth);
+            ibPreviousMonth.setOnClickListener(previousMonth);
+
+
 
             try{
 
                 listEntrate = dbhelper.getAllEntrateMese(meseAnnoSel, account.getUsername());
-                entrateAdapter = new EntrateAdapter(PagEntrate.this, listEntrate);
+                if(listEntrate.isEmpty()){
+                    Toast.makeText(PagEntrate.this, "Nessuna entrata presente per il mese selezionato!", Toast.LENGTH_SHORT).show();
+                }
+                entrateAdapter = new EntrateAdapter(PagEntrate.this, listEntrate, account.getUsername());
                 rvEntrate.setAdapter(entrateAdapter);
                 rvEntrate.setLayoutManager(new LinearLayoutManager(this));
             }catch (Exception e) {
@@ -158,6 +163,45 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
             }
         }
     }
+
+    private void updateMeseAnnoTextView(YearMonth meseAnnoSel) {
+        tvMeseAnno.setText(UtilClass.yearMonthToLocalLanguageString(meseAnnoSel));
+    }
+
+    View.OnClickListener previousMonth = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            meseAnnoSel=meseAnnoSel.minusMonths(1);
+            updateMeseAnnoTextView(meseAnnoSel);
+            try{
+                updateAllEntrateToList(dbhelper.getAllEntrateMese(meseAnnoSel, account.getUsername()));
+                if(listEntrate.isEmpty()){
+                    Toast.makeText(PagEntrate.this, "Nessuna entrata presente per il mese selezionato!", Toast.LENGTH_SHORT).show();
+                }
+
+            }catch (Exception e){
+                e.printStackTrace();
+                Toast.makeText(PagEntrate.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
+    View.OnClickListener nextMonth = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            meseAnnoSel=meseAnnoSel.plusMonths(1);
+            updateMeseAnnoTextView(meseAnnoSel);
+            try{
+                updateAllEntrateToList(dbhelper.getAllEntrateMese(meseAnnoSel, account.getUsername()));
+                if(listEntrate.isEmpty()){
+                    Toast.makeText(PagEntrate.this, "Nessuna entrata presente per il mese selezionato!", Toast.LENGTH_SHORT).show();
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+                Toast.makeText(PagEntrate.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
 
 
     View.OnClickListener addEntrata = new View.OnClickListener() {
@@ -380,21 +424,48 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
                 dialogModCosti.setContentView(R.layout.popup_mod_costi);
                 dialogModCosti.setCancelable(true);
 
-                String mese = LocalDate.now().getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault());
-                int anno = LocalDate.now().getYear();
-                String stringMeseAnno = mese + "\t\t" + anno;
-
                 tvMese=dialogModCosti.findViewById(R.id.tv_meseModCostiConsumi);
-                tvMese.setText(stringMeseAnno);
-
                 etCostoCarburante=dialogModCosti.findViewById(R.id.et_costoCarburanteAlLitro);
                 etConsumoMedio=dialogModCosti.findViewById(R.id.et_consumoMedioModCosti);
                 bSalvaCosti=dialogModCosti.findViewById(R.id.b_salvaModCosti);
 
+                Costo oldCosto = null;
+                try {
+                    oldCosto = dbhelper.getCostiMensili(UtilClass.yearMonthToLocalLanguageString(meseAnnoSel), account.getUsername());
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(PagEntrate.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                }
+                if(oldCosto==null){
+                    tvMese.setText(UtilClass.yearMonthToLocalLanguageString(meseAnnoSel));
+                }else{
+                    tvMese.setText(oldCosto.getMeseAnno());
+                    etConsumoMedio.setText(String.valueOf(oldCosto.getConsumoMedio()));
+                    etCostoCarburante.setText(String.valueOf(oldCosto.getCostoCarburante()));
+                }
+
+
+
+
+
                 bSalvaCosti.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        //salva costi
+                        try{
+                            String stringMeseAnno=String.valueOf(tvMese.getText());
+                            double costoCarburante = Double.parseDouble(String.valueOf(etCostoCarburante.getText()));
+                            double consumoMedio = Double.parseDouble(String.valueOf(etConsumoMedio.getText()));
+                            Costo costo= new Costo(stringMeseAnno, costoCarburante, consumoMedio);
+                            dbhelper.modCostiConsumi(account, costo);
 
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+                            Toast.makeText(PagEntrate.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
 
@@ -409,6 +480,7 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
         public void onClick(View v) {
             String searchedEntrata = String.valueOf(etSearchEntrata.getText());
             try {
+
                 updateAllEntrateToList(dbhelper.searchEntrata(searchedEntrata, account.getUsername()));
             }catch(Exception e){
                 e.printStackTrace();
@@ -420,22 +492,25 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
         }
     };
 
-    private void updateAllEntrateToList(Entrata searchEntrata) {
+    private void updateAllEntrateToList(List<Entrata> newEntrate) {
         if(!listEntrate.isEmpty()){
             listEntrate.clear();
         }
-        listEntrate.add(0,searchEntrata);
+        listEntrate.addAll(0, newEntrate);
         entrateAdapter.notifyDataSetChanged();
     }
 
 
     private void addSingleEntrataToList(Entrata entrata) {
         int i =0 ;
+
         Entrata e = listEntrate.get(i);
-        while(UtilClass.localDateToUnixTime(e.getData())<UtilClass.localDateToUnixTime(entrata.getData())){
-            i=i+1;
+        while (UtilClass.localDateToUnixTime(e.getData()) < UtilClass.localDateToUnixTime(entrata.getData()) && i<listEntrate.size()) {
             e = listEntrate.get(i);
+            i = i + 1;
+
         }
+
         listEntrate.add(i, entrata);
         entrateAdapter.notifyItemInserted(i);
     }
@@ -464,11 +539,13 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
     }
 
     public int searchIndexOfEntrataInList(Entrata entrata){
-        for (Entrata e : listEntrate){
-            if(UtilClass.localDateToUnixTime(e.getData()) > UtilClass.localDateToUnixTime(entrata.getData())){
-                break;
-            }else if(UtilClass.localDateToUnixTime(e.getData()) == UtilClass.localDateToUnixTime(entrata.getData())){
-                return listEntrate.indexOf(e);
+        if(listEntrate!=null) {
+            for (Entrata e : listEntrate) {
+                if (UtilClass.localDateToUnixTime(e.getData()) > UtilClass.localDateToUnixTime(entrata.getData())) {
+                    break;
+                } else if (UtilClass.localDateToUnixTime(e.getData()) == UtilClass.localDateToUnixTime(entrata.getData())) {
+                    return listEntrate.indexOf(e);
+                }
             }
         }
         return -1;
