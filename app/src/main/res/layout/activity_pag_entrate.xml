@@ -26,7 +26,7 @@
             android:paddingEnd="10dp">
 
             <TextView
-                android:id="@+id/tv_entratepagentrate"
+                android:id="@+id/tv_titleEntrate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/bangers"
@@ -39,7 +39,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -49,7 +48,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_entratepagentrate">
+                app:layout_constraintTop_toBottomOf="@+id/tv_titleEntrate">
 
                 <LinearLayout
                     android:id="@+id/l_bodyentrate"
@@ -197,7 +196,6 @@
                     </LinearLayout>
 
                 </LinearLayout>
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_entrate"
                     android:layout_width="match_parent"
@@ -209,8 +207,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/l_lineabutton"
                     />
-
-
                 <LinearLayout
                     android:id="@+id/l_lineabutton"
                     android:layout_width="match_parent"

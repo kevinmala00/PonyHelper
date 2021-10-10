@@ -4,6 +4,11 @@
     android:id="@+id/l_consegnasingola"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/rounded_transparent_light"
+    android:paddingVertical="2dp"
+    android:paddingHorizontal="2dp"
+    android:layout_marginTop="1dp"
+    android:layout_marginBottom="1dp"
     android:orientation="vertical">
 
     <TextView
@@ -50,30 +55,10 @@
             android:contentDescription="@string/content_description_b_openmaps_destinazione"
             android:src="@drawable/ic_position"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/b_infoDestinazione"
             app:layout_constraintStart_toEndOf="@id/tv_dataultimamoddestinazione"
-            app:layout_constraintTop_toTopOf="parent" />
-        <ImageButton
-            android:id="@+id/b_infoDestinazione"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_info"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/b_openMaps"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            android:contentDescription="@string/content_description_binfodestinazione" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/holo_orange_light" />
 </LinearLayout>

@@ -4,66 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
     tools:context=".IntroPage">
 
-
-    <TextView
-        android:id="@+id/tv_titlemainactiviy"
+    <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/bangers"
-
-        android:padding="10dp"
-        android:rotation="-8"
-        android:text="@string/app_name"
-        android:textAlignment="center"
-        android:textColor="@color/arancio_titolo"
-        android:textSize="80sp"
+        android:layout_height="match_parent"
+        android:background="@drawable/sfondo_pizze"
+        android:backgroundTintMode="screen"
+        android:foreground="#ac202124"
+        android:backgroundTint="@color/arancio_titolo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.250" />
-
-
-    <View
-        android:id="@+id/view1"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/raisin_black"
-        android:rotationX="50"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.725" />
-
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:background="@drawable/road"
-        android:rotationX="50"
-
-        app:layout_constraintBottom_toBottomOf="@+id/view1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view1" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/iv_title"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:contentDescription="@string/content_description_immaginefattortinotitle"
-        android:src="@drawable/img"
-        app:layout_constraintBottom_toBottomOf="@+id/view1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logoapptondo"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:tintMode="add"
+        app:tint="#10202124" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
