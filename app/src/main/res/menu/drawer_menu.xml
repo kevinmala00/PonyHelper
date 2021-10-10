@@ -29,12 +29,6 @@
             android:title="@string/menu"/>
     </group>
 
-    <item
-        android:id="@+id/nav_item_calcola_tot"
-        android:icon="@drawable/ic_calcolatrice"
-        android:title="@string/calcolo_totale"/>
-
-
     <group
         android:id="@+id/groupNavProfilo"
         android:checkableBehavior="single">
@@ -52,6 +46,7 @@
         android:id="@+id/nav_item_info"
         android:title="@string/info"
         android:icon="@drawable/ic_info"/>
+
 
 
 </menu>
