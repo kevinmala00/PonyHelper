@@ -7,13 +7,17 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.ponyhelper.accountManagment.PagProfilo;
 import com.example.ponyhelper.datamanagment.DbHelper;
 import com.example.ponyhelper.destinationManagment.PagDestinazioni;
 import com.example.ponyhelper.entrate.PagEntrate;
+import com.example.ponyhelper.homeEturni.HomePage;
+import com.example.ponyhelper.homeEturni.PagModificaTurni;
+import com.example.ponyhelper.infoEaiutoSupporto.PagInfo;
+import com.example.ponyhelper.menuManagment.PagMenu;
 import com.example.ponyhelper.util.UtilClass;
 import com.google.android.material.navigation.NavigationView;
 

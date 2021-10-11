@@ -7,6 +7,8 @@ import android.os.Handler;
 
 import androidx.annotation.Nullable;
 
+import com.example.ponyhelper.homeEturni.HomePage;
+
 /**
  * activity introdutticva per la durata di 2 secondi prima dell'apertura della home page
  */

@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.example.ponyhelper.PagProfilo;
 import com.example.ponyhelper.body.PonyAccount;
 import com.example.ponyhelper.datamanagment.DbHelper;
 import com.google.android.material.textfield.TextInputLayout;

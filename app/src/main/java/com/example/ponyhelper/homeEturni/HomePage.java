@@ -1,4 +1,4 @@
-package com.example.ponyhelper;
+package com.example.ponyhelper.homeEturni;
 
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +10,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ponyhelper.NavigationActivity;
+import com.example.ponyhelper.R;
 import com.example.ponyhelper.body.PonyAccount;
 import com.example.ponyhelper.body.Turno;
 import com.example.ponyhelper.datamanagment.DbHelper;
@@ -24,7 +26,7 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class HomePage extends  NavigationActivity {
+public class HomePage extends NavigationActivity {
     private PonyAccount account;
     private DbHelper dbhelper;
     private List<Turno> turniSettimanali;

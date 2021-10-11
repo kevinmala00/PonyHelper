@@ -1,20 +1,14 @@
 package com.example.ponyhelper.entrate;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -26,20 +20,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ponyhelper.HomePage;
 import com.example.ponyhelper.NavigationActivity;
-import com.example.ponyhelper.PagInfo;
-import com.example.ponyhelper.PagMenu;
-import com.example.ponyhelper.PagModificaTurni;
-import com.example.ponyhelper.PagProfilo;
 import com.example.ponyhelper.R;
 import com.example.ponyhelper.body.Costo;
 import com.example.ponyhelper.body.Entrata;
 import com.example.ponyhelper.body.PonyAccount;
 import com.example.ponyhelper.datamanagment.DbHelper;
-import com.example.ponyhelper.destinationManagment.PagDestinazioni;
 import com.example.ponyhelper.util.UtilClass;
-import com.google.android.material.navigation.NavigationView;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

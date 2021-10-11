@@ -26,15 +26,15 @@
             android:name=".destinationManagment.PagModificaDestinazione"
             android:exported="true" />
         <activity
-            android:name=".PagProfilo"
+            android:name=".accountManagment.PagProfilo"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".PagInfo"
+            android:name=".infoEaiutoSupporto.PagInfo"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".PagMenu"
+            android:name=".menuManagment.PagMenu"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
@@ -42,7 +42,7 @@
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".PagModificaTurni"
+            android:name=".homeEturni.PagModificaTurni"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
@@ -50,15 +50,15 @@
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".HomePage"
+            android:name=".homeEturni.HomePage"
             android:exported="true"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".PagLogin"
+            android:name=".accountManagment.PagLogin"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".PagReg"
+            android:name=".accountManagment.PagReg"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity

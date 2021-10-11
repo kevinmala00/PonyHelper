@@ -1,49 +1,25 @@
 package com.example.ponyhelper.destinationManagment;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationManager;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ponyhelper.HomePage;
 import com.example.ponyhelper.NavigationActivity;
-import com.example.ponyhelper.entrate.PagEntrate;
-import com.example.ponyhelper.PagInfo;
-import com.example.ponyhelper.PagMenu;
-import com.example.ponyhelper.PagModificaTurni;
-import com.example.ponyhelper.PagProfilo;
 import com.example.ponyhelper.R;
 import com.example.ponyhelper.body.Destinazione;
 import com.example.ponyhelper.body.PonyAccount;
 import com.example.ponyhelper.datamanagment.DbHelper;
-import com.example.ponyhelper.util.UtilClass;
-import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
 

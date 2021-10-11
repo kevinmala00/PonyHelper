@@ -1,4 +1,4 @@
-package com.example.ponyhelper;
+package com.example.ponyhelper.homeEturni;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -13,11 +13,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.ponyhelper.NavigationActivity;
+import com.example.ponyhelper.R;
 import com.example.ponyhelper.body.PonyAccount;
 import com.example.ponyhelper.body.Turno;
 import com.example.ponyhelper.datamanagment.DbHelper;
 import com.example.ponyhelper.util.UtilClass;
-import com.google.android.material.navigation.NavigationView;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class PagModificaTurni extends NavigationActivity{
+public class PagModificaTurni extends NavigationActivity {
     private PonyAccount account;
     private Turno turno;
     DbHelper dbhelper;

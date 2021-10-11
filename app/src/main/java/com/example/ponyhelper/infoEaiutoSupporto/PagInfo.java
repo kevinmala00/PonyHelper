@@ -1,27 +1,35 @@
-package com.example.ponyhelper;
+package com.example.ponyhelper.infoEaiutoSupporto;
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
-
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+
+import com.example.ponyhelper.NavigationActivity;
+import com.example.ponyhelper.R;
 import com.example.ponyhelper.body.PonyAccount;
 import com.example.ponyhelper.datamanagment.DbHelper;
+import com.example.ponyhelper.destinationManagment.PagDestinazioni;
+import com.example.ponyhelper.entrate.PagEntrate;
+import com.example.ponyhelper.util.UtilClass;
 import com.google.android.material.navigation.NavigationView;
 
-public class PagMenu extends NavigationActivity {
-    PonyAccount account;
-    DbHelper dbhelper;
-
+public class PagInfo extends NavigationActivity {
     Toolbar toolbar;
     ActionBarDrawerToggle toggle;
-    NavigationView navigationView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pag_menu);
+        setContentView(R.layout.activity_pag_info);
+
 
         //setto la toolbar
         toolbar=findViewById(R.id.Toolbar);
@@ -34,29 +42,12 @@ public class PagMenu extends NavigationActivity {
 
         //setto la navigation view
         navigationView = findViewById(R.id.navigation_view);
-        navigationView.setCheckedItem(R.id.nav_item_menu);
+        navigationView.setCheckedItem(R.id.nav_item_info);
         navigationView.setNavigationItemSelectedListener(this);
 
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-
-        //istanzio le view del navmenu
-        View headerView=navigationView.getHeaderView(0);
-        TextView tvNavUsername= headerView.findViewById(R.id.tv_usernameNavMenu);
-        TextView tvNavEmail=headerView.findViewById(R.id.tv_navEmail);
-
-        //RECUPERO I DATI DELL'ACCOUNT ATTIVO
-        try{
-            account = dbhelper.getActiveAccount();
-            //SETTO USERNAME E EMAIL NEL NAV HEADER
-            tvNavUsername.setText(account.getUsername());
-            tvNavEmail.setText(account.getEmail());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
-
 }
