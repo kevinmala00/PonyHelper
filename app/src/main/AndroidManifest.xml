@@ -24,7 +24,8 @@
         android:theme="@style/Theme.PonyHelper.NoActionBar">
         <activity
             android:name=".destinationManagment.PagModificaDestinazione"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".accountManagment.PagProfilo"
             android:exported="true"

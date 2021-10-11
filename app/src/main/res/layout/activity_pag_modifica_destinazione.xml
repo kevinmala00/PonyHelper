@@ -2,6 +2,7 @@
 <ScrollView xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/Theme.PonyHelper"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -12,7 +13,8 @@
 
         <ImageButton
             android:id="@+id/ib_returnBack"
-            style="@android:style/Widget.Holo.Light.ImageButton"
+            style="@android:style/Widget.DeviceDefault.Light.ImageButton"
+            android:backgroundTint="@android:color/transparent"
             android:layout_width="52dp"
             android:layout_height="53dp"
             android:layout_marginTop="10dp"
