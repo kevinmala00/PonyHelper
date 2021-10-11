@@ -13,7 +13,6 @@
         android:background="@drawable/sfondo_pizze"
         android:backgroundTintMode="screen"
         android:foreground="#ac202124"
-        android:backgroundTint="@color/arancio_titolo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

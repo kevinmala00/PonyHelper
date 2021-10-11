@@ -117,7 +117,7 @@
     <com.google.android.material.navigation.NavigationView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/navigation_view_pag_login"
+        android:id="@+id/navigation_view"
         app:menu="@menu/drawer_menu"
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
