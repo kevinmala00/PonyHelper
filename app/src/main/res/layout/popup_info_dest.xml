@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rounded_orange"
+    android:padding="5dp">
+
+
+    <TextView
+        android:id="@+id/tv_titleInfoDest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/bangers"
+        android:text="@string/info_destinazione"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/arancio_titolo"
+        android:textSize="34sp" />
+
+    <TextView
+        android:id="@+id/tv_indirizzoInfoDestLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tv_titleInfoDest"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/indirizzo" />
+
+    <TextView
+        android:id="@+id/tv_indirizzoInfoDest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:layout_below="@+id/tv_indirizzoInfoDestLabel"
+        android:background="@drawable/rounded_orange"/>
+
+    <TextView
+        android:id="@+id/tv_dataOraUltimaModificaInfoDestLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tv_indirizzoInfoDest"
+        android:text="@string/ultima_modifica"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_dataOraUltimaModificaInfoDest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_dataOraUltimaModificaInfoDestLabel"
+        android:background="@drawable/rounded_orange"
+        android:padding="4dp" />
+
+    <TextView
+        android:id="@+id/tv_manciaInfoDestLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tv_dataOraUltimaModificaInfoDest"
+        android:text="@string/mancia"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_manciaInfoDest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_manciaInfoDestLabel"
+        android:background="@drawable/rounded_orange"
+        android:padding="4dp" />
+
+
+    <TextView
+        android:id="@+id/tv_latitudineInfoDestLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/tv_manciaInfoDest"
+        android:text="Latitudine"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_latitudineInfoDest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_latitudineInfoDestLabel"
+        android:background="@drawable/rounded_orange"
+        android:padding="4dp"/>
+
+    <TextView
+        android:id="@+id/tv_longitudineInfoDestLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/tv_latitudineInfoDest"
+        android:text="Latitudine"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:id="@+id/tv_longitudineInfoDest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_longitudineInfoDestLabel"
+        android:background="@drawable/rounded_orange"
+        android:padding="4dp"/>
+
+    <TextView
+        android:id="@+id/tv_noteInfoDestLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tv_longitudineInfoDest"
+        android:text="@string/note"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_noteInfoDest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_noteInfoDestLabel"
+        android:background="@drawable/rounded_orange"
+        android:padding="4dp" />
+
+    <ImageButton
+        android:id="@+id/b_modDestInfoDest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_noteInfoDest"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_edit"/>
+
+
+
+
+
+
+</RelativeLayout>
