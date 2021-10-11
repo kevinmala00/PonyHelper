@@ -1,17 +1,8 @@
 package com.example.ponyhelper;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,11 +10,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.Toolbar;
+
 import com.example.ponyhelper.body.PonyAccount;
 import com.example.ponyhelper.body.Turno;
 import com.example.ponyhelper.datamanagment.DbHelper;
-import com.example.ponyhelper.destinationManagment.PagDestinazioni;
-import com.example.ponyhelper.entrate.PagEntrate;
 import com.example.ponyhelper.util.UtilClass;
 import com.google.android.material.navigation.NavigationView;
 
@@ -36,14 +28,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class PagModificaTurni extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class PagModificaTurni extends NavigationActivity{
     private PonyAccount account;
     private Turno turno;
     DbHelper dbhelper;
-    DrawerLayout drawerLayout;
     Toolbar toolbar;
     ActionBarDrawerToggle toggle;
-    NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +49,7 @@ public class PagModificaTurni extends AppCompatActivity implements NavigationVie
         drawerLayout = findViewById(R.id.drawer_layout);
 
         //setto la navigation view
-        navigationView=findViewById(R.id.navigation_view_pag_modifica_turni);
+        navigationView = findViewById(R.id.navigation_view);
         navigationView.setCheckedItem(R.id.nav_item_turni);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -192,69 +182,5 @@ public class PagModificaTurni extends AppCompatActivity implements NavigationVie
 
     }
 
-    /**
-     * Called when an item in the navigation menu is selected.
-     *
-     * @param item The selected item
-     * @return true to display the item as the selected item
-     */
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-        switch (item.getItemId()) {
-
-            case R.id.nav_item_home: {
-                finish();
-                Intent openMainActivity = new Intent(PagModificaTurni.this, HomePage.class);
-                openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityIfNeeded(openMainActivity, 0);
-                break;
-
-
-            }
-            case R.id.nav_item_destinazioni: {
-                finish();
-                startActivity(new Intent(PagModificaTurni.this, PagDestinazioni.class));
-                break;
-            }
-            case R.id.nav_item_turni: {
-                 break;
-
-            }
-            case R.id.nav_item_entrate: {
-                finish();
-                startActivity(new Intent(PagModificaTurni.this,  PagEntrate.class));
-                break;
-            }
-            case R.id.nav_item_menu: {
-                finish();
-                startActivity(new Intent(PagModificaTurni.this, PagMenu.class));
-                break;
-            }
-            case R.id.nav_item_calcola_tot: {
-                finish();
-                startActivity(new Intent(PagModificaTurni.this, PagCalcoloTot.class));
-                break;
-            }
-            case R.id.nav_item_profilo: {
-                finish();
-                startActivity(new Intent(PagModificaTurni.this, PagProfilo.class));
-                break;
-            }
-            case R.id.nav_item_info: {
-                finish();
-                startActivity(new Intent(PagModificaTurni.this, PagInfo.class));
-                break;
-            }
-            case R.id.nav_item_logout:{
-
-                UtilClass.logout(PagModificaTurni.this, account);
-                break;
-            }
-
-        }
-        drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
-    }
 
 }

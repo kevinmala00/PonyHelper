@@ -1,15 +1,21 @@
 package com.example.ponyhelper;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ponyhelper.body.Turno;
+import com.example.ponyhelper.datamanagment.DbHelper;
+
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.List;
@@ -18,9 +24,14 @@ import java.util.Locale;
 public class TurniAdapter extends RecyclerView.Adapter<TurniAdapter.ViewHolder> {
 
     private List<Turno> mlistTurni;
+    private Context mContext;
+    private String mUsername;
+    private DateTimeFormatter timeFormatter= DateTimeFormatter.ofPattern("HH:mm");
 
-    public TurniAdapter(List<Turno> listTurni){
+    public TurniAdapter(List<Turno> listTurni, Context context, String username){
         mlistTurni = listTurni;
+        mContext=context;
+        mUsername=username;
     }
 
     @NonNull
@@ -47,12 +58,49 @@ public class TurniAdapter extends RecyclerView.Adapter<TurniAdapter.ViewHolder> 
         tvGiorno.setText(Giorno);
 
         TextView tvOraInizioTurno = holder.tvOraInizio;
-        String oraInizioTurno = turno.getOraInizio().format(DateTimeFormatter.ofPattern("HH:mm"));
+        String oraInizioTurno = turno.getOraInizio().format(timeFormatter);
         tvOraInizioTurno.setText(oraInizioTurno);
 
         TextView tvOraFineTurno = holder.tvOraFine;
-        String oraFineTurno = turno.getOraFine().format(DateTimeFormatter.ofPattern("HH:mm"));
+        String oraFineTurno = turno.getOraFine().format(timeFormatter);
         tvOraFineTurno.setText(oraFineTurno);
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setTitle("ELIMINARE TURNO?");
+                builder.setMessage("Sei sicuro di voler eliminare il turno di: "+Giorno+" ?" );
+                builder.setPositiveButton("CONFERMA", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        DbHelper dbHelper = new DbHelper(mContext);
+                        try{
+                            dbHelper.deleteTurno(turno, mUsername);
+                            int index = holder.getAdapterPosition();
+                            mlistTurni.remove(index);
+                            ((ViewManager)holder.itemView.getParent()).removeView(holder.itemView);
+
+
+                            Toast.makeText(mContext, "Turno eliminato definitivamente", Toast.LENGTH_SHORT).show();
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+                            Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                        dialog.dismiss();
+                    }
+                });
+                builder.setNegativeButton("ANNULLA", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.show();
+                return true;
+            }
+        });
     }
 
 
