@@ -42,6 +42,7 @@
 
         <Spinner
             android:id="@+id/s_meseDataModEntrata"
+            style="@android:style/Widget.DeviceDefault.Light.Spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -57,6 +58,7 @@
 
         <Spinner
             android:id="@+id/s_giornoDataModEntrata"
+            style="@android:style/Widget.DeviceDefault.Light.Spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_dataAddEntrata"
@@ -76,6 +78,7 @@
 
         <Spinner
             android:id="@+id/s_annoDataModEntrata"
+            style="@android:style/Widget.DeviceDefault.Light.Spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_dataAddEntrata"
@@ -104,6 +107,7 @@
 
         <Spinner
             android:id="@+id/s_oraInizioModEntrata"
+            style="@android:style/Widget.DeviceDefault.Light.Spinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_ora_inizio"
@@ -144,6 +148,7 @@
 
         <Spinner
             android:id="@+id/s_oraFineModEntrata"
+            style="@android:style/Widget.DeviceDefault.Light.Spinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_oraFine"
