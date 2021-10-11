@@ -160,6 +160,8 @@ public class HomePage extends  NavigationActivity {
 
 
 
+
+
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(HomePage.this, e.getMessage(), Toast.LENGTH_SHORT).show();
