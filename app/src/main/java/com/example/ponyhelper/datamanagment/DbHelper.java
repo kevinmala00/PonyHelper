@@ -620,6 +620,17 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
+    public void deleteTurno(Turno turno, String username) throws Exception {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result  = db.delete("TURNI", "username LIKE ? AND data LIKE ?",
+                new String[]{username, String.valueOf(UtilClass.localDateToUnixTime(turno.getData()))});
+        db.close();
+        if(result != 1){
+            throw erroriInterni;
+        }
+
+    }
+
 
     //DESTINAZIONI
     /**
