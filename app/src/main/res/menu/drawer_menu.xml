@@ -41,11 +41,14 @@
             android:title="@string/logout"
             android:icon="@drawable/ic_logout"/>
     </group>
-
-    <item
-        android:id="@+id/nav_item_info"
-        android:title="@string/info"
-        android:icon="@drawable/ic_info"/>
+    <group
+        android:id="@+id/groupNavInfoHelp"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_item_info"
+            android:title="@string/info"
+            android:icon="@drawable/ic_info"/>
+    </group>
 
 
 
