@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_width="match_parent"
+<ScrollView xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/rounded_orange">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp">
+
+        <ImageButton
+            android:id="@+id/ib_returnBack"
+            style="@android:style/Widget.Holo.Light.ImageButton"
+            android:layout_width="52dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_arrow_back_" />
 
         <TextView
             android:id="@+id/tv_titlepopupModDestinazione"
@@ -16,10 +26,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/bangers"
-            android:text="@string/destinazione"
+            android:text="Modifica destinazione"
             android:textAlignment="center"
             android:textColor="@color/arancio_titolo"
-            android:textSize="24sp"
+            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -258,6 +268,8 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_longitudineModDest"
             app:srcCompat="@drawable/ic_refresh"
             android:contentDescription="@string/content_description_buttn_refresch_mod_dest" />
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
