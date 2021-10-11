@@ -1,27 +1,20 @@
 package com.example.ponyhelper;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.ponyhelper.body.PonyAccount;
 import com.example.ponyhelper.datamanagment.DbHelper;
-import com.example.ponyhelper.destinationManagment.PagDestinazioni;
-import com.example.ponyhelper.entrate.PagEntrate;
-import com.example.ponyhelper.util.UtilClass;
 import com.google.android.material.navigation.NavigationView;
 
-public class PagMenu extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
+public class PagMenu extends NavigationActivity {
     PonyAccount account;
     DbHelper dbhelper;
-    DrawerLayout drawerLayout;
+
     Toolbar toolbar;
     ActionBarDrawerToggle toggle;
     NavigationView navigationView;
@@ -40,7 +33,7 @@ public class PagMenu extends AppCompatActivity implements  NavigationView.OnNavi
         drawerLayout = findViewById(R.id.drawer_layout);
 
         //setto la navigation view
-        navigationView=findViewById(R.id.navigation_view_pag_menu);
+        navigationView = findViewById(R.id.navigation_view);
         navigationView.setCheckedItem(R.id.nav_item_menu);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -48,68 +41,22 @@ public class PagMenu extends AppCompatActivity implements  NavigationView.OnNavi
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-    }
-    /**
-     * Called when an item in the navigation menu is selected.
-     *
-     * @param item The selected item
-     * @return true to display the item as the selected item
-     */
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()) {
+        //istanzio le view del navmenu
+        View headerView=navigationView.getHeaderView(0);
+        TextView tvNavUsername= headerView.findViewById(R.id.tv_usernameNavMenu);
+        TextView tvNavEmail=headerView.findViewById(R.id.tv_navEmail);
 
-            case R.id.nav_item_home: {
-                finish();
-                Intent openMainActivity = new Intent(PagMenu.this, HomePage.class);
-                openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityIfNeeded(openMainActivity, 0);
-                break;
+        //RECUPERO I DATI DELL'ACCOUNT ATTIVO
+        try{
+            account = dbhelper.getActiveAccount();
+            //SETTO USERNAME E EMAIL NEL NAV HEADER
+            tvNavUsername.setText(account.getUsername());
+            tvNavEmail.setText(account.getEmail());
 
-
-            }
-            case R.id.nav_item_destinazioni: {
-                finish();
-                startActivity(new Intent(PagMenu.this, PagDestinazioni.class));
-                break;
-            }
-            case R.id.nav_item_turni: {
-                finish();
-                startActivity(new Intent(PagMenu.this, PagModificaTurni.class));
-                break;
-            }
-            case R.id.nav_item_entrate: {
-                finish();
-                startActivity(new Intent(PagMenu.this,  PagEntrate.class));
-                break;
-            }
-            case R.id.nav_item_menu: {
-                break;
-            }
-            case R.id.nav_item_calcola_tot: {
-                finish();
-                startActivity(new Intent(PagMenu.this, PagCalcoloTot.class));
-                break;
-            }
-            case R.id.nav_item_profilo: {
-                finish();
-                startActivity(new Intent(PagMenu.this, PagProfilo.class));
-                break;
-            }
-            case R.id.nav_item_info: {
-                finish();
-                startActivity(new Intent(PagMenu.this, PagInfo.class));
-                break;
-            }
-            case R.id.nav_item_logout:{
-
-                UtilClass.logout(PagMenu.this, account);
-                break;
-            }
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
     }
+
 }

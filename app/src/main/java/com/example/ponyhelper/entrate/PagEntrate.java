@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,7 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ponyhelper.HomePage;
-import com.example.ponyhelper.PagCalcoloTot;
+import com.example.ponyhelper.NavigationActivity;
 import com.example.ponyhelper.PagInfo;
 import com.example.ponyhelper.PagMenu;
 import com.example.ponyhelper.PagModificaTurni;
@@ -48,12 +47,10 @@ import java.time.Month;
 import java.time.Year;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
-import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-public class PagEntrate extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class PagEntrate extends NavigationActivity {
     private PonyAccount account;
     private DbHelper dbhelper;
     private List<Entrata> listEntrate;
@@ -61,11 +58,9 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
     private YearMonth meseAnnoSel;
     private  DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
-
-    DrawerLayout drawerLayout;
     Toolbar toolbar;
     ActionBarDrawerToggle toggle;
-    NavigationView navigationView;
+
 
     //definisco le view del menu
     View navHeader;
@@ -102,13 +97,13 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
         drawerLayout = findViewById(R.id.drawer_layout);
 
         //setto la navigation view
-        navigationView=findViewById(R.id.navigation_view_pag_entrate);
+        navigationView = findViewById(R.id.navigation_view);
         navigationView.setCheckedItem(R.id.nav_item_entrate);
         navigationView.setNavigationItemSelectedListener(this);
 
-        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+        toggle = new ActionBarDrawerToggle(this, super.drawerLayout, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
+        super.drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
 
@@ -346,8 +341,6 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
                             //inizializzo entrata
                             Entrata entrata = new Entrata(data, oraInizio, oraFine, oreTot, paga, mancia, kmPercorsi, note);
 
-
-
                             try{
                                 //controllo se è gia presente all'interno del db
                                 if(dbhelper.checkPresenzaEntrata(entrata, account.getUsername()) == 1){
@@ -429,6 +422,8 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
                 etConsumoMedio=dialogModCosti.findViewById(R.id.et_consumoMedioModCosti);
                 bSalvaCosti=dialogModCosti.findViewById(R.id.b_salvaModCosti);
 
+                dialogModCosti.show();
+
                 Costo oldCosto = null;
                 try {
                     oldCosto = dbhelper.getCostiMensili(UtilClass.yearMonthToLocalLanguageString(meseAnnoSel), account.getUsername());
@@ -446,30 +441,37 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
                     etCostoCarburante.setText(String.valueOf(oldCosto.getCostoCarburante()));
                 }
 
-
-
-
-
                 bSalvaCosti.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //salva costi
-                        try{
-                            String stringMeseAnno=String.valueOf(tvMese.getText());
-                            double costoCarburante = Double.parseDouble(String.valueOf(etCostoCarburante.getText()));
-                            double consumoMedio = Double.parseDouble(String.valueOf(etConsumoMedio.getText()));
-                            Costo costo= new Costo(stringMeseAnno, costoCarburante, consumoMedio);
-                            dbhelper.modCostiConsumi(account, costo);
+                        boolean check = true;
+
+                        if(!checkCampoObbligatorio(etConsumoMedio)){
+                            check =false;
+                        }
+                        if(!checkCampoObbligatorio(etCostoCarburante)){
+                            check =false;
+                        }
+
+                        if(check) {
+                            //salva costi
+                            try {
+                                String stringMeseAnno = String.valueOf(tvMese.getText());
+                                double costoCarburante = Double.parseDouble(String.valueOf(etCostoCarburante.getText()));
+                                double consumoMedio = Double.parseDouble(String.valueOf(etConsumoMedio.getText()));
+                                Costo costo = new Costo(stringMeseAnno, costoCarburante, consumoMedio);
+                                dbhelper.modCostiConsumi(account, costo);
 
 
-                        }catch (Exception e){
-                            e.printStackTrace();
-                            Toast.makeText(PagEntrate.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                Toast.makeText(PagEntrate.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
                 });
 
-                dialogModCosti.show();
+
 
             }
         }
@@ -558,71 +560,6 @@ public class PagEntrate extends AppCompatActivity implements NavigationView.OnNa
             editText.setError("Campo obbligatorio");
             return false;
         }
-    }
-
-
-
-    /**
-     * Called when an item in the navigation menu is selected.
-     *
-     * @param item The selected item
-     * @return true to display the item as the selected item
-     */
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-        switch (item.getItemId()) {
-
-            case R.id.nav_item_home: {
-                finish();
-                Intent openMainActivity = new Intent(PagEntrate.this, HomePage.class);
-                openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityIfNeeded(openMainActivity, 0);
-                break;
-
-            }
-            case R.id.nav_item_destinazioni: {
-                finish();
-                startActivity(new Intent(PagEntrate.this, PagDestinazioni.class));
-                break;
-            }
-            case R.id.nav_item_turni: {
-                finish();
-                startActivity(new Intent(PagEntrate.this, PagModificaTurni.class));
-                break;
-            }
-            case R.id.nav_item_entrate: {
-                break;
-
-            }
-            case R.id.nav_item_menu: {
-                finish();
-                startActivity(new Intent(PagEntrate.this, PagMenu.class));
-                break;
-            }
-            case R.id.nav_item_calcola_tot: {
-                finish();
-                startActivity(new Intent(PagEntrate.this, PagCalcoloTot.class));
-                break;
-            }
-            case R.id.nav_item_profilo: {
-                finish();
-                startActivity(new Intent(PagEntrate.this, PagProfilo.class));
-                break;
-            }
-            case R.id.nav_item_info: {
-                finish();
-                startActivity(new Intent(PagEntrate.this,  PagInfo.class));
-                break;
-            }
-            case R.id.nav_item_logout:{
-                UtilClass.logout(PagEntrate.this, account);
-                break;
-            }
-
-        }
-        drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
     }
 
 

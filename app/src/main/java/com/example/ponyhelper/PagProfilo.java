@@ -23,13 +23,11 @@ import com.example.ponyhelper.entrate.PagEntrate;
 import com.example.ponyhelper.util.UtilClass;
 import com.google.android.material.navigation.NavigationView;
 
-public class PagProfilo extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
+public class PagProfilo extends NavigationActivity{
     PonyAccount account;
     DbHelper dbhelper;
-    DrawerLayout drawerLayout;
     Toolbar toolbar;
     ActionBarDrawerToggle toggle;
-    NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,12 +38,11 @@ public class PagProfilo extends AppCompatActivity implements  NavigationView.OnN
         setSupportActionBar(toolbar);
         //elimino il titolo dalla toolbar
         if (getSupportActionBar() != null) getSupportActionBar().setDisplayShowTitleEnabled (false);
-
         //setto il navigation drawer
         drawerLayout = findViewById(R.id.drawer_layout);
 
         //setto la navigation view
-        navigationView=findViewById(R.id.navigation_view_pag_profilo);
+        navigationView = findViewById(R.id.navigation_view);
         navigationView.setCheckedItem(R.id.nav_item_profilo);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -123,69 +120,4 @@ public class PagProfilo extends AppCompatActivity implements  NavigationView.OnN
         }
     };
 
-
-
-    /**
-     * Called when an item in the navigation menu is selected.
-     *
-     * @param item The selected item
-     * @return true to display the item as the selected item
-     */
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-        switch (item.getItemId()) {
-
-            case R.id.nav_item_home: {
-                finish();
-                Intent openMainActivity = new Intent(PagProfilo.this, HomePage.class);
-                openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityIfNeeded(openMainActivity, 0);
-                break;
-
-
-            }
-            case R.id.nav_item_destinazioni: {
-                finish();
-                startActivity(new Intent(PagProfilo.this, PagDestinazioni.class));
-                break;
-            }
-            case R.id.nav_item_turni: {
-                finish();
-                startActivity(new Intent(PagProfilo.this, PagModificaTurni.class));
-                break;
-
-            }
-            case R.id.nav_item_entrate: {
-                finish();
-                startActivity(new Intent(PagProfilo.this,  PagEntrate.class));
-                break;
-            }
-            case R.id.nav_item_menu: {
-                finish();
-                startActivity(new Intent(PagProfilo.this, PagMenu.class));
-                break;
-            }
-            case R.id.nav_item_calcola_tot: {
-                finish();
-                startActivity(new Intent(PagProfilo.this, PagCalcoloTot.class));
-                break;
-            }
-            case R.id.nav_item_profilo: {
-
-                break;
-            }
-            case R.id.nav_item_info: {
-                finish();
-                startActivity(new Intent(PagProfilo.this, PagInfo.class));
-                break;
-            }
-            case R.id.nav_item_logout: {
-                UtilClass.logout(PagProfilo.this, account);
-                break;
-            }
-        }
-        drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
-    }
 }

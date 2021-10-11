@@ -25,13 +25,11 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Objects;
 
-public class PagReg extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
+public class PagReg extends NavigationActivity {
     PonyAccount account;
     DbHelper dbhelper;
-    DrawerLayout drawerLayout;
     Toolbar toolbar;
     ActionBarDrawerToggle toggle;
-    NavigationView navigationView;
 
     //variabile che rappresenta l'esito dei controlli
     boolean check = true;
@@ -53,7 +51,8 @@ public class PagReg extends AppCompatActivity implements  NavigationView.OnNavig
         drawerLayout = findViewById(R.id.drawer_layout);
 
         //setto la navigation view
-        navigationView=findViewById(R.id.navigation_view_pag_reg);
+        navigationView = findViewById(R.id.navigation_view);
+        navigationView.setCheckedItem(R.id.nav_item_profilo);
         navigationView.setNavigationItemSelectedListener(this);
 
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
@@ -71,9 +70,6 @@ public class PagReg extends AppCompatActivity implements  NavigationView.OnNavig
         View headerView=navigationView.getHeaderView(0);
         tvNavUsername= headerView.findViewById(R.id.tv_usernameNavMenu);
         tvNavEmail=headerView.findViewById(R.id.tv_navEmail);
-
-
-
 
         //setto gli onTextChanger degli edit text presenti
         UtilClass.eliminaErroreCampoObbligatorio(itUsername);
@@ -165,71 +161,6 @@ public class PagReg extends AppCompatActivity implements  NavigationView.OnNavig
                 }
             }
         });
-    }
-
-    /**
-     * Called when an item in the navigation menu is selected.
-     *
-     * @param item The selected item
-     * @return true to display the item as the selected item
-     */
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-        switch (item.getItemId()) {
-
-            case R.id.nav_item_home: {
-                finish();
-                Intent openMainActivity = new Intent(PagReg.this, HomePage.class);
-                openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityIfNeeded(openMainActivity, 0);
-                break;
-
-
-            }
-            case R.id.nav_item_destinazioni: {
-                finish();
-                startActivity(new Intent(PagReg.this, PagDestinazioni.class));
-                break;
-            }
-            case R.id.nav_item_turni: {
-                finish();
-                startActivity(new Intent(PagReg.this, PagModificaTurni.class));
-                break;
-            }
-            case R.id.nav_item_entrate: {
-                finish();
-                startActivity(new Intent(PagReg.this,  PagEntrate.class));
-                break;
-            }
-            case R.id.nav_item_menu: {
-                finish();
-                startActivity(new Intent(PagReg.this, PagMenu.class));
-                break;
-            }
-            case R.id.nav_item_calcola_tot: {
-                finish();
-                startActivity(new Intent(PagReg.this, PagCalcoloTot.class));
-                break;
-            }
-            case R.id.nav_item_profilo: {
-                finish();
-                startActivity(new Intent(PagReg.this, PagProfilo.class));
-                break;
-            }
-            case R.id.nav_item_info: {
-                finish();
-                startActivity(new Intent(PagReg.this, PagInfo.class));
-                break;
-            }
-            case R.id.nav_item_logout:{
-                UtilClass.logout(PagReg.this, account);
-                break;
-            }
-
-        }
-        drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
     }
 
 }
