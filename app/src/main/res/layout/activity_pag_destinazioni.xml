@@ -67,8 +67,7 @@
                          android:layout_height="match_parent"
                          android:orientation="horizontal"
                          android:padding="4dp"
-                         android:background="@drawable/rounded_orange"
-                         android:backgroundTint="#40ff8800">
+                         android:background="@drawable/rounded_search">
 
                          <EditText
                              android:id="@+id/et_searchDestinazioni"

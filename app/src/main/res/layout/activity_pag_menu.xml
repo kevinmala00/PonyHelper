@@ -25,13 +25,109 @@
             android:paddingStart="10dp"
             android:paddingEnd="10dp">
 
+            <TextView
+                android:id="@+id/tv_titleMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/bangers"
+                android:text="@string/menu"
+                android:textAlignment="center"
+                android:textColor="@color/arancio_titolo"
+                android:textSize="34sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_titleMenu">
+
+                <TextView
+                    android:id="@+id/tv_selezionamenu"
+                    style="@android:style/Widget.DeviceDefault.Light.TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Selezionare il menù:"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Spinner
+                    android:id="@+id/s_selezioneMenu"
+                    style="@android:style/Widget.DeviceDefault.Light.Spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:padding="4dp"
+                    android:spinnerMode="dialog"
+                    android:textAlignment="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_selezionamenu" />
+
+                <WebView
+                    android:id="@+id/wv_menu"
+                    style="@android:style/Widget.DeviceDefault.Light.WebView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/rounded_transparent_light"
+                    android:forceDarkAllowed="false"
+                    android:theme="@android:style/Widget.DeviceDefault.Light.WebView"
+                    app:layout_constraintBottom_toTopOf="@id/l_lineabutton"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/s_selezioneMenu" />
 
 
 
 
+                <LinearLayout
+                    android:id="@+id/l_lineabutton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="5dp"
+                    app:layout_constraintVertical_bias="1.0"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
 
+                    <ImageButton
+                        android:id="@+id/b_aggiungiMenu"
+                        style="@android:style/Widget.DeviceDefault.Light.ImageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="1.5dp"
+                        android:layout_weight="1"
+                        android:padding="4dp"
+                        android:tooltipText="Aggiungi menù"
+                        app:srcCompat="@drawable/ic_qr_scanner"
+                        tools:ignore="TouchTargetSizeCheck" />
 
-
+                    <ImageButton
+                        android:id="@+id/b_eliminaMenu"
+                        style="@android:style/Widget.DeviceDefault.Light.ImageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="1.5dp"
+                        android:layout_weight="1"
+                        android:padding="4dp"
+                        android:tooltipText="Elimina menù"
+                        app:srcCompat="@drawable/ic_delete"
+                        tools:ignore="TouchTargetSizeCheck" />
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>

@@ -42,52 +42,53 @@
                     android:id="@+id/tv_selezionagiorno"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="52dp"
+                    android:layout_marginTop="15dp"
                     android:text="@string/giorno"
                     android:textAlignment="center"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:textStyle="normal"
-                    app:layout_constraintEnd_toStartOf="@+id/s_giornomodificaturno"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_durataSettimana" />
 
                 <Spinner
                     android:id="@+id/s_giornomodificaturno"
-                    android:layout_width="0dp"
+                    style="@android:style/Widget.DeviceDefault.Light.Spinner"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="-10dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
+                    android:layout_marginTop="2dp"
                     android:contentDescription="@string/spinner_giorno"
                     android:dropDownWidth="wrap_content"
-                    android:spinnerMode="dialog"
                     android:foreground="@drawable/rounded_orange"
                     android:minHeight="48dp"
                     android:paddingHorizontal="4dp"
+                    android:spinnerMode="dialog"
 
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/tv_selezionagiorno"
-                    app:layout_constraintTop_toTopOf="@+id/tv_selezionagiorno" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_selezionagiorno" />
 
                 <TextView
                     android:id="@+id/tv_orainizio"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="10dp"
                     android:text="@string/ora_inizio"
                     android:textAlignment="center"
-                    app:layout_constraintEnd_toEndOf="@+id/tv_selezionagiorno"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_selezionagiorno" />
+                    app:layout_constraintTop_toBottomOf="@id/s_giornomodificaturno" />
 
                 <Spinner
                     android:id="@+id/s_orainiziomodificaturno"
-                    android:layout_width="0dp"
+                    style="@android:style/Widget.DeviceDefault.Light.Spinner"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="-15dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginEnd="20dp"
                     android:contentDescription="@string/spinner_ora_inizio"
                     android:entries="@array/orari"
@@ -97,27 +98,28 @@
                     android:spinnerMode="dialog"
                     android:textAlignment="center"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/tv_orainizio"
-                    app:layout_constraintTop_toTopOf="@+id/tv_orainizio" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_orainizio" />
 
                 <TextView
                     android:id="@+id/tv_orafinemodificaturno"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="45dp"
+                    android:layout_marginTop="10dp"
                     android:text="@string/ora_fine"
+                    android:textSize="16sp"
                     android:textAlignment="center"
-                    app:layout_constraintEnd_toEndOf="@+id/tv_orainizio"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_orainizio" />
+                    app:layout_constraintTop_toBottomOf="@id/s_orainiziomodificaturno" />
 
                 <Spinner
                     android:id="@+id/s_orafinemodificaturno"
-                    android:layout_width="0dp"
+                    style="@android:style/Widget.DeviceDefault.Light.Spinner"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="-15dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginEnd="20dp"
                     android:spinnerMode="dialog"
                     android:foreground="@drawable/rounded_orange"
@@ -127,8 +129,8 @@
                     android:textAlignment="center"
                     android:paddingHorizontal="4dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/tv_orafinemodificaturno"
-                    app:layout_constraintTop_toTopOf="@+id/tv_orafinemodificaturno" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_orafinemodificaturno" />
 
                 <TextView
                     android:id="@+id/tv_meseanno"

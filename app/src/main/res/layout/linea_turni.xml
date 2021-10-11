@@ -3,7 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginTop="1dp"
+    android:layout_marginBottom="1dp"
+    android:layout_marginHorizontal="1dp"
+    android:background="@drawable/rounded_transparent_light">
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -39,11 +43,5 @@
             android:textSize="14sp" />
 
     </LinearLayout>
-
-    <View
-        android:id="@+id/divider2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/arancio_titolo" />
 
 </LinearLayout>

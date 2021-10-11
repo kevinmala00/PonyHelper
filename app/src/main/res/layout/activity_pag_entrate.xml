@@ -64,8 +64,7 @@
 
                     <LinearLayout
                         android:id="@+id/l_lineasearch"
-                        android:background="@drawable/rounded_orange"
-                        android:backgroundTint="#40ff8800"
+                        android:background="@drawable/rounded_search"
                         android:padding="4dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
