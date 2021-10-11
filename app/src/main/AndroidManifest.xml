@@ -23,9 +23,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PonyHelper.NoActionBar">
         <activity
+            android:name=".menuManagment.QRScannerPage"
+            android:exported="true" />
+        <activity
             android:name=".destinationManagment.PagModificaDestinazione"
             android:exported="true"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".accountManagment.PagProfilo"
             android:exported="true"
@@ -53,7 +56,7 @@
         <activity
             android:name=".homeEturni.HomePage"
             android:exported="true"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".accountManagment.PagLogin"
             android:exported="true"
