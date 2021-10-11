@@ -3,6 +3,7 @@ package com.example.ponyhelper.menuManagment;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
@@ -11,6 +12,7 @@ import com.example.ponyhelper.NavigationActivity;
 import com.example.ponyhelper.R;
 import com.example.ponyhelper.body.PonyAccount;
 import com.example.ponyhelper.datamanagment.DbHelper;
+import com.example.ponyhelper.infoEaiutoSupporto.PagInfo;
 import com.google.android.material.navigation.NavigationView;
 
 public class PagMenu extends NavigationActivity {
@@ -49,14 +51,18 @@ public class PagMenu extends NavigationActivity {
         TextView tvNavUsername= headerView.findViewById(R.id.tv_usernameNavMenu);
         TextView tvNavEmail=headerView.findViewById(R.id.tv_navEmail);
 
-        //RECUPERO I DATI DELL'ACCOUNT ATTIVO
-        try{
+        dbhelper = new DbHelper(PagMenu.this);
+
+        try {
+            //otennego i dati dell'account attivo
             account = dbhelper.getActiveAccount();
-            //SETTO USERNAME E EMAIL NEL NAV HEADER
+            //setto le text view account e email ne navigation menu con quelle correnti
             tvNavUsername.setText(account.getUsername());
             tvNavEmail.setText(account.getEmail());
 
+
         } catch (Exception e) {
+            Toast.makeText(PagMenu.this, e.getMessage(), Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
     }

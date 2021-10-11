@@ -10,6 +10,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ponyhelper.NavigationActivity;
 import com.example.ponyhelper.R;
@@ -17,12 +20,14 @@ import com.example.ponyhelper.body.PonyAccount;
 import com.example.ponyhelper.datamanagment.DbHelper;
 import com.example.ponyhelper.destinationManagment.PagDestinazioni;
 import com.example.ponyhelper.entrate.PagEntrate;
+import com.example.ponyhelper.homeEturni.PagModificaTurni;
 import com.example.ponyhelper.util.UtilClass;
 import com.google.android.material.navigation.NavigationView;
 
 public class PagInfo extends NavigationActivity {
     Toolbar toolbar;
     ActionBarDrawerToggle toggle;
+    private PonyAccount account;
 
 
     @Override
@@ -49,5 +54,24 @@ public class PagInfo extends NavigationActivity {
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+        View headerView=navigationView.getHeaderView(0);
+        TextView tvNavUsername= headerView.findViewById(R.id.tv_usernameNavMenu);
+        TextView tvNavEmail=headerView.findViewById(R.id.tv_navEmail);
+
+        DbHelper dbhelper = new DbHelper(PagInfo.this);
+
+        try {
+            //otennego i dati dell'account attivo
+            account = dbhelper.getActiveAccount();
+            //setto le text view account e email ne navigation menu con quelle correnti
+            tvNavUsername.setText(account.getUsername());
+            tvNavEmail.setText(account.getEmail());
+
+
+        } catch (Exception e) {
+            Toast.makeText(PagInfo.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
     }
 }
