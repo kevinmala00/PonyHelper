@@ -6,4 +6,5 @@
     android:layout_height="match_parent"
     tools:context=".menuManagment.QRScannerPage">
 
+
 </androidx.constraintlayout.widget.ConstraintLayout>
