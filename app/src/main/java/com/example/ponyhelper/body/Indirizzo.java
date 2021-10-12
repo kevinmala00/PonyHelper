@@ -9,6 +9,7 @@ public class Indirizzo {
     String via;
     String civico;
     String provincia;
+    String citta;
 
     public String getCivico() {
         return civico;
@@ -18,7 +19,7 @@ public class Indirizzo {
         this.civico = civico;
     }
 
-    String citta;
+
 
     /**
      * constructor della classe indirizzo, istanzia un nuovo oggetto indirizzo con
