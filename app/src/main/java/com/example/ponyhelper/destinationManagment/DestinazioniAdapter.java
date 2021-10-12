@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ponyhelper.R;
 import com.example.ponyhelper.body.Destinazione;
 import com.example.ponyhelper.datamanagment.DbHelper;
+import com.example.ponyhelper.util.UtilClass;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -158,7 +159,22 @@ public class DestinazioniAdapter extends RecyclerView.Adapter<DestinazioniAdapte
 
                         dialogInfoDest.dismiss();
                         //Passo all'activity modifica
+                        Intent openModDest = new Intent(mContext, PagModificaDestinazione.class);
 
+                        openModDest.putExtra("aggiornamento", true);
+                        openModDest.putExtra("via", destinazione.getIndirizzo().getVia());
+                        openModDest.putExtra("civico", destinazione.getIndirizzo().getCivico());
+                        openModDest.putExtra("citta", destinazione.getIndirizzo().getCitta());
+                        openModDest.putExtra("cap", destinazione.getIndirizzo().getCap());
+                        openModDest.putExtra("provincia", destinazione.getIndirizzo().getProvincia());
+
+                        openModDest.putExtra("dataUltimaModifica", UtilClass.localDateToUnixTime(destinazione.getDataUltimaModifica()));
+                        openModDest.putExtra("oraUltimaModifica", destinazione.getOraUltimaModifica().format(DateTimeFormatter.ofPattern("HH:mm")));
+                        openModDest.putExtra("mancia", destinazione.getMancia());
+                        openModDest.putExtra("latitudine", destinazione.getLatitudine());
+                        openModDest.putExtra("longitudine", destinazione.getLongitudine());
+                        openModDest.putExtra("note", destinazione.getNote());
+                        mContext.startActivity(openModDest);
                     }
                 });
 

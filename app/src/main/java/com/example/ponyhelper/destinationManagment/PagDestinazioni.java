@@ -165,6 +165,7 @@ public class PagDestinazioni extends NavigationActivity {
             } else {
                 //passa a pagmoddest
                 Intent openPagModDest = new Intent(PagDestinazioni.this, PagModificaDestinazione.class);
+                openPagModDest.putExtra("aggiornamento", false);
                 startActivity(openPagModDest);
             }
         }
