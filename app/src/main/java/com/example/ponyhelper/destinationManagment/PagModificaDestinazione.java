@@ -247,11 +247,6 @@ public class PagModificaDestinazione extends AppCompatActivity {
         }
     }
 
-    private void returnToPagDestinazioni() {
-        finish();
-        Intent returnToPagDestinazioni = new Intent(PagModificaDestinazione.this, PagDestinazioni.class);
-        startActivity(returnToPagDestinazioni);
-    }
 
     private void updateGPS(){
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED &&
@@ -268,7 +263,10 @@ public class PagModificaDestinazione extends AppCompatActivity {
             });
         }else{
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, FINE_LOCATION_PERMISSION_CODE);
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+                                                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                                                    Manifest.permission.ACCESS_BACKGROUND_LOCATION},
+                                    FINE_LOCATION_PERMISSION_CODE);
             }
         }
     }
