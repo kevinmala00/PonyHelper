@@ -127,12 +127,12 @@
                       app:layout_constraintTop_toBottomOf="@id/rv_destinazioni">
                       <ImageButton
                           android:id="@+id/b_aggiunginDestinazione"
+                          style="@android:style/Widget.DeviceDefault.Light.ImageButton"
                           android:layout_width="0dp"
                           android:layout_height="wrap_content"
                           android:layout_weight="1"
                           android:paddingVertical="4dp"
                           android:layout_marginTop="3dp"
-                          android:background="@drawable/rounded_transparent_light"
                           android:contentDescription="@string/content_description_bottoneaggiungientrata"
                           app:srcCompat="@drawable/ic_add"
                           tools:ignore="TouchTargetSizeCheck"
