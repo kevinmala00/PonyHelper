@@ -21,6 +21,7 @@ public class DbString {
             ", UNIQUE (email)\n" +
             ");";
 
+
     /**
      * strigna di creazione della tabella entrate
      */
@@ -173,6 +174,15 @@ public class DbString {
             ", costo_carburante REAL DEFAULT 0\n" +
             ", consumo_medio REAL DEFAULT 0\n" +
             ", PRIMARY KEY(username, mese_anno)" +
+            ", FOREIGN KEY (username) REFERENCES ACCOUNT(username) ON DELETE CASCADE ON UPDATE CASCADE\n" +
+            ");";
+
+
+    public static final String CREATION_MENU = "CREATE TABLE IF NOT EXISTS MENU(\n" +
+            "username TEXT NOT NULL\n" +
+            ", nome TEXT NOT NULL\n" +
+            ", url TEXT NOT NULL\n" +
+            ", PRIMARY KEY(username, nome)" +
             ", FOREIGN KEY (username) REFERENCES ACCOUNT(username) ON DELETE CASCADE ON UPDATE CASCADE\n" +
             ");";
 
