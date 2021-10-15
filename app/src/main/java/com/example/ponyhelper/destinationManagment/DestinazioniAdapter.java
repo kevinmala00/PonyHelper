@@ -64,7 +64,7 @@ public class DestinazioniAdapter extends RecyclerView.Adapter<DestinazioniAdapte
         tvIndirizzoCompleto.setText(indirirzzo);
 
         TextView tvDataOraUltimaMod= holder.tvDataOraUltimaMod;
-        String dataOraMod = destinazione.getDataUltimaModifica().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\t\t" + destinazione.getOraUltimaModifica().format(DateTimeFormatter.ofPattern("HH : mm"));
+        String dataOraMod = destinazione.getDataUltimaModifica().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\t\t" + destinazione.getOraUltimaModifica().format(DateTimeFormatter.ofPattern("HH:mm"));
         tvDataOraUltimaMod.setText(dataOraMod);
 
         TextView tvMancia= holder.tvMancia;

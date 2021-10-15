@@ -159,7 +159,7 @@ public class Indirizzo {
     }
 
     public String toStringViaCivico(){
-        return via + ", " + civico;
+        return via + "," + civico;
     }
 
     public void setViaFromViaCivico(String ViaCivico){

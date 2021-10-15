@@ -32,7 +32,6 @@ public class PagDestinazioni extends NavigationActivity {
     private DestinazioniAdapter destinazioniAdapter;
 
     private EditText etSearchDestinazione;
-    private GpsTracker gpsTracker;
     private RecyclerView rvDestinazioni;
 
     Toolbar toolbar;
