@@ -137,6 +137,7 @@ public class HomePage extends NavigationActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        navigationView.setCheckedItem(R.id.nav_item_home);
         try {
 
             //otennego i dati dell'account attivo
