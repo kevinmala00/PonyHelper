@@ -410,7 +410,7 @@ public class PagEntrate extends NavigationActivity {
                 etConsumoMedio=dialogModCosti.findViewById(R.id.et_consumoMedioModCosti);
                 bSalvaCosti=dialogModCosti.findViewById(R.id.b_salvaModCosti);
 
-                dialogModCosti.show();
+
 
                 Costo oldCosto = null;
                 try {
@@ -449,6 +449,8 @@ public class PagEntrate extends NavigationActivity {
                                 double consumoMedio = Double.parseDouble(String.valueOf(etConsumoMedio.getText()));
                                 Costo costo = new Costo(stringMeseAnno, costoCarburante, consumoMedio);
                                 dbhelper.modCostiConsumi(account, costo);
+                                Toast.makeText(PagEntrate.this, "Costi aggiornati con successo", Toast.LENGTH_SHORT).show();
+                                dialogModCosti.dismiss();
 
 
                             } catch (Exception e) {
@@ -458,9 +460,7 @@ public class PagEntrate extends NavigationActivity {
                         }
                     }
                 });
-
-
-
+                dialogModCosti.show();
             }
         }
     };

@@ -494,6 +494,7 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor rs= db.rawQuery(DbString.selectCostiMensili, new String[]{username, meseAnno});
         if(rs.getCount()>0){
+            rs.moveToFirst();
             return  new Costo(rs.getString(1),
                     rs.getDouble(2),
                     rs.getDouble(3));
