@@ -131,14 +131,15 @@ public class PagEntrate extends NavigationActivity {
 
 
             try{
-
-                listEntrate = dbhelper.getAllEntrateMese(meseAnnoSel, account.getUsername());
-                if(listEntrate.isEmpty()){
-                    Toast.makeText(PagEntrate.this, "Nessuna entrata presente per il mese selezionato!", Toast.LENGTH_SHORT).show();
+                if(account!=null){
+                    listEntrate = dbhelper.getAllEntrateMese(meseAnnoSel, account.getUsername());
+                    if(listEntrate.isEmpty()){
+                        Toast.makeText(PagEntrate.this, "Nessuna entrata presente per il mese selezionato!", Toast.LENGTH_SHORT).show();
+                    }
+                    entrateAdapter = new EntrateAdapter(PagEntrate.this, listEntrate, account.getUsername());
+                    rvEntrate.setAdapter(entrateAdapter);
+                    rvEntrate.setLayoutManager(new LinearLayoutManager(this));
                 }
-                entrateAdapter = new EntrateAdapter(PagEntrate.this, listEntrate, account.getUsername());
-                rvEntrate.setAdapter(entrateAdapter);
-                rvEntrate.setLayoutManager(new LinearLayoutManager(this));
             }catch (Exception e) {
                 e.printStackTrace();
                 Toast.makeText(PagEntrate.this, e.getMessage(), Toast.LENGTH_SHORT).show();
