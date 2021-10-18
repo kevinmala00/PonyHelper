@@ -133,17 +133,21 @@ public class PagDestinazioni extends NavigationActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        try {
-            //otenngo la lista di destinazione dal database
-            listDestinazione = dbhelper.getAllDestinazioni(account);
+        if(account == null){
 
-            //popolo la recyclerview
-            destinazioniAdapter = new DestinazioniAdapter(listDestinazione, PagDestinazioni.this, account.getUsername());
-            rvDestinazioni.setAdapter(destinazioniAdapter);
-            rvDestinazioni.setLayoutManager(new LinearLayoutManager(this));
-        }catch (Exception e){
-            Toast.makeText(PagDestinazioni.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
+        }else {
+            try {
+                //otenngo la lista di destinazione dal database
+                listDestinazione = dbhelper.getAllDestinazioni(account);
+
+                //popolo la recyclerview
+                destinazioniAdapter = new DestinazioniAdapter(listDestinazione, PagDestinazioni.this, account.getUsername());
+                rvDestinazioni.setAdapter(destinazioniAdapter);
+                rvDestinazioni.setLayoutManager(new LinearLayoutManager(this));
+            } catch (Exception e) {
+                Toast.makeText(PagDestinazioni.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
         }
     }
 
