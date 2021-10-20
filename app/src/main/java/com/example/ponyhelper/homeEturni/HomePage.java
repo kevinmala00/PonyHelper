@@ -22,6 +22,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -29,8 +30,8 @@ import java.util.Locale;
 public class HomePage extends NavigationActivity {
     private PonyAccount account;
     private DbHelper dbhelper;
-    private List<Turno> turniSettimanali;
-    private List<Turno> newTurniSettimanali;
+    private List<Turno> turniSettimanali = new ArrayList<>();
+    private List<Turno> newTurniSettimanali = new ArrayList<>();
 
     Toolbar toolbar;
     ActionBarDrawerToggle toggle;
@@ -151,7 +152,6 @@ public class HomePage extends NavigationActivity {
             //totmensile con i ricavi netti mensili
             String entrateMensili = "ENTRATE MENSILI:\t\t" + dbhelper.getTotMensile(meseAnnoCurr, account.getUsername()) + "\t\t€";
             tvEntrateMensili.setText(entrateMensili);
-
 
             //ottengo la lista dei turni settimanali
             newTurniSettimanali = dbhelper.getTurniFromInterval(account.getUsername(),
