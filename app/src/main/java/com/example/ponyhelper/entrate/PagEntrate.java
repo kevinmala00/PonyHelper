@@ -129,9 +129,9 @@ public class PagEntrate extends NavigationActivity {
             ibPreviousMonth.setOnClickListener(previousMonth);
 
 
-
             try{
                 if(account!=null){
+
                     listEntrate = dbhelper.getAllEntrateMese(meseAnnoSel, account.getUsername());
                     if(listEntrate.isEmpty()){
                         Toast.makeText(PagEntrate.this, "Nessuna entrata presente per il mese selezionato!", Toast.LENGTH_SHORT).show();
@@ -154,17 +154,21 @@ public class PagEntrate extends NavigationActivity {
     View.OnClickListener previousMonth = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            meseAnnoSel=meseAnnoSel.minusMonths(1);
-            updateMeseAnnoTextView(meseAnnoSel);
-            try{
-                updateAllEntrateToList(dbhelper.getAllEntrateMese(meseAnnoSel, account.getUsername()));
-                if(listEntrate.isEmpty()){
-                    Toast.makeText(PagEntrate.this, "Nessuna entrata presente per il mese selezionato!", Toast.LENGTH_SHORT).show();
-                }
+            if(account == null){
+                Toast.makeText(PagEntrate.this, "Effettua il login o registrati", Toast.LENGTH_SHORT).show();
+            }else {
+                meseAnnoSel = meseAnnoSel.minusMonths(1);
+                updateMeseAnnoTextView(meseAnnoSel);
+                try {
+                    updateAllEntrateToList(dbhelper.getAllEntrateMese(meseAnnoSel, account.getUsername()));
+                    if (listEntrate.isEmpty()) {
+                        Toast.makeText(PagEntrate.this, "Nessuna entrata presente per il mese selezionato!", Toast.LENGTH_SHORT).show();
+                    }
 
-            }catch (Exception e){
-                e.printStackTrace();
-                Toast.makeText(PagEntrate.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(PagEntrate.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         }
     };
@@ -172,16 +176,21 @@ public class PagEntrate extends NavigationActivity {
     View.OnClickListener nextMonth = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            meseAnnoSel=meseAnnoSel.plusMonths(1);
-            updateMeseAnnoTextView(meseAnnoSel);
-            try{
-                updateAllEntrateToList(dbhelper.getAllEntrateMese(meseAnnoSel, account.getUsername()));
-                if(listEntrate.isEmpty()){
-                    Toast.makeText(PagEntrate.this, "Nessuna entrata presente per il mese selezionato!", Toast.LENGTH_SHORT).show();
+            if(account == null){
+                Toast.makeText(PagEntrate.this, "Effettua il login o registrati", Toast.LENGTH_SHORT).show();
+            }else {
+
+                meseAnnoSel = meseAnnoSel.plusMonths(1);
+                updateMeseAnnoTextView(meseAnnoSel);
+                try {
+                    updateAllEntrateToList(dbhelper.getAllEntrateMese(meseAnnoSel, account.getUsername()));
+                    if (listEntrate.isEmpty()) {
+                        Toast.makeText(PagEntrate.this, "Nessuna entrata presente per il mese selezionato!", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(PagEntrate.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-            }catch (Exception e){
-                e.printStackTrace();
-                Toast.makeText(PagEntrate.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     };
@@ -396,7 +405,7 @@ public class PagEntrate extends NavigationActivity {
         @Override
         public void onClick(View v) {
             if(account==null){
-                Toast.makeText(PagEntrate.this, "Effettua il login o registrati per aggiungere un'entrata", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PagEntrate.this, "Effettua il login o registrati per modificare i costi", Toast.LENGTH_SHORT).show();
             }
             else{
                 dialogModCosti = new Dialog(PagEntrate.this);
@@ -468,16 +477,20 @@ public class PagEntrate extends NavigationActivity {
     View.OnClickListener searchEntrata = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            String searchedEntrata = String.valueOf(etSearchEntrata.getText());
-            try {
+            if(account == null){
+                Toast.makeText(PagEntrate.this, "Effettua il login o registrati", Toast.LENGTH_SHORT).show();
+            }else {
+                String searchedEntrata = String.valueOf(etSearchEntrata.getText());
+                try {
 
-                updateAllEntrateToList(dbhelper.searchEntrata(searchedEntrata, account.getUsername()));
-            }catch(Exception e){
-                e.printStackTrace();
-                AlertDialog.Builder builder = new AlertDialog.Builder(PagEntrate.this);
-                builder.setTitle("ERRORE");
-                builder.setMessage(e.getMessage());
-                builder.show();
+                    updateAllEntrateToList(dbhelper.searchEntrata(searchedEntrata, account.getUsername()));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(PagEntrate.this);
+                    builder.setTitle("ERRORE");
+                    builder.setMessage(e.getMessage());
+                    builder.show();
+                }
             }
         }
     };
