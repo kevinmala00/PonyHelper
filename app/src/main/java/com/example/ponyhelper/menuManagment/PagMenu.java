@@ -38,7 +38,7 @@ public class PagMenu extends NavigationActivity {
 
         //setto la navigation view
         navigationView = findViewById(R.id.navigation_view);
-        navigationView.setCheckedItem(R.id.nav_item_menu);
+        //navigationView.setCheckedItem(R.id.nav_item_menu);
         navigationView.setNavigationItemSelectedListener(this);
 
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,

@@ -23,10 +23,11 @@
             android:id="@+id/nav_item_entrate"
             android:icon="@drawable/ic_entrate"
             android:title="@string/entrate"/>
-        <item
+        <!-- <item
             android:id="@+id/nav_item_menu"
             android:icon="@drawable/ic_restourant_menu"
             android:title="@string/menu"/>
+            -->
     </group>
 
     <group

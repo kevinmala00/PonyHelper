@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:textSize="16sp"
     android:textAlignment="center"
-    android:paddingHorizontal="4dp"
-    android:theme="@style/Theme.PonyHelper">
+    android:paddingHorizontal="4dp">
 
 </TextView>

@@ -11,5 +11,6 @@
     <color name="red">#ff0000</color>
     <color name="lightskyblue">#87cefa</color>
     <color name="arancio_titolo">@color/holo_orange_dark</color>
+    <color name="arancio_titolo_trasparenza0">#80ff8800</color>
     <color name="azzurro_sottotitolo">#0000ff</color>
 </resources>

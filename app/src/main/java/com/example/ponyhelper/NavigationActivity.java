@@ -2,11 +2,14 @@ package com.example.ponyhelper;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -26,6 +29,12 @@ public abstract class NavigationActivity extends AppCompatActivity implements Na
 
     protected DrawerLayout drawerLayout;
     protected  NavigationView navigationView;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+    }
 
     /**
      * Called when an item in the navigation menu is selected.
@@ -61,10 +70,10 @@ public abstract class NavigationActivity extends AppCompatActivity implements Na
                 launchActivity(this, PagEntrate.class );
                 break;
             }
-            case R.id.nav_item_menu: {
-                launchActivity(this, PagMenu.class );
-                break;
-            }
+            //case R.id.nav_item_menu: {
+            //    launchActivity(this, PagMenu.class );
+            //    break;
+            //}
             case R.id.nav_item_profilo: {
                 launchActivity(this, PagProfilo.class );
                 break;
