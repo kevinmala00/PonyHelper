@@ -108,7 +108,8 @@ public class HomePage extends NavigationActivity {
             tvNavEmail.setText(account.getEmail());
 
             //totmensile con i ricavi netti mensili
-            String entrateMensili = "ENTRATE MENSILI:\t\t" + dbhelper.getTotMensile(meseAnnoCurr, account.getUsername()) + "\t\t€";
+            Double entrateNetteMensili = (double)Math.round(dbhelper.getTotMensile(meseAnnoCurr, account.getUsername()) * 100d) / 100d;
+            String entrateMensili = "ENTRATE NETTE MENSILI:\t\t" + entrateNetteMensili + "\t\t€";
             tvEntrateMensili.setText(entrateMensili);
 
 
@@ -150,7 +151,8 @@ public class HomePage extends NavigationActivity {
             navigationView.setCheckedItem(R.id.nav_item_home);
 
             //totmensile con i ricavi netti mensili
-            String entrateMensili = "ENTRATE MENSILI:\t\t" + dbhelper.getTotMensile(meseAnnoCurr, account.getUsername()) + "\t\t€";
+            Double entrateNetteMensili = (double)Math.round(dbhelper.getTotMensile(meseAnnoCurr, account.getUsername()) * 100d) / 100d;
+            String entrateMensili = "ENTRATE NETTE MENSILI:\t\t" + entrateNetteMensili + "\t\t€";
             tvEntrateMensili.setText(entrateMensili);
 
             //ottengo la lista dei turni settimanali
@@ -158,12 +160,9 @@ public class HomePage extends NavigationActivity {
                     UtilClass.getDayOfDataWeek(LocalDate.now(), DayOfWeek.MONDAY),
                     UtilClass.getDayOfDataWeek(LocalDate.now(), DayOfWeek.SUNDAY));
 
-            //popolo la recycler view con la lista dei turni settimanali
-            updateDestinazioniList(newTurniSettimanali);
-
-
-
-
+            turniAdapter = new TurniAdapter(newTurniSettimanali, HomePage.this, account.getUsername());
+            rvTurniSettimanali.setAdapter(turniAdapter);
+            rvTurniSettimanali.setLayoutManager(new LinearLayoutManager(this));
 
         } catch (Exception e) {
             e.printStackTrace();
