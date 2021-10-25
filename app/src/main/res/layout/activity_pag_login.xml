@@ -100,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/round_red_corner"
+                android:background="@drawable/only_rounded_shape"
                 android:fontFamily="@font/droid_sans"
                 android:text="@string/login"
                 android:textColor="@color/white"

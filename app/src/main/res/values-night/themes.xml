@@ -17,5 +17,8 @@
 
         <!-- Customize your theme here. -->
         <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="buttonStyle">@android:style/Widget.DeviceDefault.Light.Button</item>
+        <item name="android:buttonCornerRadius">10dp</item>
+
     </style>
 </resources>
