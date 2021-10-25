@@ -3,7 +3,7 @@
     <style name="Theme.PonyHelper" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/arancio_titolo</item>
+        <item name="colorPrimary">#80ff8800</item>
         <item name="colorPrimaryVariant">#80ff8800</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
