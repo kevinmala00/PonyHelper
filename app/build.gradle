@@ -26,9 +26,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
 
     }
-    aaptOptions {
-        cruncherEnabled = false
-    }
 }
 
 
@@ -47,6 +44,6 @@ dependencies {
     implementation 'org.jetbrains:annotations:22.0.0'
     implementation 'com.google.android.gms:play-services-location:18.0.0'
 
-    
+
 
 }
