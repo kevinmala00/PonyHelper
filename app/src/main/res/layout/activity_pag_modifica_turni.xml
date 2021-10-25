@@ -161,14 +161,14 @@
 
             <Button
                 android:id="@+id/b_modificaturni"
+                style="@android:style/Widget.DeviceDefault.Light.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:background="@drawable/round_red_corner"
                 android:fontFamily="@font/droid_sans"
                 android:text="@string/modifica"
+                android:background="@drawable/rounded_transparent_light"
                 android:textSize="16sp"
-                app:icon="@drawable/round_red_corner"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
