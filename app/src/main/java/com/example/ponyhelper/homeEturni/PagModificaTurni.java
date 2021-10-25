@@ -101,9 +101,9 @@ public class PagModificaTurni extends NavigationActivity {
         }
 
         //CREO E SETTO GLI SPINNER ADAPTER
-        ArrayAdapter<String> spinnerAdapterGiorni = new ArrayAdapter<>(getApplicationContext(), R.layout.spinner_item, giorniSettimana);
+        ArrayAdapter<String> spinnerAdapterGiorni = new ArrayAdapter<>(PagModificaTurni.this, R.layout.spinner_item, giorniSettimana);
         sGiorno.setAdapter(spinnerAdapterGiorni);
-        ArrayAdapter<String> spinnerAdapterOre = new ArrayAdapter<>(getApplicationContext(), R.layout.spinner_item, getResources().getStringArray(R.array.orari));
+        ArrayAdapter<String> spinnerAdapterOre = new ArrayAdapter<>(PagModificaTurni.this, R.layout.spinner_item, getResources().getStringArray(R.array.orari));
         sOraInizio.setAdapter(spinnerAdapterOre);
         sOraFine.setAdapter(spinnerAdapterOre);
 
