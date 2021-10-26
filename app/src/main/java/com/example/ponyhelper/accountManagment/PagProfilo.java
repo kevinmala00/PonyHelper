@@ -104,31 +104,34 @@ public class PagProfilo extends NavigationActivity {
     View.OnClickListener deleteProfile = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            AlertDialog.Builder dialog = new AlertDialog.Builder(PagProfilo.this);
-            dialog.setTitle("ELIMINAZIONE DEFINITIVA ACCOUNT");
-            dialog.setMessage("Sei sicuro di voler eliminare definitivamente l'account con username: " + account.getUsername() + "?\n" +
-                    "In caso di coferma l'app verrà terminata");
-            dialog.setPositiveButton("CONFERMA", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    ProfileDeleter profileDeleter = new ProfileDeleter();
-                    try {
-                        profileDeleter.deleteProfile(PagProfilo.this, account);
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        Toast.makeText(PagProfilo.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            if(account==null){
+                Toast.makeText(PagProfilo.this, "Non esiste alcun account attivo. Impossibile effettuare l'eliminazione", Toast.LENGTH_SHORT).show();
+            }else{
+                AlertDialog.Builder dialog = new AlertDialog.Builder(PagProfilo.this);
+                dialog.setTitle("ELIMINAZIONE DEFINITIVA ACCOUNT");
+                dialog.setMessage("Sei sicuro di voler eliminare definitivamente l'account con username: " + account.getUsername() + "?\n" +
+                        "In caso di coferma l'app verrà terminata");
+                dialog.setPositiveButton("CONFERMA", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ProfileDeleter profileDeleter = new ProfileDeleter();
+                        try {
+                            profileDeleter.deleteProfile(PagProfilo.this, account);
+                            finishAffinity();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Toast.makeText(PagProfilo.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
                     }
-                }
-            });
-            dialog.setNegativeButton("ANNULLA", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-            dialog.show();
-
+                });
+                dialog.setNegativeButton("ANNULLA", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+            }
         }
     };
 
