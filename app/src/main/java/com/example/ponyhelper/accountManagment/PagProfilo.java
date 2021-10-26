@@ -1,8 +1,11 @@
 package com.example.ponyhelper.accountManagment;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -56,6 +59,7 @@ public class PagProfilo extends NavigationActivity {
         ImageButton bLogout = findViewById(R.id.b_logoutPagProfilo);
         Button bLogin = findViewById(R.id.b_loginPagProfilo);
         Button bRegistrati = findViewById(R.id.b_registratiPagProfilo);
+        ImageButton bDeleteProfile = findViewById(R.id.b_deleteProfilePagProfilo);
 
         View headerView=navigationView.getHeaderView(0);
         TextView tvNavUsername= headerView.findViewById(R.id.tv_usernameNavMenu);
@@ -79,10 +83,11 @@ public class PagProfilo extends NavigationActivity {
         } catch (Exception e) {
             Toast.makeText(PagProfilo.this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
-        //SETTO L'ONCLICKLISTENER DI B_LOGOUT
+        //SETTO L'ONCLICKLISTENER D
         bLogout.setOnClickListener(logout);
         bLogin.setOnClickListener(login);
         bRegistrati.setOnClickListener(registrati);
+        bDeleteProfile.setOnClickListener(deleteProfile);
 
 
     }
@@ -91,7 +96,39 @@ public class PagProfilo extends NavigationActivity {
     View.OnClickListener logout = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            UtilClass.logout(PagProfilo.this, account);
+            LogoutClass logoutClass= new LogoutClass();
+            logoutClass.logout(PagProfilo.this, account);
+        }
+    };
+
+    View.OnClickListener deleteProfile = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(PagProfilo.this);
+            dialog.setTitle("ELIMINAZIONE DEFINITIVA ACCOUNT");
+            dialog.setMessage("Sei sicuro di voler eliminare definitivamente l'account con username: " + account.getUsername() + "?\n" +
+                    "In caso di coferma l'app verrà terminata");
+            dialog.setPositiveButton("CONFERMA", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    ProfileDeleter profileDeleter = new ProfileDeleter();
+                    try {
+                        profileDeleter.deleteProfile(PagProfilo.this, account);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Toast.makeText(PagProfilo.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            dialog.setNegativeButton("ANNULLA", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.show();
+
         }
     };
 
