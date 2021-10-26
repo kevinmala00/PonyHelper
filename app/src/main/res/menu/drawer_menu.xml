@@ -49,6 +49,11 @@
             android:id="@+id/nav_item_info"
             android:title="@string/info"
             android:icon="@drawable/ic_info"/>
+        <item
+            android:id="@+id/nav_item_contattaci"
+            android:title="Contatta supporto"
+            android:icon="@drawable/ic_contact_support_24"/>
+
     </group>
 
 
