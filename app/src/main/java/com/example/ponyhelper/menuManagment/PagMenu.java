@@ -12,7 +12,6 @@ import com.example.ponyhelper.NavigationActivity;
 import com.example.ponyhelper.R;
 import com.example.ponyhelper.body.PonyAccount;
 import com.example.ponyhelper.datamanagment.DbHelper;
-import com.example.ponyhelper.infoEaiutoSupporto.PagInfo;
 import com.google.android.material.navigation.NavigationView;
 
 public class PagMenu extends NavigationActivity {

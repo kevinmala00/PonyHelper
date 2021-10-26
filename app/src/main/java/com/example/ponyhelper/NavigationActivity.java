@@ -19,8 +19,7 @@ import com.example.ponyhelper.destinationManagment.PagDestinazioni;
 import com.example.ponyhelper.entrate.PagEntrate;
 import com.example.ponyhelper.homeEturni.HomePage;
 import com.example.ponyhelper.homeEturni.PagModificaTurni;
-import com.example.ponyhelper.infoEaiutoSupporto.PagInfo;
-import com.example.ponyhelper.menuManagment.PagMenu;
+import com.example.ponyhelper.info.PagInfo;
 import com.example.ponyhelper.util.UtilClass;
 import com.google.android.material.navigation.NavigationView;
 

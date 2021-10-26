@@ -12,7 +12,7 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -22,76 +22,68 @@
         android:roundIcon="@mipmap/ic_logo_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PonyHelper">
+        <activity
+            android:name=".Supporto.SupportActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.mlkit.vision.DEPENDENCIES"
-            android:value="barcode"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:value="barcode" />
 
         <activity
             android:name=".menuManagment.QRScannerPage"
             android:exported="true" />
-
         <activity
             android:name=".destinationManagment.PagModificaDestinazione"
             android:exported="true"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".accountManagment.PagProfilo"
             android:exported="true"
             android:screenOrientation="portrait" />
-
         <activity
-            android:name=".infoEaiutoSupporto.PagInfo"
+            android:name=".info.PagInfo"
             android:exported="true"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".menuManagment.PagMenu"
             android:exported="true"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".entrate.PagEntrate"
             android:exported="true"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".homeEturni.PagModificaTurni"
             android:exported="true"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".destinationManagment.PagDestinazioni"
             android:exported="true"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".homeEturni.HomePage"
             android:exported="true"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".accountManagment.PagLogin"
             android:exported="true"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".accountManagment.PagReg"
             android:exported="true"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".IntroPage"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
