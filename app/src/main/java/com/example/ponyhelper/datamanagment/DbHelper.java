@@ -831,4 +831,12 @@ public class DbHelper extends SQLiteOpenHelper {
         }
 
     }
+
+    public void deleteProfile(String username) throws Exception {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result = db.delete("ACCOUNT", "username LIKE ?", new String[]{username});
+        if(result != 1){
+            throw erroriInterni;
+        }
+    }
 }
