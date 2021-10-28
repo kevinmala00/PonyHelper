@@ -277,4 +277,5 @@
     <string name="content_description_b_openmaps_destinazione">bottone che apre google maps con l\'indirizzo della destinazione</string>
     <string name="ultima_modifica">Ultima modifica</string>
     <string name="info_destinazione">Info destinazione</string>
+    <string name="supporto">Supporto</string>
 </resources>

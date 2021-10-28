@@ -22,9 +22,7 @@
         android:roundIcon="@mipmap/ic_logo_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PonyHelper">
-        <activity
-            android:name=".Supporto.SupportActivity"
-            android:exported="false" />
+
 
         <meta-data
             android:name="com.google.mlkit.vision.DEPENDENCIES"
