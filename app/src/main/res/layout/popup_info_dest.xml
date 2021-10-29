@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/rounded_orange"
-    android:padding="5dp">
+    android:padding="10dp">
 
 
     <TextView
@@ -20,11 +20,11 @@
 
     <TextView
         android:id="@+id/tv_indirizzoInfoDestLabel"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tv_titleInfoDest"
-        android:layout_marginStart="10dp"
+
         android:layout_marginTop="10dp"
         android:text="@string/indirizzo" />
 
@@ -38,14 +38,13 @@
 
     <TextView
         android:id="@+id/tv_dataOraUltimaModificaInfoDestLabel"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/tv_indirizzoInfoDest"
-        android:text="@string/ultima_modifica"
-        android:layout_marginStart="10dp"
+        android:layout_alignParentStart="true"
+
         android:layout_marginTop="10dp"
-        />
+        android:text="@string/ultima_modifica" />
 
     <TextView
         android:id="@+id/tv_dataOraUltimaModificaInfoDest"
@@ -57,12 +56,11 @@
 
     <TextView
         android:id="@+id/tv_manciaInfoDestLabel"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tv_dataOraUltimaModificaInfoDest"
         android:text="@string/mancia"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         />
 
@@ -79,10 +77,10 @@
         android:id="@+id/tv_latitudineInfoDestLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_below="@id/tv_manciaInfoDest"
-        android:text="Latitudine"
-        android:layout_marginTop="10dp"/>
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:text="Latitudine" />
 
     <TextView
         android:id="@+id/tv_latitudineInfoDest"
@@ -96,10 +94,10 @@
         android:id="@+id/tv_longitudineInfoDestLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_below="@id/tv_latitudineInfoDest"
-        android:text="Latitudine"
-        android:layout_marginTop="10dp"/>
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:text="Longitudine" />
     <TextView
         android:id="@+id/tv_longitudineInfoDest"
         android:layout_width="match_parent"
