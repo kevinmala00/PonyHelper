@@ -90,8 +90,8 @@ public class PagModificaDestinazione extends AppCompatActivity {
                     UtilClass.unixTimeToLocalDate(datiPassati.getLong("dataUltimaModifica")),
                     LocalTime.parse(datiPassati.getString("oraUltimaModifica"), DateTimeFormatter.ofPattern("HH:mm")),
                     datiPassati.getDouble("mancia"),
-                    datiPassati.getDouble("latitudine"),
                     datiPassati.getDouble("longitudine"),
+                    datiPassati.getDouble("latitudine"),
                     datiPassati.getString("note")
             );
 
@@ -208,6 +208,8 @@ public class PagModificaDestinazione extends AppCompatActivity {
                 try {
                     DbHelper dbHelper = new DbHelper(PagModificaDestinazione.this);
                     if (mAggiornamento) {
+                        mDestinazione.setDataUltimaModifica(LocalDate.now());
+                        mDestinazione.setOraUltimaModifica(LocalTime.now());
                         dbHelper.updateDestinazione(dbHelper.getActiveAccount(), mOldDestinazione, mDestinazione);
                         Toast.makeText(PagModificaDestinazione.this, "Destinazione aggiornata correttemente", Toast.LENGTH_SHORT).show();
                     } else {
