@@ -2,9 +2,17 @@ package com.example.ponyhelper.info;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.FileProvider;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,10 +21,14 @@ import com.example.ponyhelper.R;
 import com.example.ponyhelper.body.PonyAccount;
 import com.example.ponyhelper.datamanagment.DbHelper;
 
+import java.io.File;
+import java.util.List;
+
 public class PagInfo extends NavigationActivity {
     Toolbar toolbar;
     ActionBarDrawerToggle toggle;
     private PonyAccount account;
+    Button bOpenPresentazione;
 
 
     @Override
@@ -62,5 +74,33 @@ public class PagInfo extends NavigationActivity {
             Toast.makeText(PagInfo.this, e.getMessage(), Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
+        //finally {
+        //    bOpenPresentazione= findViewById(R.id.b_openPresentazione);
+        //    bOpenPresentazione.setOnClickListener(new View.OnClickListener() {
+        //        @Override
+        //        public void onClick(View v) {
+        //            openPPT("files/PresentazionePonyHelper.pptx");
+        //        }
+        //    });
+        //}
     }
+
+
+    //private void openPPT(final String path) {
+    //    File file = new File(path);
+    //    Uri uri ;
+    //    uri = FileProvider.getUriForFile(PagInfo.this, PagInfo.this.getPackageName() + ".provider", file);
+    //
+    //    Intent intent = new Intent(Intent.ACTION_VIEW);
+    //    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    //    intent.setDataAndType(uri, "application/vnd.ms-powerpoint");
+    //    intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+    //    try {
+    //        startActivity(intent);
+    //    } catch (ActivityNotFoundException e) {
+    //        Toast.makeText(this, "Application not found", Toast.LENGTH_SHORT).show();
+    //    }
+    //}
 }
+
+

@@ -152,41 +152,7 @@
                         android:textSize="16sp"
                         android:text="@string/info_entrate"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/bangers"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
-                        android:text="@string/pagina_menu"
-                        android:textSize="20sp" />
 
-                    <TextView
-                        android:id="@+id/tv_messMenuPagInfo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
-                        android:textSize="16sp"
-                        android:text="@string/info_menu"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/bangers"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
-                        android:text="@string/calcolo_totale"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/tv_messCalcolaTotPagInfo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
-                        android:textSize="16sp"
-                        android:text="@string/info_calcolotot"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -205,6 +171,49 @@
                         android:paddingEnd="15dp"
                         android:textSize="16sp"
                         android:text="@string/info_profilo"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bangers"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:text="@string/contatta_supporto"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tv_messContattaSupportoPagInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:textSize="16sp"
+                        android:text="@string/info_contatta_supporto"/>
+
+
+                    <!--
+                    <TextView
+                        android:id="@+id/tv_messDownloadPresentazione"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:textSize="16sp"
+                        android:layout_marginTop="15dp"
+                        android:text="Clicca qui sotto per aprire la presentazione illustrativa di Pony Helper"/>
+
+                    <Button
+                        android:id="@+id/b_openPresentazione"
+                        style="@android:style/Widget.DeviceDefault.Light.Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="25dp"
+                        android:background="@drawable/only_rounded_shape"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Apri"
+                        android:textSize="16sp" />
+                        -->
 
                 </LinearLayout>
             </ScrollView>
