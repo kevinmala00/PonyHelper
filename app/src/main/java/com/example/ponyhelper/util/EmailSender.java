@@ -2,20 +2,20 @@ package com.example.ponyhelper.util;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 
 public class EmailSender {
-    public void sendMail(Activity activity, String to, String message, String subject){
+    public void sendMail(Activity activity, String destinatario, String oggetto){
 
 
 
-        Intent email = new Intent(Intent.ACTION_SEND);
-        email.putExtra(Intent.EXTRA_EMAIL, new String[]{ to});
-        email.putExtra(Intent.EXTRA_SUBJECT, subject);
-        email.putExtra(Intent.EXTRA_TEXT, message);
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:"));
+        intent.putExtra(Intent.EXTRA_EMAIL, destinatario);
+        intent.putExtra(Intent.EXTRA_SUBJECT, oggetto);
+        if (intent.resolveActivity(activity.getPackageManager()) != null) {
+            activity.startActivity(intent);
+        }
 
-        //need this to prompts email client only
-        email.setType("message/rfc822");
-
-        activity.startActivity(Intent.createChooser(email, "Choose an Email client :"));
     }
 }
