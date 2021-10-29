@@ -85,8 +85,7 @@ public abstract class NavigationActivity extends AppCompatActivity implements Na
                 EmailSender emailSender = new EmailSender();
                 emailSender.sendMail(NavigationActivity.this,
                         "ponyhelper@gmail.com",
-                        "",
-                        "CONTATTO SUPPORTO PONYHELPER");
+                        "CONTATTO SUPPORTO PONY HELPER");
                 break;
             }
         }
