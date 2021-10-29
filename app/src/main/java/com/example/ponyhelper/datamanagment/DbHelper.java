@@ -653,6 +653,7 @@ public class DbHelper extends SQLiteOpenHelper {
         cv.put("citta", destinazione.getIndirizzo().getCitta());
         cv.put("cap", destinazione.getIndirizzo().getCap());
         cv.put("provincia", destinazione.getIndirizzo().getProvincia());
+        cv.put("mancia", destinazione.getMancia());
         cv.put("latitudine", destinazione.getLatitudine());
         cv.put("longitudine", destinazione.getLongitudine());
         cv.put("note", destinazione.getNote());
