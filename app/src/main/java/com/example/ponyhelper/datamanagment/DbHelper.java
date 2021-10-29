@@ -780,7 +780,7 @@ public class DbHelper extends SQLiteOpenHelper {
         cvNew.put("provincia", newDestinazione.getIndirizzo().getProvincia());
         cvNew.put("latitudine", newDestinazione.getLatitudine());
         cvNew.put("longitudine", newDestinazione.getLongitudine());
-        cvNew.put("note", newDestinazione.getLongitudine());
+        cvNew.put("note", newDestinazione.getNote());
         
         int result = db.update("DESTINAZIONE", cvNew, "username LIKE ? AND indirizzo LIKE ? AND citta LIKE ?",
                 new String[]{account.getUsername(), oldDestinazione.getIndirizzo().toStringViaCivico(), oldDestinazione.getIndirizzo().getCitta()} );
