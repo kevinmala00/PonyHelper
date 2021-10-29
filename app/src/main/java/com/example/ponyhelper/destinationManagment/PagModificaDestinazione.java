@@ -6,17 +6,12 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
-import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,10 +28,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -56,7 +48,7 @@ public class PagModificaDestinazione extends AppCompatActivity {
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest locationRequest;
     private LocationCallback locationCallBack;
-    public static  final int FINE_LOCATION_PERMISSION_CODE = 100;
+    public static  final int LOCATION_PERMISSION_CODE = 100;
     public static  final int DEFAULT_UPDATE_INTERVAL = 3;
     public static  final int FAST_UPDATE_INTERVAL = 1;
 
@@ -250,8 +242,7 @@ public class PagModificaDestinazione extends AppCompatActivity {
 
     private void updateGPS(){
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)== PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION)== PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)== PackageManager.PERMISSION_GRANTED){
 
             mFusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
                 @Override
@@ -264,9 +255,8 @@ public class PagModificaDestinazione extends AppCompatActivity {
         }else{
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                 requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
-                                                    Manifest.permission.ACCESS_COARSE_LOCATION,
-                                                    Manifest.permission.ACCESS_BACKGROUND_LOCATION},
-                                    FINE_LOCATION_PERMISSION_CODE);
+                                                    Manifest.permission.ACCESS_COARSE_LOCATION},
+                        LOCATION_PERMISSION_CODE);
             }
         }
     }
@@ -280,15 +270,15 @@ public class PagModificaDestinazione extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch(requestCode){
-            case FINE_LOCATION_PERMISSION_CODE:
+            case LOCATION_PERMISSION_CODE:
                 if(grantResults[0]==PackageManager.PERMISSION_GRANTED){
                     updateGPS();
                 }else{
-                    Toast.makeText(this, "devi dare il paermesso di acesso alla posizione", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Devi fornire il permesso di acesso alla posizione", Toast.LENGTH_SHORT).show();
                 }
                 break;
             default:
-                throw new IllegalStateException("Unexpected value: " + requestCode);
+                throw new IllegalStateException("Valore inaspettato: " + requestCode);
         }
     }
 
