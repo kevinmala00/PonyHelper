@@ -47,7 +47,7 @@
             android:icon="@drawable/ic_info"/>
         <item
             android:id="@+id/nav_item_contattaci"
-            android:title="Contatta email supporto"
+            android:title="Contatta supporto"
             android:icon="@drawable/ic_contact_support_24"/>
 
     </group>
