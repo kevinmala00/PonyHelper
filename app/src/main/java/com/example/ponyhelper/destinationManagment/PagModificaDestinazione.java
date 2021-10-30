@@ -36,7 +36,7 @@ import java.time.format.DateTimeFormatter;
 
 public class PagModificaDestinazione extends AppCompatActivity {
     private EditText etIndirizzo, etCivico, etCitta, etProvincia, etCap, etNote, etMancia;
-    private TextView tvLatitudine, tvLongitudine;
+    private TextView tvLatitudine, tvLongitudine, tvTitle;
     private  ImageButton b_callBack, ibRefreshGps;
     private Button bSalva;
 
@@ -74,10 +74,13 @@ public class PagModificaDestinazione extends AppCompatActivity {
         tvLongitudine = findViewById(R.id.tv_longitudineModDest);
         ibRefreshGps = findViewById(R.id.ib_refreshGpsModDest);
         b_callBack= findViewById(R.id.ib_returnBack);
+        tvTitle = findViewById(R.id.tv_titlepopupModDestinazione);
+
 
         Bundle datiPassati = getIntent().getExtras();
         mAggiornamento = datiPassati.getBoolean("aggiornamento");
         if (mAggiornamento) {
+            tvTitle.setText("Modifica destinazione");
             Indirizzo oldIndirizzo = new Indirizzo();
             oldIndirizzo.setVia(datiPassati.getString("via"));
             oldIndirizzo.setCivico(datiPassati.getString("civico"));

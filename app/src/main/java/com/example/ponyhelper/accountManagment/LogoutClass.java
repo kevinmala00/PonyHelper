@@ -24,7 +24,7 @@ public class LogoutClass {
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle("LOGOUT");
-        builder.setMessage("Sei sicuro di voler effettuare il logout?");
+        builder.setMessage("Sei sicuro di voler effettuare il logout?\nIn caso di conferma l'app verrà terminata");
         builder.setPositiveButton("CONFERMA", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
