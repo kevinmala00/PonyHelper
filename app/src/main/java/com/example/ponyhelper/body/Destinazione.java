@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Destinazione {
+public class Destinazione implements Comparable<Destinazione>{
     Indirizzo indirizzo;
     LocalDate dataUltimaModifica;
     LocalTime oraUltimaModifica;
@@ -133,5 +133,28 @@ public class Destinazione {
                 ", latitudine=" + latitudine +
                 ", note='" + note + '\'' +
                 '}';
+    }
+
+    /**
+     * ordinati prima in basae alla data di ultima modifica poi in base all'ora di ultima modifica
+     * poi in ordine  di indirizzo
+     * @param d1 destinazione con cui deve avvenire il confronto
+     * @return positivo se segue, negativo se precede, 0 se uguali
+     */
+    @Override
+    public int compareTo(Destinazione d1) {
+        if(dataUltimaModifica.isBefore(d1.getDataUltimaModifica())){
+            return -1;
+        }else if(dataUltimaModifica.isAfter(d1.getDataUltimaModifica())){
+            return  1;
+        }else {
+            if(oraUltimaModifica.isBefore(d1.getOraUltimaModifica())){
+                return -1;
+            }else if(oraUltimaModifica.isAfter(d1.getOraUltimaModifica())){
+                return 1;
+            }else{
+                return indirizzo.compareTo(d1.getIndirizzo());
+            }
+        }
     }
 }

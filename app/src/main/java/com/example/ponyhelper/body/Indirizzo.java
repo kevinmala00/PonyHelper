@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 import java.util.Objects;
 
-public class Indirizzo {
+public class Indirizzo  implements  Comparable<Indirizzo>{
     int cap;
     String via;
     String civico;
@@ -170,5 +170,16 @@ public class Indirizzo {
     public void setCivicoFromViaCivico(String viaCivico){
         int position =  viaCivico.indexOf(',');
         civico =  viaCivico.substring(position+1);
+    }
+
+
+    /**
+     * in ordine alfabetico per indirizzo completo
+     * @param o oggetto indirizzo con cui deve avvenire il confronto
+     * @return neg se this precede valore passato, pos se succede, 0 se uguali
+     */
+    @Override
+    public int compareTo(Indirizzo o) {
+        return this.toStringFullAddress().compareTo(o.toStringFullAddress());
     }
 }
