@@ -15,6 +15,7 @@ import com.example.ponyhelper.R;
 import com.example.ponyhelper.body.PonyAccount;
 import com.example.ponyhelper.body.Turno;
 import com.example.ponyhelper.datamanagment.DbHelper;
+import com.example.ponyhelper.entrate.CalcoloStipendio;
 import com.example.ponyhelper.util.UtilClass;
 
 import java.time.DayOfWeek;
@@ -108,7 +109,8 @@ public class HomePage extends NavigationActivity {
             tvNavEmail.setText(account.getEmail());
 
             //totmensile con i ricavi netti mensili
-            Double entrateNetteMensili = (double)Math.round(dbhelper.getTotMensile(meseAnnoCurr, account.getUsername()) * 100d) / 100d;
+            CalcoloStipendio calcoloStipendio = new CalcoloStipendio(HomePage.this);
+            Double entrateNetteMensili = (double)Math.round(calcoloStipendio.calcolaStipendioNettoMensile(meseAnnoCurr, account.getUsername()) * 100d) / 100d;
             String entrateMensili = "ENTRATE NETTE MENSILI:\t\t" + entrateNetteMensili + "\t\t€";
             tvEntrateMensili.setText(entrateMensili);
 
@@ -151,7 +153,8 @@ public class HomePage extends NavigationActivity {
             navigationView.setCheckedItem(R.id.nav_item_home);
 
             //totmensile con i ricavi netti mensili
-            Double entrateNetteMensili = (double)Math.round(dbhelper.getTotMensile(meseAnnoCurr, account.getUsername()) * 100d) / 100d;
+            CalcoloStipendio calcoloStipendio = new CalcoloStipendio(HomePage.this);
+            Double entrateNetteMensili = (double)Math.round(calcoloStipendio.calcolaStipendioNettoMensile(meseAnnoCurr, account.getUsername()) * 100d) / 100d;
             String entrateMensili = "ENTRATE NETTE MENSILI:\t\t" + entrateNetteMensili + "\t\t€";
             tvEntrateMensili.setText(entrateMensili);
 

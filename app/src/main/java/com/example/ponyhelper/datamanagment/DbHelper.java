@@ -506,33 +506,7 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
-    /**
-     * software di calcolo delle entrate nettte mesili ovvero quelle lorde (entrate + mancia) - i costi [(kmtot / consumomedio) * costocarburante]
-     * @param meseAnno mese da analizzare
-     * @param username username dell'account
-     * @return ritorna le entrate mensili nette
-     */
-    public double getTotMensile(YearMonth meseAnno, String username){
-        List<Entrata> list;
-        double totMensile=0;
-        double kmMensili=0;
-        Costo costiMensili;
-        try {
-            list = this.getAllEntrateMese(meseAnno, username);
-            if(!list.isEmpty()){
-                for(Entrata e : list){
-                    totMensile+=(e.getEntrate()+e.getMancia());
-                    kmMensili+=e.getKm();
-                }
-                costiMensili = getCostiMensili(UtilClass.yearMonthToLocalLanguageString(meseAnno), username);
-                totMensile-=(kmMensili/costiMensili.getConsumoMedio())*costiMensili.getCostoCarburante();
-            }
-            return totMensile;
-        } catch (Exception e) {
-            return totMensile;
-        }
 
-    }
 
 
     //TURNI
