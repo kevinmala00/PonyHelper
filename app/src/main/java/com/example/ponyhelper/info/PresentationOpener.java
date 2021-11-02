@@ -33,12 +33,18 @@ public class PresentationOpener {
                 copyInputStreamToFile(inputStream, presentazione);
             }
 
+            if(presentazione.setReadOnly()){
+                powerPointOpener.openPPT(path);
+            }else{
+                throw new Exception("Errori interni. Ci scusiamo. Riprovare");
+            }
 
-            powerPointOpener.openPPT(path);
 
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

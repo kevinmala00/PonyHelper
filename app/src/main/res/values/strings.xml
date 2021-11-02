@@ -251,14 +251,12 @@
     </string-array>
 
 
-    <string name="info_generali">PonyHelper è un\'app nata nell\'estate 2021 realizzata per facilitare il lavoro del fattorino, con essa potrai gestire agevolmente i turni settimanali, tenere conto delle tue entrate e velocizzare le consegne.</string>
+    <string name="info_generali">PonyHelper è un\'app nata nell\'estate 2021 realizzata per facilitare il lavoro del fattorino. Con essa potrai gestire agevolmente i turni settimanali, tenere conto delle tue entrate e velocizzare le consegne.</string>
     <string name="info_homepag">Nella Hompage troverai i turni della settimana corrente e potrai vedere le entrate inserite del mese corrente.</string>
-    <string name="info_turni">Nella pagina Turni potrai modificare o inserire un nuovo turno della settimana in corso. Potrai inserire un turno al giorno, quindi in caso inserissi la data di un turno già presente verranno apportate ad esso le modifiche selezionate.</string>
-    <string name="info_entrate">Nella pagina entrate potrai visualizzare le entrate del mese scelto, aggiungere o modificare una o più righe di esse, ricordandoti che potrai inserire un\'unica entrata al giorno, potrai inoltre ricercare un\'entrata mediante la data.</string>
-    <string name="info_destinazioni">Nella pagina destinazioni avrai accesso a tutte le destinazioni inserite nell\'ultimo mese, potrai velocemente ricercare la destinazione che ti interessa inserendo l\'indirizzo. Ricordati che conviene inserire le destinazioni con la condivisione della posizione una volta giunto nel lougo per avere una precisione maggiore. NON AFFIDARTI A GOOGLE MAPS SE VUOI ESSERE PRECISO, CHI FA DA SE FA PER TRE RICORDA</string>
-    <string name="info_calcolotot">Nella pagina calcolo totale potrai usufruire del software di calcolo basato sui prezzi da te inseriti nel menù. Rapido ed efficiente ti saà utilissimo per gestire i totali dei tuoi ordini.</string>
-    <string name="info_menu">Nella pagina menù potrai gestire i prodotti e gli ingredenti utilizzati nel tuo luogo di lavoro inserendo i prezzi riuscirai ad usufruire del software di calcolo integrato nell\'app per avere rapidamente a disposizione il totale dell\'ordine.</string>
-    <string name="info_profilo">Nella pagina profilo vedrai i dati del tuo account in caso tu sia già loggato oppure potrai registrarti o effettuare il login rapidamente.</string>
+    <string name="info_turni">Nella pagina turni potrai modificare o inserire un nuovo turno della settimana in corso. Potrai inserire un turno al giorno, quindi in caso inserissi la data di un turno già presente verranno apportate ad esso le modifiche selezionate.</string>
+    <string name="info_entrate">Nella pagina entrate potrai visualizzare le entrate del mese scelto, aggiungerne o eliminarne. Potrai inserire un\'unica entrata al giorno, potrai inserire o modificare i costi mensili relativi alla spesa del carburante.</string>
+    <string name="info_destinazioni">Nella pagina destinazioni potrai visualizzare tutte le destinazioni da te inserite nell\'ultimo mese, è possibile ricercare la destinazione che ti interessa inserendo l\'indirizzo.</string>
+    <string name="info_profilo">Nella pagina profilo potrai visualizzare i dati del tuo account in caso tu sia già loggato oppure potrai registrarti o effettuare il login.</string>
     <string name="destinazione">Destinazione</string>
     <string name="content_description_button_destinazioen">bottone che porterà all\'apertura in google maps</string>
     <string name="civico">Civico</string>

@@ -14,5 +14,5 @@
         path="." />
     <files-path
         name="PresentazionePonyHelper.ppt"
-        path="/data/data/com.example.ponyhelper/files/" />
+        path="." />
 </paths>
