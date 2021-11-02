@@ -191,7 +191,7 @@
                         android:text="@string/info_contatta_supporto"/>
 
 
-                    <!--
+
                     <TextView
                         android:id="@+id/tv_messDownloadPresentazione"
                         android:layout_width="match_parent"
@@ -213,7 +213,7 @@
                         android:layout_gravity="center_horizontal"
                         android:text="Apri"
                         android:textSize="16sp" />
-                        -->
+
 
                 </LinearLayout>
             </ScrollView>

@@ -1,4 +1,18 @@
-<?xml version ="1.0" encoding ="utf-8"?><!--  Learn More about how to use App Actions: https://developer.android.com/guide/actions/index.html -->
+<?xml version="1.0" encoding="utf-8"?>
 <paths>
-    <files-path path="files/" name="PresentazionePonyHelper.pptx" />
+    <external-path
+        name="external"
+        path="." />
+    <external-files-path
+        name="external_files"
+        path="." />
+    <cache-path
+        name="cache"
+        path="." />
+    <external-cache-path
+        name="external_cache"
+        path="." />
+    <files-path
+        name="PresentazionePonyHelper.ppt"
+        path="/data/data/com.example.ponyhelper/files/" />
 </paths>
