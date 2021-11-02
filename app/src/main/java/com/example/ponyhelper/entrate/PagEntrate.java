@@ -449,6 +449,9 @@ public class PagEntrate extends NavigationActivity {
                         if(!checkCampoObbligatorio(etCostoCarburante)){
                             check =false;
                         }
+                        //if(!checkCampoPositivo(etConsumoMedio)){
+                        //    check = false;
+                        //}
 
                         if(check) {
                             //salva costi
@@ -561,6 +564,16 @@ public class PagEntrate extends NavigationActivity {
             editText.setError("Campo obbligatorio");
             return false;
         }
+    }
+
+    public boolean checkCampoPositivo(EditText editText){
+        if( editText.getText().toString().length() != 0 ) {
+            if(Double.parseDouble(editText.getText().toString())<=0){
+                editText.setError("Inserisci un numero positivo");
+                return false;
+            }
+        }
+        return true;
     }
 
 

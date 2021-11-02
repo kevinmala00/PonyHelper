@@ -31,13 +31,18 @@ public class CalcoloStipendio {
                         kmMensili+=e.getKm();
                     }
                     costiMensili = dbHelper.getCostiMensili(UtilClass.yearMonthToLocalLanguageString(meseAnno), username);
-                    spesaTot = (kmMensili*costiMensili.getCostoCarburante()) / costiMensili.getConsumoMedio();
-                    totNettoMensile = totMensile - spesaTot;
+
+                    if(costiMensili.getConsumoMedio()!=0) {
+                        spesaTot = (kmMensili * costiMensili.getCostoCarburante()) / costiMensili.getConsumoMedio();
+                        totNettoMensile = totMensile - spesaTot;
+                    }else{
+                        return totMensile;
+                    }
                 }
                 return totNettoMensile;
             } catch (Exception e) {
                 e.printStackTrace();
-                return totNettoMensile;
+                return totMensile;
             }
 
     }
