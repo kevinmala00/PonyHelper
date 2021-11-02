@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
 
-public class Entrata {
+public class Entrata implements Comparable<Entrata>{
     LocalDate data;
     LocalTime oraInizio;
     LocalTime oraFine;
@@ -89,5 +89,16 @@ public class Entrata {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    @Override
+    public int compareTo(Entrata e1) {
+        if(data.isBefore(e1.data)){
+            return -1;
+        }else if(data.isAfter(e1.data)){
+            return 1;
+        }else{
+            return 0;
+        }
     }
 }
