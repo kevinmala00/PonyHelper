@@ -35,6 +35,7 @@ public class PowerPointOpener {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.setDataAndType(uri, "application/vnd.ms-powerpoint");
         intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         try {
             mContext.startActivity(intent);

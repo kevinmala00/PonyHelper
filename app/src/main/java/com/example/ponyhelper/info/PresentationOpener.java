@@ -13,10 +13,10 @@ import java.io.InputStream;
 
 public class PresentationOpener {
 
-    private Context mContext;
-    private PowerPointOpener powerPointOpener;
+    private final Context mContext;
+    private final PowerPointOpener powerPointOpener;
 
-    public static final int DEFAULT_BUFFER_SIZE = 8192;
+    public static final int BUFFER_SIZE = (int) (10 * Math.pow(2, 20)); //copio 10 MB alla volta
 
     public PresentationOpener(Context context){
         mContext=context;
@@ -27,11 +27,16 @@ public class PresentationOpener {
         AssetManager assetManager = mContext.getAssets();
         try {
             InputStream inputStream = assetManager.open("PresentazionePonyHelper.pptx");
-            String path = mContext.getFilesDir().getPath()+"/PresentazionePonyHelper.pptx";
+            String path = mContext.getFilesDir().getPath()+File.separator + "PresentazionePonyHelper.pptx";
             File presentazione = new File(path);
+
+
+
             if(presentazione.getTotalSpace()==0){
                 copyInputStreamToFile(inputStream, presentazione);
             }
+
+            inputStream.close();
 
             if(presentazione.setReadOnly()){
                 powerPointOpener.openPPT(path);
@@ -48,13 +53,13 @@ public class PresentationOpener {
         }
     }
 
-    private static void copyInputStreamToFile(InputStream inputStream, File file)
-            throws IOException {
+    private static void copyInputStreamToFile(InputStream inputStream, File file) throws IOException {
 
         // append = false
         try (FileOutputStream outputStream = new FileOutputStream(file, false)) {
             int read;
-            byte[] bytes = new byte[DEFAULT_BUFFER_SIZE];
+
+            byte[] bytes = new byte[BUFFER_SIZE];
             while ((read = inputStream.read(bytes)) != -1) {
                 outputStream.write(bytes, 0, read);
             }
