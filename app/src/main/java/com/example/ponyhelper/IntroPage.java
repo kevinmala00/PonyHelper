@@ -11,7 +11,8 @@ import androidx.appcompat.app.AppCompatDelegate;
 import com.example.ponyhelper.homeEturni.HomePage;
 
 /**
- * activity introdutticva per la durata di 2 secondi prima dell'apertura della home page
+ * activity introduttiva per la durata di 2 secondi prima dell'apertura della home page
+ * @author kevin
  */
 public class IntroPage extends Activity {
     @Override
