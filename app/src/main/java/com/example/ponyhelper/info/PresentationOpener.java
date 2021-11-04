@@ -11,6 +11,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * classe che permette l'apertura della presentazione illustrativa dell'app. la classe preleva il file dalla cartella asset,
+ * ne installa una versione sul dispositivo nella cartella files dell'applicazione poi chiama PowerPointOpener
+ * @see PowerPointOpener
+ *
+ * @author kevin
+ */
+
 public class PresentationOpener {
 
     private final Context mContext;
@@ -50,9 +58,16 @@ public class PresentationOpener {
             Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             e.printStackTrace();
+            Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
+    /**
+     * metodo che permette la trasformazione da input stream a file
+     * @param inputStream input stream contenetne lo stream da copiare
+     * @param file file inizializzato alla posizione in cui deve essere installata la copia
+     * @throws IOException in caso di malfunzionamento
+     */
     private static void copyInputStreamToFile(InputStream inputStream, File file) throws IOException {
 
         // append = false

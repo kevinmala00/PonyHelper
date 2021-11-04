@@ -24,8 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author kevin
+ *
  * classe che permette la creazione e la gestione del database Sqlite
+ *
+ * @author kevin
  */
 public class DbHelper extends SQLiteOpenHelper {
 

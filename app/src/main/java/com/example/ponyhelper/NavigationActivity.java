@@ -21,6 +21,12 @@ import com.example.ponyhelper.info.PagInfo;
 import com.example.ponyhelper.util.EmailSender;
 import com.google.android.material.navigation.NavigationView;
 
+
+/**
+ * classe per la gestione del navigation menu. nel suo metodo on create forza la modalità notte
+ *
+ * @author kevin
+ */
 public abstract class NavigationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 
@@ -82,8 +88,8 @@ public abstract class NavigationActivity extends AppCompatActivity implements Na
             }
             case R.id.nav_item_contattaci: {
 
-                EmailSender emailSender = new EmailSender();
-                emailSender.sendMail(NavigationActivity.this,
+                EmailSender emailSender = new EmailSender(NavigationActivity.this);
+                emailSender.sendMail(
                         "ponyhelper@gmail.com",
                         "CONTATTO SUPPORTO PONY HELPER");
                 break;
@@ -93,6 +99,16 @@ public abstract class NavigationActivity extends AppCompatActivity implements Na
         return true;
     }
 
+
+    /**
+     *
+     * metodo per l'apertura delle nuove activity.
+     * a meno che l'activity chaimante non sia la home allora viene chiusa (verificato attraverso instanceof)
+     *
+     *
+     * @param closedContext activity chiamante
+     * @param newActivity activity chiamata
+     */
     public void launchActivity(Context closedContext, Class newActivity){
         if(!(closedContext instanceof HomePage)){
             finish();
